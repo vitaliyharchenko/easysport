@@ -36,16 +36,11 @@ ALTER USER scuser CREATEDB;
 cd scenv (ссылка к виртуальному окружению)
 source bin/activate
 pip install psycopg2
-deactivate
-```
-
-11) 
-```
+cd sportcourts (путь к проекту)
 python manage.py makemigrations
 python manage.py migrate
 python manage.py syncdb
-
 create user - admin, ceo@sportcourts.ru, 123456
 ```
 
-12) set database in PyCharm
+11) set database in PyCharm
