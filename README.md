@@ -44,3 +44,23 @@ create user - admin, ceo@sportcourts.ru, 123456
 ```
 
 11) set database in PyCharm
+
+
+# обнуление БД
+
+'''
+psql
+DROP DATABASE scdb;
+CREATE DATABASE scdb OWNER scuser;
+ALTER USER scuser CREATEDB;
+python manage.py makemigrations users
+python manage.py migrate users
+python manage.py syncdb
+create user - admin, ceo@sportcourts.ru, 123456
+'''
+
+
+# Работа с зависимостями
+'''
+pip freeze > requirements.txt
+'''
