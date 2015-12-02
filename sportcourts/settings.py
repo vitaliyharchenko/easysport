@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'users',
     'utils',
     'rest_framework',
+    'rest_framework.authtoken',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,10 +109,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
-)
-
+TEMPLATES = [
+    {
+        'DIRS': (os.path.join(BASE_DIR,  'templates'),)
+    }
+]
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
@@ -119,5 +121,8 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }

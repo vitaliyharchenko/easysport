@@ -64,3 +64,82 @@ create user - admin, ceo@sportcourts.ru, 123456
 '''
 pip freeze > requirements.txt
 '''
+
+# Работа с удаленкой #
+```
+lt --port 8000
+```
+
+# Деплой на сервер
+
+'''
+Установка Ubuntu ubuntu14.04-x86_64
+ssh root@194.58.108.127
+OKBxmNX*GL6rg1
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-virtualenv
+sudo apt-get install git
+sudo apt-get install nginx
+sudo apt-get build-dep python-imaging
+sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
+sudo virtualenv /opt/scenv
+sudo apt-get install git
+source /opt/scenv/bin/activate
+pip install django
+deactivate
+sudo apt-get install libpq-dev python-dev
+sudo apt-get install postgresql postgresql-contrib
+sudo su - postgres
+psql
+create user "scuser" with password '4203';
+create database "scdb" owner "scuser";
+alter user scuser createdb;
+grant all privileges on database scdb TO scuser;
+\q
+su - root
+source /opt/scenv/bin/activate
+pip install psycopg2
+git clone https://github.com/vitaliyharchenko/sportcourts2.git
+pip install -r /opt/sportcourts2/requirements.txt
+cd /opt/sportcourts2
+python manage.py makemigrations
+python manage.py migrate
+python manage.py syncdb
+create user - admin, ceo@sportcourts.ru, 123456
+pip install gunicorn
+cd /opt/scenv
+sudo nano gunicorn_config.py
+
+    command = '/opt/myenv/bin/gunicorn'
+    pythonpath = '/opt/myenv/myproject'
+    bind = '127.0.0.1:8001'
+    workers = 3
+    
+sudo nano /etc/nginx/sites-available/sportcourts
+
+    server {
+        server_name test.sportcourts.ru;
+        charset utf-8;
+        client_max_body_size 75M;  
+
+        access_log off;
+
+        location /static/ {
+            alias /opt/scenv/static/;
+        }
+
+        location / {
+                proxy_pass http://127.0.0.1:8001;
+                proxy_set_header X-Forwarded-Host $server_name;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM N$
+        }
+    }
+    
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/sportcourts
+sudo rm default
+sudo service nginx restart
+'''
+
