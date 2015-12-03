@@ -1,0 +1,27 @@
+|{% load staticfiles %}
+doctype html
+html(lang="en")
+  head
+    title {% block title %}SportCourts{% endblock %} | SportCourts.ru
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    meta(name="keywords" content="{% block keywords %}{% endblock %}")
+    meta(name="description" content="{% block description %}{% endblock %}")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    //Favicon
+    link(href="{% static 'images/favicon.ico' %}" rel="icon" type="image/vnd.microsoft.icon")
+    //Styles
+    link(href="{% static 'css/main.css' %}" type="text/css" rel="stylesheet")
+    //Scripts
+    script(src="{% static 'js/main.js' %}")
+    //Custom
+    |{% block headers %}{% endblock %}
+  body
+    //include particles/base_navbar
+    //include particles/base_modals
+    //include particles/base_notifications
+    |{% block globalcontent %}
+    section#content
+      .container
+        |{% block content %}{% endblock %}
+    |{% endblock %}
+    //include particles/base_footer

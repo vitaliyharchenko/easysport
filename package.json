@@ -1,0 +1,34 @@
+{
+  "name": "sportcourts",
+  "version": "1.0.0",
+  "description": "Initial commit",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-rigger": "^0.5.8",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-watch": "^4.3.5",
+    "imagemin-pngquant": "^4.2.0",
+    "rimraf": "^2.4.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vitaliyharchenko/sportcourts2.git"
+  },
+  "author": "Vitaliy Harchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitaliyharchenko/sportcourts2/issues"
+  },
+  "homepage": "https://github.com/vitaliyharchenko/sportcourts2"
+}

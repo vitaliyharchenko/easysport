@@ -2,7 +2,7 @@
 
 Initial commit
 
-Инструкция по развертыванию проекта для локальной разработки:
+# Инструкция по развертыванию проекта для локальной разработки:
 
 1) установка PyCharm
 
@@ -45,7 +45,6 @@ create user - admin, ceo@sportcourts.ru, 123456
 
 11) set database in PyCharm
 
-
 # обнуление БД
 
 '''
@@ -63,12 +62,43 @@ create user - admin, ceo@sportcourts.ru, 123456
 # Работа с зависимостями
 '''
 pip freeze > requirements.txt
+
+npm update --save
+npm outdated
 '''
 
 # Работа с удаленкой #
 ```
 lt --port 8000
 ```
+
+# Развертываем фронтенд #
+'''
+npm install --save-dev gulp - в директории проекта
+npm init
+
+npm i gulp-autoprefixer --save
+npm i gulp-minify-css --save
+npm i gulp-imagemin --save
+npm i imagemin-pngquant --save
+npm i gulp-uglify --save
+npm i rimraf --save
+npm i gulp-sass --save
+npm i gulp-sourcemaps --save
+npm i gulp-rigger --save
+npm i gulp-watch --save
+npm i gulp-jade --save
+
+bower init
+
+bower install bootstrap-sass --save
+bower install jquery-ui --save
+bower install fontawesome --save
+bower install social-likes --save
+
+далее gulp в директории проекта
+'''
+
 
 # Деплой на сервер
 

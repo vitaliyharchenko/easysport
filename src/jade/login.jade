@@ -1,0 +1,48 @@
+| {% extends 'base.html' %}
+| {% block title %}Добро пожаловать! {% endblock %}
+| {% block content %}
+.row
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading
+        .row
+          .col-xs-12.text-center
+            h2 Авторизация
+            p
+              a(href="#" data-dismiss="modal" data-toggle="modal" data-target="#regModal") Я не зарегистрирован
+      .panel-body
+        .row
+          .col-xs-12
+            | {% if messages %}
+            | {% for message in messages %}
+            .alert.alert-dismissible.fade.in(role="alert" class="alert-{{ message.tags }}")
+              button.close(type="button" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") ×
+              strong Упс!
+              | &nbsp;{{ message }}
+            script(type="text/javascript")
+              | setInterval(function(){$(".alert").alert('close')}, 3000);
+            | {% endfor %}
+            | {% endif %}
+          .col-xs-6
+            form(method="post")
+              | {% csrf_token %}
+              .form-group
+                label.sr-only Email
+                input.form-control(type="email" name="email" placeholder="Email")
+              .form-group
+                label.sr-only Пароль
+                input.form-control(type="password" name="password" placeholder="Пароль")
+              button.btn.btn-default(type="submit") Войти
+              br
+              br
+              a(href="#") Забыли пароль?
+          .col-xs-6
+            | {% url 'login' as login_url %}
+            .form-group
+              a.btn.btn-default.btn-block(href="#") ВКОНТАКТЕ
+            //.form-group
+            //  a.btn.btn-default.btn-block(href="#") FACEBOOK
+            //.form-group
+            //  a.btn.btn-default.btn-block(href="#") GOOGLE
+| {% endblock %}
