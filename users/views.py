@@ -4,7 +4,6 @@ from django.contrib import auth, messages
 from .forms import UserLoginForm
 
 
-# Create your views here.
 def login_view(request, *args, **kwargs):
     if request.user.is_authenticated():
         # TODO: global name for index url
@@ -27,3 +26,9 @@ def login_view(request, *args, **kwargs):
     template = "login.html"
     context = {"form": form}
     return render(request, template, context)
+
+
+def logout_view(request):
+    auth.logout(request)
+    # TODO: global name for login url
+    return redirect("/login/")
