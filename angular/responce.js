@@ -10,7 +10,7 @@ $(document).on('click','#btn', function(){
     var email = $('#email').val();
     var password = $('#password').val();
     $.ajax({
-        url: "http://127.0.0.1:8000/token/?format=json",
+        url: "http://127.0.0.1:8000/api/token/?format=json",
         data: {
             password: password,
             email: email
