@@ -1,0 +1,154 @@
+| {% extends 'base_fat.html' %}
+| {% load staticfiles %}
+| {% load globaltags %}
+| {% block title %}Будь в игре! {% endblock %}
+| {% block headers %}
+link(href="{% static 'css/particles/index.css' %}" type="text/css" rel="stylesheet")
+| {% endblock %}
+| {% block content %}
+.row.bigrow
+  .bigrow-background
+    img(src="{% static 'images/index/main_1.jpg' %} ")
+  .bigrow-content.content-white
+    .content-block-first
+      img.logo(src="{% static 'images/logo_big.png' %} ")
+      //.hidden-xs
+      //  img.logo(src="{% static 'images/logo_big.png' %} ")
+      //.visible-xs
+      //  h1 SportCourts
+      br
+      br
+      h2.h3 Ваш проводник в мире любительского спорта.
+      p.h3
+        | Играй в&nbsp;
+        span.gamestyped
+        | &nbsp;
+        br.visible-xs
+        | вместе с {% random_choice 'нами' 'друзьями' %}!</p>
+      br
+      .row.text-center(style="max-height:80px; overflow:hidden;")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+        a(href="#")
+          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+      br
+      br
+      | {% if not loggedin %}
+      p
+        a.btn.btn-main.btn-lg.btn-success(href="#" data-toggle="modal" data-target="#regModal" role="button") Зарегистрироваться
+      p или
+      p
+        a.btn.btn-main.btn-lg.btn-primary(href="#" data-toggle="modal" data-target="#loginModal" role="button") Войти
+      | {% else %}
+      p.h3 Расскажи о нас друзьям!
+      br
+      .social-likes.social-likes_notext.social-likes_big
+        .facebook
+        .twitter
+        .vkontakte
+        .odnoklassniki
+      | {% endif %}
+      //TODO: buttons for share or invite friends in service
+.row.bigrow
+  .bigrow-content
+    .content-block-second
+      .row
+        .col-md-10.col-md-offset-1
+          h2.text-center Хочешь поиграть, но не знаешь где и с кем? Ты нашел то, что искал! От желания до игры за 5 минут!
+          br
+          br
+          br
+      .row
+        .col-sm-5.col-md-3.hidden-xs
+          .text-left(style="float:right;")
+            h3.h2 Просто
+            ul.promo-ul(style="margin-left: -24px;")
+              li.promo-li регистрируйся в системе
+              li.promo-li выбирай подходящую игру
+              li.promo-li получай удовольствие!
+        .col-md-6.hidden-sm
+          img(src="{% static 'images/index/site_preview.png' %}" style="width:100%;" alt="SportCourts - это удобное приложение для любителей спорта.")
+        .col-sm-5.col-sm-offset-2.col-md-3.col-md-offset-0.text-left.hidden-xs
+          h3.h2 Удобно
+          ul.promo-ul(style="margin-left: -24px;")
+            li.promo-li пользуйся с любого устройства
+            li.promo-li задавай вопросы организаторам
+            li.promo-li меняй свои планы одним кликом!
+.row.bigrow
+  .bigrow-background
+    img(src="{% static 'images/index/main_2.jpg' %}" alt="SportCourts решает все острые проблемы в организации любительских игр")
+  .bigrow-content.content-white
+    .content-block-third
+      h3.h2 Вы уже играете и вам не хватает игроков? Подключайтесь к нам! Проблем с составом больше не будет.
+      br.hidden-xs
+      h3.h2.hidden-xs Мы провели уже более 600 игр!
+.row.bigrow
+  .bigrow-content
+    .content-block-fourth
+      .row.imgrow
+        .col-md-12
+          img(src="{% static 'images/index/1.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/2.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/3.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/4.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/5.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/6.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/7.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/8.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/9.png' %}" style="width:100px;")
+      .row
+        .col-md-12
+          br
+          br
+          h3.h2 Найди свое место в мире любительского спорта!
+          p Пройди весь путь от интереса к игре, через тренировки, поиск команды, участие в турнирах к получению необходимой игровой практики, достижению собственных целей.
+          br
+          br
+      .row.imgrow
+        .col-md-12
+          img(src="{% static 'images/index/10.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/11.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/12.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/13.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/14.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/15.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/16.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/17.png' %}" style="width:100px;")
+          img(src="{% static 'images/index/18.png' %}" style="width:100px;")
+.row.bigrow
+  .bigrow-background
+    img(src="{% static 'images/index/main_3.jpg' %}" alt="SportCourts - это развивающееся спортивное сообщество")
+  .bigrow-content.content-white
+    .content-block-fifth
+      p.h2 Мы мечтаем построить в России динамичное и здоровое спортивное сообщество
+.row.bigrow
+  .bigrow-content
+    .content-block-sixth
+      p.h2 Не можешь играть каждую неделю? Отвлекает семья и работа?
+      br
+      img(src="{% static 'images/index/main_4.png' %}" alt="" height="300")
+      br
+      p.h2 Со SportCourts это не помеха. Планируй свое время удобным образом!
+.row.bigrow
+  .bigrow-background
+    img(src="{% static 'images/index/main_5.jpg' %}" alt="SportCourts. Будь в игре!")
+  .bigrow-content.content-white
+    .content-block-seventh
+      h1 Будь в игре!
+      br
+      br
+      p
+        a.btn.btn-main.btn-lg.btn-success(href="#" data-toggle="modal" data-target="#regModal" role="button") Зарегистрироваться
+| {% endblock %}

@@ -121,3 +121,4 @@ gulp.task('watch', function(){
 });
 
 gulp.task('default', ['build', 'watch']);
+//TODO: clean directories

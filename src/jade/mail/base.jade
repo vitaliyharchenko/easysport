@@ -1,0 +1,36 @@
+| {% load staticfiles %}
+doctype transitional
+html(xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;")
+  head
+    meta(name="viewport" content="width=device-width")
+    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    //TODO: css render with gulp
+    link(rel="stylesheet" href="{% static 'css/mail.css' %}")
+    title
+      | {% block title %}
+      | {% endblock %}
+  body
+    table.body-wrap
+      tr.row
+        td(valign="top")
+        td.container(width="600" valign="top")
+          .content
+            table.main(width="100%" cellpadding="0" cellspacing="0")
+              tr
+                td.content-header(valign="top") SportCourts
+              tr
+                td.content-wrap(valign="top")
+                  table(width="100%" cellpadding="0" cellspacing="0")
+                    | {% block content %}
+                    | {% endblock %}
+            .footer
+              table(width="100%")
+                tr
+                  td.footer-block
+                    a.footer-icon(href="http://vk.com/sportcourts" target="_blank")
+                      img(align="none" height="30" src="http://sportcourts.ru{% static 'images/mail_vk.png' %}" width="30")
+                    span &nbsp;&nbsp;&nbsp;
+                    a.footer-icon(href="http://sportcourts.ru/" target="_blank") sportcourts.ru
+                    span &nbsp;&nbsp;&nbsp;
+                    a(href="http://sportcourts.ru/profile/settings" target="_blank") Отписаться от рассылки
+        td(valign="top")

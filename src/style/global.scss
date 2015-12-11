@@ -1,0 +1,79 @@
+@import "variables";
+
+/* Fixed navbar styles
+-------------------------------------------------- */
+
+#content > .container {
+  padding-top: 90px;
+}
+
+.navbar-brand {
+  padding-top: 0;
+  padding-right: 0;
+  img {
+    height: 150%;
+    padding: 0;
+  }
+}
+
+.topmenu {
+  img {
+    display: inline;
+    height: $navbar-height - 10px;
+    width: $navbar-height - 10px;;
+    margin-top: -10px;
+    margin-bottom: -10px;
+  }
+}
+
+.dropdown-toggle {
+  margin-bottom: -1px;
+}
+
+
+/* Fixed footer styles
+-------------------------------------------------- */
+
+.footer{
+  p {
+    margin-bottom: 0;
+    .clip {
+      white-space: nowrap; /* Запрещаем перенос строк */
+      overflow: hidden;
+    }
+  }
+  a {
+    position: relative;
+  }
+  img {
+    position: absolute;
+    top: -6px;
+    right: 0;
+  }
+  .footerright {
+    float: right;
+  }
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+$footerpadding: 40px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 21px + $footerpadding * 2;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  padding-top: $footerpadding;
+  padding-bottom: $footerpadding;
+}

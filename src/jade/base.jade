@@ -16,12 +16,12 @@ html(lang="en")
     //Custom
     |{% block headers %}{% endblock %}
   body
-    //include particles/base_navbar
-    //include particles/base_modals
-    //include particles/base_notifications
+    include particles/base_navbar
+    include particles/base_modals
+    include particles/base_notifications
     |{% block globalcontent %}
     section#content
       .container
         |{% block content %}{% endblock %}
     |{% endblock %}
-    //include particles/base_footer
+    include particles/base_footer

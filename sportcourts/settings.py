@@ -25,7 +25,8 @@ SECRET_KEY = 'ot45^f6lyrsp3qs6g5&3ysxxh6k_5&9$$2*3igj4#+i%-&aho#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CURRENT_HOST = 'http://127.0.0.1:8000'
+ALLOWED_HOSTS = ['http://127.0.0.1:8000']
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -53,6 +54,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'sportcourts.urls'
@@ -67,7 +70,13 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.request',
+                'utils.context_processors.loggedin_user',
             ],
         },
     },
@@ -124,4 +133,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     )
+}
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'info@sportcourts.ru'
+EMAIL_HOST_PASSWORD = 'courtssport2'
+EMAIL_SUBJECT_PREFIX = '[SPORTCOURTS] '
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
 }

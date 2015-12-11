@@ -1,0 +1,40 @@
+| {% extends 'base.html' %}
+| {% block title %}Регистрация {% endblock %}
+| {% block content %}
+.row
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading
+        .row
+          .col-xs-12.text-center
+            h2 Регистрация
+      .panel-body
+        .row
+          .col-xs-12
+            | {% if messages %}
+            | {% for message in messages %}
+            .alert.alert-dismissible.fade.in(role="alert" class="alert-{{ message.tags }}")
+              button.close(type="button" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") ×
+              strong Упс!
+              | &nbsp;{{ message }}
+            script(type="text/javascript")
+              | setInterval(function(){$(".alert").alert('close')}, 3000);
+            | {% endfor %}
+            | {% endif %}
+
+            |{% if form.errors %}
+            .alert.alert-dismissible.fade.in(role="alert" class="")
+              button.close(type="button" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") ×
+              strong Упс!
+              | &nbsp;Вы ввели неверный логин\пароль
+            script(type="text/javascript")
+              | setInterval(function(){$(".alert").alert('close')}, 3000);
+            |{% endif %}
+          .col-xs-6.col-xs-offset-3
+            form(method="post")
+              | {% csrf_token %}
+              | {{ form.as_p }}
+              button.btn.btn-primary(type="submit") Зарегистрироваться
+| {% endblock %}

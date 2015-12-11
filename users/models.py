@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.mail import send_mail
 from django.utils import timezone
+from utils.fields import PhoneField
 
 
 class UserManager(BaseUserManager):
@@ -33,7 +34,6 @@ class UserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
-        Activation.objects.create(email=email, status=Activation.REGISTERED, token='manual adding')
         return user
 
     def create_superuser(self, email, password, **extra_fields):
@@ -67,8 +67,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(u'Фамилия', max_length=120)
     vkuserid = models.IntegerField(unique=True, null=True, blank=True)
     sex = models.CharField(max_length=1, choices=(('m', 'мужской'), ('f', 'женский')), verbose_name='Пол')
-    # TODO: add phone field
-    # phone = MyPhoneField(verbose_name='Телефон', blank=True)
+    phone = PhoneField(verbose_name='Телефон', blank=True)
     # ampluas = models.ManyToManyField('events.Amplua', verbose_name=u'Амплуа', blank=True)
     weight = models.PositiveSmallIntegerField(default=0, verbose_name='Вес')
     height = models.PositiveSmallIntegerField(default=0, verbose_name='Рост')
@@ -77,8 +76,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
-    # TODO: add registration fields
-    # REGISTRATION_FIELDS = ['avatar'] + REQUIRED_FIELDS + ['sex'] + ['vkuserid'] + ['bdate'] + ['phone'] + [USERNAME_FIELD] + ['password']
+    REGISTRATION_FIELDS = REQUIRED_FIELDS + ['sex'] + ['vkuserid'] + ['bdate'] + ['phone'] + [USERNAME_FIELD]
 
     class Meta:
         verbose_name = 'Игрок'
@@ -120,24 +118,14 @@ class User(AbstractUser):
         return "/users/%i" % self.id
 
 
-class Activation(models.Model):
-    EMAIL_SENT = 0
-    EMAIL_VERIFIED = 1
-    REGISTERED = 2
-    STATUS_CHOICES = ((EMAIL_SENT, 'Сообщение отправлено'),
-                      (EMAIL_VERIFIED, 'Активация пройдена'),
-                      (REGISTERED, 'Зарегестрирован'))
+class UserActivation(models.Model):
+    user = models.OneToOneField(User)
+    activation_key = models.CharField(max_length=40, blank=True)
+    request_time = models.DateTimeField(default=timezone.now)
+    confirm_time = models.DateTimeField('Дата активации', blank=True, null=True)
 
-    email = models.EmailField(primary_key=True, unique=True, verbose_name='Email')
-    status = models.IntegerField(default=EMAIL_SENT, verbose_name='статус',
-                                 choices=STATUS_CHOICES)
-    token = models.CharField(max_length=100, verbose_name='ключ активации', unique=True)
-    datetime = models.DateTimeField('Дата активации', auto_now=True)
+    def __str__(self):
+        return self.user.email
 
     class Meta:
-        ordering = ['-datetime']
-        verbose_name = 'подтверждение почты'
-        verbose_name_plural = 'Подтверждения почты'
-
-    def __unicode__(self):
-        return self.email
+        verbose_name_plural = u'Активации'

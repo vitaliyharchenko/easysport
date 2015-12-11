@@ -53,8 +53,8 @@ DROP DATABASE scdb;
 CREATE DATABASE scdb OWNER scuser;
 ALTER USER scuser CREATEDB;
 python manage.py makemigrations users
-python manage.py migrate users
-python manage.py syncdb
+python manage.py migrate
+python manage.py createsuperuser
 create user - admin, ceo@sportcourts.ru, 123456
 '''
 

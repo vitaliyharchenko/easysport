@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf.urls.static import static
+from sportcourts import settings
 
 import users.urls
 import api.urls
+import pages.urls
 
 
 urlpatterns = [
@@ -27,3 +30,5 @@ urlpatterns = [
 ]
 
 urlpatterns += users.urls.urlpatterns
+urlpatterns += pages.urls.urlpatterns
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

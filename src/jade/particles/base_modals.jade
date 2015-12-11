@@ -1,0 +1,39 @@
+| {% if not loggedin %}
+#loginModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        .row
+          .col-xs-12.text-center
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+            h2 Авторизация
+            p
+              a(href="#" data-dismiss="modal" data-toggle="modal" data-target="#regModal") Я не зарегистрирован
+      .modal-body
+        .container-fluid
+          .row
+            .col-xs-6
+              form(method="post" action="{% url 'login_view' %}")
+                | {% csrf_token %}
+                .form-group
+                  label.sr-only Email
+                  input.form-control(type="email" name="email" placeholder="Email")
+                .form-group
+                  label.sr-only Пароль
+                  input.form-control(type="password" name="password" placeholder="Пароль")
+                button.btn.btn-default(type="submit") Войти
+                br
+                br
+                a(href="") Забыли пароль?
+            .col-xs-6
+              .form-group
+                a.btn.btn-default.btn-block(href="") ВКОНТАКТЕ
+              //.form-group
+              //  a.btn.btn-default.btn-block(href="#") FACEBOOK
+              //.form-group
+              //  a.btn.btn-default.btn-block(href="#") GOOGLE
+
+| {% else %}
+
+| {% endif %}

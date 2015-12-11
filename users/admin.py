@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, UserActivation
 from .forms import UserChangeForm, UserCreationForm
 
 
@@ -34,5 +34,20 @@ class UserAdmin(UserAdmin):
     filter_horizontal = ()
 
 
+class UserActivationAdmin(admin.ModelAdmin):
+    model = UserActivation
+    readonly_fields = ['user', 'activation_key', 'request_time', 'confirm_time']
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_superuser:
+            return True
+        else:
+            return False
+
+
 admin.site.register(User, UserAdmin)
+admin.site.register(UserActivation, UserActivationAdmin)
 admin.site.unregister(Group)
