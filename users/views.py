@@ -71,7 +71,8 @@ def register_view(request):
 def register_confirm(request, activation_key):
     # TODO: страница ошибки активации
     user_profile = get_object_or_404(UserActivation, activation_key=activation_key)
-
+    print user_profile
+    # TODO: отдебажить активацию
     # если ключ норм, то активировать пользователя
     user = user_profile.user
     user.is_active = True
