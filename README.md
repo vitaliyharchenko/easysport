@@ -24,7 +24,7 @@ install django
 6)
 ```
 psql
-CREATE USER scuser WITH PASSWORD '123456';
+CREATE USER scuser WITH PASSWORD '4203';
 CREATE DATABASE scdb OWNER scuser;
 ALTER USER scuser CREATEDB;
 \q
