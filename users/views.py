@@ -44,7 +44,7 @@ def login_view(request):
         try:
             access_token, user_id = vkontakte.auth_code(code, reverse('login_view'))
         except vkontakte.AuthError as e:
-            messages.warning(request, u'Ошибка авторизации {}'.format(e))
+            messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e))
             return shortcut()
         try:
             user = User.objects.get(vkuserid=user_id)
