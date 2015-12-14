@@ -50,9 +50,9 @@ def register_view(request):
             password = form.cleaned_data['password1']
             salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
             activation_key = hashlib.sha1(salt + email).hexdigest()
-
             user = User.objects.get(email=email)
-            # TODO: проверка на существующие активации
+            UserActivation.objects.filter(user=user).delete()
+
             new_activation = UserActivation(user=user, activation_key=activation_key,
                                             request_time=timezone.now())
             new_activation.save()
@@ -70,17 +70,18 @@ def register_view(request):
 
 def register_confirm(request, activation_key):
     # TODO: страница ошибки активации
-    user_profile = get_object_or_404(UserActivation, activation_key=activation_key)
-    print user_profile
-    # TODO: отдебажить активацию
-    # если ключ норм, то активировать пользователя
-    user = user_profile.user
-    user.is_active = True
-    user.save()
-    if not request.user.is_authenticated():
-        user = auth.authenticate(username=user.email, password=user.password)
-        auth.login(request, user)
+    user_profile = UserActivation.objects.get(activation_key=activation_key)
 
-    # TODO: send thanks-message on email
+    if user_profile.count() == 0:
+         # TODO: страница ошибки активации
+        raise Exception("Неверный код")
+    else:
+        user = user_profile.user
+        user.is_active = True
+        user.save()
+        if not request.user.is_authenticated():
+            user = auth.authenticate(username=user.email, password=user.password)
+            auth.login(request, user)
 
-    return redirect('index_view')
+        # TODO: send thanks-message on email
+        return redirect('index_view')
