@@ -141,6 +141,11 @@ EMAIL_HOST_USER = 'info@sportcourts.ru'
 EMAIL_HOST_PASSWORD = 'courtssport2'
 EMAIL_SUBJECT_PREFIX = '[SPORTCOURTS] '
 
+VKONTAKTE = {
+    'SECRET': 'SyrEE8fNLlkCBUxuxwTL',
+    'APPID': '4963792'
+}
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',

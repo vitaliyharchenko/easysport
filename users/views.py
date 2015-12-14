@@ -1,10 +1,11 @@
 # coding=utf-8
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from django.contrib import auth, messages
 from django.utils import timezone
 from .forms import UserLoginForm, UserRegistrationForm
 from .models import User, UserActivation
-from utils import mailing
+from utils import mailing, vkontakte
 import hashlib
 import random
 
@@ -12,6 +13,10 @@ import random
 def login_view(request):
     if request.user.is_authenticated():
         return redirect('index_view')
+
+    shortcut = lambda: render(request, 'login.html', {"form": form})
+    return_path = request.META.get('HTTP_REFERER', '/')
+
     if request.method == "POST":
         form = UserLoginForm(request.POST or None)
         if form.is_valid:
@@ -22,15 +27,37 @@ def login_view(request):
             if user:
                 if user.is_active:
                     auth.login(request, user)
-                    return redirect('index_view')
+                    return redirect(return_path)
                 else:
                     messages.warning(request, "Ваш профиль деактивирован!")
+                    return shortcut()
             else:
-                    messages.warning(request, "Введенные данные неверны!")
+                messages.warning(request, "Введенные данные неверны!")
+                return shortcut()
+        else:
+            messages.warning(request, "Введенные данные некорректны!")
+            return shortcut()
+
+    elif 'code' in request.GET:
+        code = request.GET['code']
+        form = UserLoginForm(request.POST or None)
+        try:
+            access_token, user_id = vkontakte.auth_code(code, reverse('login_view'))
+        except vkontakte.AuthError as e:
+            messages.warning(request, u'Ошибка авторизации {}'.format(e))
+            return shortcut()
+        try:
+            user = User.objects.get(vkuserid=user_id)
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            auth.login(request, user)
+            return redirect(return_path)
+        except User.DoesNotExist:
+            messages.warning(request, 'Такой пользователь не найден')
+            return shortcut()
+
     else:
         form = UserLoginForm(request)
-
-    return render(request, 'login.html', {"form": form})
+        return shortcut()
 
 
 def logout_view(request):

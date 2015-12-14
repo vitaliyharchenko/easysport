@@ -1,3 +1,4 @@
+| {% load globaltags %}
 | {% if not loggedin %}
 #loginModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
   .modal-dialog
@@ -28,7 +29,8 @@
                 a(href="") Забыли пароль?
             .col-xs-6
               .form-group
-                a.btn.btn-default.btn-block(href="") ВКОНТАКТЕ
+                |{% url 'login_view' as login_url %}
+                a.btn.btn-default.btn-block(href="{% vkontakte_auth_link login_url %}") ВКОНТАКТЕ
               //.form-group
               //  a.btn.btn-default.btn-block(href="#") FACEBOOK
               //.form-group

@@ -2,6 +2,7 @@
 from django import template
 import re, random
 from django.core.urlresolvers import reverse, NoReverseMatch
+from utils import vkontakte
 
 register = template.Library()
 
@@ -21,3 +22,8 @@ def active(context, urlname):
     if re.search(pattern, path):
         return 'active'
     return ''
+
+
+@register.simple_tag
+def vkontakte_auth_link(redirect_uri):
+    return vkontakte.build_login_link(redirect_uri)
