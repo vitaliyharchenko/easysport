@@ -91,10 +91,13 @@ npm i gulp-jade --save
 
 bower init
 
+git config http.sslVerify false
 bower install bootstrap-sass --save
 bower install jquery-ui --save
 bower install fontawesome --save
 bower install social-likes --save
+bower install jasny-bootstrap --save
+bower install jasny-bootstrap --save
 
 далее gulp в директории проекта
 '''

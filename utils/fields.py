@@ -6,6 +6,57 @@ from django.core import validators
 from phonenumbers.phonenumberutil import NumberParseException
 from django.core.exceptions import ValidationError
 
+from django.core.files import File
+import urllib, urlparse, re
+
+
+# Jasny image widget
+#
+#
+def urlencodenonascii(b):
+    return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
+
+
+def iritouri(iri):
+    parts = urlparse.urlparse(iri)
+    return urlparse.urlunparse(
+        part.encode('idna') if parti==1 else urlencodenonascii(part.encode('utf-8'))
+        for parti, part in enumerate(parts)
+    )
+
+
+class JasnyImageWidget(forms.FileInput):
+    existing = '<img src="{url}" alt="{name}" width="{width}" height="{height}">'
+
+    html = """\
+            <br>
+            <div class="fileinput fileinput-{state}" data-provides="fileinput">
+                <div class="fileinput-preview thumbnail" style="width: {width}px; height: {height}px;">
+                    {image}
+                </div>
+                <div>
+                    <span class="btn btn-default btn-file">
+                        <span class="fileinput-new">Выберите изображение</span>
+                        <span class="fileinput-exists">Изменить</span>
+                        <input type="file" name="{name}" accept="images/*"></span>
+                        <input type="hidden" value name>
+                    </span>
+                    <a href="#" id="a-jasny-deleted" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Удалить</a>
+                </div>
+            </div>
+           """
+
+    def __init__(self, attrs={}):
+        super(JasnyImageWidget, self).__init__(attrs)
+
+    def render(self, name, value, attrs=None):
+        attrs = attrs or {}
+        state = 'exists' if value else 'new'
+        width = attrs.get('width', None) or 150
+        height = attrs.get('width', None) if value else 150
+        existing = self.existing.format(url=value.url, name=name, width=width, height=height) if value else ''
+        return self.html.format(state=state, width=width, height=height, image=existing, name=name)
+
 
 # CUSTOM PHONE FIELD
 #

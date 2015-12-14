@@ -17,10 +17,10 @@ class UserAdmin(UserAdmin):
     list_filter = ('is_admin', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'vkuserid',
+        ('Personal info', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid',
                                       'sex', 'weight', 'height')}),
-        ('Permissions', {'fields': ('is_active', 'is_referee', 'is_coach', 'is_responsible',
-                                    'is_organizer', 'is_staff', 'is_admin', 'banned',)}),
+        ('Permissions', {'fields': ('is_active', 'banned', 'is_referee', 'is_coach', 'is_responsible',
+                                    'is_organizer', 'is_staff', 'is_admin',)}),
     )
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (

@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import User
 from datetimewidget.widgets import DateWidget
+from utils.fields import JasnyImageWidget
 
 
 class UserLoginForm(forms.Form):
@@ -26,7 +27,8 @@ class UserRegistrationForm(forms.ModelForm):
         widgets = {'vkuserid': forms.HiddenInput(),
                    'password': forms.PasswordInput(render_value=False),
                    'email': forms.EmailInput(),
-                   'bdate': DateWidget(options = dateTimeOptions, usel10n=True, bootstrap_version=3)
+                   'bdate': DateWidget(options=dateTimeOptions, usel10n=True, bootstrap_version=3),
+                   'avatar': JasnyImageWidget()
                    }
 
     def clean_password2(self):
@@ -70,6 +72,26 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UserUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ('avatar', 'first_name', 'last_name', 'sex', 'vkuserid', 'bdate', 'phone')
+        dateTimeOptions = {
+            'format': 'dd.mm.yy',
+            'autoclose': True,
+            'showMeridian': True,
+        }
+        widgets = {'avatar': JasnyImageWidget(),
+                   'bdate': DateWidget(options=dateTimeOptions, usel10n=True, bootstrap_version=3)}
+
+    def clean_password(self):
+        # Regardless of what the user provides, return the initial value.
+        # This is done here, rather than on the field, because the
+        # field does not have access to the initial value
+        return self.initial["password"]
 
 
 class UserChangeForm(forms.ModelForm):

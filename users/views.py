@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.http import Http404
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
 import hashlib
@@ -134,3 +135,17 @@ def users_view(request):
     except KeyError:
         context = {'users': User.objects.all().extra(order_by=['pk'])}
     return render(request, 'users.html', context)
+
+
+@login_required
+def user_update_view(request):
+    user = User.objects.get(email=request.user.email)
+    form = UserUpdateForm(request.POST or None, request.FILES or None, instance=user)
+    if request.POST:
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Успешно сохранено!", extra_tags='info')
+            return redirect('user_update_view')
+        else:
+            messages.warning(request, "Некорректные данные", extra_tags='info')
+    return render(request, 'user_update.html', {'avatar_url': user.avatar, 'form': form})
