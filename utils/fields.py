@@ -6,6 +6,9 @@ from django.core import validators
 from phonenumbers.phonenumberutil import NumberParseException
 from django.core.exceptions import ValidationError
 
+import urllib
+from django.core.files import File
+
 
 # Jasny image widget
 #
@@ -21,9 +24,10 @@ class JasnyImageWidget(forms.FileInput):
                 </div>
                 <div>
                     <span class="btn btn-default btn-file">
-                        <span class="fileinput-new">Выберите изображение</span>
+                        <span id="a-jasny-add" class="fileinput-new">Выберите изображение</span>
                         <span class="fileinput-exists">Изменить</span>
                         <input type="file" name="{name}" accept="images/*"></span>
+                        <input type="hidden" id="jasny-deleted" name="{name}-deleted" value="0">
                         <input type="hidden" value name>
                     </span>
                     <a href="#" id="a-jasny-deleted" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Удалить</a>
@@ -41,6 +45,20 @@ class JasnyImageWidget(forms.FileInput):
         height = attrs.get('width', None) if value else 150
         existing = self.existing.format(url=value.url, name=name, width=width, height=height) if value else ''
         return self.html.format(state=state, width=width, height=height, image=existing, name=name)
+
+    def value_from_datadict(self, data, files, name):
+        deleted = bool(int(data.pop(name+'-deleted', ['0'])[0]))
+        url = data.pop(name+'-url', [''])[0]
+        file = files.get(name, None)
+        if deleted and not file:
+            return False
+        if not file and url:
+            result = urllib.urlretrieve(url)
+            file = File(open(result[0]))
+        return file
+
+    class Media:
+        js = ['js/jasnyimagewidget.js']
 
 
 # CUSTOM PHONE FIELD
