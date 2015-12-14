@@ -31,7 +31,7 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
           | {% if user.avatar %}
           .avatar-parent
             img(src="{{ user.avatar.url }}")
-          | {% elif user.sex = 'f' %}
+          | {% elif user.sex == 'f' %}
           .avatar-parent
             img(src="{% static 'images/blank_female.jpg' %}")
           | {% else %}

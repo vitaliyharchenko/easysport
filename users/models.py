@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.mail import send_mail
 from django.utils import timezone
 from utils.fields import PhoneField
+from utils.formatters import age_format
 
 
 class UserManager(BaseUserManager):
@@ -98,6 +99,9 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     def age(self):
         today = datetime.date.today()
         return today.year - self.bdate.year - ((today.month, today.day) < (self.bdate.month, self.bdate.day))
+
+    def beautiful_age(self):
+        return age_format(self.age)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)

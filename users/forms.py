@@ -24,11 +24,12 @@ class UserRegistrationForm(forms.ModelForm):
             'autoclose': True,
             'showMeridian': True,
         }
+        #TODO: 'bdate': forms.SelectDateWidget(),
         widgets = {'vkuserid': forms.HiddenInput(),
                    'password': forms.PasswordInput(render_value=False),
                    'email': forms.EmailInput(),
                    'bdate': DateWidget(options=dateTimeOptions, usel10n=True, bootstrap_version=3),
-                   'avatar': JasnyImageWidget()
+                   'avatar': JasnyImageWidget(),
                    }
 
     def clean_password2(self):
@@ -78,7 +79,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('avatar', 'first_name', 'last_name', 'sex', 'vkuserid', 'bdate', 'phone')
+        fields = ('avatar', 'first_name', 'last_name', 'sex', 'vkuserid', 'bdate', 'weight', 'height', 'phone')
         dateTimeOptions = {
             'format': 'dd.mm.yy',
             'autoclose': True,

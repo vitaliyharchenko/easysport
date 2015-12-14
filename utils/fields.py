@@ -6,25 +6,10 @@ from django.core import validators
 from phonenumbers.phonenumberutil import NumberParseException
 from django.core.exceptions import ValidationError
 
-from django.core.files import File
-import urllib, urlparse, re
-
 
 # Jasny image widget
 #
 #
-def urlencodenonascii(b):
-    return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
-
-
-def iritouri(iri):
-    parts = urlparse.urlparse(iri)
-    return urlparse.urlunparse(
-        part.encode('idna') if parti==1 else urlencodenonascii(part.encode('utf-8'))
-        for parti, part in enumerate(parts)
-    )
-
-
 class JasnyImageWidget(forms.FileInput):
     existing = '<img src="{url}" alt="{name}" width="{width}" height="{height}">'
 

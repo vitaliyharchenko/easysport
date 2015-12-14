@@ -27,7 +27,7 @@
             | {% endfor %}
             | {% endif %}
           .col-xs-12
-            form(method="post")
+            form(method="post" enctype='multipart/form-data')
               | {% csrf_token %}
               | {{ form|bootstrap }}
               button.btn.btn-primary.btn-block(type="submit") Зарегистрироваться

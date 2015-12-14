@@ -70,7 +70,7 @@ def logout_view(request):
 
 
 def register_view(request):
-    form = UserRegistrationForm(request.POST or None)
+    form = UserRegistrationForm(request.POST or None, request.FILES or None)
     if request.user.is_authenticated():
         return redirect('login_view')
     if request.method == 'POST':
@@ -148,4 +148,4 @@ def user_update_view(request):
             return redirect('user_update_view')
         else:
             messages.warning(request, "Некорректные данные", extra_tags='info')
-    return render(request, 'user_update.html', {'avatar_url': user.avatar, 'form': form})
+    return render(request, 'user_update.html', {'form': form})

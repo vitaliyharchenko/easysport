@@ -17,7 +17,7 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
           a(href="{% url 'user_update_view' %}") Редактировать
         | {% endif %}
       | {% else %}
-      | {% if user.sex = 'f' %}
+      | {% if user.sex == 'f' %}
       .avatar-parent
         img(src="{% static 'images/blank_female.jpg' %}")
         | {% if current %}
