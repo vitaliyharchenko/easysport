@@ -1,0 +1,112 @@
+| {% extends 'base.html' %}
+| {% load staticfiles %}
+| {% load globaltags %}
+| {% block title %}{{ user }}{% endblock %}
+|{% block headers %}
+link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="stylesheet")
+|{% endblock %}
+| {% block content %}
+.row
+  .col-md-4.col-sm-4.col-xs-4
+    .thumbnail.profile-avatar
+      | {% if user.avatar %}
+      .avatar-parent
+        img(src="{{ user.avatar.url }}")
+        | {% if current %}
+        .avatar-edit
+          a(href="{% url 'user_update_view' %}") Редактировать
+        | {% endif %}
+      | {% else %}
+      | {% if user.sex = 'f' %}
+      .avatar-parent
+        img(src="{% static 'images/blank_female.jpg' %}")
+        | {% if current %}
+        .avatar-edit
+          a(href="{% url 'user_update_view' %}") Редактировать
+        | {% endif %}
+      | {% else %}
+      .avatar-parent
+        img(src="{% static 'images/blank_male.jpg' %}")
+        | {% if current %}
+        .avatar-edit
+          a(href="{% url 'user_update_view' %}") Редактировать
+        | {% endif %}
+      | {% endif %}
+      | {% endif %}
+    | {% if not user.is_active %}
+    a.btn.btn-warning.btn-block Профиль не активирован
+    | {% endif %}
+    | {% if current_user.is_admin %}
+    a.btn.btn-primary.btn-block(href="mailto:{{ user.email }}") {{ user.email }}
+    | {% endif %}
+  .col-md-8.col-sm-8.col-xs-8
+    h1.m-t-0
+      | {{ user }}
+      small
+        | &nbsp;&nbsp;&nbsp;
+        br.visible-xs
+        | {% if user.is_admin %}
+        span#badge1.glyphicon.glyphicon-exclamation-sign(data-toggle="tooltip" data-placement="bottom" title="Администратор")
+        | &nbsp;
+        | {% endif %}
+        | {% if user.is_organizer %}
+        span#badge2.glyphicon.glyphicon-star(data-toggle="tooltip" data-placement="bottom" title="Организатор")
+        | &nbsp;
+        | {% endif %}
+        | {% if user.is_responsible %}
+        span#badge3.glyphicon.glyphicon-star-empty(data-toggle="tooltip" data-placement="bottom" title="Ответственный")
+        | &nbsp;
+        | {% endif %}
+        | {% if user.is_referee %}
+        span#badge3.glyphicon.glyphicon-king(data-toggle="tooltip" data-placement="bottom" title="Судья")
+        | &nbsp;
+        | {% endif %}
+    p
+      | {% if not current %}
+      small Последний раз заходил{% ifequal user.sex 'f' %}a{% endifequal %}: {{ user.last_login }}
+      | {% endif %}
+    br
+    p
+      | {% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}
+    | {% if user.height > 0 %}
+    br
+    p Рост: {{ user.height }} см.
+    | {% elif current %}
+    p
+      | Рост:
+      small
+        | &nbsp;
+        a(href="{% url 'user_update_view' %}") Заполнить...
+    | {% endif %}
+    | {% if user.weight > 0 %}
+    p Вес: {{ user.weight }} кг.
+    | {% elif current %}
+    p
+      | Вес:
+      small
+        | &nbsp;
+        a(href="{% url 'user_update_view' %}") Заполнить...
+    | {% endif %}
+    | {% if user.phone %}
+    br
+    p Телефон: {{ user.get_beautiful_phone }}
+    | {% else %}
+    br
+    p Телефон не указан
+    | {% endif %}
+    | {% if user.vkuserid %}
+    p
+      a(href="{% vkontakte_profile_link user.vkuserid %}" target="_blank")
+        img(src="{% static 'images/vk.png' %}" width="32")
+    | {% elif current %}
+    | {% url 'setvkid' as setvkid_url %}
+    p
+      a(href="{% vkontakte_auth_link setvkid_url %}" target="_blank") + связать свой аккаунт с вконтакте
+    | {% endif %}
+    | {% if user.ampluas.count > 0 %}
+    br
+    | {% for amplua in user.ampluas.all %}
+    p {{ amplua }}
+    | {% endfor %}
+    | {% endif %}
+| {% endblock %}

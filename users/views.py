@@ -1,8 +1,10 @@
 # coding=utf-8
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import auth, messages
 from django.utils import timezone
+from django.http import Http404
 from .forms import UserLoginForm, UserRegistrationForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
@@ -90,16 +92,15 @@ def register_view(request):
 
             return redirect('index_view')
         else:
-            messages.warning(request, "Form is not valid!")
+            messages.warning(request, "Здесь есть неверно заполненные поля!")
             return render(request, 'reg.html', {'form': form})
     return render(request, 'reg.html', {'form': form})
 
 
 def register_confirm(request, activation_key):
-    # TODO: страница ошибки активации
     user_profile = UserActivation.objects.get(activation_key=activation_key)
 
-    if user_profile.count() == 0:
+    if not user_profile:
          # TODO: страница ошибки активации
         raise Exception("Неверный код")
     else:
@@ -107,8 +108,29 @@ def register_confirm(request, activation_key):
         user.is_active = True
         user.save()
         if not request.user.is_authenticated():
-            user = auth.authenticate(username=user.email, password=user.password)
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             auth.login(request, user)
 
         # TODO: send thanks-message on email
         return redirect('index_view')
+
+
+def user_view(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except ObjectDoesNotExist:
+        raise Http404("Такого пользователя не существует")
+    context = {'user': user}
+    if request.user.pk == user.pk:
+        context['current'] = True
+    return render(request, 'user.html', context)
+
+
+def users_view(request):
+    try:
+        query = request.GET.__getitem__('q')
+        users = User.objects.filter(first_name__icontains=query) | User.objects.filter(last_name__icontains=query)
+        context = {'users': users, 'query': query}
+    except KeyError:
+        context = {'users': User.objects.all().extra(order_by=['pk'])}
+    return render(request, 'users.html', context)

@@ -106,7 +106,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         return "/users/%i" % self.id
 
     def __unicode__(self):
-        return self.first_name
+        return u'{} {}'.format(self.first_name, self.last_name)
 
 
 class User(AbstractUser):

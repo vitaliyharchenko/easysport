@@ -77,3 +77,27 @@ body {
   padding-top: $footerpadding;
   padding-bottom: $footerpadding;
 }
+
+/*
+* Social buttons style
+* https://github.com/sapegin/social-likes
+*/
+
+.social-likes__widget {
+  border-radius: 5px;
+}
+
+.social-likes{
+  font-size: 1.4em;
+  &-compact {
+    @extend .social-likes;
+    margin: 0 auto;
+    .social-likes__widget {
+      margin: 0;
+    }
+  }
+}
+
+.social-likes_big {
+  font-size: 2em;
+}

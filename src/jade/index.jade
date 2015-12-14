@@ -48,7 +48,7 @@ script(src="{% static 'js/index.js' %}")
       br
       | {% if not loggedin %}
       p
-        a.btn.btn-main.btn-lg.btn-success(href="#" data-toggle="modal" data-target="#regModal" role="button") Зарегистрироваться
+        a.btn.btn-main.btn-lg.btn-success(href="{% url 'reg_view' %}") Зарегистрироваться
       p или
       p
         a.btn.btn-main.btn-lg.btn-primary(href="#" data-toggle="modal" data-target="#loginModal" role="button") Войти
@@ -151,5 +151,7 @@ script(src="{% static 'js/index.js' %}")
       br
       br
       p
-        a.btn.btn-main.btn-lg.btn-success(href="#" data-toggle="modal" data-target="#regModal" role="button") Зарегистрироваться
+        |{% if not loggedin %}
+        a.btn.btn-main.btn-lg.btn-success(href="{% url 'reg_view' %}") Зарегистрироваться
+        |{% endif %}
 | {% endblock %}

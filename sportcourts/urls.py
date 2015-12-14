@@ -20,8 +20,8 @@ from django.conf.urls.static import static
 from sportcourts import settings
 
 import users.urls
+import events.urls
 import api.urls
-import pages.urls
 
 
 urlpatterns = [
@@ -30,5 +30,5 @@ urlpatterns = [
 ]
 
 urlpatterns += users.urls.urlpatterns
-urlpatterns += pages.urls.urlpatterns
+urlpatterns += events.urls.urlpatterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

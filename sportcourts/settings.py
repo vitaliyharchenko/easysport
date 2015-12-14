@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'utils',
     'rest_framework',
     'rest_framework.authtoken',
+    'bootstrapform',
+    'datetimewidget',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import User
+from datetimewidget.widgets import DateWidget
 
 
 class UserLoginForm(forms.Form):
@@ -17,17 +18,23 @@ class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = User.REGISTRATION_FIELDS
+        dateTimeOptions = {
+            'format': 'dd.mm.yy',
+            'autoclose': True,
+            'showMeridian': True,
+        }
         widgets = {'vkuserid': forms.HiddenInput(),
                    'password': forms.PasswordInput(render_value=False),
                    'email': forms.EmailInput(),
-                   'avatar': forms.ImageField()}
+                   'bdate': DateWidget(options = dateTimeOptions, usel10n=True, bootstrap_version=3)
+                   }
 
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
+            raise forms.ValidationError("Пароли не совпадают")
         return password2
 
     def save(self, commit=True):

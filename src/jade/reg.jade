@@ -1,5 +1,9 @@
 | {% extends 'base.html' %}
+|{% load bootstrap %}
 | {% block title %}Регистрация {% endblock %}
+|{% block headers %}
+|{{ form.media }}
+|{% endblock %}
 | {% block content %}
 .row
   .col-md-6.col-md-offset-3
@@ -22,19 +26,9 @@
               | setInterval(function(){$(".alert").alert('close')}, 3000);
             | {% endfor %}
             | {% endif %}
-
-            |{% if form.errors %}
-            .alert.alert-dismissible.fade.in(role="alert" class="")
-              button.close(type="button" data-dismiss="alert" aria-label="Close")
-                span(aria-hidden="true") ×
-              strong Упс!
-              | &nbsp;Вы ввели неверный логин\пароль
-            script(type="text/javascript")
-              | setInterval(function(){$(".alert").alert('close')}, 3000);
-            |{% endif %}
-          .col-xs-6.col-xs-offset-3
+          .col-xs-12
             form(method="post")
               | {% csrf_token %}
-              | {{ form.as_p }}
-              button.btn.btn-primary(type="submit") Зарегистрироваться
+              | {{ form|bootstrap }}
+              button.btn.btn-primary.btn-block(type="submit") Зарегистрироваться
 | {% endblock %}

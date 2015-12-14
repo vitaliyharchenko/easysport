@@ -17,7 +17,7 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
             span.glyphicon.glyphicon-globe
             | &nbsp;Площадки
         li(class="")
-          a.topmenu(href="") Игроки
+          a.topmenu(href="{% url 'users_view' %}") Игроки
       ul.nav.navbar-nav.navbar-right
         |{% if loggedin %}
         li.dropdown
@@ -31,9 +31,9 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
               |Avatar
             ul.dropdown-menu
               li
-                a(href="#") Мой профиль
+                a(href="{% url 'user_view' current_user.id %}") Мой профиль
               li
-                a(href="#") Настройки
+                a(href="{% url 'user_update_view' %}") Настройки
               |{% if current_user.is_staff %}
               li
                 a(href="/admin" target="blank") Админка

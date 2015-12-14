@@ -1,0 +1,63 @@
+| {% extends 'base.html' %}
+| {% load staticfiles %}
+| {% load globaltags %}
+| {% block title %}Игроки{% endblock %}
+|{% block headers %}
+link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="stylesheet")
+|{% endblock %}
+| {% block content %}
+.row
+  .col-sm-4.col-md-3
+    .panel.panel-default
+      .panel-body
+        p.lead Поиск
+        input#searchquery.form-control(type="text" name="query" placeholder="Поиск по имени" value="{{ query }}")
+        br
+        a#searchbutton.btn.btn-primary.btn-block(href="#" disabled) Найти
+    .panel.panel-default.hidden-xs
+      .panel-body
+        p.lead Расскажи о нас друзьям!
+        .social-likes.social-likes_notext.social-likes-compact
+          .facebook
+          .twitter
+          .vkontakte
+          .odnoklassniki
+  .col-sm-8.col-md-9
+    | {% if users|length > 0 %}
+    | {% for user in users %}
+    .row
+      .col-xs-3
+        .thumbnail.profile-avatar
+          | {% if user.avatar %}
+          .avatar-parent
+            img(src="{{ user.avatar.url }}")
+          | {% elif user.sex = 'f' %}
+          .avatar-parent
+            img(src="{% static 'images/blank_female.jpg' %}")
+          | {% else %}
+          .avatar-parent
+            img(src="{% static 'images/blank_male.jpg' %}")
+          | {% endif %}
+      .col-xs-9
+        p.lead
+          a(href="{{ user.get_absolute_url }}") {{ user }}
+        p
+          | {% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}
+        | {% if user.ampluas.count > 0 %}
+        p
+          | {% for amplua in user.ampluas.all %}
+          | {{ amplua }}
+          br
+          | {% endfor %}
+        | {% endif %}
+    hr
+    | {% endfor %}
+    | {% else %}
+    .alert.alert-dismissable.alert-warning
+      button.close(type="button" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+      | По вашему запросу ничего не найдено
+    | {% endif %}
+script
+  include ../js/users.js
+| {% endblock %}
