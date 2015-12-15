@@ -6,7 +6,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.http import Http404
-from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm
+from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
 import hashlib
@@ -148,4 +148,21 @@ def user_update_view(request):
             return redirect('user_update_view')
         else:
             messages.warning(request, "Некорректные данные", extra_tags='info')
-    return render(request, 'user_update.html', {'form': form})
+    return render(request, 'user_update.html', {'form': form, 'pass_form': ChangePasswordForm})
+
+
+@login_required
+def changepass(request):
+    user = User.objects.get(email=request.user.email)
+    pass_form = ChangePasswordForm(request.POST or None)
+    if request.method == 'POST':
+        if pass_form.is_valid():
+            password = pass_form.cleaned_data.get("password")
+            user.set_password(password)
+            user.save()
+            validation = auth.authenticate(username=user.email, password=password)
+            auth.login(request, validation)
+            messages.success(request, "Пароль изменен", extra_tags='changepass')
+        else:
+            messages.warning(request, "Введенные пароли некорректны!", extra_tags='changepass')
+    return redirect('user_update_view')

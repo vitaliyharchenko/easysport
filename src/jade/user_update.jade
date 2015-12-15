@@ -27,4 +27,27 @@ hr
           | {{ form|bootstrap }}
           button.btn.btn-primary(type="submit" name="saveinfo") Сохранить
   .col-md-6
+    .panel.panel-default
+      .panel-body
+        h3 Приватность
+    .panel.panel-default
+      .panel-body
+        h3 Сменить пароль
+        br
+
+        | {% if messages %}
+        | {% for message in messages %}
+        | {% if message.extra_tags == 'changepass' %}
+        .alert.alert-dismissible(class="{% if message.tags == 'changepass success' %}alert-success{% else %}alert-warning{% endif %}")
+          button.close(href="#" data-dismiss="alert" aria-label="close") &times;
+          |{{ message }}
+        | {% endif %}
+        | {% endfor %}
+        | {% endif %}
+
+        form(method="post" action="{% url 'changepass' %}" enctype='multipart/form-data')
+          |{% csrf_token %}
+          |{{ pass_form|bootstrap }}
+          br
+          button.btn.btn-warning(type="submit" name="changepass") Изменить пароль
 | {% endblock %}

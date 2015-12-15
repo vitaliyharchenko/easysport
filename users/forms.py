@@ -107,3 +107,15 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(label='Новый пароль', widget=forms.PasswordInput())
+    password1 = forms.CharField(label='Еще раз', widget=forms.PasswordInput())
+
+    def clean_password1(self):
+        password = self.cleaned_data.get("password")
+        password1 = self.cleaned_data.get("password1")
+        if password and password1 and password != password1:
+            raise forms.ValidationError("Введенные пароли не совпадают", code='password_mismatch',)
+        return password1
