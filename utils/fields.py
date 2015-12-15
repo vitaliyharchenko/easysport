@@ -46,19 +46,22 @@ class JasnyImageWidget(forms.FileInput):
         existing = self.existing.format(url=value.url, name=name, width=width, height=height) if value else ''
         return self.html.format(state=state, width=width, height=height, image=existing, name=name)
 
-    def value_from_datadict(self, data, files, name):
-        deleted = bool(int(data.pop(name+'-deleted', ['0'])[0]))
-        url = data.pop(name+'-url', [''])[0]
-        file = files.get(name, None)
-        if deleted and not file:
-            return False
-        if not file and url:
-            result = urllib.urlretrieve(url)
-            file = File(open(result[0]))
-        return file
+    # def value_from_datadict(self, data, files, name):
+    #     deleted = bool(int(data.pop(name+'-deleted', ['0'])[0]))
+    #     url = data.pop(name+'-url', [''])[0]
+    #     file = files.get(name, None)
+    #     if deleted and not file:
+    #         return False
+    #     if not file and url:
+    #         result = urllib.urlretrieve(url)
+    #         file = File(open(result[0]))
+    #     return file
 
     class Media:
-        js = ['js/jasnyimagewidget.js']
+        css = {
+            'all': ['css/jasny.css']
+        }
+        js = ['js/jasny.js']
 
 
 # CUSTOM PHONE FIELD
