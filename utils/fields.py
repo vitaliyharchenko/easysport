@@ -10,6 +10,32 @@ import urllib
 from django.core.files import File
 
 
+# Beauty image widget for admin
+#
+#
+class BeautyImageWidget(forms.FileInput):
+    existing = '<img src="{url}" alt="{name}" width="{width}" height="{height}">'
+
+    html = """\
+            <br>
+            <div>
+                {image}
+                <input type="file" name="{name}" accept="images/*"></span>
+            </div>
+           """
+
+    def __init__(self, attrs={}):
+        super(BeautyImageWidget, self).__init__(attrs)
+
+    def render(self, name, value, attrs=None):
+        attrs = attrs or {}
+        state = 'exists' if value else 'new'
+        width = attrs.get('width', None) or 150
+        height = attrs.get('width', None) if value else 150
+        existing = self.existing.format(url=value.url, name=name, width=width, height=height) if value else ''
+        return self.html.format(state=state, width=width, height=height, image=existing, name=name)
+
+
 # Jasny image widget
 #
 #
