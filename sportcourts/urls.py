@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from sportcourts import settings
 
 import users.urls
-import events.urls
+import games.urls
 import courts.urls
 import api.urls
 
@@ -31,7 +31,7 @@ urlpatterns = [
 ]
 
 urlpatterns += users.urls.urlpatterns
-urlpatterns += events.urls.urlpatterns
+urlpatterns += games.urls.urlpatterns
 urlpatterns += courts.urls.urlpatterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
