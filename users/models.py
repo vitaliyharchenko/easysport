@@ -109,7 +109,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     def get_absolute_url(self):
         return "/users/%i" % self.id
 
-    def __unicode__(self):
+    def __str__(self):
         return u'{} {}'.format(self.first_name, self.last_name)
 
 

@@ -48,6 +48,7 @@ create user - admin, ceo@sportcourts.ru, 123456
 # обнуление БД
 
 '''
+sudo su postgres -c 'pg_ctl -D /opt/local/var/db/postgresql84/defaultdb/ restart' (рестарт psql)
 psql
 DROP DATABASE scdb;
 CREATE DATABASE scdb OWNER scuser;
@@ -61,6 +62,7 @@ create user - admin, ceo@sportcourts.ru, 123456
 
 # Работа с зависимостями
 '''
+pip install -r requirements.txt
 pip freeze > requirements.txt
 
 npm update --save

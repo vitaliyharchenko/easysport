@@ -1,0 +1,52 @@
+| {% extends 'base.html' %}
+| {% load globaltags %}
+| {% block title %}{{ court.title }}{% endblock %}
+| {% block content %}
+.row
+  .col-md-8
+    .thumbnail.profile-avatar
+      | {% if court.photo %}
+      img(src="{{ court.photo.url }}")
+      | {% endif %}
+  .col-md-4
+    p.lead {{ court.title }}
+    | {% if current_user.is_staff %}
+    p
+      a(href="/admin/courts/court/{{ court.pk }}/") Редактировать
+    | {% endif %}
+    .table-responsive
+      table.table
+        tbody
+          tr
+            td.p-l-0
+              small
+                strong Адрес:
+            td
+              | {{ court.place }}
+              br
+              small
+                a(href="#CourtMap")
+                  | Показать на карте&nbsp;
+                  span.glyphicon.glyphicon-map-marker
+          tr
+            td.p-l-0
+              small
+                strong Описание:
+            td {{ court.description }}
+          tr
+            td.p-l-0
+              small
+                strong Виды спорта:
+            td
+              | {% if court.sporttypes.count > 0 %}
+              ul.list-unstyled.m-b-0
+                | {% for sporttype in court.sporttypes.all %}
+                li {{ sporttype }}
+                | {% endfor %}
+              | {% endif %}
+          tr
+            td.p-l-0
+              small
+                strong Просмотров:
+            td {{ court.views }}
+| {% endblock %}

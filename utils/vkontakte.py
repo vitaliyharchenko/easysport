@@ -1,4 +1,3 @@
-import urllib2
 import urllib
 import json
 
@@ -34,7 +33,7 @@ def auth_code(code, redirect_uri):
     url = url.format(settings.VKONTAKTE['APPID'], settings.VKONTAKTE['SECRET'], code, settings.CURRENT_HOST,
                      redirect_uri)
     try:
-        response = urllib2.urlopen(url)
+        response = urllib.urlopen(url)
     except Exception as e:
         raise AuthError('Auth error', 'Unathorized', e)
     response = response.read().decode()
