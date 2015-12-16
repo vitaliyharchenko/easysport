@@ -3,12 +3,19 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 from .models import User, UserActivation
 from .forms import UserChangeForm, UserCreationForm
+from games.models import UserGameAction
+
+
+class UserGameActionInline(admin.TabularInline):
+    model = UserGameAction
+    extra = 0
 
 
 class UserAdmin(UserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
     add_form = UserCreationForm
+    inlines = [UserGameActionInline]
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin

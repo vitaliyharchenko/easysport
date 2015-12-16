@@ -51,10 +51,10 @@ class Game(models.Model):
         app_label = 'games'
 
     def __str__(self):
-        return u'{}, {}, {}'.format(self.datetime, self.gametype, self.court)
+        return u'{}, {}, {}'.format(self.court, self.datetime, self.gametype)
 
     def __unicode__(self):
-        return u'{}, {}, {}'.format(self.datetime, self.gametype, self.court)
+        return u'{}, {}, {}'.format(self.court, self.datetime, self.gametype)
 
     def save(self):
         if self.datetime > self.datetime_to:
