@@ -1,0 +1,5 @@
+
+{% load staticfiles %}
+{% if avatar %}<img src="{{ avatar.url }}" width="{{ width }}" height="{{ height }}" class="m-w-100 {% if circle == 'True' %}img-circle{% endif %}{% if thumbnail == 'True' %}img-thumbnail{% endif %}"/>{% else %}
+{% if sex == 'f' %}<img src="{% static 'images/blank_female.jpg' %}" width="{{ width }}" height="{{ height }}" class="m-w-100 {% if circle == 'True' %}img-circle{% endif %}{% if thumbnail == 'True' %}img-thumbnail{% endif %}"/>{% else %}<img src="{% static 'images/blank_male.jpg' %}" width="{{ width }}" height="{{ height }}" class="m-w-100 {% if circle == 'True' %}img-circle{% endif %}{% if thumbnail == 'True' %}img-thumbnail{% endif %}"/>{% endif %}
+{% endif %}

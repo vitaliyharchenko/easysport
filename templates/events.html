@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block title %}Спортивные события{% endblock %}
+{% block content %}
+<h1 class="m-t-0">События</h1>
+<hr/>
+<div class="row">
+  <div class="col-md-9">
+    {% for event in events %}
+    Event
+    {% endfor %}
+  </div>
+  <div class="col-md-3 visible-md visible-lg">
+    <p class="lead m-t-0">Расскажи о нас друзьям!</p>
+    <div class="social-likes social-likes_notext social-likes-compact">
+      <div class="facebook"></div>
+      <div class="twitter"></div>
+      <div class="vkontakte"></div>
+      <div class="odnoklassniki"></div>
+    </div>
+  </div>
+</div>{% endblock %}

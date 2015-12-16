@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load globaltags %}
+{% block title %}{{ user }}{% endblock %}
+{% block headers %}
+<link href="{% static 'css/particles/profile.css' %}" type="text/css" rel="stylesheet"/>{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-4 col-sm-4 col-xs-4">
+    <div class="thumbnail profile-avatar">
+      <div class="avatar-parent">
+        {% avatar user.avatar sex=user.sex %}
+        {% if current %}
+        <div class="avatar-edit"><a href="{% url 'user_update_view' %}">Редактировать</a></div>{% endif %}
+      </div>
+    </div>{% if not user.is_active %}<a class="btn btn-warning btn-block">Профиль не активирован</a>{% endif %}
+    {% if current_user.is_admin %}<a href="mailto:{{ user.email }}" class="btn btn-primary btn-block">{{ user.email }}</a>{% endif %}
+  </div>
+  <div class="col-md-8 col-sm-8 col-xs-8">
+    <h1 class="m-t-0">{{ user }}<small>&nbsp;&nbsp;&nbsp;<br class="visible-xs"/>{% if user.is_admin %}<span id="badge1" data-toggle="tooltip" data-placement="bottom" title="Администратор" class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;
+        {% endif %}
+        {% if user.is_organizer %}<span id="badge2" data-toggle="tooltip" data-placement="bottom" title="Организатор" class="glyphicon glyphicon-star"></span>&nbsp;
+        {% endif %}
+        {% if user.is_responsible %}<span id="badge3" data-toggle="tooltip" data-placement="bottom" title="Ответственный" class="glyphicon glyphicon-star-empty"></span>&nbsp;
+        {% endif %}
+        {% if user.is_referee %}<span id="badge3" data-toggle="tooltip" data-placement="bottom" title="Судья" class="glyphicon glyphicon-king"></span>&nbsp;
+        {% endif %}</small></h1>
+    <p>{% if not current %}<small>Последний раз заходил{% ifequal user.sex 'f' %}a{% endifequal %}: {{ user.last_login }}</small>{% endif %}</p><br/>
+    <p>{% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}</p>{% if user.height > 0 %}<br/>
+    <p>Рост: {{ user.height }} см.</p>{% elif current %}
+    <p>Рост:<small>&nbsp;<a href="{% url 'user_update_view' %}">Заполнить...</a></small></p>{% endif %}
+    {% if user.weight > 0 %}
+    <p>Вес: {{ user.weight }} кг.</p>{% elif current %}
+    <p>Вес:<small>&nbsp;<a href="{% url 'user_update_view' %}">Заполнить...</a></small></p>{% endif %}
+    {% if user.amplua %}
+    <p>{{ user.amplua }}</p>{% endif %}
+    {% if user.phone %}<br/>
+    <p>Телефон: {{ user.get_beautiful_phone }}</p>{% else %}<br/>
+    <p>Телефон не указан</p>{% endif %}
+    {% if user.vkuserid %}
+    <p><a href="{% vkontakte_profile_link user.vkuserid %}" target="_blank"><img src="{% static 'images/vk.png' %}" width="32"/></a></p>{% endif %}
+  </div>
+</div>{% endblock %}

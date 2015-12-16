@@ -166,6 +166,11 @@ sudo service nginx restart
 source /opt/scenv/bin/activate
 pip install uwsgi
 
+cd /opt/sportcourts2
+python manage.py runserver 0.0.0.0:8000
+uwsgi --http :8000 --module sportcourts.wsgi
+
+
 python manage.py makemigrations
 python manage.py migrate
 python manage.py syncdb

@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load staticfiles %}
+{% load globaltags %}
+{% block title %}Редактирование профиля{% endblock %}
+{% block headers %}
+{{ form.media }}
+{% endblock %}
+{% block content %}
+<h1 class="m-t-0">Настройки</h1>
+<hr/>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Редактирование профиля</h3><br/>{% if messages %}
+        {% for message in messages %}
+        {% if message.extra_tags == 'info' %}
+        <div class="alert alert-dismissible {% if message.tags == 'info success' %}alert-success{% else %}alert-warning{% endif %}">
+          <button href="#" data-dismiss="alert" aria-label="close" class="close">&times;</button>{{ message }}
+        </div>{% endif %}
+        {% endfor %}
+        {% endif %}
+        <form method="post" action="{% url 'user_update_view' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|bootstrap }}
+          <button type="submit" name="saveinfo" class="btn btn-primary">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Интеграция с соцсетями</h3><br/>{% if messages %}
+        {% for message in messages %}
+        {% if message.extra_tags == 'integration' %}
+        <div class="alert alert-dismissible {% if message.tags == 'changepass success' %}alert-success{% else %}alert-warning{% endif %}">
+          <button href="#" data-dismiss="alert" aria-label="close" class="close">&times;</button>{{ message }}
+        </div>{% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if current_user.vkuserid %}
+        <p><a href="{% vkontakte_profile_link user.vkuserid %}" target="_blank"><img src="{% static 'images/vk.png' %}" width="32"/></a>&nbsp;&nbsp;<a href="{% url 'unsetvkid' %}">Открепить профиль</a></p>{% else %}
+        {% url 'user_update_view' as update_url %}
+        <p><a href="{% vkontakte_auth_link update_url %}">+ связать свой аккаунт с вконтакте</a></p>{% endif %}
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Сменить пароль</h3><br/>{% if messages %}
+        {% for message in messages %}
+        {% if message.extra_tags == 'changepass' %}
+        <div class="alert alert-dismissible {% if message.tags == 'changepass success' %}alert-success{% else %}alert-warning{% endif %}">
+          <button href="#" data-dismiss="alert" aria-label="close" class="close">&times;</button>{{ message }}
+        </div>{% endif %}
+        {% endfor %}
+        {% endif %}
+        <form method="post" action="{% url 'changepass' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ pass_form|bootstrap }}<br/>
+          <button type="submit" name="changepass" class="btn btn-warning">Изменить пароль</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}

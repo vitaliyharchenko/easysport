@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}Регистрация {% endblock %}
+{% block headers %}
+{{ form.media }}
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h2>Регистрация</h2>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            {% if messages %}
+            {% for message in messages %}
+            <div role="alert" class="alert alert-dismissible fade in alert-{{ message.tags }}">
+              <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">×</span></button><strong>Упс!</strong>&nbsp;{{ message }}
+            </div>
+            <script type="text/javascript">setInterval(function(){$(".alert").alert('close')}, 3000);</script>{% endfor %}
+            {% endif %}
+          </div>
+          <div class="col-xs-12">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|bootstrap }}
+              <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}

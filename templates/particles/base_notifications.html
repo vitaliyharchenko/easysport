@@ -1,0 +1,8 @@
+
+<div class="notifications bottom-left">{% for notification in notifications_new %}
+  <div style="display: none;" class="alert {% if notification.level == 0 %}alert-info{% elif notification.level == 1 %}alert-warning{% elif notification.level == 2 %}alert-danger{% endif %}">
+    <button type="button" data-dismiss="alert" aria-hidden="true" class="close">&times;</button>
+    <p><small>{{notification.datetime}}</small></p>
+    <p class="lead">{{ notification }} | {{ notification.level }} | {{ notification.read }}</p>
+  </div>{% endfor %}
+</div>

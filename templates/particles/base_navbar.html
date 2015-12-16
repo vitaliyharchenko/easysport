@@ -1,0 +1,37 @@
+
+{% load globaltags %}
+{% block navbar %}
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle collapsed"><span class="sr-only">Toogle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>{% if loggedin %}<a href="{% url 'games_view' %}" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="brand"/></a>{% else %}<a href="{% url 'index_view' %}" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="brand"/></a>{% endif %}
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="{% active '/courts$' %}"><a href="{% url 'courts_view' %}" class="topmenu"><span class="glyphicon glyphicon-globe"></span>&nbsp;Площадки</a></li>
+        <li class="{% active '/users$' %}"><a href="{% url 'users_view' %}" class="topmenu">Игроки</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">{% if loggedin %}
+        <li><a>{% now "D, j M, H:i" %}</a></li>
+        <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="topmenu dropdown-toggle">
+            <div class="visible-xs-inline">Мой профиль</div>
+            <div class="visible-sm-inline">Avatar</div>
+            <div class="visible-lg-inline visible-md-inline">
+              {{ current_user }}&nbsp;
+              {% avatar current_user.avatar height="40" width="40" circle="True" sex=user.sex thumbnail="False" %}
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'user_view' current_user.id %}">Мой профиль</a></li>
+              <li><a href="{% url 'user_update_view' %}">Настройки</a></li>{% if current_user.is_staff %}
+              <li><a href="/admin" target="blank">Админка</a></li>{% endif %}
+              <li role="separator" class="divider"></li>
+              <li><a href="{% url 'logout_view' %}">Выход</a></li>
+            </ul></a></li>{% else %}
+        <li>
+          <!--a.topmenu(href="#" data-toggle="modal" data-target="#regModal") Зарегистрироваться--><a href="{% url 'reg_view' %}" class="topmenu">Зарегистрироваться</a>
+        </li>
+        <li><a href="#" data-toggle="modal" data-target="#loginModal" class="topmenu">Войти</a></li>{% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>{% endblock %}

@@ -1,0 +1,45 @@
+
+{% load globaltags %}
+{% if not loggedin %}
+<div id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h2>Авторизация</h2>
+            <p><a href="{% url 'reg_view' %}">Я не зарегистрирован</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-6">
+              <form method="post" action="{% url 'login_view' %}">{% csrf_token %}
+                <div class="form-group">
+                  <label class="sr-only">Email</label>
+                  <input type="email" name="email" placeholder="Email" class="form-control"/>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only">Пароль</label>
+                  <input type="password" name="password" placeholder="Пароль" class="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-default">Войти</button><br/><br/><a href="">Забыли пароль?</a>
+              </form>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">{% url 'login_view' as login_url %}<a href="{% vkontakte_auth_link login_url %}" class="btn btn-default btn-block">ВКОНТАКТЕ</a></div>
+              <!--.form-group-->
+              <!--  a.btn.btn-default.btn-block(href="#") FACEBOOK-->
+              <!--.form-group-->
+              <!--  a.btn.btn-default.btn-block(href="#") GOOGLE-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% else %}
+{% endif %}

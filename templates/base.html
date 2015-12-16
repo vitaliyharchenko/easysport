@@ -1,0 +1,117 @@
+{% load staticfiles %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}SportCourts{% endblock %} | SportCourts.ru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Favicon-->
+    <link href="{% static 'images/favicon.ico' %}" rel="icon" type="image/vnd.microsoft.icon">
+    <!--Styles-->
+    <link href="{% static 'css/main.css' %}" type="text/css" rel="stylesheet">
+    <!--Scripts-->
+    <script src="{% static 'js/main.js' %}"></script>
+    <!--Custom-->{% block headers %}{% endblock %}
+  </head>
+  <body>
+    {% load globaltags %}
+    {% block navbar %}
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle collapsed"><span class="sr-only">Toogle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>{% if loggedin %}<a href="{% url 'games_view' %}" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="brand"></a>{% else %}<a href="{% url 'index_view' %}" class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="brand"></a>{% endif %}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="{% active '/courts$' %}"><a href="{% url 'courts_view' %}" class="topmenu"><span class="glyphicon glyphicon-globe"></span>&nbsp;Площадки</a></li>
+            <li class="{% active '/users$' %}"><a href="{% url 'users_view' %}" class="topmenu">Игроки</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">{% if loggedin %}
+            <li><a>{% now "D, j M, H:i" %}</a></li>
+            <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="topmenu dropdown-toggle">
+                <div class="visible-xs-inline">Мой профиль</div>
+                <div class="visible-sm-inline">Avatar</div>
+                <div class="visible-lg-inline visible-md-inline">
+                  {{ current_user }}&nbsp;
+                  {% avatar current_user.avatar height="40" width="40" circle="True" sex=user.sex thumbnail="False" %}
+                </div>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'user_view' current_user.id %}">Мой профиль</a></li>
+                  <li><a href="{% url 'user_update_view' %}">Настройки</a></li>{% if current_user.is_staff %}
+                  <li><a href="/admin" target="blank">Админка</a></li>{% endif %}
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{% url 'logout_view' %}">Выход</a></li>
+                </ul></a></li>{% else %}
+            <li>
+              <!--a.topmenu(href="#" data-toggle="modal" data-target="#regModal") Зарегистрироваться--><a href="{% url 'reg_view' %}" class="topmenu">Зарегистрироваться</a>
+            </li>
+            <li><a href="#" data-toggle="modal" data-target="#loginModal" class="topmenu">Войти</a></li>{% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>{% endblock %}
+    {% load globaltags %}
+    {% if not loggedin %}
+    <div id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+                <h2>Авторизация</h2>
+                <p><a href="{% url 'reg_view' %}">Я не зарегистрирован</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-6">
+                  <form method="post" action="{% url 'login_view' %}">{% csrf_token %}
+                    <div class="form-group">
+                      <label class="sr-only">Email</label>
+                      <input type="email" name="email" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only">Пароль</label>
+                      <input type="password" name="password" placeholder="Пароль" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-default">Войти</button><br><br><a href="">Забыли пароль?</a>
+                  </form>
+                </div>
+                <div class="col-xs-6">
+                  <div class="form-group">{% url 'login_view' as login_url %}<a href="{% vkontakte_auth_link login_url %}" class="btn btn-default btn-block">ВКОНТАКТЕ</a></div>
+                  <!--.form-group-->
+                  <!--  a.btn.btn-default.btn-block(href="#") FACEBOOK-->
+                  <!--.form-group-->
+                  <!--  a.btn.btn-default.btn-block(href="#") GOOGLE-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>{% else %}
+    {% endif %}
+    <div class="notifications bottom-left">{% for notification in notifications_new %}
+      <div style="display: none;" class="alert {% if notification.level == 0 %}alert-info{% elif notification.level == 1 %}alert-warning{% elif notification.level == 2 %}alert-danger{% endif %}">
+        <button type="button" data-dismiss="alert" aria-hidden="true" class="close">&times;</button>
+        <p><small>{{notification.datetime}}</small></p>
+        <p class="lead">{{ notification }} | {{ notification.level }} | {{ notification.read }}</p>
+      </div>{% endfor %}
+    </div>{% block globalcontent %}
+    <section id="content">
+      <div class="container">{% block content %}{% endblock %}</div>
+    </section>{% endblock %}
+    <footer class="footer">
+      <div class="container text-center">
+        <p class="text-muted clip">
+          &copy; Sportcourts 2014
+          &nbsp&nbsp&nbsp&nbsp<a href="" class="topmenu">Контакты</a>&nbsp&nbsp&nbsp&nbsp<a target="_blank" href="https://vk.com/write17610278" class="topmenu">Сообщить об ошибке</a><a href="http://vk.com/sportcourts" target="_blank" class="footerright hidden-xs"><img src="{% static 'images/vk.png' %}" width="32"></a>
+        </p>
+      </div>
+    </footer>{% block footer %}{% endblock %}
+  </body>
+</html>

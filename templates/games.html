@@ -1,0 +1,85 @@
+
+{% extends 'base.html' %}
+{% load gametags %}
+{% block title %}Предстоящие игры{% endblock %}
+{% block content %}
+<h1 class="m-t-0">Игры</h1>
+<hr/>
+<div class="row">
+  <div class="col-md-3 visible-md visible-lg">{% if current_user.is_organizer %}<a href="/admin/games/game/add/" class="btn btn-success btn-block">+ создать игру</a><br/>{% endif %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!--# TODO: autorender select by sports-->
+        <p class="lead">Фильтр</p>
+        <select id="sporttype" name="query" class="form-control">{% if query %}
+          <option value="0">Предстоящие игры</option>{% else %}
+          <option value="0" selected="selected">Предстоящие игры</option>{% endif %}
+          {% if query == -1 %}
+          <option value="-1" selected="selected">Прошедшие игры</option>{% else %}
+          <option value="-1">Прошедшие игры</option>{% endif %}
+          {% for sport_type in sport_types %}
+          {% if query == sport_type.id %}
+          <option value="{{ sport_type.id }}" selected="selected">{{ sport_type.title }}</option>{% else %}
+          <option value="{{ sport_type.id }}">{{ sport_type.title }}</option>{% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="panel panel-default hidden-xs">
+      <div class="panel-body">
+        <p class="lead m-t-0">Расскажи о нас друзьям!</p>
+        <div class="social-likes social-likes_notext social-likes-compact">
+          <div class="facebook"></div>
+          <div class="twitter"></div>
+          <div class="vkontakte"></div>
+          <div class="odnoklassniki"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    {% for game in games %}
+    {% game_tpl game=game %}
+    {% endfor %}
+  </div>
+</div>
+<script>$(document).on('click', '.action', function (e) {
+    var arr = $(this).attr("id").split('-');
+    var game_id = arr[0], action = arr[1];
+    console.log(arr);
+    $.ajax({
+        url: '{% url "gameaction" %}',
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            game_id: game_id,
+            action: action
+        },
+        async: true,
+        success: function (responseData, textStatus) {
+            if (responseData['error']) {
+                alert(responseData['error']['error_description']);
+            } else {
+                $('#' + game_id + '-pane').fadeOut('slow', function () {
+                    $('#' + game_id + '-pane').replaceWith(responseData);
+                });
+            }
+        },
+        error: function (response, status, errorThrown) {
+            alert('Все плохо, расскажите нам про эту ошибку \n\r\n\r' + response + status + errorThrown);
+        },
+        type: "POST",
+        dataType: "text"
+    });
+    e.preventDefault();
+});
+
+$(document).on('change','#sporttype',function(){
+    var value = $('#sporttype').val();
+    if (value == '0') {
+        location.href='/games';
+    }
+    else {
+        location.href='/games?q='+value;
+    }
+});
+</script>{% endblock %}

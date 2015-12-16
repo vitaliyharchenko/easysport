@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+{% load globaltags %}
+{% block title %}Добро пожаловать! {% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h2>Авторизация</h2>
+            <p><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#regModal">Я не зарегистрирован</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            {% if messages %}
+            {% for message in messages %}
+            <div role="alert" class="alert alert-dismissible fade in alert-{{ message.tags }}">
+              <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">×</span></button><strong>Упс!</strong>&nbsp;{{ message }}
+            </div>
+            <script type="text/javascript">setInterval(function(){$(".alert").alert('close')}, 30000);</script>{% endfor %}
+            {% endif %}
+          </div>
+          <div class="col-xs-6">
+            <form method="post">{% csrf_token %}
+              <div class="form-group">
+                <label class="sr-only">Email</label>
+                <input type="email" name="email" placeholder="Email" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label class="sr-only">Пароль</label>
+                <input type="password" name="password" placeholder="Пароль" class="form-control"/>
+              </div>
+              <button type="submit" class="btn btn-default">Войти</button><br/><br/><a href="#">Забыли пароль?</a>
+            </form>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group">{% url 'login_view' as login_url %}<a href="{% vkontakte_auth_link login_url %}" class="btn btn-default btn-block">ВКОНТАКТЕ</a></div>
+            <!--.form-group-->
+            <!--  a.btn.btn-default.btn-block(href="#") FACEBOOK-->
+            <!--.form-group-->
+            <!--  a.btn.btn-default.btn-block(href="#") GOOGLE-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}

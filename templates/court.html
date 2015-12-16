@@ -1,0 +1,40 @@
+
+{% extends 'base.html' %}
+{% load globaltags %}
+{% block title %}{{ court.title }}{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="thumbnail profile-avatar">{% image court.photo width="100" height="100" %}</div>
+  </div>
+  <div class="col-md-4">
+    <p class="lead">{{ court.title }}</p>{% if current_user.is_staff %}
+    <p><a href="/admin/courts/court/{{ court.pk }}/">Редактировать</a></p>{% endif %}
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="p-l-0"><small><strong>Адрес:</strong></small></td>
+            <td>{{ court.place }}<br/><small><a href="#CourtMap">Показать на карте&nbsp;<span class="glyphicon glyphicon-map-marker"></span></a></small></td>
+          </tr>
+          <tr>
+            <td class="p-l-0"><small><strong>Описание:</strong></small></td>
+            <td>{{ court.description }}</td>
+          </tr>
+          <tr>
+            <td class="p-l-0"><small><strong>Виды спорта:</strong></small></td>
+            <td>{% if court.sporttypes.count > 0 %}
+              <ul class="list-unstyled m-b-0">{% for sporttype in court.sporttypes.all %}
+                <li>{{ sporttype }}</li>{% endfor %}
+              </ul>{% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td class="p-l-0"><small><strong>Просмотров:</strong></small></td>
+            <td>{{ court.views }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>{% endblock %}

@@ -1,0 +1,75 @@
+{% load staticfiles %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--Styles-->
+    <link href="{% static 'css/main.css' %}" type="text/css" rel="stylesheet">
+    <!--Scripts-->
+    <script src="{% static 'js/main.js' %}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <p class="lead"><a href="{% url 'game_view' game.pk %}">Игра №{{ game.pk }}</a></p>
+                      <p>Ответственный:&nbsp;<a href="{{ game.responsible_user.get_absolute_url }}">{{ game.responsible_user }}</a></p>
+                      <p>Тип игры: {{ game.gametype }}</p>
+                      <p>Площадка:&nbsp;<a href="{{ game.court.get_absolute_url }}">{{ game.court }}</a></p>
+                    </div>
+                    <div class="col-xs-6">
+                      <p>{{ game.datetime }}</p>
+                      <p>Продолжительность: {{ game.duration }}</p>
+                      <p>Цена: {{ game.cost }} RUB</p><br><br>
+                      <p>__________________</p>
+                      <p>Подпись ответственного</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-condensed">
+                          <tbody>
+                            <tr class="success">
+                              <td>№</td>
+                              <td>Имя</td>
+                              <td>Фамилия</td>
+                              <td>Телефон</td>
+                              <td>Статус</td>
+                              <td>Подпись</td>
+                            </tr>{% for user in game.subscribed %}
+                            <tr>
+                              <td>{{ user.pk }}</td>
+                              <td>{{ user.first_name }}</td>
+                              <td>{{ user.last_name }}</td>
+                              <td>{{ user.phone }}</td>
+                              <td></td>
+                              <td></td>
+                            </tr>{% endfor %}
+                            {% for user in game.reserved %}
+                            <tr class="warning">
+                              <td>{{ user.pk }}</td>
+                              <td>{{ user.first_name }}</td>
+                              <td>{{ user.last_name }}</td>
+                              <td>{{ user.phone }}</td>
+                              <td></td>
+                              <td></td>
+                            </tr>{% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+{% load gametags %}
+<!--#TODO: add popup window for login or registration-->
+<div id="{{ game.id }}-pane">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-10">
+          {% if standalone %}
+          # {{ game.id }} | {{ game.title }}
+          {% else %}<a href="{% url 'games:detail' game.id %}"># {{ game.id }} | {{ game.title }}</a>{% endif %}
+        </div>
+        <div class="col-xs-2 text-right">{% if current_user.is_staff %}
+          <div class="btn-group btn-group-compact">
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="close dropdown-toggle"><span class="glyphicon glyphicon-option-vertical"></span></button>
+            <ul class="dropdown-menu pull-right">
+              <li><a href="/admin/games/game/{{ game.pk }}/">Редактировать</a></li>
+              <li><a href="#">Печатать списки</a></li>
+            </ul>
+          </div>{% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="panel-body p-b-5">{% if game.type == 'game' %}
+      <div class="row">
+        <div class="col-md-2">
+          <p>{{ game.datetime }}</p>
+        </div>
+        <div class="col-md-7">
+          <p>{{ game.gametype }}</p>
+          <p><a href="{% url 'courts:detail' game.court.id %}" target="_blank">{{ game.court }}</a></p>{% if game.coach %}
+          <p>Тренер: {{ game.coach }}</p>{% endif %}
+          <p>
+            Ответственный: {{ game.responsible_user }}
+            {% if game.capacity > 0 %}
+          </p>
+          <div class="progress">{% if game.is_reported %}
+            <div role="progressbar" style="width: {% widthratio game.visited|length game.capacity 100 %}%;" class="progress-bar progress-bar-info"><span>{{ game.visited|length }} / {{ game.capacity }}</span></div>{% else %}
+            {% if game.has_place %}
+            <div role="progressbar" style="width: {% widthratio game.subscribed|length game.capacity 100 %}%; min-width: 1em;" class="progress-bar progress-bar-default progress-bar-striped active"><span>{{ game.subscribed|length }} / {{ game.capacity }}</span></div>{% else %}
+            <div role="progressbar" style="width: {% widthratio game.subscribed|length game.capacity 100 %}%; min-width: 1em;" class="progress-bar progress-bar-success"><span>{{ game.subscribed|length }} / {{ game.capacity }}</span></div>{% endif %}
+            {% endif %}
+          </div>{% else %}
+          <p><span class="glyphicon glyphicon-user"></span>&nbsp; {{ game.subscribed|length }}</p>{% endif %}
+          {% if game.is_reported %}
+          <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group m-b-5">
+            <div class="panel panel-default">
+              <div role="tab" id="heading-{{ game.pk }}" class="panel-heading">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-visited" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Посетили игру<span class="caret"></span></a></h4>
+              </div>
+              <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-visited" class="panel-collapse collapse">
+                <div class="panel-body p-b-5">{% for user in game.visited %}
+                  <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
+                </div>
+              </div>
+            </div>{% if current_user.is_staff %}
+            {% if game.notvisited|length > 0 %}
+            <div class="panel panel-default">
+              <div role="tab" id="heading-{{ game.pk }}" class="panel-heading">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-notvisited" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Не пришли<span class="caret"></span></a></h4>
+              </div>
+              <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notvisited" class="panel-collapse collapse">
+                <div class="panel-body">{% for user in game.notvisited %}
+                  <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
+                </div>
+              </div>
+            </div>{% endif %}
+            {% if game.notpay|length > 0 %}
+            <div class="panel panel-default">
+              <div role="tab" id="heading-{{ game.pk }}" class="panel-heading">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-notpay" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Не заплатили<span class="caret"></span></a></h4>
+              </div>
+              <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notpay" class="panel-collapse collapse">
+                <div class="panel-body">{% for user in game.notpay %}
+                  <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
+                </div>
+              </div>
+            </div>{% endif %}
+            {% endif %}
+          </div>{% else %}
+          <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group m-b-5">{% if game.subscribed|length > 0 %}
+            <div class="panel panel-default">
+              <div role="tab" id="heading-{{ game.pk }}" class="panel-heading">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Список участников<span class="caret"></span></a></h4>
+              </div>
+              <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}" class="panel-collapse collapse">
+                <div class="panel-body p-b-5">{% for user in game.subscribed %}
+                  <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
+                </div>
+              </div>
+            </div>{% endif %}
+            {% if current_user.is_staff %}
+            {% if game.reserved|length > 0 %}
+            <div class="panel panel-default">
+              <div role="tab" id="heading-{{ game.pk }}" class="panel-heading">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-reserved" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">В резерве<span class="caret"></span></a></h4>
+              </div>
+              <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-reserved" class="panel-collapse collapse">
+                <div class="panel-body p-b-5">{% for user in game.reserved %}
+                  <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
+                </div>
+              </div>
+            </div>{% endif %}
+            {% if game.unsubscribed|length > 0 %}
+            <div class="panel panel-default">
+              <div role="tab" id="heading-{{ game.pk }}" class="panel-heading">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-unsubscribed" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Отписались<span class="caret"></span></a></h4>
+              </div>
+              <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-unsubscribed" class="panel-collapse collapse">
+                <div class="panel-body p-b-5">{% for user in game.unsubscribed %}
+                  <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
+                </div>
+              </div>
+            </div>{% endif %}
+            {% endif %}
+          </div>{% endif %}
+        </div>
+        <div class="col-md-3 text-right">
+          {% if current_user %}
+          {% usergameaction current_user game as action %}
+          {% endif %}
+          <div class="btn-group">
+            <!--Если игра будет-->{% if game.time_status == 'WILL BE' %}
+            <!--Если записан-->{% if action == 1 %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm dropdown-toggle">
+              Вы записаны
+              &nbsp;<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a id="{{ game.id }}-unsubscribe" class="action">Отписаться</a></li>
+            </ul>
+            <!--Если в резерве-->{% elif action == 3 %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle">
+              Вы в резерве
+              &nbsp;<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a id="{{ game.id }}-unreserve" class="action">Выйти из резерва</a></li>{% if game.has_place %}
+              <li><a id="{{ game.id }}-subscribe" class="action">Перейти в основу</a></li>{% endif %}
+            </ul>
+            <!--Если не записан и не в резерве, проверяем наличие мест-->{% else %}
+            <!--Если есть места-->{% if game.has_place %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm dropdown-toggle">
+              Идет набор
+              &nbsp;<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">{% if current_user %}
+              <li><a id="{{ game.id }}-subscribe" class="action">Записаться</a></li>{% else %}
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться</a></li>{% endif %}
+            </ul>
+            <!--Если нет мест-->{% else %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет</button>
+            <ul class="dropdown-menu">
+              {% if current_user %}
+              {% if game.has_reserved_place %}
+              <li><a id="{{ game.id }}-reserve" class="action">Записаться в резерв</a></li>{% else %}
+              <!--pass-->{% endif %}
+              {% else %}
+              {% if game.has_reserved_place %}
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться в резерв</a></li>{% else %}
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">Мест нет</a></li>{% endif %}
+              {% endif %}
+            </ul>{% endif %}
+            <!--Конец проверки - Если есть места-->{% endif %}
+            <!--Конец проверки - Если игра будет-->
+            <!--Начало проверки - Если игра близко-->{% elif game.time_status == 'COMING' %}
+            {% if action == 1 %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm dropdown-toggle">Вы записаны</button>
+            <ul class="dropdown-menu">
+              <li>
+                <!--TODO: popup with phone--><a>Отписаться - попап с телефоном ответственного</a>
+              </li>
+            </ul>
+            <!--Если в резерве-->{% elif action == 3 %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle">Вы в резерве</button>
+            <ul class="dropdown-menu">
+              <li><a id="{{ game.id }}-unreserve" class="action">Выйти из резерва</a></li>{% if game.has_place %}
+              <li><a id="{{ game.id }}-subscribe" class="action">Перейти в основу</a></li>{% endif %}
+            </ul>
+            <!--Если не записан и не в резерве, проверяем наличие мест-->{% else %}
+            <!--Если есть места-->{% if game.has_place %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm dropdown-toggle">Идет набор</button>
+            <ul class="dropdown-menu">{% if current_user %}
+              <li><a id="{{ game.id }}-subscribe" class="action">Записаться</a></li>{% else %}
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться</a></li>{% endif %}
+            </ul>
+            <!--Если нет мест-->{% else %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет</button>{% endif %}
+            <!--Конец проверки - Если есть места-->{% endif %}
+            <!--Конец проверки - Если игра близко-->{% elif game.time_status == 'IT GOES' %}
+            <button class="btn btn-info btn-sm">
+              Игра идет
+              {% elif game.time_status == 'WAS' %}
+            </button>{% if action == 5 %}
+            <button class="btn btn-success btn-sm">Вы играли тут</button>{% elif action == 6 %}
+            <button class="btn btn-danger btn-sm">Вы прогуляли</button>{% elif action == 7 %}
+            <button class="btn btn-danger btn-sm">Вы не заплатили</button>{% else %}
+            <button class="btn btn-default btn-sm">Игра прошла</button>{% endif %}
+            {% endif %}
+          </div><br/><br/>
+          <p class="lead m-b-10">{{ game.cost }} RUB</p>
+          <p>{{ game.duration }}
+            <!--IF MODEL IS ELSE-->
+          </p>
+        </div>
+      </div>{% else %}
+      <p>{{ game }}</p>
+      <p>{{ game.datetime }}</p>
+      <p>EVENTZZ</p>
+      <hr/>{% endif %}
+    </div>
+  </div>
+</div>
