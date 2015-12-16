@@ -14,6 +14,9 @@ class SportType(models.Model):
     def __str__(self):
         return self.title
 
+    def __unicode__(self):
+        return self.title
+
 
 class GameType(models.Model):
     sporttype = models.ForeignKey(SportType, verbose_name='Вид спорта')
@@ -27,6 +30,9 @@ class GameType(models.Model):
     def __str__(self):
         return u'{} - {}'.format(self.sporttype.title, self.title)
 
+    def __unicode__(self):
+        return u'{} - {}'.format(self.sporttype.title, self.title)
+
 
 class Amplua(models.Model):
     sporttype = models.ForeignKey(SportType, verbose_name='Вид спорта', related_name='+')
@@ -38,4 +44,7 @@ class Amplua(models.Model):
         app_label = 'sports'
 
     def __str__(self):
+        return u'{} - {}'.format(self.sporttype.title, self.title)
+
+    def __unicode__(self):
         return u'{} - {}'.format(self.sporttype.title, self.title)
