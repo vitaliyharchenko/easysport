@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'places',
     'games',
     'utils',
+    'api',
     'rest_framework',
     'rest_framework.authtoken',
     'bootstrapform',

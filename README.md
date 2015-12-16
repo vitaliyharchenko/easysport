@@ -169,6 +169,11 @@ pip install uwsgi
 cd /opt/sportcourts2
 python manage.py runserver 0.0.0.0:8000
 uwsgi --http :8000 --module sportcourts.wsgi
+python manage.py collectstatic
+python manage.py makemigrations api users courts games places sports users
+python manage.py migrate
+python manage.py createsuperuser
+create user - admin, ceo@sportcourts.ru, 123456
 
 
 python manage.py makemigrations
