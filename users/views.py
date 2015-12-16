@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.shortcuts import render, redirect
+from django.core import signing
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import auth, messages
@@ -78,8 +79,7 @@ def register_view(request):
             form.save()
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
-            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-            activation_key = hashlib.sha1(salt + email).hexdigest()
+            activation_key = signing.dumps({'email': email})
             user = User.objects.get(email=email)
             UserActivation.objects.filter(user=user).delete()
 

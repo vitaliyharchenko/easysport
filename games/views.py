@@ -35,6 +35,13 @@ def game_view(request, game_id):
     return render(request, 'game.html', context)
 
 
+# TODO: privacy add
+def game_roster_view(request, game_id):
+    context = {'game': Game.objects.get(id=game_id),
+               'standalone': True}
+    return render(request, 'roster.html', context)
+
+
 # Return error for ajax
 def error_response(description):
     error = {'error_description': description}

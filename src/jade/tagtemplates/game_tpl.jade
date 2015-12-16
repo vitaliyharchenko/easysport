@@ -20,7 +20,7 @@ div(id="{{ game.id }}-pane")
               li
                 a(href="/admin/games/game/{{ game.pk }}/") Редактировать
               li
-                a(href="#") Печатать списки
+                a(href="{% url 'game_roster_view' game.pk %}" target="_blank") Печатать списки
           | {% endif %}
     .panel-body.p-b-5
       .row

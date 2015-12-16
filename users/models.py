@@ -124,7 +124,7 @@ class User(AbstractUser):
 
 class UserActivation(models.Model):
     user = models.OneToOneField(User)
-    activation_key = models.CharField(max_length=40, blank=True)
+    activation_key = models.CharField(max_length=100, blank=True)
     request_time = models.DateTimeField(default=timezone.now)
     confirm_time = models.DateTimeField('Дата активации', blank=True, null=True)
 
