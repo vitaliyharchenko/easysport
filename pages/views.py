@@ -7,3 +7,7 @@ def index_view(request):
         return redirect('games_view')
     else:
         return render(request, 'index.html')
+
+
+def contacts_view(request):
+    return render(request, 'contacts.html')
