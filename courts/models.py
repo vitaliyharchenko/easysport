@@ -67,7 +67,7 @@ class Court(models.Model):
         ordering = ['-views']
 
     def get_absolute_url(self):
-        return "/courts/%i" % self.id
+        return "/court/%i" % self.id
 
     def __str__(self):
         return self.title

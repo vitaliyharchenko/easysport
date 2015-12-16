@@ -20,5 +20,5 @@ from .views import courts_view, court_view
 
 urlpatterns = [
     url('^courts$', courts_view, name='courts_view'),
-    url('^courts/(?P<court_id>\d+)$', court_view, name='court_view'),
+    url('^court/(?P<court_id>\d+)$', court_view, name='court_view'),
 ]

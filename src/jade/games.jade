@@ -1,0 +1,47 @@
+| {% extends 'base.html' %}
+| {% load gametags %}
+| {% block title %}Предстоящие игры{% endblock %}
+| {% block content %}
+h1.m-t-0 Игры
+hr
+.row
+  .col-md-3.visible-md.visible-lg
+    .panel.panel-default
+      .panel-body
+        //# TODO: autorender select by sports
+        p.lead Фильтр
+        select#sporttype.form-control(name="query")
+          | {% if query %}
+          option(value="0") Предстоящие игры
+          | {% else %}
+          option(value="0" selected) Предстоящие игры
+          | {% endif %}
+
+          | {% if query == -1 %}
+          option(value="-1" selected) Прошедшие игры
+          | {% else %}
+          option(value="-1") Прошедшие игры
+          | {% endif %}
+
+          | {% for sport_type in sport_types %}
+          | {% if query == sport_type.id %}
+          option(value="{{ sport_type.id }}" selected) {{ sport_type.title }}
+          | {% else %}
+          option(value="{{ sport_type.id }}") {{ sport_type.title }}
+          | {% endif %}
+          | {% endfor %}
+    .panel.panel-default.hidden-xs
+      .panel-body
+        p.lead.m-t-0 Расскажи о нас друзьям!
+        .social-likes.social-likes_notext.social-likes-compact
+          .facebook
+          .twitter
+          .vkontakte
+          .odnoklassniki
+  .col-md-9
+    | {% for game in games %}
+    | {% game_tpl game=game %}
+    | {% endfor %}
+script
+  include ../js/games.js
+| {% endblock %}

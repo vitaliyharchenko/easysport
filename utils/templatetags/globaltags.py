@@ -1,8 +1,12 @@
 # coding=utf-8
+import re
+import random
+
 from django import template
-import re, random
 from django.core.urlresolvers import reverse, NoReverseMatch
+
 from utils import vkontakte
+
 
 register = template.Library()
 

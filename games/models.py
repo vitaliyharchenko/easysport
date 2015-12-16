@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.db import models
 from users.models import User
 from courts.models import Court
-from sports.models import GameType
+from sports.models import GameType, SportType
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -29,6 +29,7 @@ class Game(models.Model):
     court = models.ForeignKey(Court, verbose_name='Площадка')
 
     gametype = models.ForeignKey(GameType, verbose_name='Тип игры')
+    sporttype = models.ForeignKey(SportType, verbose_name='Вид спорта', blank=True, null=True)
 
     capacity = models.IntegerField(verbose_name='Вместимость')
 
@@ -64,12 +65,16 @@ class Game(models.Model):
         #     return super(Game, self).delete(using)
 
     @property
+    def sport_type(self):
+        return self.gametype.sporttype_id
+
+    @property
     def duration(self):
         # TODO: beautiful format of duration
         return self.datetime_to - self.datetime
 
     def get_absolute_url(self):
-        return "/games/%i" % self.id
+        return "/game/%i" % self.id
 
     @property
     def time_status(self):

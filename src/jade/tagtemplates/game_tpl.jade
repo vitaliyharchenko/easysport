@@ -1,0 +1,288 @@
+| {% load gametags %}
+|{% load tz %}
+//#TODO: add popup window for login or registration
+div(id="{{ game.id }}-pane")
+  .panel.panel-default
+    .panel-heading
+      .row
+        .col-xs-10
+          | {% if standalone %}
+          | # {{ game.id }} | {{ game.title }}
+          | {% else %}
+          a(href="{% url 'game_view' game.id %}") # {{ game.id }} | {{ game.title }}
+          | {% endif %}
+        .col-xs-2.text-right
+          | {% if current_user.is_staff %}
+          .btn-group.btn-group-compact
+            button.close.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              span.glyphicon.glyphicon-option-vertical
+            ul.dropdown-menu.pull-right
+              li
+                a(href="/admin/games/game/{{ game.pk }}/") Редактировать
+              li
+                a(href="#") Печатать списки
+          | {% endif %}
+    .panel-body.p-b-5
+      .row
+        .col-md-2
+          |{% localtime on %}
+          .well.well-sm.text-center.p-b-0
+            p {{ game.datetime|date:"l" }}
+            p
+              span.glyphicon.glyphicon-calendar
+              |&nbsp;{{ game.datetime|date:"j E" }}
+            p
+              span.glyphicon.glyphicon-time
+              |&nbsp;{{ game.datetime|date:"H:i" }}
+
+          //.panel.panel-warning.text-center.m-b-0
+          //  .panel-heading {{ game.datetime|date:"F" }}
+          //  .panel-body.p-b-0
+          //    p.h3.m-t-0 {{ game.datetime|date:"d" }}
+          //    p {{ game.datetime|date:"l" }}
+          //    p {{ game.datetime|date:"H:i" }}
+          //    p
+          //      span.label.label-info Сегодня
+          |{% endlocaltime %}
+        .col-md-7
+          p {{ game.gametype }}
+          p
+            a(href="{% url 'court_view' game.court.id %}" target="_blank") {{ game.court }}
+          | {% if game.coach %}
+          p Тренер: {{ game.coach }}
+          | {% endif %}
+          p Ответственный: {{ game.responsible_user }}
+            | {% if game.capacity > 0 %}
+          .progress
+            | {% if game.is_reported %}
+            .progress-bar.progress-bar-info(role="progressbar" style="width: {% widthratio game.visited|length game.capacity 100 %}%;")
+              span {{ game.visited|length }} / {{ game.capacity }}
+            | {% else %}
+            | {% if game.has_place %}
+            .progress-bar.progress-bar-default.progress-bar-striped.active(role="progressbar" style="width: {% widthratio game.subscribed|length game.capacity 100 %}%; min-width: 1em;")
+              span {{ game.subscribed|length }} / {{ game.capacity }}
+            | {% else %}
+            .progress-bar.progress-bar-success(role="progressbar" style="width: {% widthratio game.subscribed|length game.capacity 100 %}%; min-width: 1em;")
+              span {{ game.subscribed|length }} / {{ game.capacity }}
+            | {% endif %}
+            | {% endif %}
+          | {% else %}
+          p
+            span.glyphicon.glyphicon-user
+            | &nbsp; {{ game.subscribed|length }}
+          | {% endif %}
+          | {% if game.is_reported %}
+          .panel-group#accordion.m-b-5(role="tablist" aria-multiselectable="true")
+            .panel.panel-default
+              .panel-heading(role="tab" id="heading-{{ game.pk }}")
+                h4.panel-title
+                  a(role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-visited" aria-expanded="true" aria-controls="collapse-{{ game.pk }}")
+                    | Посетили игру
+                    span.caret
+              .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-visited")
+                .panel-body.p-b-5
+                  | {% for user in game.visited %}
+                  p
+                    a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
+                  | {% endfor %}
+            | {% if current_user.is_staff %}
+            | {% if game.notvisited|length > 0 %}
+            .panel.panel-default
+              .panel-heading(role="tab" id="heading-{{ game.pk }}")
+                h4.panel-title
+                  a(role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-notvisited" aria-expanded="true" aria-controls="collapse-{{ game.pk }}")
+                    | Не пришли
+                    span.caret
+              .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notvisited")
+                .panel-body
+                  | {% for user in game.notvisited %}
+                  p
+                    a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
+                  | {% endfor %}
+            | {% endif %}
+            | {% if game.notpay|length > 0 %}
+            .panel.panel-default
+              .panel-heading(role="tab" id="heading-{{ game.pk }}")
+                h4.panel-title
+                  a(role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-notpay" aria-expanded="true" aria-controls="collapse-{{ game.pk }}")
+                    | Не заплатили
+                    span.caret
+              .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notpay")
+                .panel-body
+                  | {% for user in game.notpay %}
+                  p
+                    a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
+                  | {% endfor %}
+            | {% endif %}
+            | {% endif %}
+          | {% else %}
+          .panel-group#accordion.m-b-5(role="tablist" aria-multiselectable="true")
+            | {% if game.subscribed|length > 0 %}
+            .panel.panel-default
+              .panel-heading(role="tab" id="heading-{{ game.pk }}")
+                h4.panel-title
+                  a(role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}" aria-expanded="true" aria-controls="collapse-{{ game.pk }}")
+                    | Список участников
+                    span.caret
+              .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}")
+                .panel-body.p-b-5
+                  | {% for user in game.subscribed %}
+                  p
+                    a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
+                  | {% endfor %}
+            | {% endif %}
+            | {% if current_user.is_staff %}
+            | {% if game.reserved|length > 0 %}
+            .panel.panel-default
+              .panel-heading(role="tab" id="heading-{{ game.pk }}")
+                h4.panel-title
+                  a(role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-reserved" aria-expanded="true" aria-controls="collapse-{{ game.pk }}")
+                    | В резерве
+                    span.caret
+              .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-reserved")
+                .panel-body.p-b-5
+                  | {% for user in game.reserved %}
+                  p
+                    a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
+                  | {% endfor %}
+            | {% endif %}
+            | {% if game.unsubscribed|length > 0 %}
+            .panel.panel-default
+              .panel-heading(role="tab" id="heading-{{ game.pk }}")
+                h4.panel-title
+                  a(role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-unsubscribed" aria-expanded="true" aria-controls="collapse-{{ game.pk }}")
+                    | Отписались
+                    span.caret
+              .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-unsubscribed")
+                .panel-body.p-b-5
+                  | {% for user in game.unsubscribed %}
+                  p
+                    a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
+                  | {% endfor %}
+            | {% endif %}
+            | {% endif %}
+          | {% endif %}
+        .col-md-3.text-right
+          | {% if current_user %}
+          | {% usergameaction current_user game as action %}
+          | {% endif %}
+          .btn-group
+            //Если игра будет
+            | {% if game.time_status == 'WILL BE' %}
+            //Если записан
+            | {% if action == 1 %}
+            button.btn.btn-success.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              | Вы записаны
+              | &nbsp;
+              span.caret
+            ul.dropdown-menu
+              li
+                a.action(id="{{ game.id }}-unsubscribe") Отписаться
+            //Если в резерве
+            | {% elif action == 3 %}
+            button.btn.btn-warning.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              | Вы в резерве
+              | &nbsp;
+              span.caret
+            ul.dropdown-menu
+              li
+                a.action(id="{{ game.id }}-unreserve") Выйти из резерва
+              | {% if game.has_place %}
+              li
+                a.action(id="{{ game.id }}-subscribe") Перейти в основу
+              | {% endif %}
+            //Если не записан и не в резерве, проверяем наличие мест
+            | {% else %}
+            //Если есть места
+            | {% if game.has_place %}
+            button.btn.btn-primary.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              | Идет набор
+              | &nbsp;
+              span.caret
+            ul.dropdown-menu
+              | {% if current_user %}
+              li
+                a.action(id="{{ game.id }}-subscribe") Записаться
+              | {% else %}
+              li
+                a(href="#" data-toggle="modal" data-target="#loginModal") Записаться
+              | {% endif %}
+            //Если нет мест
+            | {% else %}
+            button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
+            ul.dropdown-menu
+              | {% if current_user %}
+              | {% if game.has_reserved_place %}
+              li
+                a.action(id="{{ game.id }}-reserve") Записаться в резерв
+              | {% else %}
+              //pass
+              | {% endif %}
+              | {% else %}
+              | {% if game.has_reserved_place %}
+              li
+                a(href="#" data-toggle="modal" data-target="#loginModal") Записаться в резерв
+              | {% else %}
+              li
+                a(href="#" data-toggle="modal" data-target="#loginModal") Мест нет
+              | {% endif %}
+              | {% endif %}
+            | {% endif %}
+            //Конец проверки - Если есть места
+            | {% endif %}
+            //Конец проверки - Если игра будет
+            //Начало проверки - Если игра близко
+            | {% elif game.time_status == 'COMING' %}
+            | {% if action == 1 %}
+            button.btn.btn-success.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Вы записаны
+            ul.dropdown-menu
+              li
+                //TODO: popup with phone
+                a Отписаться - попап с телефоном ответственного
+            //Если в резерве
+            | {% elif action == 3 %}
+            button.btn.btn-warning.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Вы в резерве
+            ul.dropdown-menu
+              li
+                a.action(id="{{ game.id }}-unreserve") Выйти из резерва
+              | {% if game.has_place %}
+              li
+                a.action(id="{{ game.id }}-subscribe") Перейти в основу
+              | {% endif %}
+            //Если не записан и не в резерве, проверяем наличие мест
+            | {% else %}
+            //Если есть места
+            | {% if game.has_place %}
+            button.btn.btn-primary.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Идет набор
+            ul.dropdown-menu
+              | {% if current_user %}
+              li
+                a.action(id="{{ game.id }}-subscribe") Записаться
+              | {% else %}
+              li
+                a(href="#" data-toggle="modal" data-target="#loginModal") Записаться
+              | {% endif %}
+            //Если нет мест
+            | {% else %}
+            button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
+            | {% endif %}
+            //Конец проверки - Если есть места
+            | {% endif %}
+            //Конец проверки - Если игра близко
+            | {% elif game.time_status == 'IT GOES' %}
+            button.btn.btn-info.btn-sm Игра идет
+              | {% elif game.time_status == 'WAS' %}
+            | {% if action == 5 %}
+            button.btn.btn-success.btn-sm Вы играли тут
+            | {% elif action == 6 %}
+            button.btn.btn-danger.btn-sm Вы прогуляли
+            | {% elif action == 7 %}
+            button.btn.btn-danger.btn-sm Вы не заплатили
+            | {% else %}
+            button.btn.btn-default.btn-sm Игра прошла
+            | {% endif %}
+            | {% endif %}
+          br
+          br
+          p.lead.m-b-10 {{ game.cost }} RUB
+          p {{ game.duration }}

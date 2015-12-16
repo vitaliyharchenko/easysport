@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^update$', user_update_view, name="user_update_view"),
     url(r'^changepass$', changepass, name="changepass"),
 
-    url(r'^users/(?P<user_id>\d+)$', user_view, name='user_view'),
+    url(r'^user/(?P<user_id>\d+)$', user_view, name='user_view'),
     url(r'^users$', users_view, name='users_view'),
 ]

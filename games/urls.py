@@ -1,7 +1,9 @@
 from django.conf.urls import url
 
-from .views import events_view
+from .views import games_view, game_view, gameaction
 
 urlpatterns = [
-    url(r'^$', events_view, name='index_view'),
+    url(r'^games$', games_view, name='games_view'),
+    url(r'^game/(?P<game_id>\d+)$', game_view, name='game_view'),
+    url(r'^game/action$', gameaction, name='gameaction'),
 ]

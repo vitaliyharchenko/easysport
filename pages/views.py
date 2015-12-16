@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
 def index_view(request):
     if request.user.is_authenticated():
-        #TODO: redirect to events
-        return render(request, 'index.html')
+        return redirect('games_view')
     else:
         return render(request, 'index.html')

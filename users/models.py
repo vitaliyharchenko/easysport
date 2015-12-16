@@ -119,7 +119,7 @@ class User(AbstractUser):
         app_label = 'users'
 
     def get_absolute_url(self):
-        return "/users/%i" % self.id
+        return "/user/%i" % self.id
 
 
 class UserActivation(models.Model):
