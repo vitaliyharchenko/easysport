@@ -35,7 +35,7 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
               |Avatar
             .visible-lg-inline.visible-md-inline
               |{{ current_user }}&nbsp;
-              |Avatar
+              |{% avatar current_user.avatar height="40" width="40" circle="True" sex=user.sex thumbnail="False" %}
             ul.dropdown-menu
               li
                 a(href="{% url 'user_view' current_user.id %}") Мой профиль

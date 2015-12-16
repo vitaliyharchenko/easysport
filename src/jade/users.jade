@@ -45,14 +45,10 @@ hr
           a(href="{{ user.get_absolute_url }}") {{ user }}
         p
           | {% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}
-        | {% if user.ampluas.count > 0 %}
-        p
-          | {% for amplua in user.ampluas.all %}
-          | {{ amplua }}
-          br
-          | {% endfor %}
+        | {% if user.amplua %}
+        p {{ user.amplua }}
         | {% endif %}
-    hr
+    hr.m-t-0
     | {% endfor %}
     | {% else %}
     .alert.alert-dismissable.alert-warning

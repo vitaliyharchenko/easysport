@@ -1,4 +1,5 @@
 | {% load gametags %}
+| {% load globaltags %}
 |{% load tz %}
 //#TODO: add popup window for login or registration
 div(id="{{ game.id }}-pane")
@@ -24,9 +25,9 @@ div(id="{{ game.id }}-pane")
           | {% endif %}
     .panel-body.p-b-5
       .row
-        .col-md-2
+        .col-xs-4.col-xs-offset-4.col-sm-2.col-sm-offset-0
           |{% localtime on %}
-          .well.well-sm.text-center.p-b-0
+          .well.well-sm.text-center.p-b-0.m-w-180px
             p {{ game.datetime|date:"l" }}
             p
               span.glyphicon.glyphicon-calendar
@@ -44,14 +45,15 @@ div(id="{{ game.id }}-pane")
           //    p
           //      span.label.label-info Сегодня
           |{% endlocaltime %}
-        .col-md-7
+        .col-xs-12.col-sm-7.col-md-7
           p {{ game.gametype }}
           p
             a(href="{% url 'court_view' game.court.id %}" target="_blank") {{ game.court }}
           | {% if game.coach %}
           p Тренер: {{ game.coach }}
           | {% endif %}
-          p Ответственный: {{ game.responsible_user }}
+          p Ответственный:&nbsp;
+            a(href="{{ game.responsible_user.get_absolute_url }}") {{ game.responsible_user }}
             | {% if game.capacity > 0 %}
           .progress
             | {% if game.is_reported %}
@@ -162,7 +164,7 @@ div(id="{{ game.id }}-pane")
             | {% endif %}
             | {% endif %}
           | {% endif %}
-        .col-md-3.text-right
+        .col-xs-12.col-sm-3.col-md-3.text-right
           | {% if current_user %}
           | {% usergameaction current_user game as action %}
           | {% endif %}

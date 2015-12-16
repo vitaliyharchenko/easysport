@@ -6,6 +6,8 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from utils.fields import PhoneField
 from utils.formatters import age_format
+from sports.models import Amplua
+from places.models import City
 
 
 class UserManager(BaseUserManager):
@@ -61,6 +63,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     banned = models.BooleanField('Забанен', default=False,
                                  help_text="Банит пользователя")
 
+    city = models.ForeignKey(City, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True, verbose_name='Аватар')
     date_joined = models.DateTimeField('Дата регистрации', default=timezone.now)
     bdate = models.DateField('Дата рождения', auto_now_add=False, blank=True, null=True)
@@ -69,15 +72,15 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     vkuserid = models.IntegerField(unique=True, null=True, blank=True)
     sex = models.CharField(max_length=1, choices=(('m', 'мужской'), ('f', 'женский')), verbose_name='Пол')
     phone = PhoneField(verbose_name='Телефон', blank=True)
-    # ampluas = models.ManyToManyField('events.Amplua', verbose_name=u'Амплуа', blank=True)
+    amplua = models.ForeignKey(Amplua, verbose_name=u'Амплуа', blank=True, null=True)
     weight = models.PositiveSmallIntegerField(default=0, verbose_name='Вес')
     height = models.PositiveSmallIntegerField(default=0, verbose_name='Рост')
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
-    REGISTRATION_FIELDS = ['avatar'] + REQUIRED_FIELDS + ['sex'] + ['vkuserid'] + ['bdate'] + ['phone'] + [USERNAME_FIELD]
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'city']
+    REGISTRATION_FIELDS = ['avatar'] + ['first_name', 'last_name']+ ['sex'] + ['city'] + ['bdate'] + ['phone'] + [USERNAME_FIELD]
 
     class Meta:
         verbose_name = 'Игрок'

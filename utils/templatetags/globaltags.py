@@ -37,3 +37,17 @@ def vkontakte_auth_link(redirect_uri):
 def vkontakte_profile_link(vkuserid):
     vkuserid = str(vkuserid)
     return 'http://vk.com/' + 'id' * vkuserid.isdigit() + vkuserid
+
+
+@register.inclusion_tag('tagtemplates/avatar.html')
+def avatar(avatar_img, height='', width='', circle=False, sex='m', thumbnail=False):
+    height = str(height)
+    width = str(width)
+    return {'avatar': avatar_img, 'circle': circle, 'width': width, 'height': height, 'sex': sex, 'thumbnail': thumbnail}
+
+
+@register.inclusion_tag('tagtemplates/image.html')
+def image(img, height='', width='', thumbnail=False):
+    height = str(height)
+    width = str(width)
+    return {'image': img, 'width': width, 'height': height, 'thumbnail': thumbnail}

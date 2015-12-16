@@ -1,0 +1,7 @@
+| {% load staticfiles %}
+
+| {% if image %}
+img.m-w-100(src="{{ image.url }}" class="{% if thumbnail == 'True' %}img-thumbnail{% endif %}" width="{{ width }}" height="{{ height }}")
+| {% else %}
+img.m-w-100(src="{% static 'images/blank.jpg' %}" class="{% if thumbnail == 'True' %}img-thumbnail{% endif %}" style="width:100%")
+| {% endif %}

@@ -10,32 +10,6 @@ import urllib
 from django.core.files import File
 
 
-# Beauty image widget for admin
-#
-#
-class BeautyImageWidget(forms.FileInput):
-    existing = '<img src="{url}" alt="{name}" width="{width}" height="{height}">'
-
-    html = """\
-            <br>
-            <div>
-                {image}
-                <input type="file" name="{name}" accept="images/*"></span>
-            </div>
-           """
-
-    def __init__(self, attrs={}):
-        super(BeautyImageWidget, self).__init__(attrs)
-
-    def render(self, name, value, attrs=None):
-        attrs = attrs or {}
-        state = 'exists' if value else 'new'
-        width = attrs.get('width', None) or 150
-        height = attrs.get('width', None) if value else 150
-        existing = self.existing.format(url=value.url, name=name, width=width, height=height) if value else ''
-        return self.html.format(state=state, width=width, height=height, image=existing, name=name)
-
-
 # Jasny image widget
 #
 #
@@ -43,7 +17,6 @@ class JasnyImageWidget(forms.FileInput):
     existing = '<img src="{url}" alt="{name}" width="{width}" height="{height}">'
 
     html = """\
-            <br>
             <div class="fileinput fileinput-{state}" data-provides="fileinput">
                 <div class="fileinput-preview thumbnail" style="width: {width}px; height: {height}px;">
                     {image}
@@ -72,16 +45,16 @@ class JasnyImageWidget(forms.FileInput):
         existing = self.existing.format(url=value.url, name=name, width=width, height=height) if value else ''
         return self.html.format(state=state, width=width, height=height, image=existing, name=name)
 
-    # def value_from_datadict(self, data, files, name):
-    #     deleted = bool(int(data.pop(name+'-deleted', ['0'])[0]))
-    #     url = data.pop(name+'-url', [''])[0]
-    #     file = files.get(name, None)
-    #     if deleted and not file:
-    #         return False
-    #     if not file and url:
-    #         result = urllib.urlretrieve(url)
-    #         file = File(open(result[0]))
-    #     return file
+    def value_from_datadict(self, data, files, name):
+        deleted = bool(int(data.pop(name+'-deleted', ['0'])[0]))
+        # url = data.pop(name+'-url', [''])[0]
+        file = files.get(name, None)
+        if deleted and not file:
+            return False
+        # if not file and url:
+        #     result = urllib.urlretrieve(url)
+        #     file = File(open(result[0]))
+        return file
 
     class Media:
         css = {

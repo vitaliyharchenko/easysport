@@ -1,0 +1,12 @@
+| {% load staticfiles %}
+
+|{% if avatar %}
+img.m-w-100(src="{{ avatar.url }}" class="{% if circle == 'True' %}img-circle{% endif %}{% if thumbnail == 'True' %}img-thumbnail{% endif %}" width="{{ width }}" height="{{ height }}")
+|{% else %}
+| {% if sex == 'f' %}
+img.m-w-100(src="{% static 'images/blank_female.jpg' %}" class="{% if circle == 'True' %}img-circle{% endif %}{% if thumbnail == 'True' %}img-thumbnail{% endif %}" width="{{ width }}" height="{{ height }}")
+| {% else %}
+img.m-w-100(src="{% static 'images/blank_male.jpg' %}" class="{% if circle == 'True' %}img-circle{% endif %}{% if thumbnail == 'True' %}img-thumbnail{% endif %}" width="{{ width }}" height="{{ height }}")
+| {% endif %}
+|{% endif %}
+

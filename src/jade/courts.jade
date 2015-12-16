@@ -5,14 +5,25 @@
 h1.m-t-0 Площадки
 hr
 .row
+  .col-md-3.visible-md.visible-lg
+    |{% if current_user.is_organizer %}
+    a.btn.btn-success.btn-block(href="/admin/courts/court/add/") + создать площадку
+    br
+    |{% endif %}
+    .panel.panel-default.hidden-xs
+      .panel-body
+        p.lead.m-t-0 Расскажи о нас друзьям!
+        .social-likes.social-likes_notext.social-likes-compact
+          .facebook
+          .twitter
+          .vkontakte
+          .odnoklassniki
   .col-md-9
     | {% for court in courts %}
     .row
       .col-xs-3
         .thumbnail.profile-avatar
-          | {% if court.photo %}
-          img(src="{{ court.photo.url }}")
-          | {% endif %}
+          |{% image court.photo %}
       .col-xs-9
         p.lead
           a(href="{{ court.get_absolute_url }}") {{ court.title }}
@@ -20,11 +31,4 @@ hr
         p {{ court.place }}
     hr.m-t-0
     | {% endfor %}
-  .col-md-3.visible-md.visible-lg
-    p.lead.m-t-0 Расскажи о нас друзьям!
-    .social-likes.social-likes_notext.social-likes-compact
-      .facebook
-      .twitter
-      .vkontakte
-      .odnoklassniki
 | {% endblock %}

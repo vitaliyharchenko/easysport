@@ -31,7 +31,7 @@ class Game(models.Model):
     gametype = models.ForeignKey(GameType, verbose_name='Тип игры')
     sporttype = models.ForeignKey(SportType, verbose_name='Вид спорта', blank=True, null=True)
 
-    capacity = models.IntegerField(verbose_name='Вместимость')
+    capacity = models.IntegerField(verbose_name='Вместимость', help_text='введите 0 для безлимитной игры')
 
     cost = models.PositiveIntegerField(verbose_name='Цена')
 
