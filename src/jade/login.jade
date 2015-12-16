@@ -39,7 +39,6 @@
               br
               a(href="#") Забыли пароль?
           .col-xs-6
-            | {% url 'login' as login_url %}
             .form-group
               |{% url 'login_view' as login_url %}
               a.btn.btn-default.btn-block(href="{% vkontakte_auth_link login_url %}") ВКОНТАКТЕ

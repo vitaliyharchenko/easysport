@@ -1,5 +1,7 @@
 | {% extends 'base.html' %}
 | {% load bootstrap %}
+| {% load staticfiles %}
+| {% load globaltags %}
 | {% block title %}Редактирование профиля{% endblock %}
 | {% block headers %}
 | {{ form.media }}
@@ -29,7 +31,28 @@ hr
   .col-md-6
     .panel.panel-default
       .panel-body
-        h3 Приватность
+        h3 Интеграция с соцсетями
+        br
+        | {% if messages %}
+        | {% for message in messages %}
+        | {% if message.extra_tags == 'integration' %}
+        .alert.alert-dismissible(class="{% if message.tags == 'changepass success' %}alert-success{% else %}alert-warning{% endif %}")
+          button.close(href="#" data-dismiss="alert" aria-label="close") &times;
+          |{{ message }}
+        | {% endif %}
+        | {% endfor %}
+        | {% endif %}
+        | {% if current_user.vkuserid %}
+        p
+          a(href="{% vkontakte_profile_link user.vkuserid %}" target="_blank")
+            img(src="{% static 'images/vk.png' %}" width="32")
+          |&nbsp;&nbsp;
+          a(href="{% url 'unsetvkid' %}") Открепить профиль
+        | {% else %}
+        | {% url 'user_update_view' as update_url %}
+        p
+          a(href="{% vkontakte_auth_link update_url %}") + связать свой аккаунт с вконтакте
+        | {% endif %}
     .panel.panel-default
       .panel-body
         h3 Сменить пароль

@@ -10,8 +10,6 @@ from django.http import Http404
 from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
-import hashlib
-import random
 
 
 def login_view(request):
@@ -139,9 +137,31 @@ def users_view(request):
 
 @login_required
 def user_update_view(request):
+    shortcut = lambda: render(request, 'user_update.html', {'form': form, 'pass_form': ChangePasswordForm})
+
     user = User.objects.get(email=request.user.email)
     form = UserUpdateForm(request.POST or None, request.FILES or None, instance=user)
-    if request.POST:
+
+    if 'code' in request.GET:
+        code = request.GET['code']
+        try:
+            access_token, user_id = vkontakte.auth_code(code, reverse('user_update_view'))
+        except vkontakte.AuthError as e:
+            messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
+            return redirect('user_update_view')
+        print(user_id)
+        try:
+            user = User.objects.get(vkuserid=user_id)
+            messages.warning(request, 'Этот аккаунт ВКонтакте уже связан с профилем', extra_tags='integration')
+            return redirect('user_update_view')
+        except User.DoesNotExist:
+            user = User.objects.get(email=request.user.email)
+            user.vkuserid = user_id
+            user.save()
+            messages.success(request, "Профиль ВКонтакте прикреплен", extra_tags='integration')
+            return redirect('user_update_view')
+
+    elif request.POST:
         if form.is_valid():
             form.save()
             messages.success(request, "Успешно сохранено!", extra_tags='info')
@@ -165,4 +185,13 @@ def changepass(request):
             messages.success(request, "Пароль изменен", extra_tags='changepass')
         else:
             messages.warning(request, "Введенные пароли некорректны!", extra_tags='changepass')
+    return redirect('user_update_view')
+
+
+@login_required
+def unsetvkid(request):
+    user = User.objects.get(email=request.user.email)
+    user.vkuserid = False
+    user.save()
+    messages.success(request, "Профиль ВКонтакте откреплен", extra_tags='integration')
     return redirect('user_update_view')

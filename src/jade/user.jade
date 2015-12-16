@@ -98,10 +98,6 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
     p
       a(href="{% vkontakte_profile_link user.vkuserid %}" target="_blank")
         img(src="{% static 'images/vk.png' %}" width="32")
-    | {% elif current %}
-    | {% url 'setvkid' as setvkid_url %}
-    p
-      a(href="{% vkontakte_auth_link setvkid_url %}" target="_blank") + связать свой аккаунт с вконтакте
     | {% endif %}
     | {% if user.ampluas.count > 0 %}
     br

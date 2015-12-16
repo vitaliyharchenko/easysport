@@ -79,7 +79,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('avatar', 'first_name', 'last_name', 'sex', 'vkuserid', 'bdate', 'weight', 'height', 'phone')
+        fields = ('avatar', 'first_name', 'last_name', 'sex', 'bdate', 'weight', 'height', 'phone')
         dateTimeOptions = {
             'format': 'dd.mm.yy',
             'autoclose': True,
