@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from django.http import Http404
 from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm
@@ -12,6 +13,7 @@ from .models import User, UserActivation
 from utils import mailing, vkontakte
 
 
+@csrf_protect
 def login_view(request):
     if request.user.is_authenticated():
         return redirect('index_view')
