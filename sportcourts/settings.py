@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'courts',
     'places',
     'games',
+    'notifications',
     'utils',
     'api',
     'rest_framework',
