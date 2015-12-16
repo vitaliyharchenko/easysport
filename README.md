@@ -118,7 +118,7 @@ sudo apt-get install git
 sudo apt-get install nginx
 sudo apt-get build-dep python-imaging
 sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
-sudo virtualenv /opt/scenv
+sudo virtualenv /opt/scenv --python=python3.4
 source /opt/scenv/bin/activate
 pip install django
 deactivate

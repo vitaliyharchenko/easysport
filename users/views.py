@@ -145,11 +145,9 @@ def user_update_view(request):
         code = request.GET['code']
         try:
             access_token, user_id = vkontakte.auth_code(code, reverse('user_update_view'))
-            print(user_id)
         except vkontakte.AuthError as e:
             messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
             return redirect('user_update_view')
-        print(user_id)
         try:
             user = User.objects.get(vkuserid=user_id)
             messages.warning(request, 'Этот аккаунт ВКонтакте уже связан с профилем', extra_tags='integration')
