@@ -79,8 +79,8 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'city']
-    REGISTRATION_FIELDS = ['avatar'] + ['first_name', 'last_name']+ ['sex'] + ['city'] + ['bdate'] + ['phone'] + [USERNAME_FIELD]
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REGISTRATION_FIELDS = ['avatar'] + ['first_name', 'last_name', 'city'] + ['sex'] + ['city'] + ['bdate'] + ['phone'] + [USERNAME_FIELD]
 
     class Meta:
         verbose_name = 'Игрок'
