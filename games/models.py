@@ -53,6 +53,9 @@ class Game(models.Model):
     def __str__(self):
         return u'{}, {}, {}'.format(self.datetime, self.gametype, self.court)
 
+    def __unicode__(self):
+        return u'{}, {}, {}'.format(self.datetime, self.gametype, self.court)
+
     def save(self):
         if self.datetime > self.datetime_to:
             raise ValueError('Проверьте отрезки времени')
