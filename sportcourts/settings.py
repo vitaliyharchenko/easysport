@@ -37,7 +37,7 @@ else:
 # CSRF_COOKIE_HTTPONLY = True
 # X_FRAME_OPTIONS = 'DENY'
 
-ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'http://test.sportcourts.ru:8000']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'http://test.sportcourts.ru:8000', 'http://test.sportcourts.ru', 'test.sportcourts.ru']
 
 AUTH_USER_MODEL = 'users.User'
 
