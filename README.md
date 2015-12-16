@@ -119,11 +119,10 @@ sudo apt-get install nginx
 sudo apt-get build-dep python-imaging
 sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
 sudo virtualenv /opt/scenv
-sudo apt-get install git
 source /opt/scenv/bin/activate
 pip install django
 deactivate
-sudo apt-get install libpq-dev python-dev
+sudo apt-get install libpq-dev python3.4-dev
 sudo apt-get install postgresql postgresql-contrib
 sudo su - postgres
 psql
@@ -138,19 +137,6 @@ pip install psycopg2
 git clone https://github.com/vitaliyharchenko/sportcourts2.git
 pip install -r /opt/sportcourts2/requirements.txt
 cd /opt/sportcourts2
-python manage.py makemigrations
-python manage.py migrate
-python manage.py syncdb
-create user - admin, ceo@sportcourts.ru, 123456
-pip install gunicorn
-cd /opt/scenv
-sudo nano gunicorn_config.py
-
-    command = '/opt/myenv/bin/gunicorn'
-    pythonpath = '/opt/myenv/myproject'
-    bind = '127.0.0.1:8001'
-    workers = 3
-    
 sudo nano /etc/nginx/sites-available/sportcourts
 
     server {
@@ -176,5 +162,22 @@ cd /etc/nginx/sites-enabled
 sudo ln -s ../sites-available/sportcourts
 sudo rm default
 sudo service nginx restart
+
+source /opt/scenv/bin/activate
+pip install uwsgi
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py syncdb
+create user - admin, ceo@sportcourts.ru, 123456
+pip install gunicorn
+cd /opt/scenv
+sudo nano gunicorn_config.py
+
+    command = '/opt/myenv/bin/gunicorn'
+    pythonpath = '/opt/myenv/myproject'
+    bind = '127.0.0.1:8001'
+    workers = 3
+
 '''
 
