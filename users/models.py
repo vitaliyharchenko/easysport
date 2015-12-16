@@ -115,6 +115,9 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return u'{} {}'.format(self.first_name, self.last_name)
 
+    def __unicode__(self):
+        return u'{} {}'.format(self.first_name, self.last_name)
+
 
 class User(AbstractUser):
     class Meta(AbstractUser.Meta):
