@@ -14,6 +14,9 @@ class Country(models.Model):
     def __str__(self):
         return u'{}'.format(self.title)
 
+    def __unicode__(self):
+        return u'{}'.format(self.title)
+
 
 class Region(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название', unique=True)
@@ -27,6 +30,9 @@ class Region(models.Model):
     def __str__(self):
         return u'{}'.format(self.title)
 
+    def __unicode__(self):
+        return u'{}'.format(self.title)
+
 
 class City(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название', unique=True)
@@ -38,6 +44,9 @@ class City(models.Model):
         app_label = 'places'
 
     def __str__(self):
+        return self.title
+
+    def __unicode__(self):
         return self.title
 
 
