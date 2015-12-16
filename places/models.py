@@ -55,6 +55,9 @@ class Place(models.Model):
     def __str__(self):
         return u'{}, {}'.format(self.city, self.fulladdress)
 
+    def __unicode__(self):
+        return u'{}, {}'.format(self.city, self.fulladdress)
+
     # FIXME: save coords
     # def save(self):
     #     api_key = settings.YANDEX_MAPS_API_KEY
