@@ -23,15 +23,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ot45^f6lyrsp3qs6g5&3ysxxh6k_5&9$$2*3igj4#+i%-&aho#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+IS_PRODUCTION = True
+
+if IS_PRODUCTION:
+    DEBUG = False
+    CURRENT_HOST = 'http://test.sportcourts.ru:8000'
+else:
+    DEBUG = True
+    CURRENT_HOST = 'http://127.0.0.1:8000'
 
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
 # CSRF_COOKIE_HTTPONLY = True
 # X_FRAME_OPTIONS = 'DENY'
 
-CURRENT_HOST = 'http://127.0.0.1:8000'
-ALLOWED_HOSTS = ['http://127.0.0.1:8000']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'http://test.sportcourts.ru:8000']
 
 AUTH_USER_MODEL = 'users.User'
 
