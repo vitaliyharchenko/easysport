@@ -27,6 +27,16 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
         |{% if loggedin %}
         li
           a {% now "D, j M, H:i" %}
+        |{% if loggedin %}
+        |{% if notifications_count > 0 %}
+        li.notifications-menu-item
+          a.topmenu(href="#" data-toggle="modal" data-target="#notificationsModal")
+            span.glyphicon.glyphicon-bell
+            |&nbsp;
+            span.notifications-count
+              |{{ notifications_count }}
+        |{% endif %}
+        |{% endif %}
         li.dropdown
           a.topmenu.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
             .visible-xs-inline
