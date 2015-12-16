@@ -63,7 +63,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     banned = models.BooleanField('Забанен', default=False,
                                  help_text="Банит пользователя")
 
-    city = models.ForeignKey(City, blank=True, null=True)
+    city = models.ForeignKey(City, blank=True, null=True, verbose_name='Город')
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True, verbose_name='Аватар')
     date_joined = models.DateTimeField('Дата регистрации', default=timezone.now)
     bdate = models.DateField('Дата рождения', auto_now_add=False, blank=True, null=True)

@@ -110,7 +110,7 @@ def register_confirm(request, activation_key):
         if not request.user.is_authenticated():
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             auth.login(request, user)
-
+            # TODO: page of success activation
         # TODO: send thanks-message on email
         return redirect('index_view')
 
@@ -138,8 +138,6 @@ def users_view(request):
 
 @login_required
 def user_update_view(request):
-    shortcut = lambda: render(request, 'user_update.html', {'form': form, 'pass_form': ChangePasswordForm})
-
     user = User.objects.get(email=request.user.email)
     form = UserUpdateForm(request.POST or None, request.FILES or None, instance=user)
 
