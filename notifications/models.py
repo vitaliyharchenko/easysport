@@ -35,3 +35,6 @@ class Notification(models.Model):
 
     def __unicode__(self):
         return self.text
+
+    def __str__(self):
+        return self.text

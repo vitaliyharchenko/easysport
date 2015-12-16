@@ -1,13 +1,4 @@
-
-<footer class="footer">
-  <div class="container text-center">
-    <p class="text-muted clip">
-      &copy; Sportcourts 2014
-      &nbsp&nbsp&nbsp&nbsp<a href="" class="topmenu">Контакты</a>&nbsp&nbsp&nbsp&nbsp<a target="_blank" href="https://vk.com/write17610278" class="topmenu">Сообщить об ошибке</a><a href="http://vk.com/sportcourts" target="_blank" class="footerright hidden-xs"><img src="{% static 'images/vk.png' %}" width="32"/></a>
-    </p>
-  </div>
-</footer>
-<script>$(document).ready(function () {
+$(document).ready(function () {
     var count = "{{ notifications_new|length }}"
     if (count != "0") {
         $('.notifications .alert').each(function () {
@@ -68,4 +59,3 @@ $(document).on('click','.delete-notification', function(){
         dataType: "json"
     });
 });
-</script>{% block footer %}{% endblock %}

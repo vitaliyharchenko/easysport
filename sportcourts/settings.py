@@ -98,6 +98,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
                 'utils.context_processors.loggedin_user',
+                'utils.context_processors.notifications',
             ],
         },
     },

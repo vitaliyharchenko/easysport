@@ -28,10 +28,8 @@
             <li class="{% active '/users$' %}"><a href="{% url 'users_view' %}" class="topmenu">Игроки</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">{% if loggedin %}
-            <li><a>{% now "D, j M, H:i" %}</a></li>{% if loggedin %}
-            {% if notifications_count > 0 %}
+            <li><a>{% now "D, j M, H:i" %}</a></li>{% if notifications_count > 0 %}
             <li class="notifications-menu-item"><a href="#" data-toggle="modal" data-target="#notificationsModal" class="topmenu"><span class="glyphicon glyphicon-bell"></span>&nbsp;<span class="notifications-count">{{ notifications_count }}</span></a></li>{% endif %}
-            {% endif %}
             <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="topmenu dropdown-toggle">
                 <div class="visible-xs-inline">Мой профиль</div>
                 <div class="visible-sm-inline">Avatar</div>
@@ -97,7 +95,29 @@
         </div>
       </div>
     </div>{% else %}
-    {% endif %}
+    <div id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Уведомления</h4>
+          </div>
+          <div class="modal-body p-b-0">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12">{% for notification in notifications_all %}
+                  <div class="alert fade in {% if notification.level == 0 %}alert-info{% elif notification.level == 1 %}alert-warning{% elif notification.level == 2 %}alert-danger{% endif %}">
+                    <button id="notif-{{notification.id}}" type="button" data-dismiss="alert" aria-hidden="true" class="close delete-notification">&times;</button>
+                    <p><small>{{notification.datetime}}</small></p>
+                    <p class="lead">{{ notification }} | {{ notification.level }} | {{ notification.read }}</p>
+                  </div>{% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>{% endif %}
     <div class="notifications bottom-left">{% for notification in notifications_new %}
       <div style="display: none;" class="alert {% if notification.level == 0 %}alert-info{% elif notification.level == 1 %}alert-warning{% elif notification.level == 2 %}alert-danger{% endif %}">
         <button type="button" data-dismiss="alert" aria-hidden="true" class="close">&times;</button>
@@ -115,6 +135,68 @@
           &nbsp&nbsp&nbsp&nbsp<a href="" class="topmenu">Контакты</a>&nbsp&nbsp&nbsp&nbsp<a target="_blank" href="https://vk.com/write17610278" class="topmenu">Сообщить об ошибке</a><a href="http://vk.com/sportcourts" target="_blank" class="footerright hidden-xs"><img src="{% static 'images/vk.png' %}" width="32"></a>
         </p>
       </div>
-    </footer>{% block footer %}{% endblock %}
+    </footer>
+    <script>$(document).ready(function () {
+    var count = "{{ notifications_new|length }}"
+    if (count != "0") {
+        $('.notifications .alert').each(function () {
+            $(this).fadeIn('slow');
+        });
+        setTimeout(function () {
+            $.ajax({
+                url: "{% url 'notification_read' %}",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                async: true,
+                success: function (data, textStatus) {
+                    if (data['response'] = 'OK') {
+                        $('.notifications .alert').each(function () {
+                            $(this).fadeOut('slow');
+                        });
+                    } else {
+                        alert('Ошибка чтения уведомлений');
+                    }
+                },
+                error: function (response, status, errorThrown) {
+                    alert('Все плохо, расскажите нам про эту ошибку \n\r\n\r' + response + status + errorThrown);
+                    console.log(response);
+                },
+                type: "POST",
+                dataType: "json"
+            });
+        }, 6000);
+    }
+});
+
+$(document).on('click','.delete-notification', function(){
+    var arr = $(this).attr("id").split('-');
+    var notification_id = arr[1];
+    $.ajax({
+        url: "{% url 'notification_delete' %}",
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            notification_id: notification_id
+        },
+        async: true,
+        success: function (data, textStatus) {
+            var count = $(".notifications-count").html();
+            count = count - 1;
+            if (count == 0) {
+                $(".notifications-menu-item").html('');
+                $('#notificationsModal').modal('hide')
+            } else {
+                $(".notifications-count").html(count);
+            }
+        },
+        error: function (response, status, errorThrown) {
+            alert('Все плохо, расскажите нам про эту ошибку \n\r\n\r' + response + status + errorThrown);
+            console.log(response);
+        },
+        type: "POST",
+        dataType: "json"
+    });
+});
+    </script>{% block footer %}{% endblock %}
   </body>
 </html>

@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, url
-import views
+from . import views
 
 
-urlpatterns = patterns('notifications',
-                       url(r'^notifications/read$', views.notification_read, name='read'),
-                       url(r'^notifications/delete$', views.notification_delete, name='delete'),
-                       )
+urlpatterns = [
+    url(r'^notification/read$', views.notification_read, name='notification_read'),
+    url(r'^notification/delete$', views.notification_delete, name='notification_delete'),
+]
