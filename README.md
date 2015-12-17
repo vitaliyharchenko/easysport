@@ -140,6 +140,7 @@ cd /opt/sportcourts2
 sudo nano /etc/nginx/sites-available/sportcourts
 
     server {
+        listen      8000;
         server_name test.sportcourts.ru;
         charset utf-8;
         client_max_body_size 75M;  
@@ -147,14 +148,16 @@ sudo nano /etc/nginx/sites-available/sportcourts
         access_log off;
 
         location /static/ {
-            alias /opt/scenv/static/;
+            alias /opt/sportcourts2/static/;
+        }
+        
+        location /media  {
+            alias /opt/sportcourts2/media/;
         }
 
         location / {
-                proxy_pass http://127.0.0.1:8001;
-                proxy_set_header X-Forwarded-Host $server_name;
-                proxy_set_header X-Real-IP $remote_addr;
-                add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM N$
+            uwsgi_pass  django;
+            include     /opt/sportcourts2/uwsgi_params;
         }
     }
     
@@ -165,6 +168,7 @@ sudo service nginx restart
 
 source /opt/scenv/bin/activate
 pip install uwsgi
+locale-gen ru_RU.UTF-8
 
 cd /opt/sportcourts2
 python manage.py runserver 0.0.0.0:8000
