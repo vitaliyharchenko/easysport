@@ -235,9 +235,27 @@ socket works correctly
 uwsgi --socket sportcourts.sock --module sportcourts.wsgi --chmod-socket=666
 '''
 
+Install uWSGI system-wide
+'''
+deactivate
+sudo pip install uwsgi
+source /opt/scenv/bin/activate
+'''
+
 простой старт сервера
 '''
 uwsgi --ini sportcourts_uwsgi.ini
+'''
+
+Emperor mode for uwsgi
+'''
+# create a directory for the vassals
+sudo mkdir /etc/uwsgi
+sudo mkdir /etc/uwsgi/vassals
+# symlink from the default config directory to your config file
+sudo ln -s /opt/sportcourts2/sportcourts_uwsgi.ini /etc/uwsgi/vassals/
+# run the emperor
+uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
 '''
 
 
