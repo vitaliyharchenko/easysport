@@ -107,59 +107,121 @@ bower install jasny-bootstrap --save
 
 # Деплой на сервер
 
+Подключение к серверу
 '''
-Установка Ubuntu ubuntu14.04-x86_64
-ssh root@194.58.108.127
-OKBxmNX*GL6rg1
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install python-virtualenv
-sudo apt-get install git
-sudo apt-get install nginx
-sudo apt-get build-dep python-imaging
-sudo apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
-sudo virtualenv /opt/scenv --python=python3.4
-source /opt/scenv/bin/activate
-pip install django
-deactivate
-sudo apt-get install libpq-dev python3.4-dev
-sudo apt-get install postgresql postgresql-contrib
-sudo su - postgres
-psql
-create user "scuser" with password '4203';
-create database "scdb" owner "scuser";
-alter user scuser createdb;
-grant all privileges on database scdb TO scuser;
-\q
-su - root
-source /opt/scenv/bin/activate
-pip install psycopg2
-git clone https://github.com/vitaliyharchenko/sportcourts2.git
-pip install -r /opt/sportcourts2/requirements.txt
-cd /opt/sportcourts2
+    Установка Ubuntu ubuntu14.04-x86_64
+    ssh-keygen -R 194.58.108.127
+    ssh root@194.58.108.127
+    OKBxmNX*GL6rg1
+'''
+
+    
+Установка зависимостей на Ubuntu    
+'''    
+    sudo apt-get update
+    sudo apt-get upgrade 
+    sudo apt-get install libpq-dev python3.4-dev libjpeg8 libjpeg62-dev
+    sudo apt-get install libfreetype6 libfreetype6-dev
+    sudo apt-get build-dep python-imaging
+    sudo apt-get install python-virtualenv git nginx postgresql postgresql-contrib
+'''
+
+Устанавливаем базу данных
+'''
+    sudo su - postgres
+    psql
+    create user "scuser" with password '4203';
+    create database "scdb" owner "scuser";
+    alter user scuser createdb;
+    grant all privileges on database scdb TO scuser;
+    \q
+    su - root
+'''
+
+
+Поднимаем виртуальное окружение
+'''
+    sudo virtualenv /opt/scenv --python=python3.4
+    source /opt/scenv/bin/activate
+    cd /opt
+    git clone https://github.com/vitaliyharchenko/sportcourts2.git
+    pip install -r /opt/sportcourts2/requirements.txt
+    pip install uwsgi
+'''
+
+Test Django-uwsgi
+'''
+    cd /opt/sportcourts2
+    python manage.py collectstatic
+    python manage.py makemigrations api courts games places sports users notifications
+    python manage.py migrate
+    python manage.py createsuperuser
+    create user - admin, ceo@sportcourts.ru, 123456
+    
+    python manage.py runserver 0.0.0.0:8000
+    go to http://test.sportcourts.ru:8000
+    
+    uwsgi --http :8000 --module sportcourts.wsgi
+    go to http://test.sportcourts.ru:8000
+    the web client <-> uWSGI <-> Django | works
+    
+    go to http://test.sportcourts.ru
+    the web client <-> the web server |works
+'''
+
+Set up nginx
+'''
 sudo nano /etc/nginx/sites-available/sportcourts
+'''
 
-    server {
-        listen      8000;
-        server_name test.sportcourts.ru;
-        charset utf-8;
-        client_max_body_size 75M;  
+'''
+# mysite_nginx.conf
 
-        access_log off;
+# the upstream component nginx needs to connect to
+upstream django {
+    # server unix:///opt/sportcourts2/sportcourts.sock; # for a file socket
+    server 127.0.0.1:8001; # for a web port socket (we'll use this first)
+}
 
-        location /static/ {
-            alias /opt/sportcourts2/static/;
-        }
-        
-        location /media  {
-            alias /opt/sportcourts2/media/;
-        }
+# configuration of the server
+server {
+    # the port your site will be served on
+    listen      8000;
+    # the domain name it will serve for
+    server_name test.sportcourts.ru; # substitute your machine's IP address or FQDN
+    charset     utf-8;
 
-        location / {
-            uwsgi_pass  django;
-            include     /opt/sportcourts2/uwsgi_params;
-        }
+    # max upload size
+    client_max_body_size 75M;   # adjust to taste
+
+    # Django media
+    location /media  {
+        alias /opt/sportcourts2/media;  # your Django project's media files - amend as required
     }
+
+    location /static {
+        alias /opt/sportcourts2/static; # your Django project's static files - amend as required
+    }
+
+    # Finally, send all non-media requests to the Django server.
+    location / {
+        uwsgi_pass  django;
+        include     /opt/sportcourts2/uwsgi_params; # the uwsgi_params file you installed
+    }
+}
+'''
+
+'''
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/sportcourts
+sudo rm default
+sudo service nginx restart
+
+go to http://test.sportcourts.ru:8000/static/css/main.css
+Nginx serving static and media correctly
+'''
+
+
     
 cd /etc/nginx/sites-enabled
 sudo ln -s ../sites-available/sportcourts
@@ -167,7 +229,6 @@ sudo rm default
 sudo service nginx restart
 
 source /opt/scenv/bin/activate
-pip install uwsgi
 locale-gen ru_RU.UTF-8
 
 cd /opt/sportcourts2
