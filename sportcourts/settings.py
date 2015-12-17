@@ -27,17 +27,17 @@ IS_PRODUCTION = True
 
 if IS_PRODUCTION:
     DEBUG = True
-    CURRENT_HOST = 'http://test.sportcourts.ru:8000'
+    CURRENT_HOST = 'http://test.sportcourts.ru'
+    ALLOWED_HOSTS = ['http://test.sportcourts.ru:8000', 'http://test.sportcourts.ru', 'test.sportcourts.ru']
 else:
     DEBUG = True
     CURRENT_HOST = 'http://127.0.0.1:8000'
+    ALLOWED_HOSTS = ['http://127.0.0.1:8000']
 
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
 # CSRF_COOKIE_HTTPONLY = True
 # X_FRAME_OPTIONS = 'DENY'
-
-ALLOWED_HOSTS = ['http://127.0.0.1:8000', 'http://test.sportcourts.ru:8000', 'http://test.sportcourts.ru', 'test.sportcourts.ru']
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -143,6 +143,10 @@ STATIC_ROOT = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+]
 
 MEDIA_URL = '/media/'
 
