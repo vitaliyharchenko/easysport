@@ -223,6 +223,21 @@ Nginx serving static and media correctly
 uwsgi --socket :8001 --wsgi-file test.py
 go to http://test.sportcourts.ru:8000
 the web client <-> the web server <-> the socket <-> uWSGI <-> Python | works correctly
+
+sudo nano /etc/nginx/sites-available/sportcourts
+uncomment # server unix:///opt/sportcourts2/sportcourts.sock; # for a file socket
+sudo service nginx restart
+
+uwsgi --socket sportcourts.sock --wsgi-file test.py --chmod-socket=666
+go to http://test.sportcourts.ru:8000
+socket works correctly
+
+uwsgi --socket sportcourts.sock --module sportcourts.wsgi --chmod-socket=666
+'''
+
+простой старт сервера
+'''
+uwsgi --ini sportcourts_uwsgi.ini
 '''
 
 
