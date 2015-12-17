@@ -4,41 +4,41 @@
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!--TODO: css render with gulp-->
-    <link rel="stylesheet" href="{% static 'css/mail.css' %}"/>
+    <link rel="stylesheet" href="mail_min.css"/>
     <title>
       {% block title %}
       {% endblock %}
     </title>
   </head>
-  <body>
-    <table class="body-wrap">
-      <tr class="row">
-        <td valign="top"></td>
-        <td width="600" valign="top" class="container">
-          <div class="content">
-            <table width="100%" cellpadding="0" cellspacing="0" class="main">
-              <tr>
-                <td valign="top" class="content-header">SportCourts</td>
+  <body style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6; background: #f6f6f6; margin: 0; padding: 0;">
+    <table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background: #f6f6f6; margin: 0; padding: 0;" class="body-wrap">
+      <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;" class="row">
+        <td valign="top" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;"></td>
+        <td width="600" valign="top" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto; padding: 0;" class="container">
+          <div style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;" class="content">
+            <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background: #fff; margin: 0; padding: 0; border: 1px solid #e9e9e9;" class="main">
+              <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
+                <td valign="top" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 24px; vertical-align: top; margin: 0; padding: 15px 0 15px 0; background: #348eda; color: #fff; text-align: center; font-weight: bold;" class="content-header">SportCourts</td>
               </tr>
-              <tr>
-                <td valign="top" class="content-wrap">
-                  <table width="100%" cellpadding="0" cellspacing="0">
+              <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
+                <td valign="top" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" class="content-wrap">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                     {% block content %}
                     {% endblock %}
                   </table>
                 </td>
               </tr>
             </table>
-            <div class="footer">
-              <table width="100%">
-                <tr>
-                  <td class="footer-block"><a href="http://vk.com/sportcourts" target="_blank" class="footer-icon"><img align="none" height="30" src="http://sportcourts.ru{% static 'images/mail_vk.png' %}" width="30"/></a><span>&nbsp;&nbsp;&nbsp;</span><a href="http://sportcourts.ru/" target="_blank" class="footer-icon">sportcourts.ru</a><span>&nbsp;&nbsp;&nbsp;</span><a href="http://sportcourts.ru/profile/settings" target="_blank">Отписаться от рассылки</a></td>
+            <div style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;" class="footer">
+              <table width="100%" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
+                <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
+                  <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" class="footer-block"><a href="http://vk.com/sportcourts" target="_blank" style="text-align:center;word-wrap:break-word;color:#606060;font-weight:normal;text-decoration:none" class="footer-icon"><img align="none" height="30" src="{% static 'images/mail_vk.png' %}" width="30" style="width:30px;min-height:auto;margin:0px;border:0;outline:none;text-decoration:none"/></a><span>&nbsp;&nbsp;&nbsp;</span><a href="http://sportcourts.ru/" target="_blank" style="text-align:center;word-wrap:break-word;color:#606060;font-weight:normal;text-decoration:none" class="footer-icon">sportcourts.ru</a><span>&nbsp;&nbsp;&nbsp;</span><a href="http://sportcourts.ru/profile/settings" target="_blank" style="text-align:center;word-wrap:break-word;color:#606060;font-weight:normal;text-decoration:none">Отписаться от рассылки</a></td>
                 </tr>
               </table>
             </div>
           </div>
         </td>
-        <td valign="top"></td>
+        <td valign="top" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;"></td>
       </tr>
     </table>
   </body>

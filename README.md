@@ -90,6 +90,8 @@ npm i gulp-sourcemaps --save
 npm i gulp-rigger --save
 npm i gulp-watch --save
 npm i gulp-jade --save
+npm i gulp-inline --save
+
 
 bower init
 
