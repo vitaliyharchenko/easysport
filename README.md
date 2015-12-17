@@ -219,6 +219,10 @@ sudo service nginx restart
 
 go to http://test.sportcourts.ru:8000/static/css/main.css
 Nginx serving static and media correctly
+
+uwsgi --socket :8001 --wsgi-file test.py
+go to http://test.sportcourts.ru:8000
+the web client <-> the web server <-> the socket <-> uWSGI <-> Python | works correctly
 '''
 
 
