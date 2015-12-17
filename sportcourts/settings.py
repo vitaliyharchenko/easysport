@@ -141,6 +141,7 @@ USE_TZ = True
 if IS_PRODUCTION:
     STATIC_URL = '/static/'
     STATIC_ROOT = '/opt/static/'
+    ADMIN_MEDIA_PREFIX = '/static/admin/'
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
