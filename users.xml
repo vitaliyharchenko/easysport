@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+-
+- Sequel Pro XML dump
+- Версия 4096
+-
+- http://www.sequelpro.com/
+- http://code.google.com/p/sequel-pro/
+-
+- Адрес: sportcourts.ru (MySQL 5.1.73)
+- Схема: sportcourts
+- Время создания Time: 2015-12-17 16:35:08 +0000
+-
+-->
+
+<django-objects version="1.0">
+
+	<object pk="1" model="users.User">
+		<field name="first_name">Виталий</field>
+		<field name="last_name">Харченко</field>
+		<field name="email">harchenko.grape@gmail.com</field>
+		<field name="password">123456</field>
+		<field name="bdate">1992-12-21</field>
+		<field name="height">190</field>
+		<field name="weight">75</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">17610278</field>
+		<field name="phone">+7 (982) 646 94 54</field>
+	</object>
+</django-objects>

@@ -32,7 +32,6 @@ def auth_code(code, redirect_uri):
     url = "https://oauth.vk.com/access_token?client_id={}&client_secret={}&code={}&redirect_uri={}{}"
     url = url.format(settings.VKONTAKTE['APPID'], settings.VKONTAKTE['SECRET'], code, settings.CURRENT_HOST,
                      redirect_uri)
-    print(url)
     try:
         response = urllib.request.urlopen(url)
     except Exception as e:

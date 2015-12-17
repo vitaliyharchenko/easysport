@@ -104,6 +104,17 @@ bower install jasny-bootstrap --save
 далее gulp в директории проекта
 '''
 
+# Миграция старой БД
+
+'''
+python manage.py loaddata users.xml
+from users.models import User
+In Django console:
+u = User.objects.get(pk=1)
+u.is_superuser = True
+u.save()
+'''
+
 
 # Деплой на сервер
 
@@ -247,50 +258,13 @@ sudo pip3 install uwsgi
 uwsgi --ini sportcourts_uwsgi.ini
 '''
 
-Emperor mode for uwsgi
+автоматический старт сервера после перезагрузки
 '''
-# create a directory for the vassals
-sudo mkdir /etc/uwsgi
-sudo mkdir /etc/uwsgi/vassals
-# symlink from the default config directory to your config file
-sudo ln -s /opt/sportcourts2/sportcourts_uwsgi.ini /etc/uwsgi/vassals/
-# run the emperor
-uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
+nano /etc/init/uwsgi.conf
+
+description "uwsgi tiny instance"
+start on runlevel [2345]
+stop on runlevel [06]
+respawn
+exec uwsgi --ini /opt/sportcourts2/sportcourts_uwsgi.ini
 '''
-
-
-    
-cd /etc/nginx/sites-enabled
-sudo ln -s ../sites-available/sportcourts
-sudo rm default
-sudo service nginx restart
-
-source /opt/scenv/bin/activate
-locale-gen ru_RU.UTF-8
-
-cd /opt/sportcourts2
-python manage.py runserver 0.0.0.0:8000
-uwsgi --http :8000 --module sportcourts.wsgi
-python manage.py collectstatic
-python manage.py makemigrations api courts games places sports users notifications
-python manage.py migrate
-python manage.py migrate --fake
-python manage.py createsuperuser
-create user - admin, ceo@sportcourts.ru, 123456
-
-
-python manage.py makemigrations
-python manage.py migrate
-python manage.py syncdb
-create user - admin, ceo@sportcourts.ru, 123456
-pip install gunicorn
-cd /opt/scenv
-sudo nano gunicorn_config.py
-
-    command = '/opt/myenv/bin/gunicorn'
-    pythonpath = '/opt/myenv/myproject'
-    bind = '127.0.0.1:8001'
-    workers = 3
-
-'''
-
