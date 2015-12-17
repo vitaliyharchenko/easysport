@@ -140,7 +140,7 @@ USE_TZ = True
 
 if IS_PRODUCTION:
     STATIC_URL = '/static/'
-    STATIC_ROOT = '/opt/sportcourts2/static/'
+    STATIC_ROOT = '/opt/static/'
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
