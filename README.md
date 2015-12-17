@@ -119,11 +119,12 @@ bower install jasny-bootstrap --save
 Установка зависимостей на Ubuntu    
 '''    
     sudo apt-get update
-    sudo apt-get upgrade 
+    sudo apt-get upgrade
     sudo apt-get install libpq-dev python3.4-dev libjpeg8 libjpeg62-dev
     sudo apt-get install libfreetype6 libfreetype6-dev
     sudo apt-get build-dep python-imaging
     sudo apt-get install python-virtualenv git nginx postgresql postgresql-contrib
+    apt-get install python3-pip
 '''
 
 Устанавливаем базу данных
@@ -238,8 +239,7 @@ uwsgi --socket sportcourts.sock --module sportcourts.wsgi --chmod-socket=666
 Install uWSGI system-wide
 '''
 deactivate
-sudo pip install uwsgi
-source /opt/scenv/bin/activate
+sudo pip3 install uwsgi
 '''
 
 простой старт сервера
