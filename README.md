@@ -109,7 +109,7 @@ bower install jasny-bootstrap --save
 # Миграция старой БД
 
 '''
-python manage.py loaddata users.xml
+python manage.py loaddata users_short.xml
 from users.models import User
 In Django console:
 u = User.objects.get(pk=1)
