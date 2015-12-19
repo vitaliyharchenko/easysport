@@ -25,6 +25,9 @@ hr
           .vkontakte
           .odnoklassniki
   .col-sm-8.col-md-9
+    .row
+      .col-xs-12
+        p.lead Найдено: {{ users|length }}
     | {% if users|length > 0 %}
     | {% for user in users %}
     .row

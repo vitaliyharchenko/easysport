@@ -1312,4 +1312,18 @@
 
 		<field name="phone">+7 (908) 915 14 13</field>
 	</object>
+
+    <object pk="200" model="users.User">
+		<field name="first_name">Danis</field>
+		<field name="last_name">Sharipov</field>
+		<field name="email">sharipovdan@rambler.ru</field>
+		<field name="password">jNcz9NMebKC</field>
+		<field name="bdate">1993-03-16</field>
+		<field name="date_joined">2014-11-11</field>
+		<field name="height">173</field>
+		<field name="weight">70</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">79079700</field>
+		<field name="phone">+7 (950) 555 57 12</field>
+	</object>
 </django-objects>
