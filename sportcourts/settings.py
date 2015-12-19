@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'bootstrapform',
     'datetimewidget',
+    'el_pagination',
 )
 
 MIDDLEWARE_CLASSES = (

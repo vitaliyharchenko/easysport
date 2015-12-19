@@ -1,6 +1,7 @@
 | {% extends 'base.html' %}
 | {% load staticfiles %}
 | {% load globaltags %}
+| {% load el_pagination_tags %}
 | {% block title %}Игроки{% endblock %}
 |{% block headers %}
 link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="stylesheet")
@@ -28,11 +29,13 @@ hr
           .vkontakte
           .odnoklassniki
   .col-sm-8.col-md-9
+    |{% if users|length > 0 %}
+    | {% paginate 20 users %}
     .row
       .col-xs-12
-        p.lead Найдено: {{ users|length }}
-    | {% if users|length > 0 %}
-    | {% for user in users %}
+        |{% get_pages %}
+        p.lead Показаны: {{ pages.current_start_index }}-{{ pages.current_end_index }} из {{ pages.total_count }}
+    |  {% for user in users %}
     .row
       .col-xs-3
         .thumbnail.profile-avatar
@@ -55,13 +58,16 @@ hr
         p {{ user.amplua }}
         | {% endif %}
     hr.m-t-0
-    | {% endfor %}
-    | {% else %}
+    |  {% endfor %}
+    p.lead
+      |{{ pages }}
+
+    |{% else %}
     .alert.alert-dismissable.alert-warning
       button.close(type="button" data-dismiss="alert" aria-label="Close")
         span(aria-hidden="true") &times;
       | По вашему запросу ничего не найдено
-    | {% endif %}
+    |{% endif %}
 script
   include ../js/users.js
 | {% endblock %}

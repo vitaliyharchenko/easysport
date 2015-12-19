@@ -1,7 +1,8 @@
 Django==1.9
 django-bootstrap-form==3.2
 django-datetime-widget==0.9.3
-djangorestframework==3.3.2
+django-location-field==1.6.1
+djangorestframework==3.3.1
 phonenumbers==7.1.1
 Pillow==3.0.0
 psycopg2==2.6.1

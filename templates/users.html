@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load globaltags %}
+{% load el_pagination_tags %}
 {% block title %}Игроки{% endblock %}
 {% block headers %}
 <link href="{% static 'css/particles/profile.css' %}" type="text/css" rel="stylesheet"/>{% endblock %}
@@ -13,7 +14,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <p class="lead">Поиск</p>
-        <input id="searchquery" type="text" name="query" placeholder="Поиск по имени" value="{{ query }}" class="form-control"/><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>
+        <input id="searchquery" type="text" name="query" placeholder="Поиск по имени" value="{{ query }}" class="form-control"/><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>{% if query %}<a href="{% url 'users_view' %}" class="btn btn-primary btn-block">Сброс</a>{% endif %}
       </div>
     </div>
     <div class="panel panel-default hidden-xs">
@@ -29,12 +30,13 @@
     </div>
   </div>
   <div class="col-sm-8 col-md-9">
+    {% if users|length > 0 %}
+    {% paginate 20 users %}
     <div class="row">
-      <div class="col-xs-12">
-        <p class="lead">Найдено: {{ users|length }}</p>
+      <div class="col-xs-12">{% get_pages %}
+        <p class="lead">Показаны: {{ pages.current_start_index }}-{{ pages.current_end_index }} из {{ pages.total_count }}</p>
       </div>
-    </div>{% if users|length > 0 %}
-    {% for user in users %}
+    </div> {% for user in users %}
     <div class="row">
       <div class="col-xs-3">
         <div class="thumbnail profile-avatar">{% if user.avatar %}
@@ -49,8 +51,8 @@
         <p>{{ user.amplua }}</p>{% endif %}
       </div>
     </div>
-    <hr class="m-t-0"/>{% endfor %}
-    {% else %}
+    <hr class="m-t-0"/> {% endfor %}
+    <p class="lead">{{ pages }}</p>{% else %}
     <div class="alert alert-dismissable alert-warning">
       <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>По вашему запросу ничего не найдено
     </div>{% endif %}
