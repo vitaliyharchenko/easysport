@@ -167,6 +167,12 @@ div(id="{{ game.id }}-pane")
             | {% endif %}
             | {% endif %}
           | {% endif %}
+
+          |{% if current_user == game.responsible_user and game.is_reported == False and game.time_status == 'WAS' %}
+          a.btn.btn-lg.btn-success(href="{% url 'game_report_view' game.id %}") Заполнить отчет
+          br
+          br
+          |{% endif %}
         .col-xs-12.col-sm-3.col-md-3.text-right
           | {% if current_user %}
           | {% usergameaction current_user game as action %}

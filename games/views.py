@@ -33,14 +33,8 @@ def games_view(request):
 
 
 def game_view(request, game_id):
-    context = {}
     game = Game.objects.get(id=game_id)
-    user = User.objects.get(email=request.user.email)
-    if game.responsible_user == user:
-        context['need_report'] = True
-    context['game'] = game
-    context['standalone'] = True
-    return render(request, 'game.html', context)
+    return render(request, 'game.html', {'game': game, 'standalone': True})
 
 
 # TODO: privacy add
@@ -51,6 +45,23 @@ def game_roster_view(request, game_id):
 
 # TODO: privacy add
 def game_invite_view(request, game_id):
+    game = Game.objects.get(id=game_id)
+    court = game.court
+    sporttype = game.sport_type
+
+    games = Game.objects.filter(court=court, sporttype_id=sporttype, is_reported=True)
+    old_users = list()
+    for game in games:
+        old_users += game.visited
+
+    old_users = list(set(old_users))
+
+    context = {'game': Game.objects.get(id=game_id), 'old_users': old_users}
+    return render(request, 'invite.html', context)
+
+
+# TODO: privacy add
+def game_report_view(request, game_id):
     game = Game.objects.get(id=game_id)
     court = game.court
     sporttype = game.sport_type
