@@ -8,13 +8,9 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      |{% if loggedin %}
-      a.navbar-brand(href="{% url 'games_view' %}")
-        img(src="{% static 'images/logo.png' %}" alt="brand")
-      |{% else %}
       a.navbar-brand(href="{% url 'index_view' %}")
         img(src="{% static 'images/logo.png' %}" alt="brand")
-      |{% endif %}
+
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
         li(class="{% active '/games$' %}")
