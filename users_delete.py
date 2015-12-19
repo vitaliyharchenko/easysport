@@ -14,9 +14,4 @@ from users.models import User
 
 users = User.objects.all()
 for user in users:
-    password = user.password
-    user.set_password(password)
-    user.is_active = True
-    user.save()
-    user.last_login = timezone.now()
-    user.save()
+    user.delete()

@@ -3,6 +3,11 @@
 	<object pk="1" model="users.User">
 		<field name="first_name">Виталий</field>
 		<field name="last_name">Харченко</field>
+        <field name="is_staff">True</field>
+        <field name="is_superuser">True</field>
+        <field name="is_admin">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">harchenko.grape@gmail.com</field>
 		<field name="password">123456</field>
 		<field name="bdate">1992-12-21</field>
@@ -17,6 +22,10 @@
 	<object pk="2" model="users.User">
 		<field name="first_name">Елена</field>
 		<field name="last_name">Титенко</field>
+        <field name="is_staff">True</field>
+        <field name="is_admin">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">l.titenko@mail.ru</field>
 		<field name="password">19631504</field>
 		<field name="bdate">1994-09-22</field>

@@ -52,6 +52,11 @@ def login_view(request):
             return shortcut()
         try:
             user = User.objects.get(vkuserid=user_id)
+
+            # Bug fix
+            user.last_login = timezone.now()
+            user.save()
+
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             auth.login(request, user)
             return redirect(return_path)
@@ -132,7 +137,7 @@ def users_view(request):
         users = User.objects.filter(first_name__icontains=query) | User.objects.filter(last_name__icontains=query)
         context = {'users': users, 'query': query}
     except KeyError:
-        context = {'users': User.objects.all().extra(order_by=['last_login'])}
+        context = {'users': User.objects.all().order_by('-last_login')}
     return render(request, 'users.html', context)
 
 
