@@ -4400,6 +4400,43 @@
 		<!--<field name="played_games">0</field>-->
 	<!--</object>-->
 
+
+    <object pk="" model="users.User">
+		<field name="user_id">448</field>
+		<field name="first_name">Татьяна</field>
+		<field name="last_name">Эпплгейт</field>
+		<field name="email">maliok85@yandex.ru</field>
+		<field name="password">89221574208</field>
+		<field name="bdate">1985-08-05</field>
+		<field name="date_joined">2015-02-06</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="vkuserid">0</field>
+		<field name="phone">+7 (922) 157 42 08</field>
+
+
+		<field name="played_games">0</field>
+	</object>
+<!--  -->
+	<object pk="" model="users.User">
+		<field name="user_id">475</field>
+		<field name="first_name">Виталий</field>
+		<field name="last_name">Головнин</field>
+		<field name="email">2777747@gmail.com</field>
+		<field name="password">Гелфпщдщмф</field>
+		<field name="bdate">1983-11-29</field>
+		<field name="date_joined">2015-02-26</field>
+		<field name="height">176</field>
+		<field name="weight">74</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">0</field>
+		<field name="phone">+7 (965) 548 50 83</fiel
+<!-- <!--d>--> -->
+
+		<field name="played_games">0</field>
+	</object>
+
 	<!--<object pk="" model="users.User">-->
 		<!--<field name="user_id">449</field>-->
 		<!--<field name="first_name">Игорь</field>-->

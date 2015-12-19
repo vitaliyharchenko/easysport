@@ -24,7 +24,7 @@ class UserAdmin(UserAdmin):
     list_filter = ('is_admin', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid',
+        ('Personal info', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid', 'phone',
                                       'sex', 'weight', 'height')}),
         ('Permissions', {'fields': ('is_active', 'banned', 'is_referee', 'is_coach', 'is_responsible',
                                     'is_organizer', 'is_staff', 'is_admin',)}),
@@ -36,7 +36,7 @@ class UserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2')}
          ),
     )
-    search_fields = ('email',)
+    search_fields = ('email', 'phone')
     ordering = ('email',)
     filter_horizontal = ()
 

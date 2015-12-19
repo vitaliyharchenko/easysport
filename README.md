@@ -112,13 +112,6 @@ bower install jasny-bootstrap --save
 python manage.py loaddata users_short.xml
 
 run password_hashing.py
-
-In Django console:
-from users.models import User
-u = User.objects.get(pk=1)
-u.is_superuser = True
-u.is_staff = True
-u.save()
 '''
 
 
