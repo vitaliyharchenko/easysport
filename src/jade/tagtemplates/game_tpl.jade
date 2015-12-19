@@ -286,8 +286,7 @@ div(id="{{ game.id }}-pane")
             | {% elif action == 7 %}
             button.btn.btn-danger.btn-sm(disabled) Вы не заплатили
             | {% else %}
-            h2.m-t-0
-              span.label.label-default Игра прошла
+            button.btn.btn-default.btn-sm(disabled) Игра прошла
             | {% endif %}
             | {% endif %}
           br

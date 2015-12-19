@@ -13,25 +13,23 @@ def games_view(request):
     context = dict()
     sport_types = SportType.objects.all()
     context['sport_types'] = sport_types
-    if not request.user.is_authenticated():
-        return redirect('login_view')
-    else:
-        try:
-            query = int(request.GET.__getitem__('q'))
-            if query == -2:
-                user = User.objects.get(email=request.user.email)
-                context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
-                                                       datetime__lt=timezone.now(), deleted=False)
-            elif query == -1:
-                context['games'] = Game.objects.filter(is_reported=True, deleted=False)
-            else:
-                context['games'] = Game.objects.filter(sporttype=query, datetime__gt=timezone.now(), deleted=False)
-            context['query'] = query
-            return render(request, 'games.html', context)
-        except KeyError:
-            context['games'] = Game.objects.filter(is_reported=False, datetime__gt=timezone.now(),
-                                                   deleted=False).order_by('datetime')
-            return render(request, 'games.html', context)
+
+    try:
+        query = int(request.GET.__getitem__('q'))
+        if query == -2:
+            user = User.objects.get(email=request.user.email)
+            context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
+                                                   datetime__lt=timezone.now(), deleted=False)
+        elif query == -1:
+            context['games'] = Game.objects.filter(is_reported=True, deleted=False)
+        else:
+            context['games'] = Game.objects.filter(sporttype=query, datetime__gt=timezone.now(), deleted=False)
+        context['query'] = query
+        return render(request, 'games.html', context)
+    except KeyError:
+        context['games'] = Game.objects.filter(is_reported=False, datetime__gt=timezone.now(),
+                                               deleted=False).order_by('datetime')
+        return render(request, 'games.html', context)
 
 
 def game_view(request, game_id):

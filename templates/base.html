@@ -24,6 +24,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+            <li class="{% active '/games$' %}"><a href="{% url 'games_view' %}" class="topmenu">Игры</a></li>
             <li class="{% active '/courts$' %}"><a href="{% url 'courts_view' %}" class="topmenu"><span class="glyphicon glyphicon-globe"></span>&nbsp;Площадки</a></li>
             <li class="{% active '/users$' %}"><a href="{% url 'users_view' %}" class="topmenu">Игроки</a></li>
           </ul>
