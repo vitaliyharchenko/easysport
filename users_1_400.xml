@@ -647,7 +647,6 @@
 		<field name="height">177</field>
 		<field name="weight">77</field>
 		<field name="sex">m</field>
-		<field name="vkuserid">0</field>
 		<field name="phone">+7 (950) 542 58 81</field>
 	</object>
 
