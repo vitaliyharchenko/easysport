@@ -94,7 +94,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         if self.is_admin or self.is_organizer or self.is_responsible:
             self.is_staff = True
-        self.save_base()
+        self.save()
 
     def get_full_name(self):
         return u'{} {}'.format(self.first_name, self.last_name)
