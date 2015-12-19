@@ -110,6 +110,7 @@ bower install jasny-bootstrap --save
 
 '''
 python users_delete.py
+python filldb.py
 python manage.py loaddata users_short.xml
 python users_render.py
 '''
@@ -135,6 +136,7 @@ python users_render.py
     sudo apt-get build-dep python-imaging
     sudo apt-get install python-virtualenv git nginx postgresql postgresql-contrib
     apt-get install python3-pip
+    locale-gen ru_RU.UTF-8
 '''
 
 Устанавливаем базу данных
