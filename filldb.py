@@ -9,14 +9,10 @@ sys.path.extend(['/Dev/Django/sportcourts'])
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sportcourts.settings")
 django.setup()
 
-from courts.models import Court, Place, CourtType
+from courts.models import Court, CourtType
 from places.models import Place, City, Country, Region
 from sports.models import SportType, GameType, Amplua
-from users.models import User
 
-# print('Creating superuser...')
-# User.objects.create_superuser(email="ceo@sportcourts.ru", password="123456", first_name="Vitaliy",
-#                               last_name="Harchenko")
 
 print('Creating places...')
 Country.objects.create(title=u'Россия')

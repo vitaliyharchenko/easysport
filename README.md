@@ -109,6 +109,7 @@ bower install jasny-bootstrap --save
 # Миграция старой БД
 
 '''
+python users_delete.py
 python manage.py loaddata users_short.xml
 python users_render.py
 '''
