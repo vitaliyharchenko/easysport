@@ -20,7 +20,8 @@ def games_view(request):
             query = int(request.GET.__getitem__('q'))
             if query == -2:
                 user = User.objects.get(email=request.user.email)
-                context['games'] = Game.objects.filter(is_reported=False, responsible_user=user, datetime__lt=timezone.now(), deleted=False)
+                context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
+                                                       datetime__lt=timezone.now(), deleted=False)
             elif query == -1:
                 context['games'] = Game.objects.filter(is_reported=True, deleted=False)
             else:
@@ -28,7 +29,8 @@ def games_view(request):
             context['query'] = query
             return render(request, 'games.html', context)
         except KeyError:
-            context['games'] = Game.objects.filter(is_reported=False, datetime__gt=timezone.now(), deleted=False)
+            context['games'] = Game.objects.filter(is_reported=False, datetime__gt=timezone.now(),
+                                                   deleted=False).order_by('datetime')
             return render(request, 'games.html', context)
 
 

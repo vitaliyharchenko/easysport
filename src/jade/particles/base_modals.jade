@@ -38,6 +38,19 @@
 
 | {% else %}
 
+#unsubscribeModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times;
+        h4.modal-title Внимание!
+      .modal-body.p-b-0
+        .container-fluid
+          .row
+            .col-xs-12
+              p.lead Чтобы отказаться от участия в игре незадолго до ее начала, позвоните ответственному и предупредите его, иначе вы получите бан.
+
 #notificationsModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
   .modal-dialog
     .modal-content

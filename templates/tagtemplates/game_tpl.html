@@ -31,15 +31,7 @@
             <p>{{ game.datetime|date:"l" }}</p>
             <p><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ game.datetime|date:"j E" }}</p>
             <p><span class="glyphicon glyphicon-time"></span>&nbsp;{{ game.datetime|date:"H:i" }}</p>
-          </div>
-          <!--.panel.panel-warning.text-center.m-b-0-->
-          <!--  .panel-heading {{ game.datetime|date:"F" }}-->
-          <!--  .panel-body.p-b-0-->
-          <!--    p.h3.m-t-0 {{ game.datetime|date:"d" }}-->
-          <!--    p {{ game.datetime|date:"l" }}-->
-          <!--    p {{ game.datetime|date:"H:i" }}-->
-          <!--    p-->
-          <!--      span.label.label-info Сегодня-->{% endlocaltime %}
+          </div>{% endlocaltime %}
         </div>
         <div class="col-xs-12 col-sm-7 col-md-7">
           <p>{{ game.gametype }}</p>
@@ -132,9 +124,8 @@
           {% if current_user %}
           {% usergameaction current_user game as action %}
           {% endif %}
-          <div class="btn-group">
-            <!--Если игра будет-->{% if game.time_status == 'WILL BE' %}
-            <!--Если записан-->{% if action == 1 %}
+          <div class="btn-group">{% if game.time_status == 'WILL BE' %}
+            <!--Если игра будет и ты записан-->{% if action == 1 %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm dropdown-toggle">
               Вы записаны
               &nbsp;<span class="caret"></span>
@@ -142,7 +133,7 @@
             <ul class="dropdown-menu">
               <li><a id="{{ game.id }}-unsubscribe" class="action">Отписаться</a></li>
             </ul>
-            <!--Если в резерве-->{% elif action == 3 %}
+            <!--Если игра будет и ты в резерве-->{% elif action == 3 %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle">
               Вы в резерве
               &nbsp;<span class="caret"></span>
@@ -151,7 +142,7 @@
               <li><a id="{{ game.id }}-unreserve" class="action">Выйти из резерва</a></li>{% if game.has_place %}
               <li><a id="{{ game.id }}-subscribe" class="action">Перейти в основу</a></li>{% endif %}
             </ul>
-            <!--Если не записан и не в резерве, проверяем наличие мест-->{% else %}
+            <!--Если игра буде, а ты не записан и не в резерве, проверяем наличие мест-->{% else %}
             <!--Если есть места-->{% if game.has_place %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm dropdown-toggle">
               Идет набор
@@ -162,18 +153,28 @@
               <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться</a></li>{% endif %}
             </ul>
             <!--Если нет мест-->{% else %}
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет</button>
-            <ul class="dropdown-menu">
-              {% if current_user %}
-              {% if game.has_reserved_place %}
-              <li><a id="{{ game.id }}-reserve" class="action">Записаться в резерв</a></li>{% else %}
-              <!--pass-->{% endif %}
-              {% else %}
-              {% if game.has_reserved_place %}
-              <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться в резерв</a></li>{% else %}
-              <li><a href="#" data-toggle="modal" data-target="#loginModal">Мест нет</a></li>{% endif %}
-              {% endif %}
-            </ul>{% endif %}
+            {% if current_user %}
+             {% if game.has_reserved_place %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
+              <ul class="dropdown-menu">
+                <li><a id="{{ game.id }}-reserve" class="action">Записаться в резерв</a></li>
+              </ul>
+            </button> {% else %}
+            <button class="btn btn-default btn-sm">Мест нет</button> {% endif %}
+            {% else %}
+             {% if game.has_reserved_place %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
+              <ul class="dropdown-menu">
+                <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться в резерв</a></li>
+              </ul>
+            </button> {% else %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
+              <ul class="dropdown-menu">
+                <li><a href="#" data-toggle="modal" data-target="#loginModal">Мест нет</a></li>
+              </ul>
+            </button> {% endif %}
+            {% endif %}
+            {% endif %}
             <!--Конец проверки - Если есть места-->{% endif %}
             <!--Конец проверки - Если игра будет-->
             <!--Начало проверки - Если игра близко-->{% elif game.time_status == 'COMING' %}
@@ -181,7 +182,7 @@
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm dropdown-toggle">Вы записаны</button>
             <ul class="dropdown-menu">
               <li>
-                <!--TODO: popup with phone--><a>Отписаться - попап с телефоном ответственного</a>
+                <!--TODO: popup with phone--><a href="#" data-toggle="modal" data-target="#unsubscribeModal">Отписаться</a>
               </li>
             </ul>
             <!--Если в резерве-->{% elif action == 3 %}
@@ -205,10 +206,10 @@
               Игра идет
               {% elif game.time_status == 'WAS' %}
             </button>{% if action == 5 %}
-            <button class="btn btn-success btn-sm">Вы играли тут</button>{% elif action == 6 %}
-            <button class="btn btn-danger btn-sm">Вы прогуляли</button>{% elif action == 7 %}
-            <button class="btn btn-danger btn-sm">Вы не заплатили</button>{% else %}
-            <button class="btn btn-default btn-sm">Игра прошла</button>{% endif %}
+            <button disabled="disabled" class="btn btn-success btn-sm">Вы играли тут</button>{% elif action == 6 %}
+            <button disabled="disabled" class="btn btn-danger btn-sm">Вы прогуляли</button>{% elif action == 7 %}
+            <button disabled="disabled" class="btn btn-danger btn-sm">Вы не заплатили</button>{% else %}
+            <h2 class="m-t-0"><span class="label label-default">Игра прошла</span></h2>{% endif %}
             {% endif %}
           </div><br/><br/>
           <p class="lead m-b-10">{{ game.cost }} RUB</p>
