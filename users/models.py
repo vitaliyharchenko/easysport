@@ -11,13 +11,14 @@ from places.models import City
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, is_superuser, is_staff, **extra_fields):
+    def create_user(self, email, password, is_superuser=False, is_active=False, **extra_fields):
         now = timezone.now()
         if not email:
             raise ValueError('Users must have an email address')
-        is_active = extra_fields.pop("is_active", False)
-        is_responsible = extra_fields.pop("is_responsible", False)
+
+        is_staff = is_superuser
         is_admin = extra_fields.pop("is_admin", False)
+        is_responsible = extra_fields.pop("is_responsible", False)
         first_name = extra_fields.pop("first_name", '')
         last_name = extra_fields.pop("last_name", '')
 
@@ -45,7 +46,7 @@ class UserManager(BaseUserManager):
 
 class AbstractUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', max_length=255, unique=True, db_index=True)
-    is_active = models.BooleanField(u'Активность', default=True,
+    is_active = models.BooleanField(u'Активность', default=False,
                                     help_text="Вместо удаления аккаунта, сделайте его неактивным")
     is_referee = models.BooleanField('Судья', default=False,
                                      help_text="Может судить игры")
@@ -54,14 +55,14 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     is_responsible = models.BooleanField('Ответственный', default=False,
                                          help_text="Заполняет отчеты, редактирует игры")
     is_organizer = models.BooleanField('Организатор', default=False,
-                                       help_text="Создает игры, площадки, назначает ответственных")
+                                       help_text="Создает игры, назначает ответственных")
     is_admin = models.BooleanField('Админ', default=False,
-                                   help_text="Назначает организаторов, работает с зарплатами и базами данных")
+                                   help_text="Работает с пользователями, площадками и финансами")
     is_staff = models.BooleanField('Редактор', default=False,
                                    help_text="Определяет, может ли пользователь войти в админку")
 
     banned = models.BooleanField('Забанен', default=False,
-                                 help_text="Банит пользователя")
+                                 help_text="Сделать активным для бана")
 
     city = models.ForeignKey(City, blank=True, null=True, verbose_name='Город')
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True, verbose_name='Аватар')
@@ -87,6 +88,11 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Игроки'
         db_table = 'auth_user'
         abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.is_admin or self.is_organizer or self.is_responsible:
+            self.is_staff = True
+        self.save_base()
 
     def get_full_name(self):
         return u'{} {}'.format(self.first_name, self.last_name)

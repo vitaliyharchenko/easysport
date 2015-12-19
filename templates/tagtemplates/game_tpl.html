@@ -12,7 +12,7 @@
           # {{ game.id }} | {{ game.title }}
           {% else %}<a href="{% url 'game_view' game.id %}"># {{ game.id }} | {{ game.title }}</a>{% endif %}
         </div>
-        <div class="col-xs-2 text-right">{% if current_user.is_staff %}
+        <div class="col-xs-2 text-right">{% if current_user.is_staff or current_user.is_admin or current_user == game.responsible_user or current_user == game.created_by %}
           <div class="btn-group btn-group-compact">
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="close dropdown-toggle"><span class="glyphicon glyphicon-option-vertical"></span></button>
             <ul class="dropdown-menu pull-right">

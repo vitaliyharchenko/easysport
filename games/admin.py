@@ -2,6 +2,7 @@
 from django.contrib import admin
 from .models import Game, UserGameAction
 from sports.models import GameType
+from utils import permissions
 
 
 # Register your models here.
@@ -10,30 +11,20 @@ class UserGameActionInline(admin.TabularInline):
     extra = 0
 
 
-# TODO: add datetime picker widget
 class GameAdmin(admin.ModelAdmin):
     model = Game
     inlines = [UserGameActionInline]
     exclude = ('created_by', 'sporttype',)
-    list_display = ('id', 'datetime', 'gametype', 'court', 'capacity', 'responsible_user', 'is_reported')
+    list_display = ('id', 'datetime', 'gametype', 'court', 'capacity', 'responsible_user', 'created_by', 'is_reported')
 
     def has_add_permission(self, request):
-        if request.user.is_admin or request.user.is_organizer:
-            return True
-        else:
-            return False
+        return permissions.admin_organizer_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin or request.user.is_organizer:
-            return True
-        else:
-            return False
+        return permissions.admin_organizer_responsible_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin or request.user.is_organizer:
-            return True
-        else:
-            return False
+        return permissions.admin_organizer_permissions(request)
 
     def save_model(self, request, obj, form, change):
         user = request.user

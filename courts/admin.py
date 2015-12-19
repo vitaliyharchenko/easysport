@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Court, CourtType
+from utils import permissions
 
 
 class CourtAdmin(admin.ModelAdmin):
@@ -8,22 +9,13 @@ class CourtAdmin(admin.ModelAdmin):
         'title', 'description', 'photo', 'admin_description', 'place', 'type', 'phone', 'max_players', 'cost')
 
     def has_add_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
 # Register your models here.
 admin.site.register(CourtType)

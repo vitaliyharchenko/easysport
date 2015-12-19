@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Place, City, Region, Country
+from utils import permissions
 
 
 class RegionInline(admin.TabularInline):
@@ -18,22 +19,13 @@ class PlaceAdmin(admin.ModelAdmin):
     extra = 0
 
     def has_add_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
 
 admin.site.register(City)

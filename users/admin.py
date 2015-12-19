@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User, UserActivation
 from .forms import UserChangeForm, UserCreationForm
 from games.models import UserGameAction
+from utils import permissions
 
 
 class UserGameActionInline(admin.TabularInline):
@@ -18,16 +19,10 @@ class UserAdmin(UserAdmin):
     inlines = [UserGameActionInline]
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
@@ -37,14 +32,14 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Персональная информация', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid', 'phone',
-                                      'sex', 'weight', 'height')}),
+                                                'sex', 'weight', 'height')}),
         ('Доступы', {'fields': ('is_active', 'banned', 'is_referee', 'is_coach', 'is_responsible',
-                                    'is_organizer', 'is_admin', 'is_staff', )}),
+                                'is_organizer', 'is_admin',)}),
     )
     # overrides get_fieldsets to use this attribute when creating a user.
     # add_fieldsets = (
-    #     (None, {
-    #         'classes': ('wide',),
+    # (None, {
+    # 'classes': ('wide',),
     #         'fields': ('email', 'password1', 'password2')}
     #      ),
     # )

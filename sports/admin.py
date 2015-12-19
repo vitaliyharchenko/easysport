@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import SportType, GameType, Amplua
+from utils import permissions
 
 
 class GameTypeInline(admin.TabularInline):
@@ -7,22 +8,13 @@ class GameTypeInline(admin.TabularInline):
     extra = 0
 
     def has_add_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
 
 class AmpluaInline(admin.TabularInline):
@@ -30,22 +22,13 @@ class AmpluaInline(admin.TabularInline):
     extra = 0
 
     def has_add_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
 
 class SportTypeAdmin(admin.ModelAdmin):
@@ -53,22 +36,13 @@ class SportTypeAdmin(admin.ModelAdmin):
     inlines = [GameTypeInline, AmpluaInline]
 
     def has_add_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        if request.user.is_admin:
-            return True
-        else:
-            return False
+        return permissions.only_admin_permissions(request)
 
 
 # Register your models here.
