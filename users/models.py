@@ -77,6 +77,8 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     weight = models.PositiveSmallIntegerField(default=0, verbose_name='Вес')
     height = models.PositiveSmallIntegerField(default=0, verbose_name='Рост')
 
+    referer = models.ForeignKey('users.User', blank=True, null=True, verbose_name='Кем приглашен')
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

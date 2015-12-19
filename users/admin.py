@@ -29,10 +29,11 @@ class UserAdmin(UserAdmin):
     # that reference specific fields on auth.User.
     list_display = ('id', 'first_name', 'last_name', 'email', 'phone')
     list_filter = ('is_active', 'is_responsible', 'is_organizer', 'is_admin', 'is_staff',)
+    raw_id_fields = ('referer',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Персональная информация', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid', 'phone',
-                                                'sex', 'weight', 'height')}),
+                                                'referer', 'sex', 'weight', 'height')}),
         ('Доступы', {'fields': ('is_active', 'banned', 'is_referee', 'is_coach', 'is_responsible',
                                 'is_organizer', 'is_admin',)}),
     )

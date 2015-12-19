@@ -6,7 +6,7 @@ from utils import permissions
 class CourtAdmin(admin.ModelAdmin):
     model = Court
     fields = (
-        'title', 'description', 'photo', 'admin_description', 'place', 'type', 'phone', 'max_players', 'cost')
+        'title', 'description', 'photo', 'admin_description', 'place', 'type', 'sporttypes', 'phone', 'max_players', 'cost')
 
     def has_add_permission(self, request):
         return permissions.only_admin_permissions(request)

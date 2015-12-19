@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from utils.fields import PhoneField
 from places.models import Place
+from sports.models import SportType
 
 
 class CourtType(models.Model):
@@ -47,6 +48,7 @@ class Court(models.Model):
     place = models.ForeignKey(Place, verbose_name='Место')
 
     type = models.ForeignKey(CourtType, verbose_name='Тип площадки', related_name='+', null=True)
+
     # TODO: adding worktime and cover
     # worktime = models.ForeignKey(Worktime, verbose_name='Режим работы', blank=True, null=True)
     # cover = models.ForeignKey(Cover, verbose_name='Покрытие', blank=True, null=True)
@@ -57,7 +59,7 @@ class Court(models.Model):
 
     cost = models.IntegerField(verbose_name='Стоимость аренды, RUB/час', default=0)
     photo = models.ImageField(upload_to='courts', verbose_name='Изображение', blank=True, null=True)
-    # sporttypes = models.ManyToManyField('events.SportType', verbose_name=u'Типы спорта', blank=True)
+    sporttypes = models.ManyToManyField(SportType, verbose_name=u'Типы спорта', blank=True)
     views = models.IntegerField(default=0)
 
     class Meta():

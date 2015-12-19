@@ -5,11 +5,10 @@
 {% block content %}
 <div class="row">
   <div class="col-md-8">
-    <div class="thumbnail profile-avatar">{% image court.photo width="100" height="100" %}</div>
+    <div class="thumbnail profile-avatar">{% image court.photo width="1000" height="1000" %}</div>
   </div>
   <div class="col-md-4">
-    <p class="lead">{{ court.title }}</p>{% if current_user.is_staff %}
-    <p><a href="/admin/courts/court/{{ court.pk }}/">Редактировать</a></p>{% endif %}
+    <p class="lead">{{ court.title }}</p>{% if current_user.is_admin %}<a href="/admin/courts/court/{{ court.pk }}/" class="btn btn-lg btn-success">Редактировать</a><br/><br/>{% endif %}
     <div class="table-responsive">
       <table class="table">
         <tbody>
