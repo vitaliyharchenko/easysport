@@ -6,7 +6,7 @@
 <h1 class="m-t-0">Площадки</h1>
 <hr/>
 <div class="row">
-  <div class="col-md-3 visible-md visible-lg">{% if current_user.is_organizer %}<a href="/admin/courts/court/add/" class="btn btn-success btn-block">+ создать площадку</a><br/>{% endif %}
+  <div class="col-md-3 visible-md visible-lg">{% if current_user.is_admin %}<a href="/admin/courts/court/add/" class="btn btn-success btn-block">+ создать площадку</a><br/>{% endif %}
     <div class="panel panel-default">
       <div class="panel-body">
         <p class="lead">Поиск</p>

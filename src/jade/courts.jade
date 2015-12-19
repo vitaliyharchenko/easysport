@@ -6,7 +6,7 @@ h1.m-t-0 Площадки
 hr
 .row
   .col-md-3.visible-md.visible-lg
-    |{% if current_user.is_organizer %}
+    |{% if current_user.is_admin %}
     a.btn.btn-success.btn-block(href="/admin/courts/court/add/") + создать площадку
     br
     |{% endif %}

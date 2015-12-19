@@ -23,7 +23,7 @@
             </div>
             <ul class="dropdown-menu">
               <li><a href="{% url 'user_view' current_user.id %}">Мой профиль</a></li>
-              <li><a href="{% url 'user_update_view' %}">Настройки</a></li>{% if current_user.is_staff %}
+              <li><a href="{% url 'user_update_view' %}">Настройки</a></li>{% if current_user.is_superuser or current_user.is_admin %}
               <li><a href="/admin" target="blank">Админка</a></li>{% endif %}
               <li role="separator" class="divider"></li>
               <li><a href="{% url 'logout_view' %}">Выход</a></li>
