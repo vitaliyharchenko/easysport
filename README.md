@@ -110,8 +110,7 @@ bower install jasny-bootstrap --save
 
 '''
 python manage.py loaddata users_short.xml
-
-run password_hashing.py
+python users_render.py
 '''
 
 

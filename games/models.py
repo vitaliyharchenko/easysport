@@ -51,10 +51,10 @@ class Game(models.Model):
         app_label = 'games'
 
     def __str__(self):
-        return u'{}, {}, {}'.format(self.court, self.datetime, self.gametype)
+        return u'Игра №{}, {}, {}'.format(self.id, self.datetime, self.court)
 
     def __unicode__(self):
-        return u'{}, {}, {}'.format(self.court, self.datetime, self.gametype)
+        return u'Игра №{}, {}, {}'.format(self.id, self.datetime, self.court)
 
     def save(self):
         if self.datetime > self.datetime_to:
@@ -169,6 +169,7 @@ class Game(models.Model):
             return True
 
 
+# TODO: добавить условия, при которых возможно создание такого usergameaction'a
 class UserGameAction(models.Model):
     class Meta():
         verbose_name = 'запись на игру'

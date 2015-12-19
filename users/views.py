@@ -132,7 +132,7 @@ def users_view(request):
         users = User.objects.filter(first_name__icontains=query) | User.objects.filter(last_name__icontains=query)
         context = {'users': users, 'query': query}
     except KeyError:
-        context = {'users': User.objects.all().extra(order_by=['pk'])}
+        context = {'users': User.objects.all().extra(order_by=['last_login'])}
     return render(request, 'users.html', context)
 
 

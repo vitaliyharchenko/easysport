@@ -17,6 +17,11 @@
           {% if query == -1 %}
           <option value="-1" selected="selected">Прошедшие игры</option>{% else %}
           <option value="-1">Прошедшие игры</option>{% endif %}
+          {% if current_user.is_responsible %}
+          {% if query == -2 %}
+          <option value="-2" selected="selected">Требующие отчета</option>{% else %}
+          <option value="-2">Требующие отчета</option>{% endif %}
+          {% endif %}
           {% for sport_type in sport_types %}
           {% if query == sport_type.id %}
           <option value="{{ sport_type.id }}" selected="selected">{{ sport_type.title }}</option>{% else %}
@@ -38,9 +43,14 @@
     </div>
   </div>
   <div class="col-md-9">
+    {% if games|length > 0 %}
     {% for game in games %}
     {% game_tpl game=game %}
     {% endfor %}
+    {% else %}
+    <div class="alert alert-dismissable alert-warning">
+      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>По вашему запросу ничего не найдено
+    </div>{% endif %}
   </div>
 </div>
 <script>$(document).on('click', '.action', function (e) {

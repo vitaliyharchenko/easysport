@@ -59,6 +59,15 @@
                               <td></td>
                               <td></td>
                             </tr>{% endfor %}
+                            {% for user in game.unsubscribed %}
+                            <tr class="danger">
+                              <td>{{ user.pk }}</td>
+                              <td>{{ user.first_name }}</td>
+                              <td>{{ user.last_name }}</td>
+                              <td>{{ user.phone }}</td>
+                              <td></td>
+                              <td></td>
+                            </tr>{% endfor %}
                           </tbody>
                         </table>
                       </div>

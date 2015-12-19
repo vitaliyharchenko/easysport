@@ -15,7 +15,7 @@ class UserManager(BaseUserManager):
         now = timezone.now()
         if not email:
             raise ValueError('Users must have an email address')
-        is_active = extra_fields.pop("is_active", True)
+        is_active = extra_fields.pop("is_active", False)
         is_responsible = extra_fields.pop("is_responsible", False)
         is_admin = extra_fields.pop("is_admin", False)
         first_name = extra_fields.pop("first_name", '')

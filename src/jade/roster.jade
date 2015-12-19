@@ -63,3 +63,12 @@ html(lang="en")
                               td
                               td
                             |{% endfor %}
+                            |{% for user in game.unsubscribed %}
+                            tr.danger
+                              td {{ user.pk }}
+                              td {{ user.first_name }}
+                              td {{ user.last_name }}
+                              td {{ user.phone }}
+                              td
+                              td
+                            |{% endfor %}

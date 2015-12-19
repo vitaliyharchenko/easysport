@@ -7,6 +7,12 @@
 <hr/>
 <div class="row">
   <div class="col-md-3 visible-md visible-lg">{% if current_user.is_organizer %}<a href="/admin/courts/court/add/" class="btn btn-success btn-block">+ создать площадку</a><br/>{% endif %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="lead">Поиск</p>
+        <input id="searchquery" type="text" name="query" placeholder="Поиск по названию" value="{{ query }}" class="form-control"/><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>{% if query %}<a href="{% url 'courts_view' %}" class="btn btn-primary btn-block">Сброс</a>{% endif %}
+      </div>
+    </div>
     <div class="panel panel-default hidden-xs">
       <div class="panel-body">
         <p class="lead m-t-0">Расскажи о нас друзьям!</p>
@@ -19,7 +25,9 @@
       </div>
     </div>
   </div>
-  <div class="col-md-9">{% for court in courts %}
+  <div class="col-md-9">
+    {% if courts|length > 0 %}
+    {% for court in courts %}
     <div class="row">
       <div class="col-xs-3">
         <div class="thumbnail profile-avatar">{% image court.photo %}</div>
@@ -31,5 +39,31 @@
       </div>
     </div>
     <hr class="m-t-0"/>{% endfor %}
+    {% else %}
+    <div class="alert alert-dismissable alert-warning">
+      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>По вашему запросу ничего не найдено
+    </div>{% endif %}
   </div>
+  <script>$(document).ready(function() {
+    queryfunc();
+});
+
+function queryfunc() {
+    var len = $("#searchquery").val().length;
+    if (len > 2) {
+        $("#searchbutton").attr('disabled', false);
+    } else {
+        $("#searchbutton").attr('disabled', true);
+    }
+};
+
+$(document).on('input', '#searchquery', function () {
+    queryfunc();
+});
+
+$(document).on('click', '#searchbutton', function () {
+    var url = "{% url 'courts_view' %}?q=".concat($("#searchquery").val())
+    window.location.replace(url);
+});
+  </script>
 </div>{% endblock %}

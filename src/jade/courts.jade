@@ -10,6 +10,15 @@ hr
     a.btn.btn-success.btn-block(href="/admin/courts/court/add/") + создать площадку
     br
     |{% endif %}
+    .panel.panel-default
+      .panel-body
+        p.lead Поиск
+        input#searchquery.form-control(type="text" name="query" placeholder="Поиск по названию" value="{{ query }}")
+        br
+        a#searchbutton.btn.btn-primary.btn-block(href="#" disabled) Найти
+        |{% if query %}
+        a.btn.btn-primary.btn-block(href="{% url 'courts_view' %}") Сброс
+        |{% endif %}
     .panel.panel-default.hidden-xs
       .panel-body
         p.lead.m-t-0 Расскажи о нас друзьям!
@@ -19,6 +28,7 @@ hr
           .vkontakte
           .odnoklassniki
   .col-md-9
+    |{% if courts|length > 0 %}
     | {% for court in courts %}
     .row
       .col-xs-3
@@ -31,4 +41,12 @@ hr
         p {{ court.place }}
     hr.m-t-0
     | {% endfor %}
+    |{% else %}
+    .alert.alert-dismissable.alert-warning
+      button.close(type="button" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+      | По вашему запросу ничего не найдено
+    |{% endif %}
+  script
+    include ../js/courts.js
 | {% endblock %}

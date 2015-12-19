@@ -18,6 +18,7 @@
             <ul class="dropdown-menu pull-right">
               <li><a href="/admin/games/game/{{ game.pk }}/">Редактировать</a></li>
               <li><a href="{% url 'game_roster_view' game.pk %}" target="_blank">Печатать списки</a></li>
+              <li><a href="{% url 'game_invite_view' game.pk %}" target="_blank">Рассылка приглашений</a></li>
             </ul>
           </div>{% endif %}
         </div>

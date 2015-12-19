@@ -16,6 +16,9 @@ hr
         input#searchquery.form-control(type="text" name="query" placeholder="Поиск по имени" value="{{ query }}")
         br
         a#searchbutton.btn.btn-primary.btn-block(href="#" disabled) Найти
+        |{% if query %}
+        a.btn.btn-primary.btn-block(href="{% url 'users_view' %}") Сброс
+        |{% endif %}
     .panel.panel-default.hidden-xs
       .panel-body
         p.lead Расскажи о нас друзьям!

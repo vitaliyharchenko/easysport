@@ -27,6 +27,14 @@ hr
           option(value="-1") Прошедшие игры
           | {% endif %}
 
+          |{% if current_user.is_responsible %}
+          | {% if query == -2 %}
+          option(value="-2" selected) Требующие отчета
+          | {% else %}
+          option(value="-2") Требующие отчета
+          | {% endif %}
+          |{% endif %}
+
           | {% for sport_type in sport_types %}
           | {% if query == sport_type.id %}
           option(value="{{ sport_type.id }}" selected) {{ sport_type.title }}
@@ -43,9 +51,16 @@ hr
           .vkontakte
           .odnoklassniki
   .col-md-9
+    |{% if games|length > 0 %}
     | {% for game in games %}
     | {% game_tpl game=game %}
     | {% endfor %}
+    |{% else %}
+    .alert.alert-dismissable.alert-warning
+      button.close(type="button" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+      | По вашему запросу ничего не найдено
+    |{% endif %}
 script
   include ../js/games.js
 | {% endblock %}

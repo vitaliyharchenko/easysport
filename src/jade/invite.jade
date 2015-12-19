@@ -1,0 +1,52 @@
+| {% extends 'base.html' %}
+| {% load gametags %}
+| {% block title %}{{ game.title }}{% endblock %}
+| {% block headers %}{% endblock %}
+| {% block content %}
+.row
+  .col-md-8.col-md-offset-2
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-xs-12
+            .row
+              .col-xs-6
+                p.lead
+                  a(href="{% url 'game_view' game.pk %}") Игра №{{ game.pk }}
+                p
+                  |Ответственный:&nbsp;
+                  a(href="{{ game.responsible_user.get_absolute_url }}") {{ game.responsible_user }}
+                p Тип игры: {{ game.gametype }}
+                p
+                  |Площадка:&nbsp;
+                  a(href="{{ game.court.get_absolute_url }}") {{ game.court }}
+              .col-xs-6
+                p {{ game.datetime }}
+                p Продолжительность: {{ game.duration }}
+                p Цена: {{ game.cost }} RUB
+                br
+                br
+                p __________________
+                p Подпись ответственного
+            .row
+              .col-xs-12
+                .table-responsive
+                  table.table.table-hover.table-bordered.table-condensed
+                    tbody
+                      tr.success
+                        td №
+                        td Имя
+                        td Фамилия
+                        td Телефон
+                        td Статус
+                        td Подпись
+                      |{% for user in old_users %}
+                      tr
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      |{% endfor %}
+| {% endblock %}

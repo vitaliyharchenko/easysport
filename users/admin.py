@@ -20,8 +20,8 @@ class UserAdmin(UserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_admin')
-    list_filter = ('is_admin', 'is_active',)
+    list_display = ('id', 'first_name', 'last_name', 'email', 'phone')
+    list_filter = ('is_active', 'is_responsible', 'is_organizer', 'is_admin', 'is_staff',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid', 'phone',
@@ -30,14 +30,14 @@ class UserAdmin(UserAdmin):
                                     'is_organizer', 'is_staff', 'is_admin',)}),
     )
     # overrides get_fieldsets to use this attribute when creating a user.
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
-         ),
-    )
-    search_fields = ('email', 'phone')
-    ordering = ('email',)
+    # add_fieldsets = (
+    #     (None, {
+    #         'classes': ('wide',),
+    #         'fields': ('email', 'password1', 'password2')}
+    #      ),
+    # )
+    search_fields = ('first_name', 'last_name', 'email', 'phone')
+    ordering = ('id',)
     filter_horizontal = ()
 
 

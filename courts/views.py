@@ -4,7 +4,12 @@ from .models import Court
 
 # Create your views here.
 def courts_view(request):
-    context = {'courts': Court.objects.all()}
+    try:
+        query = request.GET.__getitem__('q')
+        courts = Court.objects.filter(title__icontains=query) | Court.objects.filter(description__icontains=query)
+        context = {'courts': courts, 'query': query}
+    except KeyError:
+        context = {'courts': Court.objects.all()}
     return render(request, 'courts.html', context)
 
 
