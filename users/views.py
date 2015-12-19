@@ -194,7 +194,7 @@ def changepass(request):
 @login_required
 def unsetvkid(request):
     user = User.objects.get(email=request.user.email)
-    user.vkuserid = False
+    user.vkuserid = ''
     user.save()
     messages.success(request, "Профиль ВКонтакте откреплен", extra_tags='integration')
     return redirect('user_update_view')

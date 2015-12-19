@@ -10,9 +10,11 @@
         .row
           .col-xs-12
             .row
-              .col-xs-6
+              .col-xs-12
                 p.lead
                   a(href="{% url 'game_view' game.pk %}") Игра №{{ game.pk }}
+            .row
+              .col-xs-6
                 p
                   |Ответственный:&nbsp;
                   a(href="{{ game.responsible_user.get_absolute_url }}") {{ game.responsible_user }}
@@ -24,10 +26,11 @@
                 p {{ game.datetime }}
                 p Продолжительность: {{ game.duration }}
                 p Цена: {{ game.cost }} RUB
+            .row
+              .col-xs-12
+                a.btn.btn-lg.btn-success(href="") Разослать приглашения на почту
                 br
                 br
-                p __________________
-                p Подпись ответственного
             .row
               .col-xs-12
                 .table-responsive
@@ -38,8 +41,8 @@
                         td Имя
                         td Фамилия
                         td Телефон
-                        td Статус
-                        td Подпись
+                        td Email
+                        td ВКонтакте
                       |{% for user in old_users %}
                       tr
                         td {{ user.pk }}
@@ -47,6 +50,12 @@
                         td {{ user.last_name }}
                         td {{ user.phone }}
                         td
+                          a(href="mailto:{{ user.email }}") {{ user.email }}
                         td
+                          |{% if user.vkuserid %}
+                          a(href="http://vk.com/write{{ user.vkuserid }}" target="_blank") Написать
+                          |{% else %}
+                          |-
+                          |{% endif %}
                       |{% endfor %}
 | {% endblock %}

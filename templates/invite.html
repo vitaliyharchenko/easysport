@@ -11,8 +11,12 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-xs-12">
                 <p class="lead"><a href="{% url 'game_view' game.pk %}">Игра №{{ game.pk }}</a></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
                 <p>Ответственный:&nbsp;<a href="{{ game.responsible_user.get_absolute_url }}">{{ game.responsible_user }}</a></p>
                 <p>Тип игры: {{ game.gametype }}</p>
                 <p>Площадка:&nbsp;<a href="{{ game.court.get_absolute_url }}">{{ game.court }}</a></p>
@@ -20,10 +24,11 @@
               <div class="col-xs-6">
                 <p>{{ game.datetime }}</p>
                 <p>Продолжительность: {{ game.duration }}</p>
-                <p>Цена: {{ game.cost }} RUB</p><br/><br/>
-                <p>__________________</p>
-                <p>Подпись ответственного</p>
+                <p>Цена: {{ game.cost }} RUB</p>
               </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12"><a href="" class="btn btn-lg btn-success">Разослать приглашения на почту</a><br/><br/></div>
             </div>
             <div class="row">
               <div class="col-xs-12">
@@ -35,16 +40,19 @@
                         <td>Имя</td>
                         <td>Фамилия</td>
                         <td>Телефон</td>
-                        <td>Статус</td>
-                        <td>Подпись</td>
+                        <td>Email</td>
+                        <td>ВКонтакте</td>
                       </tr>{% for user in old_users %}
                       <tr>
                         <td>{{ user.pk }}</td>
                         <td>{{ user.first_name }}</td>
                         <td>{{ user.last_name }}</td>
                         <td>{{ user.phone }}</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                        <td>{% if user.vkuserid %}<a href="http://vk.com/write{{ user.vkuserid }}" target="_blank">Написать</a>{% else %}
+                          -
+                          {% endif %}
+                        </td>
                       </tr>{% endfor %}
                     </tbody>
                   </table>

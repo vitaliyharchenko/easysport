@@ -76,7 +76,7 @@ def game_report_view(request, game_id):
     old_users = list(set(old_users))
 
     context = {'game': Game.objects.get(id=game_id), 'old_users': old_users}
-    return render(request, 'invite.html', context)
+    return render(request, 'report.html', context)
 
 
 # Return error for ajax

@@ -1,0 +1,120 @@
+| {% extends 'base.html' %}
+| {% load gametags %}
+| {% block title %}{{ game.title }}{% endblock %}
+| {% block headers %}{% endblock %}
+| {% block content %}
+.row
+  .col-md-8.col-md-offset-2
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-xs-12
+            .row
+              .col-xs-12
+                p.lead
+                  a(href="{% url 'game_view' game.pk %}") Отчет по игре №{{ game.pk }}
+                  |{% if game.is_reported %}
+                  |&nbsp;Отправлен
+                  |{% else %}
+                  |&nbsp;Ждет отправки
+                  |{% endif %}
+            .row
+              .col-xs-6
+                p
+                  |Ответственный:&nbsp;
+                  a(href="{{ game.responsible_user.get_absolute_url }}") {{ game.responsible_user }}
+                p Тип игры: {{ game.gametype }}
+                p
+                  |Площадка:&nbsp;
+                  a(href="{{ game.court.get_absolute_url }}") {{ game.court }}
+              .col-xs-6
+                p {{ game.datetime }}
+                p Продолжительность: {{ game.duration }}
+                p Цена: {{ game.cost }} RUB
+            .row
+              .col-xs-12
+                hr
+            .row
+              .col-xs-12
+                .table-responsive
+                  table.table.table-hover.table-bordered.table-condensed
+                    tbody
+                      tr.success
+                        td №
+                        td Имя
+                        td Фамилия
+                        td Телефон
+                        td
+                        td
+                      |{% if game.is_reported %}
+                      tr
+                        td.text-center(colspan=6) Посетившие
+                      | {% for user in game.visited %}
+                      tr
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      | {% endfor %}
+                      tr.warning
+                        td.text-center(colspan=6) Прогульщики
+                      | {% for user in game.notvisited %}
+                      tr.warning
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      | {% endfor %}
+                      tr
+                        td.text-center(colspan=6) Неплательщики
+                      | {% for user in game.notpay %}
+                      tr.danger
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      | {% endfor %}
+
+                      |{% else %}
+
+                      tr
+                        td.text-center(colspan=6) Записывались
+                      | {% for user in game.subscribed %}
+                      tr
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      | {% endfor %}
+                      tr.warning
+                        td.text-center(colspan=6) Были в резерве
+                      | {% for user in game.reserved %}
+                      tr.warning
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      | {% endfor %}
+                      tr.danger
+                        td.text-center(colspan=6) Отписавшиеся
+                      | {% for user in game.unsubscribed %}
+                      tr.danger
+                        td {{ user.pk }}
+                        td {{ user.first_name }}
+                        td {{ user.last_name }}
+                        td {{ user.phone }}
+                        td
+                        td
+                      | {% endfor %}
+                      |{% endif %}
+| {% endblock %}
