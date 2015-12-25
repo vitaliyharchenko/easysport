@@ -9,6 +9,8 @@ from utils import permissions
 class UserGameActionInline(admin.TabularInline):
     model = UserGameAction
     extra = 0
+    raw_id_fields = ('user',)
+    can_delete = False
 
 
 class GameAdmin(admin.ModelAdmin):

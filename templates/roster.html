@@ -40,14 +40,12 @@
                               <td>Фамилия</td>
                               <td>Телефон</td>
                               <td>Статус</td>
-                              <td>Подпись</td>
                             </tr>{% for user in game.subscribed %}
                             <tr>
                               <td>{{ user.pk }}</td>
                               <td>{{ user.first_name }}</td>
                               <td>{{ user.last_name }}</td>
                               <td>{{ user.phone }}</td>
-                              <td></td>
                               <td></td>
                             </tr>{% endfor %}
                             {% for user in game.reserved %}
@@ -57,7 +55,6 @@
                               <td>{{ user.last_name }}</td>
                               <td>{{ user.phone }}</td>
                               <td></td>
-                              <td></td>
                             </tr>{% endfor %}
                             {% for user in game.unsubscribed %}
                             <tr class="danger">
@@ -65,7 +62,6 @@
                               <td>{{ user.first_name }}</td>
                               <td>{{ user.last_name }}</td>
                               <td>{{ user.phone }}</td>
-                              <td></td>
                               <td></td>
                             </tr>{% endfor %}
                           </tbody>

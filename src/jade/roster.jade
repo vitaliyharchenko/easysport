@@ -44,14 +44,12 @@ html(lang="en")
                               td Фамилия
                               td Телефон
                               td Статус
-                              td Подпись
                             |{% for user in game.subscribed %}
                             tr
                               td {{ user.pk }}
                               td {{ user.first_name }}
                               td {{ user.last_name }}
                               td {{ user.phone }}
-                              td
                               td
                             |{% endfor %}
                             |{% for user in game.reserved %}
@@ -61,7 +59,6 @@ html(lang="en")
                               td {{ user.last_name }}
                               td {{ user.phone }}
                               td
-                              td
                             |{% endfor %}
                             |{% for user in game.unsubscribed %}
                             tr.danger
@@ -69,6 +66,5 @@ html(lang="en")
                               td {{ user.first_name }}
                               td {{ user.last_name }}
                               td {{ user.phone }}
-                              td
                               td
                             |{% endfor %}

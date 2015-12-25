@@ -1,0 +1,60 @@
+| {% extends 'base.html' %}
+| {% load gametags %}
+|{% load bootstrap %}
+| {% block title %}{{ game.title }}{% endblock %}
+| {% block headers %}{% endblock %}
+| {% block content %}
+.row
+  .col-md-8.col-md-offset-2
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-xs-12
+            .row
+              .col-xs-12
+                p.lead
+                  a(href="{% url 'game_view' game.pk %}") Отчет по игре №{{ game.pk }}
+                  |{% if game.is_reported %}
+                  |&nbsp;Отправлен
+                  |{% else %}
+                  |&nbsp;Ждет отправки
+                  |{% endif %}
+            .row
+              .col-xs-6
+                p
+                  |Ответственный:&nbsp;
+                  a(href="{{ game.responsible_user.get_absolute_url }}") {{ game.responsible_user }}
+                p Тип игры: {{ game.gametype }}
+                p
+                  |Площадка:&nbsp;
+                  a(href="{{ game.court.get_absolute_url }}") {{ game.court }}
+              .col-xs-6
+                p {{ game.datetime }}
+                p Продолжительность: {{ game.duration }}
+                p Цена: {{ game.cost }} RUB
+            .row
+              .col-xs-12
+                hr
+            .row
+              .col-xs-12
+                form(method="post" action="")
+                  | {% csrf_token %}
+                  table.table.table-hover.table-bordered.table-condensed
+                    tbody
+                      tr.success
+                        td Пользователь
+                        td Статус
+                      |{{ formset.management_form }}
+                      |{% for form in formset %}
+                      tr
+                        td {{ form.user }}
+                        td {{ form.action }}
+                      |{% endfor %}
+                  button.btn.btn-primary(type="submit") Отправить отчет
+            .row
+              .col-xs-12
+                table.table.table-hover.table-bordered.table-condensed
+                  tbody.userstable
+script
+  include ../../sportcourts/src/js/reports.js
+| {% endblock %}

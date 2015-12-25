@@ -3756,20 +3756,6 @@
 		<field name="phone">+7 (912) 221 76 86</field>
 	</object>
 
-	<object pk="289" model="users.User">
-		<field name="first_name">Михаил</field>
-		<field name="last_name">Гашков</field>
-		<field name="email">rozvil@bk.ru</field>
-		<field name="password">24298242</field>
-		<field name="bdate">1922-01-01</field>
-		<field name="date_joined">2014-12-06</field>
-		<field name="height">179</field>
-		<field name="weight">70</field>
-		<field name="sex">m</field>
-
-		<field name="phone">+7 (965) 519 39 27</field>
-	</object>
-
 	<object pk="291" model="users.User">
 		<field name="first_name">Андрей</field>
 		<field name="last_name">Иванов</field>
@@ -5364,7 +5350,6 @@
 	</object>
 <!--  -->
 	<object pk="400" model="users.User">
-
 		<field name="first_name">Артем</field>
 		<field name="last_name">Григорьев</field>
 		<field name="email">manutdrule@yandex.ru</field>
@@ -5374,8 +5359,1317 @@
 		<field name="height">0</field>
 		<field name="weight">0</field>
 		<field name="sex">m</field>
-
 		<field name="phone">+7 (912) 042 20 15</field>
 	</object>
-
+<!--  -->
+    <object pk="401" model="users.User">
+		<field name="first_name">Дима</field>
+		<field name="last_name">Бусов</field>
+		<field name="email">busovdimas@mail.ru</field>
+		<field name="password">20082117</field>
+		<field name="bdate">1994-07-03</field>
+		<field name="date_joined">2015-01-22</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (953) 045 69 20</field>
+	</object>
+<!--  -->
+	<object pk="403" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">Долгих</field>
+		<field name="email">Sr.andrey.dolgikh@yandex.ru</field>
+		<field name="password">0c379a</field>
+		<field name="bdate">1994-05-14</field>
+		<field name="date_joined">2015-01-22</field>
+		<field name="height">189</field>
+		<field name="weight">74</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">28133387</field>
+		<field name="phone">+7 (922) 123 23 88</field>
+	</object>
+<!--  -->
+	<object pk="404" model="users.User">
+		<field name="first_name">Василий</field>
+		<field name="last_name">Путанс</field>
+		<field name="email">putans.vas@gmail.com</field>
+		<field name="password">898900</field>
+		<field name="bdate">1992-09-28</field>
+		<field name="date_joined">2015-01-22</field>
+		<field name="height">182</field>
+		<field name="weight">70</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (950) 541 42 13</field>
+	</object>
+<!--  -->
+	<object pk="405" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">Обрезков</field>
+		<field name="email">obrezkovand@gmail.com</field>
+		<field name="password">andrey9893827</field>
+		<field name="bdate">1989-03-27</field>
+		<field name="date_joined">2015-01-22</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (911) 989 38 27</field>
+	</object>
+<!--  -->
+	<object pk="406" model="users.User">
+		<field name="first_name">Екатерина</field>
+		<field name="last_name">Никитина</field>
+		<field name="email">Nika1102@yandex.ru</field>
+		<field name="password">Kd29011989</field>
+		<field name="bdate">1989-01-29</field>
+		<field name="date_joined">2015-01-22</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (922) 194 50 40</field>
+	</object>
+<!--  -->
+	<object pk="407" model="users.User">
+		<field name="first_name">Тимур</field>
+		<field name="last_name">Уваров</field>
+		<field name="email">tima-rus@mail.ru</field>
+		<field name="password">q1w2e3r4t5</field>
+		<field name="bdate">1986-06-03</field>
+		<field name="date_joined">2015-01-22</field>
+		<field name="height">183</field>
+		<field name="weight">82</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 137 76 56</field>
+	</object>
+<!--  -->
+	<object pk="408" model="users.User">
+		<field name="first_name">Евгений</field>
+		<field name="last_name">Мещеряков</field>
+		<field name="email">Mescheryakov17@mail.ru</field>
+		<field name="password">q381shim19</field>
+		<field name="bdate">1992-11-04</field>
+		<field name="date_joined">2015-01-23</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (952) 744 62 26</field>
+	</object>
+<!--  -->
+	<object pk="409" model="users.User">
+		<field name="first_name">Михаил</field>
+		<field name="last_name">Воронин</field>
+		<field name="email">jerry-man1@yandex.ru</field>
+		<field name="password">alupka</field>
+		<field name="bdate">1995-09-12</field>
+		<field name="date_joined">2015-01-23</field>
+		<field name="height">180</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (908) 908 97 08</field>
+	</object>
+<!--  -->
+	<object pk="410" model="users.User">
+		<field name="first_name">Макс</field>
+		<field name="last_name">ххх</field>
+		<field name="email">max_somk@mail.ru</field>
+		<field name="password">ьфлы1991</field>
+		<field name="bdate">1991-07-01</field>
+		<field name="date_joined">2015-01-23</field>
+		<field name="height">187</field>
+		<field name="weight">75</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (904) 547 91 21</field>
+	</object>
+<!--  -->
+	<object pk="411" model="users.User">
+		<field name="first_name">Ольга</field>
+		<field name="last_name">Романова</field>
+		<field name="email">victoryy86@mail.ru</field>
+		<field name="password">68yyrotciv</field>
+		<field name="bdate">1986-05-22</field>
+		<field name="date_joined">2015-01-23</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="vkuserid">61278167</field>
+		<field name="phone">+7 (912) 239 46 60</field>
+	</object>
+<!--  -->
+	<object pk="412" model="users.User">
+		<field name="first_name">Данил</field>
+		<field name="last_name">З</field>
+		<field name="email">sound1991@mail.ru</field>
+		<field name="password">3Abviglmno</field>
+		<field name="bdate">1991-11-18</field>
+		<field name="date_joined">2015-01-23</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (904) 986 44 62</field>
+	</object>
+<!--  -->
+	<object pk="413" model="users.User">
+		<field name="first_name">артем</field>
+		<field name="last_name">юрзин</field>
+		<field name="email">olenkin2008@yandex.ru</field>
+		<field name="password">kozyla</field>
+		<field name="bdate">1985-05-29</field>
+		<field name="date_joined">2015-01-23</field>
+		<field name="height">175</field>
+		<field name="weight">70</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (904) 983 24 81</field>
+	</object>
+<!--  -->
+	<object pk="414" model="users.User">
+		<field name="first_name">Игорь</field>
+		<field name="last_name">Севрюгин</field>
+		<field name="email">contian@yandex.ru</field>
+		<field name="password">шшпщк2008</field>
+		<field name="bdate">1993-11-26</field>
+		<field name="date_joined">2015-01-24</field>
+		<field name="height">180</field>
+		<field name="weight">70</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (908) 630 80 20</field>
+	</object>
+<!--  -->
+	<object pk="415" model="users.User">
+		<field name="first_name">Алексей</field>
+		<field name="last_name">Жуков</field>
+		<field name="email">a.s.z@mail.ru</field>
+		<field name="password">щлыфтф</field>
+		<field name="bdate">1990-02-05</field>
+		<field name="date_joined">2015-01-25</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (925) 514 76 80</field>
+	</object>
+<!--  -->
+	<object pk="416" model="users.User">
+		<field name="first_name">Александр</field>
+		<field name="last_name">Миронов</field>
+		<field name="email">mironov.1995@list.ru</field>
+		<field name="password">Superb0sss</field>
+		<field name="bdate">1995-01-18</field>
+		<field name="date_joined">2015-01-25</field>
+		<field name="height">180</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (952) 733 01 16</field>
+	</object>
+<!--  -->
+	<object pk="417" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">Ситников</field>
+		<field name="email">andreysitnikov97@mail.ru</field>
+		<field name="password">URA19uraslav9708</field>
+		<field name="bdate">1997-11-19</field>
+		<field name="date_joined">2015-01-26</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 633 60 91</field>
+	</object>
+<!--  -->
+	<object pk="418" model="users.User">
+		<field name="first_name">Виктория</field>
+		<field name="last_name">Садомова</field>
+		<field name="email">sadomova.viktoria@yandex.ru</field>
+		<field name="password">340021</field>
+		<field name="bdate">1992-04-29</field>
+		<field name="date_joined">2015-01-26</field>
+		<field name="height">160</field>
+		<field name="weight">55</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (964) 487 97 63</field>
+	</object>
+<!--  -->
+	<object pk="419" model="users.User">
+		<field name="first_name">Dmitry</field>
+		<field name="last_name">Abakumov</field>
+		<field name="email">dil_nerim@mail.ru</field>
+		<field name="password">cvbn182</field>
+		<field name="bdate">1982-07-20</field>
+		<field name="date_joined">2015-01-26</field>
+		<field name="height">182</field>
+		<field name="weight">65</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">11182986</field>
+		<field name="phone">+7 (903) 079 36 80</field>
+	</object>
+<!--  -->
+	<object pk="420" model="users.User">
+		<field name="first_name">Сергей</field>
+		<field name="last_name">Пак</field>
+		<field name="email">serggrace29@gmail.com</field>
+		<field name="password">waffles30</field>
+		<field name="bdate">1982-12-15</field>
+		<field name="date_joined">2015-01-26</field>
+		<field name="height">167</field>
+		<field name="weight">65</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 659 14 75</field>
+	</object>
+<!--  -->
+	<object pk="421" model="users.User">
+		<field name="first_name">Денис</field>
+		<field name="last_name">Оникиенко</field>
+		<field name="email">Demon-x@e1.ru</field>
+		<field name="password">3785072</field>
+		<field name="bdate">1996-06-19</field>
+		<field name="date_joined">2015-01-26</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">18695758</field>
+		<field name="phone">+7 (912) 285 69 62</field>
+	</object>
+<!--  -->
+	<object pk="422" model="users.User">
+		<field name="first_name">Виталий</field>
+		<field name="last_name">Зверев</field>
+		<field name="email">2capitals@mail.ru</field>
+		<field name="password">350704</field>
+		<field name="bdate">1985-07-20</field>
+		<field name="date_joined">2015-01-28</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (926) 533 34 08</field>
+	</object>
+<!--  -->
+	<object pk="423" model="users.User">
+		<field name="first_name">Михаил</field>
+		<field name="last_name">Гашков</field>
+		<field name="email">mihael.gashkov@gmail.com</field>
+		<field name="password">123123123!!!</field>
+		<field name="bdate">1991-12-05</field>
+		<field name="date_joined">2015-01-29</field>
+		<field name="height">176</field>
+		<field name="weight">86</field>
+		<field name="sex">m</field>eld>
+		<field name="phone">+7 (965) 519 39 27</field>
+	</object>
+<!--  -->
+	<object pk="424" model="users.User">
+		<field name="first_name">Владимир</field>
+		<field name="last_name">Наумов</field>
+		<field name="email">King23james23@list.ru</field>
+		<field name="password">862292333Thelastofus23</field>
+		<field name="bdate">1997-08-05</field>
+		<field name="date_joined">2015-01-29</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">162135413</field>
+		<field name="phone">+7 (922) 219 31 60</field>
+	</object>
+<!--  -->
+	<object pk="425" model="users.User">
+		<field name="first_name">Павел</field>
+		<field name="last_name">Лодыкин</field>
+		<field name="email">lodykin@gmail.com</field>
+		<field name="password">зкщзшл85</field>
+		<field name="bdate">1985-04-08</field>
+		<field name="date_joined">2015-01-30</field>
+		<field name="height">197</field>
+		<field name="weight">89</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (963) 054 38 64</field>
+	</object>
+<!--  -->
+	<object pk="426" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">Рулетиков</field>
+		<field name="email">interloper@Inbox.ru</field>
+		<field name="password">к2362288К</field>
+		<field name="bdate">1987-06-23</field>
+		<field name="date_joined">2015-01-30</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">6955714</field>
+		<field name="phone">+7 (965) 505 59 95</field>
+	</object>
+<!--  -->
+	<object pk="427" model="users.User">
+		<field name="first_name">Евгений</field>
+		<field name="last_name">Андреевич</field>
+		<field name="email">74evgen74@mail.ru</field>
+		<field name="password">lfkj;bim</field>
+		<field name="bdate">1983-03-04</field>
+		<field name="date_joined">2015-01-30</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">21398744</field>
+		<field name="phone">+7 (922) 169 30 31</field>
+	</object>
+<!--  -->
+	<object pk="428" model="users.User">
+		<field name="first_name">Наталья</field>
+		<field name="last_name">Золотухина</field>
+		<field name="email">nataly-zolotko@yandex.ru</field>
+		<field name="password">zolotko6302109</field>
+		<field name="bdate">1990-09-22</field>
+		<field name="date_joined">2015-01-30</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="vkuserid">50033189</field>
+		<field name="phone">+7 (912) 630 21 09</field>
+	</object>
+<!--  -->
+	<object pk="429" model="users.User">
+		<field name="first_name">Данил</field>
+		<field name="last_name">Дерябин</field>
+		<field name="email">ddanilesto@mail.ru</field>
+		<field name="password">familyyy11112</field>
+		<field name="bdate">1997-12-17</field>
+		<field name="date_joined">2015-01-31</field>
+		<field name="height">172</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">48166566</field>
+		<field name="phone">+7 (922) 619 36 88</field>
+	</object>
+<!--  -->
+	<object pk="430" model="users.User">
+		<field name="first_name">Илья</field>
+		<field name="last_name">Калинин</field>
+		<field name="email">ilya.kalinin97@gmail.com</field>
+		<field name="password">f108Ab60</field>
+		<field name="bdate">1997-08-06</field>
+		<field name="date_joined">2015-01-31</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 601 58 54</field>
+	</object>
+<!--  -->
+	<object pk="431" model="users.User">
+		<field name="first_name">Кирилл</field>
+		<field name="last_name">Матушкин</field>
+		<field name="email">matyshkinkirill@mail.ru</field>
+		<field name="password">1618033989</field>
+		<field name="bdate">1989-09-17</field>
+		<field name="date_joined">2015-01-31</field>
+		<field name="height">184</field>
+		<field name="weight">84</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">147390499</field>
+		<field name="phone">+7 (922) 345 98 03</field>
+	</object>
+<!--  -->
+	<object pk="432" model="users.User">
+		<field name="first_name">Роман</field>
+		<field name="last_name">Карманович</field>
+		<field name="email">kakdelapidr@yandex.ru</field>
+		<field name="password">3232898</field>
+		<field name="bdate">1990-09-29</field>
+		<field name="date_joined">2015-01-31</field>
+		<field name="height">188</field>
+		<field name="weight">78</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (965) 51 67 430</field>
+	</object>
+<!--  -->
+	<object pk="433" model="users.User">
+		<field name="first_name">олег</field>
+		<field name="last_name">велижанин</field>
+		<field name="email">molegik88@e1.ru</field>
+		<field name="password">12345678910</field>
+		<field name="bdate">1988-10-24</field>
+		<field name="date_joined">2015-01-31</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (908) 903 33 10</field>
+	</object>
+<!--  -->
+	<object pk="434" model="users.User">
+		<field name="first_name">Дмитрий</field>
+		<field name="last_name">Мокрушин</field>
+		<field name="email">mokpyxa1@gmail.com</field>
+		<field name="password">babaduca</field>
+		<field name="bdate">1989-06-13</field>
+		<field name="date_joined">2015-02-02</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 213 05 18</field>
+	</object>
+<!--  -->
+	<object pk="435" model="users.User">
+		<field name="first_name">Кирилл</field>
+		<field name="last_name">TT</field>
+		<field name="email">bd1234@mail.ru</field>
+		<field name="password">qwesadqa</field>
+		<field name="bdate">1982-11-06</field>
+		<field name="date_joined">2015-02-02</field>
+		<field name="height">190</field>
+		<field name="weight">94</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (343) 200 66 67</field>
+	</object>
+<!--  -->
+	<object pk="436" model="users.User">
+		<field name="first_name">Виталий</field>
+		<field name="last_name">Сухарев</field>
+		<field name="email">svu@itgro.ru</field>
+		<field name="password">cvthnm</field>
+		<field name="bdate">1985-09-28</field>
+		<field name="date_joined">2015-02-03</field>
+		<field name="height">182</field>
+		<field name="weight">82</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">1813880</field>
+		<field name="phone">+7 (912) 601 18 11</field>
+	</object>
+<!--  -->
+	<object pk="437" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">Стругов</field>
+		<field name="email">jj-rich@yandex.ru</field>
+		<field name="password">lebronjames6</field>
+		<field name="bdate">1991-08-29</field>
+		<field name="date_joined">2015-02-03</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (919) 394 24 15</field>
+	</object>
+<!--  -->
+	<object pk="438" model="users.User">
+		<field name="first_name">Вадим</field>
+		<field name="last_name">Ибатуллин</field>
+		<field name="email">ibatullinvadim1989@gmail.com</field>
+		<field name="password">masha1love</field>
+		<field name="bdate">1989-12-25</field>
+		<field name="date_joined">2015-02-03</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (909) 023 59 68</field>
+	</object>
+<!--  -->
+	<object pk="439" model="users.User">
+		<field name="first_name">Костик</field>
+		<field name="last_name">Шалатов</field>
+		<field name="email">kostyk-shalatov@yandex.ru</field>
+		<field name="password">71014232434arens</field>
+		<field name="bdate">1993-06-30</field>
+		<field name="date_joined">2015-02-03</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">116651472</field>
+		<field name="phone">+7 (922) 144 92 88</field>
+	</object>
+<!--  -->
+	<object pk="440" model="users.User">
+		<field name="first_name">Sergei</field>
+		<field name="last_name">Kulakov</field>
+		<field name="email">nevis_07@mail.ru</field>
+		<field name="password">teodordraizer1988</field>
+		<field name="bdate">1988-05-25</field>
+		<field name="date_joined">2015-02-03</field>
+		<field name="height">187</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">154062178</field>
+		<field name="phone">+7 (922) 240 87 90</field>
+	</object>
+<!--  -->
+	<object pk="441" model="users.User">
+		<field name="first_name">Константин</field>
+		<field name="last_name">Яшин</field>
+		<field name="email">yashin-94@yandex.ru</field>
+		<field name="password">думудсгиу2601</field>
+		<field name="bdate">1994-09-14</field>
+		<field name="date_joined">2015-02-04</field>
+		<field name="height">176</field>
+		<field name="weight">69</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 134 26 62</field>
+	</object>
+<!--  -->
+	<object pk="442" model="users.User">
+		<field name="first_name">Дмитрий</field>
+		<field name="last_name">Салахутдинов</field>
+		<field name="email">dsalahutdinov@gmail.com</field>
+		<field name="password">uynwkhead</field>
+		<field name="bdate">1986-02-05</field>
+		<field name="date_joined">2015-02-04</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">380944</field>
+		<field name="phone">+7 (912) 639 21 56</field>
+	</object>
+<!--  -->
+	<object pk="443" model="users.User">
+		<field name="first_name">Сергей</field>
+		<field name="last_name">Лычев</field>
+		<field name="email">sergei.lychev@yandex.ru</field>
+		<field name="password">yerfrnjnfr</field>
+		<field name="bdate">1993-04-09</field>
+		<field name="date_joined">2015-02-04</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">39854596</field>
+		<field name="phone">+7 (912) 622 08 69</field>
+	</object>
+<!--  -->
+	<object pk="444" model="users.User">
+		<field name="first_name">Илья</field>
+		<field name="last_name">Цыганов</field>
+		<field name="email">czyganov90@bk.ru</field>
+		<field name="password">Ilya2335</field>
+		<field name="bdate">1990-06-19</field>
+		<field name="date_joined">2015-02-04</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (963) 051 18 51</field>
+	</object>
+<!--  -->
+	<object pk="445" model="users.User">
+		<field name="first_name">Maksim</field>
+		<field name="last_name">Korotaev</field>
+		<field name="email">g-unit24@mail.ru</field>
+		<field name="password">hateandlovemagic</field>
+		<field name="bdate">1992-10-24</field>
+		<field name="date_joined">2015-02-05</field>
+		<field name="height">176</field>
+		<field name="weight">73</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">182753556</field>
+		<field name="phone">+7 (952) 144 04 56</field>
+	</object>
+<!--  -->
+	<object pk="446" model="users.User">
+		<field name="first_name">Катя</field>
+		<field name="last_name">Брюховецкая</field>
+		<field name="email">ebryuxoveczkaya@bk.ru</field>
+		<field name="password">katusha15</field>
+		<field name="bdate">1997-08-05</field>
+		<field name="date_joined">2015-02-05</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (919) 911 66 79</field>
+	</object>
+<!--  -->
+	<object pk="447" model="users.User">
+		<field name="first_name">Юрий</field>
+		<field name="last_name">Бедулев</field>
+		<field name="email">zamesto@mail.ru</field>
+		<field name="password">7570dcff</field>
+		<field name="bdate">1987-08-15</field>
+		<field name="date_joined">2015-02-06</field>
+		<field name="height">196</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (982) 754 36 70</field>
+	</object>
+<!-- -->
+  <object pk="448" model="users.User">
+		<field name="first_name">Татьяна</field>
+		<field name="last_name">Эпплгейт</field>
+		<field name="email">maliok85@yandex.ru</field>
+		<field name="password">89221574208</field>
+		<field name="bdate">1985-08-05</field>
+		<field name="date_joined">2015-02-06</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (922) 157 42 08</field>
+	</object>
+<!-- -->
+	<object pk="449" model="users.User">
+		<field name="first_name">Игорь</field>
+		<field name="last_name">Бабин</field>
+		<field name="email">bi93@list.ru</field>
+		<field name="password">3assau2</field>
+		<field name="bdate">1993-04-23</field>
+		<field name="date_joined">2015-02-06</field>
+		<field name="height">175</field>
+		<field name="weight">85</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">41611312</field>
+		<field name="phone">+7 (908) 639 54 49</field>
+	</object>
+<!--  -->
+	<object pk="450" model="users.User">
+		<field name="first_name">Тася</field>
+		<field name="last_name">Поспелова</field>
+		<field name="email">tasya.tasya.pospelova@yandex.ru</field>
+		<field name="password">3562892</field>
+		<field name="bdate">1995-03-30</field>
+		<field name="date_joined">2015-02-06</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="vkuserid">30761852</field>
+		<field name="phone">+7 (912) 215 18 35</field>
+	</object>
+<!--  -->
+	<object pk="451" model="users.User">
+		<field name="first_name">Станислав</field>
+		<field name="last_name">Белоглазов</field>
+		<field name="email">s-b@mail.ru</field>
+		<field name="password">borodulin</field>
+		<field name="bdate">1974-04-14</field>
+		<field name="date_joined">2015-02-08</field>
+		<field name="height">175</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">3597346</field>
+		<field name="phone">+7 (912) 242 75 23</field>
+	</object>
+<!--  -->
+	<object pk="452" model="users.User">
+		<field name="first_name">Антон</field>
+		<field name="last_name">Воробьев</field>
+		<field name="email">camaro1@yandex.ru</field>
+		<field name="password">230187</field>
+		<field name="bdate">1987-01-23</field>
+		<field name="date_joined">2015-02-08</field>
+		<field name="height">187</field>
+		<field name="weight">78</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">8771091</field>
+		<field name="phone">+7 (924) 656 62 45</field>
+	</object>
+<!--  -->
+	<object pk="453" model="users.User">
+		<field name="first_name">Alexey</field>
+		<field name="last_name">Serebryakov</field>
+		<field name="email">lexup6@mail.ru</field>
+		<field name="password">NeverBackDown666</field>
+		<field name="bdate">1996-10-03</field>
+		<field name="date_joined">2015-02-09</field>
+		<field name="height">172</field>
+		<field name="weight">65</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 194 56 28</field>
+	</object>
+<!--  -->
+	<object pk="454" model="users.User">
+		<field name="first_name">Алексей</field>
+		<field name="last_name">Ершов</field>
+		<field name="email">lelya.ershov.93@mail.ru</field>
+		<field name="password">mausoleum011093</field>
+		<field name="bdate">1993-10-01</field>
+		<field name="date_joined">2015-02-09</field>
+		<field name="height">181</field>
+		<field name="weight">75</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 610 75 79</field>
+	</object>
+<!--  -->
+	<object pk="455" model="users.User">
+		<field name="first_name">Стас</field>
+		<field name="last_name">Швед</field>
+		<field name="email">ledled@list.ru</field>
+		<field name="password">31011960</field>
+		<field name="bdate">1982-12-12</field>
+		<field name="date_joined">2015-02-12</field>
+		<field name="height">180</field>
+		<field name="weight">76</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (965) 517 84 27</field>
+	</object>
+<!--  -->
+	<object pk="456" model="users.User">
+		<field name="first_name">Яна</field>
+		<field name="last_name">Ру</field>
+		<field name="email">belo4karu-3@list.ru</field>
+		<field name="password">27679jhl</field>
+		<field name="bdate">1990-09-10</field>
+		<field name="date_joined">2015-02-12</field>
+		<field name="height">165</field>
+		<field name="weight">60</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (950) 198 80 27</field>
+	</object>
+<!--  -->
+	<object pk="457" model="users.User">
+		<field name="first_name">Светлана</field>
+		<field name="last_name">Мишуткина</field>
+		<field name="email">tigra6886@rambler.ru</field>
+		<field name="password">djktq,jk86</field>
+		<field name="bdate">1986-08-06</field>
+		<field name="date_joined">2015-02-12</field>
+		<field name="height">172</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="vkuserid">8946169</field>
+		<field name="phone">+7 (982) 631 12 98</field>
+	</object>
+<!--  -->
+	<object pk="458" model="users.User">
+		<field name="first_name">Эрнест</field>
+		<field name="last_name">Казанцев</field>
+		<field name="email">kazantsev.ernest@mail.ru</field>
+		<field name="password">364190478</field>
+		<field name="bdate">1993-07-28</field>
+		<field name="date_joined">2015-02-12</field>
+		<field name="height">173</field>
+		<field name="weight">66</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">26502554</field>
+		<field name="phone">+7 (912) 621 97 27</field>
+	</object>
+<!--  -->
+	<object pk="459" model="users.User">
+		<field name="first_name">Роман</field>
+		<field name="last_name">Козелов</field>
+		<field name="email">pwbuz@yandex.ru</field>
+		<field name="password">gondon</field>
+		<field name="bdate">1993-09-09</field>
+		<field name="date_joined">2015-02-12</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">86252139</field>
+		<field name="phone">+7 (922) 154 24 74</field>
+	</object>
+<!--  -->
+	<object pk="460" model="users.User">
+		<field name="first_name">Юлия</field>
+		<field name="last_name">Кондратенко</field>
+		<field name="email">jd_023@mail.ru</field>
+		<field name="password">ншткнш12</field>
+		<field name="bdate">1989-11-22</field>
+		<field name="date_joined">2015-02-13</field>
+		<field name="height">160</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (982) 703 73 02</field>
+	</object>
+<!--  -->
+	<object pk="461" model="users.User">
+		<field name="first_name">Владислав</field>
+		<field name="last_name">Великанов</field>
+		<field name="email">4ybriq@gmail.com</field>
+		<field name="password">xo4y99</field>
+		<field name="bdate">1994-08-27</field>
+		<field name="date_joined">2015-02-14</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (982) 611 36 14</field>
+	</object>
+<!--  -->
+	<object pk="462" model="users.User">
+		<field name="first_name">Ленни</field>
+		<field name="last_name">Коновалова</field>
+		<field name="email">konovalova.helena@gmail.com</field>
+		<field name="password">26665599</field>
+		<field name="bdate">1987-01-15</field>
+		<field name="date_joined">2015-02-14</field>
+		<field name="height">160</field>
+		<field name="weight">46</field>
+		<field name="sex">f</field>
+		<field name="vkuserid">114214</field>
+		<field name="phone">+7 (912) 283 44 52</field>
+	</object>
+<!--  -->
+	<object pk="463" model="users.User">
+		<field name="first_name">Иван</field>
+		<field name="last_name">Чуваков</field>
+		<field name="email">chuvakov.ivan@gmail.com</field>
+		<field name="password">shtukacool</field>
+		<field name="bdate">1988-11-26</field>
+		<field name="date_joined">2015-02-16</field>
+		<field name="height">182</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">2425157</field>
+		<field name="phone">+7 (922) 104 09 09</field>
+	</object>
+<!--  -->
+	<object pk="464" model="users.User">
+		<field name="first_name">Анна</field>
+		<field name="last_name">Завьялова</field>
+		<field name="email">anizavyalova@gmail.com</field>
+		<field name="password">вщиукьфт</field>
+		<field name="bdate">1988-02-15</field>
+		<field name="date_joined">2015-02-17</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (912) 655 81 38</field>
+	</object>
+<!--  -->
+	<object pk="465" model="users.User">
+		<field name="first_name">Эдгар</field>
+		<field name="last_name">Месропян</field>
+		<field name="email">edgr.po@yandex.ru</field>
+		<field name="password">Maestro22966</field>
+		<field name="bdate">1999-04-03</field>
+		<field name="date_joined">2015-02-18</field>
+		<field name="height">175</field>
+		<field name="weight">76</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (904) 388 52 22</field>
+	</object>
+<!--  -->
+	<object pk="466" model="users.User">
+		<field name="first_name">Влад</field>
+		<field name="last_name">Исупов</field>
+		<field name="email">senior.ed-vos5@yandex.ru</field>
+		<field name="password">2459523</field>
+		<field name="bdate">1997-12-11</field>
+		<field name="date_joined">2015-02-19</field>
+		<field name="height">178</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 044 92 61</field>
+	</object>
+<!--  -->
+	<object pk="467" model="users.User">
+		<field name="first_name">Семен</field>
+		<field name="last_name">Семенов</field>
+		<field name="email">yellowswaggaboi@gmail.com</field>
+		<field name="password">annabanana</field>
+		<field name="bdate">1992-03-23</field>
+		<field name="date_joined">2015-02-19</field>
+		<field name="height">193</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">6515095</field>
+		<field name="phone">+7 (904) 161 12 76</field>
+	</object>
+<!--  -->
+	<object pk="468" model="users.User">
+		<field name="first_name">Vladimir</field>
+		<field name="last_name">Larkin</field>
+		<field name="email">larkin.94@bk.ru</field>
+		<field name="password">123321ф</field>
+		<field name="bdate">1994-06-21</field>
+		<field name="date_joined">2015-02-19</field>
+		<field name="height">190</field>
+		<field name="weight">75</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">158332794</field>
+		<field name="phone">+7 (967) 850 32 66</field>
+	</object>
+<!--  -->
+	<object pk="469" model="users.User">
+		<field name="first_name">Никита</field>
+		<field name="last_name">Бабин</field>
+		<field name="email">n_bibon@mail.ru</field>
+		<field name="password">mama290552</field>
+		<field name="bdate">1998-07-22</field>
+		<field name="date_joined">2015-02-20</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (919) 369 5540</field>
+	</object>
+<!--  -->
+	<object pk="470" model="users.User">
+		<field name="first_name">Степа</field>
+		<field name="last_name">Пантелеев</field>
+		<field name="email">ekoman-97@mail.ru</field>
+		<field name="password">hiphoponelove</field>
+		<field name="bdate">1997-01-27</field>
+		<field name="date_joined">2015-02-21</field>
+		<field name="height">185</field>
+		<field name="weight">70</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (902) 870 80 97</field>
+	</object>
+<!--  -->
+	<object pk="471" model="users.User">
+		<field name="first_name">Сергей</field>
+		<field name="last_name">Мальков</field>
+		<field name="email">kot_serega@inbox.ru</field>
+		<field name="password">21indigo</field>
+		<field name="bdate">1992-12-09</field>
+		<field name="date_joined">2015-02-21</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">17289525</field>
+		<field name="phone">+7 (904) 167 10 79</field>
+	</object>
+<!--  -->
+	<object pk="472" model="users.User">
+		<field name="first_name">Дамир</field>
+		<field name="last_name">Кофан</field>
+		<field name="email">damir0888@mail.ru</field>
+		<field name="password">250888</field>
+		<field name="bdate">1987-12-06</field>
+		<field name="date_joined">2015-02-22</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (904) 981 00 60</field>
+	</object>
+<!--  -->
+	<object pk="473" model="users.User">
+		<field name="first_name">Виктор</field>
+		<field name="last_name">Боровиков</field>
+		<field name="email">borovit@mail.ru</field>
+		<field name="password">katusha</field>
+		<field name="bdate">1987-11-12</field>
+		<field name="date_joined">2015-02-23</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (904) 164 63 59</field>
+	</object>
+<!--  -->
+	<object pk="474" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">Сайгин</field>
+		<field name="email">andreysaygin@gmail.com</field>
+		<field name="password">060786</field>
+		<field name="bdate">1986-07-06</field>
+		<field name="date_joined">2015-02-24</field>
+		<field name="height">181</field>
+		<field name="weight">78</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 151 14 11</field>
+	</object>
+<!--  -->
+	<object pk="475" model="users.User">
+		<field name="first_name">Виталий</field>
+		<field name="last_name">Головнин</field>
+		<field name="email">2777747@gmail.com</field>
+		<field name="password">Гелфпщдщмф</field>
+		<field name="bdate">1983-11-29</field>
+		<field name="date_joined">2015-02-26</field>
+		<field name="height">176</field>
+		<field name="weight">74</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (965) 548 50 83</field>
+	</object>
+<!--  -->
+	<object pk="476" model="users.User">
+		<field name="first_name">Никита</field>
+		<field name="last_name">Гилев</field>
+		<field name="email">nikitka9_23@mail.ru</field>
+		<field name="password">jordan23!!!</field>
+		<field name="bdate">1992-10-13</field>
+		<field name="date_joined">2015-02-27</field>
+		<field name="height">195</field>
+		<field name="weight">70</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 646 77 93</field>
+	</object>
+<!--  -->
+	<object pk="477" model="users.User">
+		<field name="first_name">Анастасия</field>
+		<field name="last_name">Варич</field>
+		<field name="email">Cherry--nasty@mail.ru</field>
+		<field name="password">89022730229</field>
+		<field name="bdate">1989-01-16</field>
+		<field name="date_joined">2015-02-27</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (982) 643 45 83</field>
+	</object>
+<!--  -->
+	<object pk="478" model="users.User">
+		<field name="first_name">Данил</field>
+		<field name="last_name">Залазнюк</field>
+		<field name="email">danil1998-9898@mail.ru</field>
+		<field name="password">213dsa2131da</field>
+		<field name="bdate">1998-01-28</field>
+		<field name="date_joined">2015-02-28</field>
+		<field name="height">183</field>
+		<field name="weight">66</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 660 39 25</field>
+	</object>
+<!--  -->
+	<object pk="479" model="users.User">
+		<field name="first_name">Полина</field>
+		<field name="last_name">Горчакова</field>
+		<field name="email">linagorchakova@mail.ru</field>
+		<field name="password">8146</field>
+		<field name="bdate">1996-10-03</field>
+		<field name="date_joined">2015-02-28</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (953) 387 94 15</field>
+	</object>
+<!--  -->
+	<object pk="480" model="users.User">
+		<field name="first_name">Павел</field>
+		<field name="last_name">Логинов</field>
+		<field name="email">pavelloginov@list.ru</field>
+		<field name="password">parolparol12345</field>
+		<field name="bdate">1987-01-02</field>
+		<field name="date_joined">2015-02-28</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">2255237</field>
+		<field name="phone">+7 (919) 386 98 26</field>
+	</object>
+<!--  -->
+	<object pk="481" model="users.User">
+		<field name="first_name">Иван</field>
+		<field name="last_name">Борисихин</field>
+		<field name="email">borisixin93@bk.ru</field>
+		<field name="password">5021194@</field>
+		<field name="bdate">1993-03-13</field>
+		<field name="date_joined">2015-02-28</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (982) 688 17 04</field>
+	</object>
+<!--  -->
+	<object pk="482" model="users.User">
+		<field name="first_name">Сергей</field>
+		<field name="last_name">Гилев</field>
+		<field name="email">sincer89@mail.ru</field>
+		<field name="password">ыеуддф0506</field>
+		<field name="bdate">1989-01-08</field>
+		<field name="date_joined">2015-03-01</field>
+		<field name="height">180</field>
+		<field name="weight">65</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 696 76 47</field>
+	</object>
+<!--  -->
+	<object pk="483" model="users.User">
+		<field name="first_name">Катерина</field>
+		<field name="last_name">Целищева</field>
+		<field name="email">katy_t@list.ru</field>
+		<field name="password">галифакс</field>
+		<field name="bdate">1979-08-02</field>
+		<field name="date_joined">2015-03-01</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (904) 388 72 74</field>
+	</object>
+<!--  -->
+	<object pk="484" model="users.User">
+		<field name="first_name">Егор</field>
+		<field name="last_name">Редькин</field>
+		<field name="email">egor.redkin@ya.ru</field>
+		<field name="password">цук25ЫВА</field>
+		<field name="bdate">1988-10-03</field>
+		<field name="date_joined">2015-03-01</field>
+		<field name="height">182</field>
+		<field name="weight">85</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">2646792</field>
+		<field name="phone">+7 (927) 765 24 45</field>
+	</object>
+<!--  -->
+	<object pk="485" model="users.User">
+		<field name="first_name">Сергей</field>
+		<field name="last_name">Керн</field>
+		<field name="email">serkern@rambler.ru</field>
+		<field name="password">elektrofak300301</field>
+		<field name="bdate">1992-06-04</field>
+		<field name="date_joined">2015-03-02</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">26341782</field>
+		<field name="phone">+7 (912) 044 44 57</field>
+	</object>
+<!--  -->
+	<object pk="486" model="users.User">
+		<field name="first_name">An</field>
+		<field name="last_name">Sem</field>
+		<field name="email">andrej.semerikov@pochta.ru</field>
+		<field name="password">rhfcysqdhjn2012yjdsq</field>
+		<field name="bdate">1991-12-06</field>
+		<field name="date_joined">2015-03-02</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (953) 001 62 81</field>
+	</object>
+<!--  -->
+	<object pk="488" model="users.User">
+		<field name="first_name">Екатерина</field>
+		<field name="last_name">Рыжкова</field>
+		<field name="email">ekaterina-rizhkova@ya.ru</field>
+		<field name="password">210284</field>
+		<field name="bdate">1984-02-21</field>
+		<field name="date_joined">2015-03-03</field>
+		<field name="height">184</field>
+		<field name="weight">74</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (909) 023 13 13</field>
+	</object>
+<!--  -->
+	<object pk="489" model="users.User">
+		<field name="first_name">Константин</field>
+		<field name="last_name">Лихачёв</field>
+		<field name="email">sean84@bk.ru</field>
+		<field name="password">1Basket2</field>
+		<field name="bdate">1984-07-05</field>
+		<field name="date_joined">2015-03-04</field>
+		<field name="height">181</field>
+		<field name="weight">68</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 782 25 36</field>
+	</object>
+<!--  -->
+	<object pk="490" model="users.User">
+		<field name="first_name">Роман</field>
+		<field name="last_name">Крамарев</field>
+		<field name="email">rlist@list.ru</field>
+		<field name="password">900420</field>
+		<field name="bdate">1982-03-27</field>
+		<field name="date_joined">2015-03-04</field>
+		<field name="height">185</field>
+		<field name="weight">95</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (909) 007 77 55</field>
+	</object>
+<!--  -->
+	<object pk="491" model="users.User">
+		<field name="first_name">Константин</field>
+		<field name="last_name">Малыгин</field>
+		<field name="email">megaseed@ya.ru</field>
+		<field name="password">cftcft</field>
+		<field name="bdate">1981-08-20</field>
+		<field name="date_joined">2015-03-05</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (912) 240 02 50</field>
+	</object>
+<!--  -->
+	<object pk="492" model="users.User">
+		<field name="first_name">Вячеслав</field>
+		<field name="last_name">Михеев</field>
+		<field name="email">Sk8sl@mail.ru</field>
+		<field name="password">mikheev22</field>
+		<field name="bdate">1995-01-22</field>
+		<field name="date_joined">2015-03-06</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">32979847</field>
+		<field name="phone">+7 (982) 657 67 85</field>
+	</object>
+<!--  -->
+	<object pk="493" model="users.User">
+		<field name="first_name">Виктор</field>
+		<field name="last_name">Акименко</field>
+		<field name="email">Victorakkobe47@gmail.com</field>
+		<field name="password">dukfp22320</field>
+		<field name="bdate">1994-05-20</field>
+		<field name="date_joined">2015-03-07</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (965) 515 42 83</field>
+	</object>
+<!--  -->
+	<object pk="494" model="users.User">
+		<field name="first_name">Гансэлэм</field>
+		<field name="last_name">Ганаа</field>
+		<field name="email">kani_pelle@yahoo.com</field>
+		<field name="password">ganselemganselem</field>
+		<field name="bdate">1991-03-06</field>
+		<field name="date_joined">2015-03-08</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">154292461</field>
+		<field name="phone">+7 (961) 771 63 96</field>
+	</object>
+<!--  -->
+	<object pk="495" model="users.User">
+		<field name="first_name">Никита</field>
+		<field name="last_name">Шумило</field>
+		<field name="email">nik-kit-a@mail.ru</field>
+		<field name="password">091987</field>
+		<field name="bdate">1987-10-09</field>
+		<field name="date_joined">2015-03-09</field>
+		<field name="height">186</field>
+		<field name="weight">119</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">4252051</field>
+		<field name="phone">+7 (963) 275 53 68</field>
+	</object>
+<!--  -->
+	<object pk="496" model="users.User">
+		<field name="first_name">Денис</field>
+		<field name="last_name">Иванов</field>
+		<field name="email">9226919534@mail.ru</field>
+		<field name="password">005419</field>
+		<field name="bdate">1982-10-14</field>
+		<field name="date_joined">2015-03-09</field>
+		<field name="height">188</field>
+		<field name="weight">90</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (922) 691 95 34</field>
+	</object>
+<!--  -->
+	<object pk="497" model="users.User">
+		<field name="first_name">Евгений</field>
+		<field name="last_name">Дробинин</field>
+		<field name="email">evgeniy.drobinin@mail.ru</field>
+		<field name="password">lhj,byby</field>
+		<field name="bdate">1990-01-11</field>
+		<field name="date_joined">2015-03-09</field>
+		<field name="height">0</field>
+		<field name="weight">0</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">12769293</field>
+		<field name="phone">+7 (908) 900 64 57</field>
+	</object>
+<!--  -->
+	<object pk="498" model="users.User">
+		<field name="first_name">Андрей</field>
+		<field name="last_name">DoC</field>
+		<field name="email">mandrew1986@gmail.com</field>
+		<field name="password">Doc_463504</field>
+		<field name="bdate">1986-05-20</field>
+		<field name="date_joined">2015-03-09</field>
+		<field name="height">190</field>
+		<field name="weight">90</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (909) 701 38 25</field>
+	</object>
+<!--  -->
+	<object pk="499" model="users.User">
+		<field name="first_name">Радмир</field>
+		<field name="last_name">Фазлыев</field>
+		<field name="email">PagMup17@mail.ru</field>
+		<field name="password">17afpkstd2205</field>
+		<field name="bdate">1992-10-17</field>
+		<field name="date_joined">2015-03-09</field>
+		<field name="height">180</field>
+		<field name="weight">80</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (932) 600 39 38</field>
+	</object>
+<!--  -->
+	<object pk="500" model="users.User">
+		<field name="first_name">Михаил</field>
+		<field name="last_name">Резников</field>
+		<field name="email">reznikov_mihail@mail.ru</field>
+		<field name="password">ufdbfk</field>
+		<field name="bdate">1981-05-02</field>
+		<field name="date_joined">2015-03-09</field>
+		<field name="height">189</field>
+		<field name="weight">95</field>
+		<field name="sex">m</field>
+		<field name="vkuserid">3859430</field>
+		<field name="phone">+7 (950) 550 39 55</field>
+	</object>
+<!--  -->
 </django-objects>

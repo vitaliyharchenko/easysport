@@ -1,0 +1,67 @@
+
+{% extends 'mail/base.html' %}
+{% block title %}Подтверждение адреса электронной почты{% endblock %}
+{% block content %}
+<tbody>
+  <tr>
+    <td align="center" valign="top" class="content-first">
+      <table border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse;background-color:#ffffff;border-top:0;border-bottom:0">
+        <tbody>
+          <tr>
+            <td valign="top">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+                <tbody>
+                  <tr>
+                    <td valign="top">
+                      <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse">
+                        <tbody>
+                          <tr>
+                            <td valign="top" style="margin:0;padding:0;color:#606060;display:block;font-family:Helvetica;font-size:20px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:-1px;text-align:left" class="content-td"><br/>
+                              <h1>Привет!</h1><br/>
+                              <h3>Поздравляем Вас с вступлением в команду активных людей, не представлюящих свою жизнь без спорта!</h3>
+                              <p>Пожалуйста, перейдите по ссылке для подтверждения учетной записи:</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse">
+                <tbody>
+                  <tr>
+                    <td valign="top" align="center" style="padding-top:0;padding-right:18px;padding-bottom:18px;padding-left:18px" class="btn-td">
+                      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate!important;border:2px none #707070;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;background-color:#399fed" class="btn">
+                        <tbody>
+                          <tr>
+                            <td align="center" valign="middle" style="font-family:Arial;font-size:16px;padding:16px"><a title="Подтвердить" href="{{ current_host }}{% url 'confirm' activation_key %}" target="_blank" style="font-weight:bold;letter-spacing:normal;line-height:100%;text-align:center;text-decoration:none;color:#ffffff;word-wrap:break-word">Подтвердить</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse">
+                <tbody>
+                  <tr>
+                    <td valign="top">
+                      <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse">
+                        <tbody>
+                          <tr>
+                            <td valign="top" style="padding-top:9px;padding-right:18px;padding-bottom:9px;padding-left:18px;color:#606060;font-family:Helvetica;font-size:15px;line-height:150%;text-align:left" class="content-td"><span style="font-size:12px" class="small">Если вы не регистрировались на SportCourts.ru, просто проигнорируйте это письмо.</span><br/>&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</tbody>{% endblock %}

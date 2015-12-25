@@ -1,11 +1,14 @@
 # coding=utf-8
 import json
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, HttpResponse
 from django.views.decorators.http import require_POST
 from django.utils import timezone
 from .models import Game, UserGameAction
 from users.models import User
 from sports.models import SportType
+from .forms import GameFormSet
+
+from django.core import serializers
 
 
 # Create your views here.
@@ -63,17 +66,19 @@ def game_invite_view(request, game_id):
 # TODO: privacy add
 def game_report_view(request, game_id):
     game = Game.objects.get(id=game_id)
-    court = game.court
-    sporttype = game.sport_type
 
-    games = Game.objects.filter(court=court, sporttype_id=sporttype, is_reported=True)
-    old_users = list()
-    for game in games:
-        old_users += game.visited
+    if request.method == "POST":
+        formset = GameFormSet(request.POST, instance=game)
+        if formset.is_valid():
+            formset.save()
+            # Do something. Should generally end with a redirect. For example:
+    else:
+        formset = GameFormSet(instance=game)
 
-    old_users = list(set(old_users))
+    subscribed = game.subscribed
+    data = serializers.serialize("json", subscribed, fields=('id', 'first_name', 'last_name'))
 
-    context = {'game': Game.objects.get(id=game_id), 'old_users': old_users}
+    context = {'game': game, 'formset': formset, 'users': data}
     return render(request, 'report.html', context)
 
 
