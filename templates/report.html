@@ -38,9 +38,6 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-xs-12">{{ users }}</div>
-            </div>
-            <div class="row">
               <div class="col-xs-12">
                 <div class="table-responsive">
                   <table class="table table-hover table-bordered table-condensed">
@@ -50,7 +47,6 @@
                         <td>Имя</td>
                         <td>Фамилия</td>
                         <td>Телефон</td>
-                        <td></td>
                         <td></td>
                       </tr>{% if game.is_reported %}
                       <tr>
@@ -62,7 +58,6 @@
                         <td>{{ user.last_name }}</td>
                         <td>{{ user.phone }}</td>
                         <td></td>
-                        <td></td>
                       </tr>{% endfor %}
                       <tr class="warning">
                         <td colspan="6" class="text-center">Прогульщики</td>
@@ -72,7 +67,6 @@
                         <td>{{ user.first_name }}</td>
                         <td>{{ user.last_name }}</td>
                         <td>{{ user.phone }}</td>
-                        <td></td>
                         <td></td>
                       </tr>{% endfor %}
                       <tr>
@@ -84,41 +78,15 @@
                         <td>{{ user.last_name }}</td>
                         <td>{{ user.phone }}</td>
                         <td></td>
-                        <td></td>
                       </tr>{% endfor %}
                       {% else %}
+                      {% for action in actions %}
                       <tr>
-                        <td colspan="6" class="text-center">Записывались</td>
-                      </tr>{% for user in game.subscribed %}
-                      <tr>
-                        <td>{{ user.pk }}</td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td></td>
-                        <td></td>
-                      </tr>{% endfor %}
-                      <tr class="warning">
-                        <td colspan="6" class="text-center">Были в резерве</td>
-                      </tr>{% for user in game.reserved %}
-                      <tr class="warning">
-                        <td>{{ user.pk }}</td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td></td>
-                        <td></td>
-                      </tr>{% endfor %}
-                      <tr class="danger">
-                        <td colspan="6" class="text-center">Отписавшиеся</td>
-                      </tr>{% for user in game.unsubscribed %}
-                      <tr class="danger">
-                        <td>{{ user.pk }}</td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ action.user.pk }}</td>
+                        <td>{{ action.user.first_name }}</td>
+                        <td>{{ action.user.last_name }}</td>
+                        <td>{{ action.user.phone }}</td>
+                        <td>{{ action.text }}</td>
                       </tr>{% endfor %}
                       {% endif %}
                     </tbody>
@@ -131,4 +99,50 @@
       </div>
     </div>
   </div>
-</div>{% endblock %}
+</div>
+<script>/**
+ * Created by vitaliyharchenko on 25.12.15.
+ */
+var User = {
+    constructor: function(first_name, last_name, phone, status) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone = phone;
+        this.status = status;
+    }
+}
+
+$(function(){
+    var users = [];
+
+    var subscribed_string = '{{users}}'.replace(/&quot;/g,"\"");
+    var subscribed_users = jQuery.parseJSON(subscribed_string);
+
+
+    for(var i=0; i<subscribed_users.length; i++) {
+        var pk = subscribed_users[i]['pk'];
+        var fields = subscribed_users[i]['fields'];
+        fields['id'] = pk;
+        users[pk] = fields;
+    };
+
+    console.log(users);
+
+    var table = '';
+
+    table += '<table>';
+
+    users.forEach(function(item, i, users){
+        table += '<td>';
+        table += '<tr>' + item['first_name'] + '</tr>';
+        table += '<tr>' + item['last_name'] + '</tr>';
+        table += '</td>';
+    });
+    table += '</table>';
+
+    console.log(table);
+    $(".userspane").html(function() {
+        return table;
+    });
+});
+</script>{% endblock %}

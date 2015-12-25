@@ -76,9 +76,10 @@ def game_report_view(request, game_id):
         formset = GameFormSet(instance=game)
 
     subscribed = game.subscribed
-    data = serializers.serialize("json", subscribed, fields=('id', 'first_name', 'last_name'))
+    data = serializers.serialize("json", subscribed, fields=('id', 'first_name', 'last_name', 'phone'))
+    actions = UserGameAction.objects.filter(game=game)
 
-    context = {'game': game, 'formset': formset, 'users': data}
+    context = {'game': game, 'formset': formset, 'users': data, 'actions': actions}
     return render(request, 'report.html', context)
 
 

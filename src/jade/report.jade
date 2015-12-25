@@ -36,9 +36,6 @@
                 hr
             .row
               .col-xs-12
-                |{{ users }}
-            .row
-              .col-xs-12
                 .table-responsive
                   table.table.table-hover.table-bordered.table-condensed
                     tbody
@@ -47,7 +44,6 @@
                         td Имя
                         td Фамилия
                         td Телефон
-                        td
                         td
                       |{% if game.is_reported %}
                       tr
@@ -59,7 +55,6 @@
                         td {{ user.last_name }}
                         td {{ user.phone }}
                         td
-                        td
                       | {% endfor %}
                       tr.warning
                         td.text-center(colspan=6) Прогульщики
@@ -69,7 +64,6 @@
                         td {{ user.first_name }}
                         td {{ user.last_name }}
                         td {{ user.phone }}
-                        td
                         td
                       | {% endfor %}
                       tr
@@ -81,43 +75,19 @@
                         td {{ user.last_name }}
                         td {{ user.phone }}
                         td
-                        td
                       | {% endfor %}
 
                       |{% else %}
 
+                      | {% for action in actions %}
                       tr
-                        td.text-center(colspan=6) Записывались
-                      | {% for user in game.subscribed %}
-                      tr
-                        td {{ user.pk }}
-                        td {{ user.first_name }}
-                        td {{ user.last_name }}
-                        td {{ user.phone }}
-                        td
-                        td
-                      | {% endfor %}
-                      tr.warning
-                        td.text-center(colspan=6) Были в резерве
-                      | {% for user in game.reserved %}
-                      tr.warning
-                        td {{ user.pk }}
-                        td {{ user.first_name }}
-                        td {{ user.last_name }}
-                        td {{ user.phone }}
-                        td
-                        td
-                      | {% endfor %}
-                      tr.danger
-                        td.text-center(colspan=6) Отписавшиеся
-                      | {% for user in game.unsubscribed %}
-                      tr.danger
-                        td {{ user.pk }}
-                        td {{ user.first_name }}
-                        td {{ user.last_name }}
-                        td {{ user.phone }}
-                        td
-                        td
+                        td {{ action.user.pk }}
+                        td {{ action.user.first_name }}
+                        td {{ action.user.last_name }}
+                        td {{ action.user.phone }}
+                        td {{ action.text }}
                       | {% endfor %}
                       |{% endif %}
+script
+  include ../../src/js/report.js
 | {% endblock %}

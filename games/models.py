@@ -199,3 +199,6 @@ class UserGameAction(models.Model):
 
     def __unicode__(self):
         return u'{} {} | {} | {}'.format(self.game.id, self.game, self.user, self.get_action_display())
+
+    def text(self):
+        return self.get_action_display()
