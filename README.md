@@ -111,7 +111,7 @@ bower install jasny-bootstrap --save
 '''
 python users_delete.py
 python filldb.py
-python manage.py loaddata users_short.xml
+python manage.py loaddata users_all.xml
 python users_render.py
 '''
 

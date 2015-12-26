@@ -151,6 +151,11 @@
 	<object pk="12" model="users.User">
 		<field name="first_name">Юлия</field>
 		<field name="last_name">Родыгина</field>
+        <field name="is_staff">True</field>
+        <field name="is_superuser">True</field>
+        <field name="is_admin">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">apple_59@bk.ru</field>
 		<field name="password">123456</field>
 		<field name="bdate">1994-02-14</field>
@@ -830,6 +835,9 @@
     <object pk="67" model="users.User">
 		<field name="first_name">Виталий</field>
 		<field name="last_name">Золотухин</field>
+        <field name="is_staff">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">Vitaly_zoloto@mail.ru</field>
 		<field name="password">vitaly6302106</field>
 		<field name="bdate">1992-12-12</field>
@@ -2261,6 +2269,9 @@
 	<object pk="181" model="users.User">
 		<field name="first_name">Юлия</field>
 		<field name="last_name">ZRAENKO</field>
+        <field name="is_staff">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">sirena-sky@yandex.ru</field>
 		<field name="password">pihagor</field>
 		<field name="bdate">1985-09-14</field>
@@ -2401,6 +2412,9 @@
 	<object pk="191" model="users.User">
 		<field name="first_name">Анна</field>
 		<field name="last_name">Овсянникова</field>
+        <field name="is_staff">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">assol-ka@yandex.ru</field>
 		<field name="password">4042004</field>
 		<field name="bdate">1989-04-04</field>
@@ -5464,6 +5478,9 @@
 	<object pk="436" model="users.User">
 		<field name="first_name">Виталий</field>
 		<field name="last_name">Сухарев</field>
+        <field name="is_staff">True</field>
+        <field name="is_organizer">True</field>
+        <field name="is_responsible">True</field>
 		<field name="email">svu@itgro.ru</field>
 		<field name="password">cvthnm</field>
 		<field name="bdate">1985-09-28</field>
