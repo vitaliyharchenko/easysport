@@ -11,6 +11,7 @@ from django.http import Http404
 from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
+from sports.models import SportType, GameType
 
 
 @csrf_protect
@@ -126,6 +127,7 @@ def user_view(request, user_id):
     except ObjectDoesNotExist:
         raise Http404("Такого пользователя не существует")
     context = {'user': user}
+
     if request.user.pk == user.pk:
         context['current'] = True
     return render(request, 'user.html', context)

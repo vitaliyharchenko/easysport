@@ -8,6 +8,7 @@ from utils.fields import PhoneField
 from utils.formatters import age_format
 from sports.models import Amplua
 from places.models import City
+from games.models import UserGameAction
 
 
 class UserManager(BaseUserManager):
@@ -118,6 +119,11 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return "/users/%i" % self.id
+
+    @property
+    def gamesvisited(self):
+        actions = UserGameAction.objects.filter(user=self, action=UserGameAction.VISITED)
+        return actions.count()
 
     def __str__(self):
         return u'{} {}'.format(self.first_name, self.last_name)

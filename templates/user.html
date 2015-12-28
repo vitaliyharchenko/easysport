@@ -15,7 +15,12 @@
         <div class="avatar-edit"><a href="{% url 'user_update_view' %}">Редактировать</a></div>{% endif %}
       </div>
     </div>{% if not user.is_active %}<a class="btn btn-warning btn-block">Профиль не активирован</a>{% endif %}
-    {% if current_user.is_admin %}<a href="mailto:{{ user.email }}" class="btn btn-primary btn-block">{{ user.email }}</a>{% endif %}
+    {% if current_user.is_admin %}<a href="mailto:{{ user.email }}" class="btn btn-primary btn-block">{{ user.email }}</a>{% endif %}<br/>
+    <div class="panel panel-default">
+      <div class="panel-body text-center p-b-5">
+        <p><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр посещено: {{ user.gamesvisited }}</p>
+      </div>
+    </div>
   </div>
   <div class="col-md-8 col-sm-8 col-xs-8">
     <h1 class="m-t-0">{{ user }}<small>&nbsp;&nbsp;&nbsp;<br class="visible-xs"/>{% if user.is_admin %}<span id="badge1" data-toggle="tooltip" data-placement="bottom" title="Администратор" class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;

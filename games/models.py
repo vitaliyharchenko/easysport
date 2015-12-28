@@ -2,7 +2,6 @@
 import datetime
 from django.utils import timezone
 from django.db import models
-from users.models import User
 from courts.models import Court
 from sports.models import GameType, SportType
 from django.contrib.contenttypes.models import ContentType
@@ -17,13 +16,13 @@ class Game(models.Model):
                                     help_text="Делает видимым в потоке")
     # TODO: add working status for unclosed events
 
-    responsible_user = models.ForeignKey(User, related_name='events_responsible',
+    responsible_user = models.ForeignKey('users.User', related_name='events_responsible',
                                          limit_choices_to={'is_responsible': True},
                                          verbose_name='Ответственный')
     # auto define in admin.py
-    created_by = models.ForeignKey(User, blank=True, null=True)
+    created_by = models.ForeignKey('users.User', blank=True, null=True)
     # может быть, а может и не быть тренер на игре
-    coach = models.ForeignKey(User, related_name='coach', blank=True, null=True,
+    coach = models.ForeignKey('users.User', related_name='coach', blank=True, null=True,
                               limit_choices_to={'is_coach': True})
 
     court = models.ForeignKey(Court, verbose_name='Площадка')
@@ -192,7 +191,7 @@ class UserGameAction(models.Model):
         (NOTVISITED, 'Не пришел'),
         (NOTPAY, 'Не заплатил')
     )
-    user = models.ForeignKey(User, verbose_name='Пользователь')
+    user = models.ForeignKey('users.User', verbose_name='Пользователь')
     game = models.ForeignKey(Game, verbose_name='Игра')
     datetime = models.DateTimeField(verbose_name='Дата действия', auto_now=True)
     action = models.PositiveSmallIntegerField(verbose_name='Действие', choices=ACTIONS)

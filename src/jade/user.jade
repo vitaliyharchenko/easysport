@@ -21,6 +21,12 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
     | {% if current_user.is_admin %}
     a.btn.btn-primary.btn-block(href="mailto:{{ user.email }}") {{ user.email }}
     | {% endif %}
+    br
+    .panel.panel-default
+      .panel-body.text-center.p-b-5
+        p
+          span.glyphicon.glyphicon-stats
+          |&nbsp;Игр посещено: {{ user.gamesvisited }}
   .col-md-8.col-sm-8.col-xs-8
     h1.m-t-0
       | {{ user }}
