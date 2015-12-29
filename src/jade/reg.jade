@@ -34,6 +34,7 @@
               a.btn.btn-warning(href="{% vkontakte_auth_link vk_reg_url %}")
                 |Получить данные из ВКонтакте&nbsp;
                 img(src="{% static 'images/vk.png' %}" width="32")
+            br
             form(method="post" enctype='multipart/form-data' action="{% url 'reg_view' %}")
               | {% csrf_token %}
               | {{ form|bootstrap }}
