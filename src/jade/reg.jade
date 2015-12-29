@@ -1,5 +1,7 @@
 | {% extends 'base.html' %}
 |{% load bootstrap %}
+|{% load globaltags %}
+|{% load staticfiles %}
 | {% block title %}Регистрация {% endblock %}
 |{% block headers %}
 |{{ form.media }}
@@ -27,7 +29,12 @@
             | {% endfor %}
             | {% endif %}
           .col-xs-12
-            form(method="post" enctype='multipart/form-data')
+            |{% url 'vk_reg' as vk_reg_url %}
+            p
+              a.btn.btn-warning(href="{% vkontakte_auth_link vk_reg_url %}")
+                |Получить данные из ВКонтакте&nbsp;
+                img(src="{% static 'images/vk.png' %}" width="32")
+            form(method="post" enctype='multipart/form-data' action="{% url 'reg_view' %}")
               | {% csrf_token %}
               | {{ form|bootstrap }}
               button.btn.btn-primary.btn-block(type="submit") Зарегистрироваться

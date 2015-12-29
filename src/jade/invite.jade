@@ -28,7 +28,7 @@
                 p Цена: {{ game.cost }} RUB
             .row
               .col-xs-12
-                a.btn.btn-lg.btn-success(href="") Разослать приглашения на почту
+                a.btn.btn-lg.btn-success(href="{% url 'game_email_invite' game.pk %}") Разослать приглашения на почту
                 br
                 br
             .row

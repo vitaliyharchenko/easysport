@@ -66,6 +66,16 @@ class Game(models.Model):
         #     # и отправить всем что игра удалена
         #     return super(Game, self).delete(using)
 
+    def old_users(self):
+        court = self.court
+        sporttype = self.sport_type
+        games = Game.objects.filter(court=court, sporttype_id=sporttype, is_reported=True)
+        old_users = list()
+        for game in games:
+            old_users += game.visited
+        old_users = list(set(old_users))
+        return old_users
+
     @property
     def sport_type(self):
         return self.gametype.sporttype_id

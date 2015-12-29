@@ -1,6 +1,8 @@
 
 {% extends 'base.html' %}
 {% load bootstrap %}
+{% load globaltags %}
+{% load staticfiles %}
 {% block title %}Регистрация {% endblock %}
 {% block headers %}
 {{ form.media }}
@@ -27,8 +29,9 @@
             <script type="text/javascript">setInterval(function(){$(".alert").alert('close')}, 3000);</script>{% endfor %}
             {% endif %}
           </div>
-          <div class="col-xs-12">
-            <form method="post" enctype="multipart/form-data">
+          <div class="col-xs-12">{% url 'vk_reg' as vk_reg_url %}
+            <p><a href="{% vkontakte_auth_link vk_reg_url %}" class="btn btn-warning">Получить данные из ВКонтакте&nbsp;<img src="{% static 'images/vk.png' %}" width="32"/></a></p>
+            <form method="post" enctype="multipart/form-data" action="{% url 'reg_view' %}">
               {% csrf_token %}
               {{ form|bootstrap }}
               <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>

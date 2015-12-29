@@ -11,7 +11,9 @@ from django.http import Http404
 from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
-from sports.models import SportType, GameType
+from urllib.request import urlopen
+from io import BytesIO
+from django.core.files import File
 
 
 @csrf_protect
@@ -103,11 +105,79 @@ def register_view(request):
     return render(request, 'reg.html', {'form': form})
 
 
+def vk_reg(request):
+    if 'code' in request.GET:
+        code = request.GET['code']
+        try:
+            access_token, user_id = vkontakte.auth_code(code, reverse('vk_reg'))
+        except vkontakte.AuthError as e:
+            messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
+            return redirect('reg_view')
+        try:
+            user = User.objects.get(vkuserid=user_id)
+            user.last_login = timezone.now()
+            user.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            auth.login(request, user)
+            return redirect('user_update_view')
+        except User.DoesNotExist:
+            vkuser = vkontakte.api(access_token, 'users.get', fields=['sex', 'bdate', 'city',
+                                                                      'photo_max', 'contacts'])[0]
+            vkdata = dict()
+            vkdata['vkuserid'] = user_id
+            vkdata['first_name'] = vkuser['first_name']
+            vkdata['last_name'] = vkuser['last_name']
+
+            if 'mobile_phone' in vkuser:
+                vkdata['phone'] = vkuser['mobile_phone']
+            elif 'home_phone' in vkuser:
+                vkdata['phone'] = vkuser['home_phone']
+            else:
+                vkdata['phone'] = None
+
+            if vkuser['sex']:
+                if vkuser['sex'] == 2:
+                    vkdata['sex'] = 'm'
+                elif vkuser['sex'] == 1:
+                    vkdata['sex'] = 'f'
+            else:
+                vkdata['sex'] = None
+
+            if 'bdate' in vkuser:
+                if len(vkuser['bdate']) >= 8:
+                    vkdata['bdate'] = vkuser['bdate']
+                elif vkuser['bdate'] != '':
+                    messages.warning(request, 'Неполная дата')
+                    vkdata['bdate'] = vkuser['bdate']
+            else:
+                vkdata['bdate'] = ''
+
+            # TODO: set vkontakteavatar
+            if 'photo_max' in vkuser:
+                url = vkuser['photo_max']
+                response = urlopen(url)
+                io = BytesIO(response.read())
+                file = File(io)
+                vkdata['avatar'] = file
+
+            initial = {'sex': vkdata['sex'],
+                       'first_name': vkdata['first_name'],
+                       'last_name': vkdata['last_name'],
+                       'phone': vkdata['phone'],
+                       'bdate': vkdata['bdate'],
+                       'vkuserid': user_id,
+                       'avatar': vkdata['avatar']
+                       }
+
+            form = UserRegistrationForm(initial=initial)
+            return render(request, 'reg.html', {'form': form})
+
+
 def register_confirm(request, activation_key):
     user_profile = UserActivation.objects.get(activation_key=activation_key)
 
     if not user_profile:
-         # TODO: страница ошибки активации
+        # TODO: страница ошибки активации
         raise Exception("Неверный код")
     else:
         user = user_profile.user
@@ -196,7 +266,7 @@ def changepass(request):
 @login_required
 def unsetvkid(request):
     user = User.objects.get(email=request.user.email)
-    user.vkuserid = ''
+    user.vkuserid = None
     user.save()
     messages.success(request, "Профиль ВКонтакте откреплен", extra_tags='integration')
     return redirect('user_update_view')

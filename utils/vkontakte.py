@@ -41,3 +41,22 @@ def auth_code(code, redirect_uri):
     if 'error' in response:
         raise VkontakteError(response['error'])
     return response['access_token'], response['user_id']
+
+
+def api(token, method, **kwargs):
+    params = list()
+    for key in kwargs:
+        if len(str(kwargs[key])) != 0:
+            if isinstance(kwargs[key], list):
+                params.append((key, ','.join(map(str, kwargs[key]))))
+            else:
+                params.append((key, str(kwargs[key])))
+    if token:
+        params.append(("access_token", token))
+    params.append(('v', '5.27'))
+    url = 'https://api.vk.com/method/{0}?{1}'.format(method, urllib.parse.urlencode(params))
+    response = urllib.request.urlopen(url).read()
+    response = json.loads(response.decode('utf-8'))
+    if 'response' not in response:
+        raise VkontakteError(response['error'])
+    return response['response']

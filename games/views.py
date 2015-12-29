@@ -1,12 +1,13 @@
 # coding=utf-8
 import json
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.utils import timezone
 from .models import Game, UserGameAction
 from users.models import User
 from sports.models import SportType
 from .forms import GameFormSet
+from utils import mailing
 
 from django.core import serializers
 
@@ -49,18 +50,15 @@ def game_roster_view(request, game_id):
 # TODO: privacy add
 def game_invite_view(request, game_id):
     game = Game.objects.get(id=game_id)
-    court = game.court
-    sporttype = game.sport_type
-
-    games = Game.objects.filter(court=court, sporttype_id=sporttype, is_reported=True)
-    old_users = list()
-    for game in games:
-        old_users += game.visited
-
-    old_users = list(set(old_users))
-
-    context = {'game': Game.objects.get(id=game_id), 'old_users': old_users}
+    context = {'game': game, 'old_users': game.old_users}
     return render(request, 'invite.html', context)
+
+
+def game_email_invite(request, game_id):
+    game = Game.objects.get(id=game_id)
+    for user in game.old_users():
+        mailing.confirm_email(user.email, '12345')
+    return redirect('game_invite_view', game_id)
 
 
 # TODO: privacy add
