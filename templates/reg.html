@@ -30,7 +30,7 @@
             {% endif %}
           </div>
           <div class="col-xs-12">{% url 'vk_reg' as vk_reg_url %}
-            <p><a href="{% vkontakte_auth_link vk_reg_url %}" class="btn btn-warning">Получить данные из ВКонтакте&nbsp;<img src="{% static 'images/vk.png' %}" width="32"/></a></p>
+            <p><a href="{% vkontakte_auth_link vk_reg_url %}" class="btn btn-warning">Получить данные из ВКонтакте&nbsp;<img src="{% static 'images/vk.png' %}" width="32"/></a></p><br/>
             <form method="post" enctype="multipart/form-data" action="{% url 'reg_view' %}">
               {% csrf_token %}
               {{ form|bootstrap }}
