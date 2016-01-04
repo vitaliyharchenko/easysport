@@ -53,7 +53,8 @@ ymaps.ready(function () {
 
     var map = new ymaps.Map("CourtMap", {
         center: point,
-        zoom: 16
+        zoom: 16,
+        controls: ['zoomControl', 'fullscreenControl']
     });
 
     var myPlacemark = new ymaps.Placemark(point, {
