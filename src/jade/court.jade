@@ -31,7 +31,7 @@
             td.p-l-0
               small
                 strong Описание:
-            td {{ court.description }}
+            td {% if court.description %} {{ court.description }} {% endif %}
           tr
             td.p-l-0
               small

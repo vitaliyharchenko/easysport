@@ -37,7 +37,9 @@ hr
       .col-xs-9
         p.lead
           a(href="{{ court.get_absolute_url }}") {{ court.title }}
+        |{% if court.description %}
         p {{ court.description }}
+        |{% endif %}
         p {{ court.place }}
     hr.m-t-0
     | {% endfor %}
