@@ -1,6 +1,9 @@
 | {% extends 'base.html' %}
 | {% load globaltags %}
 | {% block title %}{{ court.title }}{% endblock %}
+| {% block headers %}
+script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
+| {% endblock %}
 | {% block content %}
 .row
   .col-md-7
@@ -48,4 +51,9 @@
               small
                 strong Просмотров:
             td {{ court.views }}
+.row
+  .col-md-12
+    #CourtMap(style="width: 600px; height: 400px")
+script
+  include ../../src/js/court.js
 | {% endblock %}

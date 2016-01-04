@@ -2,6 +2,8 @@
 {% extends 'base.html' %}
 {% load globaltags %}
 {% block title %}{{ court.title }}{% endblock %}
+{% block headers %}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>{% endblock %}
 {% block content %}
 <div class="row">
   <div class="col-md-7">
@@ -36,4 +38,31 @@
       </table>
     </div>
   </div>
-</div>{% endblock %}
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div id="CourtMap" style="width: 600px; height: 400px"></div>
+  </div>
+</div>
+<script>/**
+ * Created by vitaliyharchenko on 04.01.16.
+ */
+ymaps.ready(function () {
+    var point = [parseFloat('{{ court.place.latitude }}'.replace(",", ".")),
+                 parseFloat('{{ court.place.longitude }}'.replace(",", "."))];
+
+    var map = new ymaps.Map("CourtMap", {
+        center: point,
+        zoom: 16
+    });
+
+    var myPlacemark = new ymaps.Placemark(point, {
+        balloonContentHeader: '{{ court.title }}',
+        balloonContentBody: '{{ court.place.fulladdress }}',
+        balloonContentFooter: '{{ court.description }}'
+    });
+
+    map.geoObjects.add(myPlacemark);
+    myPlacemark.balloon.open();
+});
+</script>{% endblock %}
