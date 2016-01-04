@@ -10658,4 +10658,41 @@
 		<field name="sex">m</field>
 		<field name="phone">+7 (929) 224 74 80</field>
 	</object>
+
+<!--  -->
+	<object pk="875" model="users.User">
+		<field name="first_name">Георгий</field>
+		<field name="last_name">Шайкевич</field>
+		<field name="email">Gshaykevich@mail.ru</field>
+		<field name="password">Ирина1993</field>
+		<field name="bdate">1994-06-14</field>
+		<field name="date_joined">2015-12-18</field>
+		<field name="sex">f</field>
+		<field name="phone">+7 (902) 586 90 81</field>
+	</object>
+
+<!--  -->
+	<object pk="876" model="users.User">
+		<field name="first_name">Дарья</field>
+		<field name="last_name">Шукшина</field>
+		<field name="email">dashanika34@yandex.ru</field>
+		<field name="password">kbcnvtbecf34spo</field>
+		<field name="bdate">1990-08-22</field>
+		<field name="date_joined">2015-12-18</field>
+		<field name="sex">f</field>
+        <field name="vkuserid">1513181</field>
+		<field name="phone">+7 (909) 012 32 07</field>
+	</object>
+
+<!--  -->
+	<object pk="877" model="users.User">
+		<field name="first_name">Антон</field>
+		<field name="last_name">Романенко</field>
+		<field name="email">rom-ant@yandex.ru</field>
+		<field name="password">ybrjkftdbx10112010</field>
+		<field name="bdate">1981-04-24</field>
+		<field name="date_joined">2015-12-18</field>
+		<field name="sex">m</field>
+		<field name="phone">+7 (982) 603 81 39</field>
+	</object>
 </django-objects>
