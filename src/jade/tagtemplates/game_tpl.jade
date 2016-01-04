@@ -169,7 +169,7 @@ div(id="{{ game.id }}-pane")
           | {% usergameaction current_user game as action %}
           | {% endif %}
           .btn-group
-            | {% if game.time_status == 'WILL BE' %}
+            |{% if game.time_status == 'WILL BE' %}
             //Если игра будет и ты записан
             | {% if action == 1 %}
             button.btn.btn-success.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
@@ -195,7 +195,7 @@ div(id="{{ game.id }}-pane")
             //Если игра буде, а ты не записан и не в резерве, проверяем наличие мест
             | {% else %}
             //Если есть места
-            |{% if game.has_place %}
+            |   {% if game.has_place %}
             button.btn.btn-primary.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
               | Идет набор
               | &nbsp;
@@ -209,86 +209,86 @@ div(id="{{ game.id }}-pane")
                 a(href="#" data-toggle="modal" data-target="#loginModal") Записаться
               | {% endif %}
             //Если нет мест
-            |{% else %}
+            |   {% else %}
 
-            | {% if current_user %}
-            |  {% if game.has_reserved_place %}
+            |    {% if current_user %}
+            |     {% if game.has_reserved_place %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
               ul.dropdown-menu
                 li
                   a.action(id="{{ game.id }}-reserve") Записаться в резерв
-            |  {% else %}
+            |     {% else %}
             button.btn.btn-default.btn-sm Мест нет
-            |  {% endif %}
-            | {% else %}
-            |  {% if game.has_reserved_place %}
+            |     {% endif %}
+            |    {% else %}
+            |     {% if game.has_reserved_place %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
               ul.dropdown-menu
                 li
                   a(href="#" data-toggle="modal" data-target="#loginModal") Записаться в резерв
-            |  {% else %}
+            |     {% else %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
               ul.dropdown-menu
                 li
                   a(href="#" data-toggle="modal" data-target="#loginModal") Мест нет
-            |  {% endif %}
-            | {% endif %}
-            |{% endif %}
+            |     {% endif %}
+            |    {% endif %}
+            |   {% endif %}
             //Конец проверки - Если есть места
-            | {% endif %}
+            |  {% endif %}
             //Конец проверки - Если игра будет
 
             //Начало проверки - Если игра близко
-            | {% elif game.time_status == 'COMING' %}
-            | {% if action == 1 %}
+            |  {% elif game.time_status == 'COMING' %}
+            |   {% if action == 1 %}
             button.btn.btn-success.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Вы записаны
             ul.dropdown-menu
               li
                 //TODO: popup with phone
                 a(href="#" data-toggle="modal" data-target="#unsubscribeModal") Отписаться
             //Если в резерве
-            | {% elif action == 3 %}
+            |   {% elif action == 3 %}
             button.btn.btn-warning.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Вы в резерве
             ul.dropdown-menu
               li
                 a.action(id="{{ game.id }}-unreserve") Выйти из резерва
-              | {% if game.has_place %}
+              |  {% if game.has_place %}
               li
                 a.action(id="{{ game.id }}-subscribe") Перейти в основу
-              | {% endif %}
+              |  {% endif %}
             //Если не записан и не в резерве, проверяем наличие мест
-            | {% else %}
+            |   {% else %}
             //Если есть места
-            | {% if game.has_place %}
+            |    {% if game.has_place %}
             button.btn.btn-primary.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Идет набор
             ul.dropdown-menu
-              | {% if current_user %}
+              |{% if current_user %}
               li
                 a.action(id="{{ game.id }}-subscribe") Записаться
-              | {% else %}
+              |{% else %}
               li
                 a(href="#" data-toggle="modal" data-target="#loginModal") Записаться
-              | {% endif %}
+              |{% endif %}
             //Если нет мест
-            | {% else %}
+            |    {% else %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-            | {% endif %}
+            |    {% endif %}
             //Конец проверки - Если есть места
-            | {% endif %}
+            |   {% endif %}
             //Конец проверки - Если игра близко
-            | {% elif game.time_status == 'IT GOES' %}
+            |  {% elif game.time_status == 'IT GOES' %}
             button.btn.btn-info.btn-sm Игра идет
               | {% elif game.time_status == 'WAS' %}
-            | {% if action == 5 %}
+            |    {% if action == 5 %}
             button.btn.btn-success.btn-sm(disabled) Вы играли тут
-            | {% elif action == 6 %}
+            |    {% elif action == 6 %}
             button.btn.btn-danger.btn-sm(disabled) Вы прогуляли
-            | {% elif action == 7 %}
+            |    {% elif action == 7 %}
             button.btn.btn-danger.btn-sm(disabled) Вы не заплатили
-            | {% else %}
+            |    {% else %}
             button.btn.btn-default.btn-sm(disabled) Игра прошла
-            | {% endif %}
-            | {% endif %}
+            |   {% endif %}
+            |  {% endif %}
           br
           br
           p.lead.m-b-10 {{ game.cost }} RUB
