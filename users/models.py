@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.mail import send_mail
 from django.utils import timezone
 from utils.fields import PhoneField
-from utils.formatters import age_format
+from utils.formatters import show_years
 from sports.models import Amplua
 from places.models import City
 from games.models import UserGameAction
@@ -107,12 +107,12 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         return phone[:2] + ' (' + phone[2:5] + ') ' + phone[5:8] + '-' + phone[8:10] + '-' + phone[10:12]
 
     @property
-    def age(self):
+    def age_in_years(self):
         today = datetime.date.today()
         return today.year - self.bdate.year - ((today.month, today.day) < (self.bdate.month, self.bdate.day))
 
     def beautiful_age(self):
-        return age_format(self.age)
+        return show_years(self.age_in_years)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)

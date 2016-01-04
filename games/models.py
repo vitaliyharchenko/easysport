@@ -83,7 +83,8 @@ class Game(models.Model):
     @property
     def duration(self):
         # TODO: beautiful format of duration
-        return self.datetime_to - self.datetime
+        duration = self.datetime_to - self.datetime
+        return duration.seconds
 
     def get_absolute_url(self):
         return "/game/%i" % self.id
