@@ -73,8 +73,9 @@ def login_view(request):
 
 
 def logout_view(request):
+    return_path = request.META.get('HTTP_REFERER', '/')
     auth.logout(request)
-    return redirect('index_view')
+    return redirect(return_path)
 
 
 def register_view(request):
