@@ -5,7 +5,7 @@ from django.db import models
 from courts.models import Court
 from sports.models import GameType, SportType
 from django.contrib.contenttypes.models import ContentType
-from utils import formatters
+from utils import formatters, validators
 
 
 class Game(models.Model):
@@ -15,7 +15,6 @@ class Game(models.Model):
     # TODO: add image of event
     is_public = models.BooleanField('Публичный статус', default=True,
                                     help_text="Делает видимым в потоке")
-    # TODO: add working status for unclosed events
 
     responsible_user = models.ForeignKey('users.User', related_name='events_responsible',
                                          limit_choices_to={'is_responsible': True},
@@ -35,8 +34,7 @@ class Game(models.Model):
 
     cost = models.PositiveIntegerField(verbose_name='Цена')
 
-    # TODO: validators validators=[gte_now]
-    datetime = models.DateTimeField(verbose_name='Дата проведения')
+    datetime = models.DateTimeField(verbose_name='Дата проведения', validators=[validators.gte_now])
     datetime_to = models.DateTimeField(verbose_name='Дата окончания', blank=True)
 
     reserved_count = models.PositiveIntegerField(verbose_name='Резервных мест', default=0)
@@ -62,10 +60,6 @@ class Game(models.Model):
         self.save_base()
 
     # TODO: логика удаления игры
-        # def delete(self, using=None):
-        # # не забыть удалить все уведомления
-        #     # и отправить всем что игра удалена
-        #     return super(Game, self).delete(using)
 
     def old_users(self):
         court = self.court

@@ -8,7 +8,6 @@ class RegionInline(admin.TabularInline):
     extra = 0
 
 
-# TODO: name for inline
 class CountryAdmin(admin.ModelAdmin):
     model = Country
     inlines = [RegionInline]
