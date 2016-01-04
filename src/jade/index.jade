@@ -28,22 +28,10 @@ script(src="{% static 'js/index.js' %}")
         | вместе с {% random_choice 'нами' 'друзьями' %}!</p>
       br
       .row.text-center(style="max-height:80px; overflow:hidden;")
+        |{% for user in users %}
         a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
-        a(href="#")
-          img(src="http://sportcourts.ru/images/avatars/14" width="80" height="80")
+          |{% avatar user.avatar height="80" width="80" circle="True" sex=user.sex thumbnail="False" %}
+        |{% endfor %}
       br
       br
       | {% if not loggedin %}
