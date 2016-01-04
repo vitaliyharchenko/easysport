@@ -11,6 +11,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sportcourts.settings")
 django.setup()
 
 from users.models import User
+from places.models import City
 
 from urllib.request import urlopen
 from io import BytesIO
@@ -23,6 +24,7 @@ for user in users:
     user.set_password(password)
     user.is_active = True
     user.save()
+    user.city = City.objects.get(pk=1)
     user.last_login = timezone.now()
     user.save()
 
