@@ -106,14 +106,18 @@ gulp.task('build', [
 gulp.task('watch', function(){
     watch([path.watch.jade], function(event, cb) {
         gulp.start('build');
+        gulp.start('build');
     });
     watch([path.watch.js], function(event, cb) {
+        gulp.start('build');
         gulp.start('build');
     });
     watch([path.watch.style], function(event, cb) {
         gulp.start('build');
+        gulp.start('build');
     });
     watch([path.watch.img], function(event, cb) {
+        gulp.start('build');
         gulp.start('build');
     });
 });
