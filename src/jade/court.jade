@@ -3,10 +3,10 @@
 | {% block title %}{{ court.title }}{% endblock %}
 | {% block content %}
 .row
-  .col-md-8
+  .col-md-7
     .thumbnail.profile-avatar
       |{% image court.photo width="1000" height="1000" %}
-  .col-md-4
+  .col-md-5
     p.lead {{ court.title }}
     | {% if current_user.is_admin %}
     a.btn.btn-lg.btn-success(href="/admin/courts/court/{{ court.pk }}/") Редактировать

@@ -33,8 +33,7 @@
         <div class="thumbnail profile-avatar">{% image court.photo %}</div>
       </div>
       <div class="col-xs-9">
-        <p class="lead"><a href="{{ court.get_absolute_url }}">{{ court.title }}</a></p>{% if court.description %}
-        <p>{{ court.description }}</p>{% endif %}
+        <p class="lead"><a href="{{ court.get_absolute_url }}">{{ court.title }}</a></p>
         <p>{{ court.place }}</p>
       </div>
     </div>

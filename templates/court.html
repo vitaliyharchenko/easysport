@@ -4,10 +4,10 @@
 {% block title %}{{ court.title }}{% endblock %}
 {% block content %}
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <div class="thumbnail profile-avatar">{% image court.photo width="1000" height="1000" %}</div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-5">
     <p class="lead">{{ court.title }}</p>{% if current_user.is_admin %}<a href="/admin/courts/court/{{ court.pk }}/" class="btn btn-lg btn-success">Редактировать</a><br/><br/>{% endif %}
     <div class="table-responsive">
       <table class="table">
