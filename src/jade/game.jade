@@ -6,18 +6,20 @@ script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
 | {% endblock %}
 | {% block content %}
 .row
+  .col-md-3.visible-md.visible-lg
+    .panel.panel-default.hidden-xs
+      .panel-body
+        p.lead.m-t-0 Расскажи о нас друзьям!
+        .social-likes.social-likes_notext.social-likes-compact
+          .facebook
+          .twitter
+          .vkontakte
+          .odnoklassniki
   .col-md-9
     | {% game_tpl game=game %}
     br
     #CourtMap.thumbnail(style="width: 100%; height: 600px")
     //TODO: add VK comments
-  .col-md-3.visible-md.visible-lg
-    p.lead.m-t-0 Расскажи о нас друзьям!
-    .social-likes.social-likes_notext.social-likes-compact
-      .facebook
-      .twitter
-      .vkontakte
-      .odnoklassniki
 script
   include ../js/games.js
   include ../js/game.js

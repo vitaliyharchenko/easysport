@@ -6,18 +6,22 @@
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>{% endblock %}
 {% block content %}
 <div class="row">
+  <div class="col-md-3 visible-md visible-lg">
+    <div class="panel panel-default hidden-xs">
+      <div class="panel-body">
+        <p class="lead m-t-0">Расскажи о нас друзьям!</p>
+        <div class="social-likes social-likes_notext social-likes-compact">
+          <div class="facebook"></div>
+          <div class="twitter"></div>
+          <div class="vkontakte"></div>
+          <div class="odnoklassniki"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="col-md-9">{% game_tpl game=game %}<br/>
     <div id="CourtMap" style="width: 100%; height: 600px" class="thumbnail"></div>
     <!--TODO: add VK comments-->
-  </div>
-  <div class="col-md-3 visible-md visible-lg">
-    <p class="lead m-t-0">Расскажи о нас друзьям!</p>
-    <div class="social-likes social-likes_notext social-likes-compact">
-      <div class="facebook"></div>
-      <div class="twitter"></div>
-      <div class="vkontakte"></div>
-      <div class="odnoklassniki"></div>
-    </div>
   </div>
 </div>
 <script>$(document).on('click', '.action', function (e) {
