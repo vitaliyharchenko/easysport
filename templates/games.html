@@ -6,7 +6,7 @@
 <h1 class="m-t-0">Игры</h1>
 <hr/>
 <div class="row">
-  <div class="col-md-3 visible-md visible-lg">{% if current_user.is_organizer %}<a href="/admin/games/game/add/" class="btn btn-success btn-block">+ создать игру</a><br/>{% endif %}
+  <div class="col-md-3">{% if current_user.is_organizer %}<a href="/admin/games/game/add/" class="btn btn-success btn-block">+ создать игру</a><br/>{% endif %}
     <div class="panel panel-default">
       <div class="panel-body">
         <!--# TODO: autorender select by sports-->
