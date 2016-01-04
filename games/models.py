@@ -93,6 +93,7 @@ class Game(models.Model):
             minutes = int(seconds/60)
             return formatters.show_minutes(minutes)
 
+    @property
     def duration(self):
         return self.datetime_to - self.datetime
 
