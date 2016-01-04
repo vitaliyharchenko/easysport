@@ -10,31 +10,35 @@
     <div class="thumbnail profile-avatar">{% image court.photo width="1000" height="1000" %}</div>
   </div>
   <div class="col-md-5">
-    <p class="lead">{{ court.title }}</p>{% if current_user.is_admin %}<a href="/admin/courts/court/{{ court.pk }}/" class="btn btn-lg btn-success">Редактировать</a><br/><br/>{% endif %}
-    <table class="table">
-      <tbody>
-        <tr>
-          <td class="p-l-0"><small><strong>Адрес:</strong></small></td>
-          <td>{{ court.place }}<br/><small><a href="#CourtMap">Показать на карте&nbsp;<span class="glyphicon glyphicon-map-marker"></span></a></small></td>
-        </tr>
-        <tr>
-          <td class="p-l-0"><small><strong>Описание:</strong></small></td>
-          <td>{% if court.description %} {{ court.description }} {% endif %}</td>
-        </tr>
-        <tr>
-          <td class="p-l-0"><small><strong>Виды спорта:</strong></small></td>
-          <td>{% if court.sporttypes.count > 0 %}
-            <ul class="list-unstyled m-b-0">{% for sporttype in court.sporttypes.all %}
-              <li>{{ sporttype }}</li>{% endfor %}
-            </ul>{% endif %}
-          </td>
-        </tr>
-        <tr>
-          <td class="p-l-0"><small><strong>Просмотров:</strong></small></td>
-          <td>{{ court.views }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel-body p-b-0">
+        <p class="lead">{{ court.title }}</p>{% if current_user.is_admin %}<a href="/admin/courts/court/{{ court.pk }}/" class="btn btn-lg btn-success">Редактировать</a><br/><br/>{% endif %}
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="p-l-0"><small><strong>Адрес:</strong></small></td>
+              <td>{{ court.place }}<br/><small><a href="#CourtMap">Показать на карте&nbsp;<span class="glyphicon glyphicon-map-marker"></span></a></small></td>
+            </tr>
+            <tr>
+              <td class="p-l-0"><small><strong>Описание:</strong></small></td>
+              <td>{% if court.description %} {{ court.description }} {% endif %}</td>
+            </tr>
+            <tr>
+              <td class="p-l-0"><small><strong>Виды спорта:</strong></small></td>
+              <td>{% if court.sporttypes.count > 0 %}
+                <ul class="list-unstyled m-b-0">{% for sporttype in court.sporttypes.all %}
+                  <li>{{ sporttype }}</li>{% endfor %}
+                </ul>{% endif %}
+              </td>
+            </tr>
+            <tr>
+              <td class="p-l-0"><small><strong>Просмотров:</strong></small></td>
+              <td>{{ court.views }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
