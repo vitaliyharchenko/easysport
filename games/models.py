@@ -82,8 +82,7 @@ class Game(models.Model):
         return self.gametype.sporttype_id
 
     @property
-    def duration(self):
-        # TODO: beautiful format of duration
+    def duration_beauty(self):
         duration = self.datetime_to - self.datetime
         seconds = duration.seconds
         if seconds % 3600 == 0:
@@ -93,6 +92,9 @@ class Game(models.Model):
             seconds -= seconds % 60
             minutes = int(seconds/60)
             return formatters.show_minutes(minutes)
+
+    def duration(self):
+        return self.datetime_to - self.datetime
 
     def get_absolute_url(self):
         return "/game/%i" % self.id
