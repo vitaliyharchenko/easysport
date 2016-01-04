@@ -172,13 +172,13 @@ Test Django-uwsgi
     create user - admin, ceo@sportcourts.ru, 123456
     
     python manage.py runserver 0.0.0.0:8000
-    go to http://test.sportcourts.ru:8000
+    go to http://sportcourts.ru:8000
     
     uwsgi --http :8000 --module sportcourts.wsgi
-    go to http://test.sportcourts.ru:8000
+    go to http://sportcourts.ru:8000
     the web client <-> uWSGI <-> Django | works
     
-    go to http://test.sportcourts.ru
+    go to http://sportcourts.ru
     the web client <-> the web server |works
 '''
 
@@ -201,7 +201,7 @@ server {
     # the port your site will be served on
     listen      8000;
     # the domain name it will serve for
-    server_name test.sportcourts.ru; # substitute your machine's IP address or FQDN
+    server_name sportcourts.ru; # substitute your machine's IP address or FQDN
     charset     utf-8;
 
     # max upload size
@@ -230,11 +230,11 @@ sudo ln -s ../sites-available/sportcourts
 sudo rm default
 sudo service nginx restart
 
-go to http://test.sportcourts.ru:8000/static/css/main.css
+go to http://sportcourts.ru:8000/static/css/main.css
 Nginx serving static and media correctly
 
 uwsgi --socket :8001 --wsgi-file test.py
-go to http://test.sportcourts.ru:8000
+go to http://sportcourts.ru:8000
 the web client <-> the web server <-> the socket <-> uWSGI <-> Python | works correctly
 
 sudo nano /etc/nginx/sites-available/sportcourts
@@ -242,7 +242,7 @@ uncomment # server unix:///opt/sportcourts2/sportcourts.sock; # for a file socke
 sudo service nginx restart
 
 uwsgi --socket sportcourts.sock --wsgi-file test.py --chmod-socket=666
-go to http://test.sportcourts.ru:8000
+go to http://sportcourts.ru:8000
 socket works correctly
 
 uwsgi --socket sportcourts.sock --module sportcourts.wsgi --chmod-socket=666
