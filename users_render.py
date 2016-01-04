@@ -15,7 +15,7 @@ from users.models import User
 from urllib.request import urlopen
 from io import BytesIO
 from django.core.files import File
-import hashlib
+import hashlib, urllib
 
 users = User.objects.all()
 for user in users:
@@ -27,18 +27,21 @@ for user in users:
     user.save()
 
     avatar_url = u'http://sportcourts.ru/images/avatars/{}'.format(user.pk)
-    response = urlopen(avatar_url)
-    io = BytesIO(response.read())
-    file = File(io)
-    str = file.readlines()
+    try:
+        response = urlopen(avatar_url)
+        io = BytesIO(response.read())
+        file = File(io)
+        str = file.readlines()
 
-    hashId = hashlib.md5()
-    hashId.update(repr(str).encode('utf-8'))
-    hash = hashId.hexdigest()
+        hashId = hashlib.md5()
+        hashId.update(repr(str).encode('utf-8'))
+        hash = hashId.hexdigest()
 
-    if hash == '0a70ab0f26836cb1c759346d897493c9':
-        print(u'False for user id:{}'.format(user.pk))
-    else:
-        user.avatar.save(u'avatar{}'.format(user.pk), file)
+        if hash == '0a70ab0f26836cb1c759346d897493c9':
+            print(u'False for user id:{}'.format(user.pk))
+        else:
+            user.avatar.save(u'avatar{}'.format(user.pk), file)
+    except urllib.error.HTTPError:
+        pass
 
     user.save()

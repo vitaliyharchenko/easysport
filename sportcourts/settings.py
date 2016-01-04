@@ -27,8 +27,8 @@ IS_PRODUCTION = False
 
 if IS_PRODUCTION:
     DEBUG = True
-    CURRENT_HOST = 'http://test.sportcourts.ru'
-    ALLOWED_HOSTS = ['http://test.sportcourts.ru:8000', 'http://test.sportcourts.ru', 'test.sportcourts.ru',
+    CURRENT_HOST = 'http://sportcourts.ru'
+    ALLOWED_HOSTS = ['http://sportcourts.ru:8000', 'http://sportcourts.ru', 'sportcourts.ru',
                      'http://sportcourts.ru', 'sportcourts.ru']
 else:
     DEBUG = True
