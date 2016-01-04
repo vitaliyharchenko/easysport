@@ -2,10 +2,12 @@
 {% extends 'base.html' %}
 {% load gametags %}
 {% block title %}{{ game.title }}{% endblock %}
-{% block headers %}{% endblock %}
+{% block headers %}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>{% endblock %}
 {% block content %}
 <div class="row">
-  <div class="col-md-9">{% game_tpl game=game %}
+  <div class="col-md-9">{% game_tpl game=game %}<br/>
+    <div id="CourtMap" style="width: 100%; height: 600px" class="thumbnail"></div>
     <!--TODO: add VK comments-->
   </div>
   <div class="col-md-3 visible-md visible-lg">
@@ -56,5 +58,28 @@ $(document).on('change','#sporttype',function(){
     else {
         location.href='/games?q='+value;
     }
+});/**
+ * Created by vitaliyharchenko on 04.01.16.
+ */
+/**
+ * Created by vitaliyharchenko on 04.01.16.
+ */
+ymaps.ready(function () {
+    var point = [parseFloat('{{ game.court.place.latitude }}'.replace(",", ".")),
+                 parseFloat('{{ game.court.place.longitude }}'.replace(",", "."))];
+
+    var map = new ymaps.Map("CourtMap", {
+        center: point,
+        zoom: 16,
+        controls: ['zoomControl', 'fullscreenControl']
+    });
+
+    var myPlacemark = new ymaps.Placemark(point, {
+        balloonContentHeader: '{{ game.court.title }}',
+        balloonContentBody: '{{ game.court.place.fulladdress }}'
+    });
+
+    map.geoObjects.add(myPlacemark);
+    myPlacemark.balloon.open();
 });
 </script>{% endblock %}
