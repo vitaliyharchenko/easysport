@@ -5,6 +5,7 @@ from django.db import models
 from courts.models import Court
 from sports.models import GameType, SportType
 from django.contrib.contenttypes.models import ContentType
+from utils import formatters
 
 
 class Game(models.Model):
@@ -84,7 +85,14 @@ class Game(models.Model):
     def duration(self):
         # TODO: beautiful format of duration
         duration = self.datetime_to - self.datetime
-        return duration.seconds
+        seconds = duration.seconds
+        if seconds % 3600 == 0:
+            hours = int(seconds/3600)
+            return formatters.show_hours(hours)
+        else:
+            seconds -= seconds % 60
+            minutes = int(seconds/60)
+            return formatters.show_minutes(minutes)
 
     def get_absolute_url(self):
         return "/game/%i" % self.id
