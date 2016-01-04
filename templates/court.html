@@ -58,8 +58,7 @@ ymaps.ready(function () {
 
     var myPlacemark = new ymaps.Placemark(point, {
         balloonContentHeader: '{{ court.title }}',
-        balloonContentBody: '{{ court.place.fulladdress }}',
-        balloonContentFooter: '{{ court.description }}'
+        balloonContentBody: '{{ court.place.fulladdress }}'
     });
 
     map.geoObjects.add(myPlacemark);
