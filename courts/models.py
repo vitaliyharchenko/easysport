@@ -43,8 +43,8 @@ class Worktime(models.Model):
 
 class Court(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название', unique=True)
-    description = models.CharField(max_length=300, verbose_name='Описание', blank=True)
-    admin_description = models.CharField(max_length=200, blank=True, verbose_name='Примечания для админов')
+    description = models.CharField(max_length=600, verbose_name='Описание', blank=True)
+    admin_description = models.CharField(max_length=600, blank=True, verbose_name='Примечания для админов')
     place = models.ForeignKey(Place, verbose_name='Место')
 
     type = models.ForeignKey(CourtType, verbose_name='Тип площадки', related_name='+', null=True)
