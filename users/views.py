@@ -186,9 +186,17 @@ def register_confirm(request, activation_key):
         # TODO: страница ошибки активации
         raise Exception("Неверный код")
     else:
+        user_profile.confirm_time = timezone.now()
+        user_profile.save()
+
         user = user_profile.user
         user.is_active = True
         user.save()
+
+        notification = Notification(user=user,
+                                    text='Вы успешно активировали аккаунт! Поздравляем вас со вступлением в сообщество спортсменов ;)')
+        notification.save()
+
         if not request.user.is_authenticated():
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             auth.login(request, user)
