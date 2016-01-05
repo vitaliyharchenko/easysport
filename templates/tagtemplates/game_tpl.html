@@ -26,7 +26,7 @@
     </div>
     <div class="panel-body p-b-5">
       <div class="row">
-        <div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">{% localtime on %}
+        <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-0">{% localtime on %}
           <div class="well well-sm text-center p-b-0 m-w-180px">
             <p>{{ game.datetime|date:"l" }}</p>
             <p><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ game.datetime|date:"j E" }}</p>
@@ -130,7 +130,7 @@
               Вы записаны
               &nbsp;<span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li><a id="{{ game.id }}-unsubscribe" class="action">Отписаться</a></li>
             </ul>
             <!--Если игра будет и ты в резерве-->{% elif action == 3 %}
@@ -138,7 +138,7 @@
               Вы в резерве
               &nbsp;<span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li><a id="{{ game.id }}-unreserve" class="action">Выйти из резерва</a></li>{% if game.has_place %}
               <li><a id="{{ game.id }}-subscribe" class="action">Перейти в основу</a></li>{% endif %}
             </ul>
@@ -148,7 +148,7 @@
               Идет набор
               &nbsp;<span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">{% if current_user %}
+            <ul class="dropdown-menu dropdown-menu-right">{% if current_user %}
               <li><a id="{{ game.id }}-subscribe" class="action">Записаться</a></li>{% else %}
               <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться</a></li>{% endif %}
             </ul>
@@ -156,7 +156,7 @@
             {% if current_user %}
              {% if game.has_reserved_place %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-right">
                 <li><a id="{{ game.id }}-reserve" class="action">Записаться в резерв</a></li>
               </ul>
             </button> {% else %}
@@ -164,12 +164,12 @@
             {% else %}
              {% if game.has_reserved_place %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться в резерв</a></li>
               </ul>
             </button> {% else %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="#" data-toggle="modal" data-target="#loginModal">Мест нет</a></li>
               </ul>
             </button> {% endif %}
@@ -180,21 +180,21 @@
             <!--Начало проверки - Если игра близко-->{% elif game.time_status == 'COMING' %}
             {% if action == 1 %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-success btn-sm dropdown-toggle">Вы записаны</button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li>
                 <!--TODO: popup with phone--><a href="#" data-toggle="modal" data-target="#unsubscribeModal">Отписаться</a>
               </li>
             </ul>
             <!--Если в резерве-->{% elif action == 3 %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-warning btn-sm dropdown-toggle">Вы в резерве</button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li><a id="{{ game.id }}-unreserve" class="action">Выйти из резерва</a></li>{% if game.has_place %}
               <li><a id="{{ game.id }}-subscribe" class="action">Перейти в основу</a></li>{% endif %}
             </ul>
             <!--Если не записан и не в резерве, проверяем наличие мест-->{% else %}
             <!--Если есть места-->{% if game.has_place %}
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary btn-sm dropdown-toggle">Идет набор</button>
-            <ul class="dropdown-menu">{% if current_user %}
+            <ul class="dropdown-menu dropdown-menu-right">{% if current_user %}
               <li><a id="{{ game.id }}-subscribe" class="action">Записаться</a></li>{% else %}
               <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться</a></li>{% endif %}
             </ul>

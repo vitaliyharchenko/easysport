@@ -28,7 +28,7 @@ div(id="{{ game.id }}-pane")
           | {% endif %}
     .panel-body.p-b-5
       .row
-        .col-xs-4.col-xs-offset-4.col-sm-2.col-sm-offset-0
+        .col-xs-6.col-xs-offset-3.col-sm-2.col-sm-offset-0
           |{% localtime on %}
           .well.well-sm.text-center.p-b-0.m-w-180px
             p {{ game.datetime|date:"l" }}
@@ -176,7 +176,7 @@ div(id="{{ game.id }}-pane")
               | Вы записаны
               | &nbsp;
               span.caret
-            ul.dropdown-menu
+            ul.dropdown-menu.dropdown-menu-right
               li
                 a.action(id="{{ game.id }}-unsubscribe") Отписаться
             //Если игра будет и ты в резерве
@@ -185,7 +185,7 @@ div(id="{{ game.id }}-pane")
               | Вы в резерве
               | &nbsp;
               span.caret
-            ul.dropdown-menu
+            ul.dropdown-menu.dropdown-menu-right
               li
                 a.action(id="{{ game.id }}-unreserve") Выйти из резерва
               | {% if game.has_place %}
@@ -200,7 +200,7 @@ div(id="{{ game.id }}-pane")
               | Идет набор
               | &nbsp;
               span.caret
-            ul.dropdown-menu
+            ul.dropdown-menu.dropdown-menu-right
               | {% if current_user %}
               li
                 a.action(id="{{ game.id }}-subscribe") Записаться
@@ -214,7 +214,7 @@ div(id="{{ game.id }}-pane")
             | {% if current_user %}
             |  {% if game.has_reserved_place %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-              ul.dropdown-menu
+              ul.dropdown-menu.dropdown-menu-right
                 li
                   a.action(id="{{ game.id }}-reserve") Записаться в резерв
             |  {% else %}
@@ -223,12 +223,12 @@ div(id="{{ game.id }}-pane")
             | {% else %}
             |  {% if game.has_reserved_place %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-              ul.dropdown-menu
+              ul.dropdown-menu.dropdown-menu-right
                 li
                   a(href="#" data-toggle="modal" data-target="#loginModal") Записаться в резерв
             |  {% else %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-              ul.dropdown-menu
+              ul.dropdown-menu.dropdown-menu-right
                 li
                   a(href="#" data-toggle="modal" data-target="#loginModal") Мест нет
             |  {% endif %}
@@ -242,14 +242,14 @@ div(id="{{ game.id }}-pane")
             | {% elif game.time_status == 'COMING' %}
             | {% if action == 1 %}
             button.btn.btn-success.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Вы записаны
-            ul.dropdown-menu
+            ul.dropdown-menu.dropdown-menu-right
               li
                 //TODO: popup with phone
                 a(href="#" data-toggle="modal" data-target="#unsubscribeModal") Отписаться
             //Если в резерве
             | {% elif action == 3 %}
             button.btn.btn-warning.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Вы в резерве
-            ul.dropdown-menu
+            ul.dropdown-menu.dropdown-menu-right
               li
                 a.action(id="{{ game.id }}-unreserve") Выйти из резерва
               | {% if game.has_place %}
@@ -261,7 +261,7 @@ div(id="{{ game.id }}-pane")
             //Если есть места
             | {% if game.has_place %}
             button.btn.btn-primary.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Идет набор
-            ul.dropdown-menu
+            ul.dropdown-menu.dropdown-menu-right
               | {% if current_user %}
               li
                 a.action(id="{{ game.id }}-subscribe") Записаться
