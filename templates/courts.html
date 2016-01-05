@@ -8,11 +8,28 @@
 <h1 class="m-t-0">Площадки</h1>
 <hr/>
 <div class="row">
-  <div class="col-md-3 visible-md visible-lg">{% if current_user.is_admin %}<a href="/admin/courts/court/add/" class="btn btn-success btn-block">+ создать площадку</a><br/>{% endif %}
+  <div class="col-xs-12 col-sm-12 col-md-3">{% if current_user.is_admin %}<a href="/admin/courts/court/add/" class="btn btn-success btn-block">+ создать площадку</a><br/>{% endif %}
     <div class="panel panel-default">
       <div class="panel-body">
         <p class="lead">Поиск</p>
-        <input id="searchquery" type="text" name="query" placeholder="Поиск по названию" value="{{ query }}" class="form-control"/><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>{% if query %}<a href="{% url 'courts_view' %}" class="btn btn-primary btn-block">Сброс</a>{% endif %}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="input-group">
+              <input id="searchquery" type="text" name="query" placeholder="Поиск по названию" value="{{ query }}" class="form-control"/>{% if query %}<span class="input-group-btn">
+                <button id="resetbutton" type="button" aria-label="Reset" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></span>{% else %}<span disabled="disabled" class="input-group-btn">
+                <button id="resetbutton" type="button" aria-label="Reset" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></span>{% endif %}
+            </div>
+          </div>
+        </div><br/>
+        <select id="sporttype" name="query" class="form-control">{% if sporttype %}
+          <option value="0">Все виды cпорта</option>{% else %}
+          <option value="0" selected="selected">Все виды cпорта</option>{% endif %}
+          {% for sport_type in sport_types %}
+          {% if sporttype == sport_type.id %}
+          <option value="{{ sport_type.id }}" selected="selected">{{ sport_type.title }}</option>{% else %}
+          <option value="{{ sport_type.id }}">{{ sport_type.title }}</option>{% endif %}
+          {% endfor %}
+        </select><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>
       </div>
     </div>
     <div class="panel panel-default hidden-xs">
@@ -27,7 +44,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-9">
+  <div class="col-xs-12 col-sm-12 col-md-9">
     <div id="CourtMap" style="width: 100%; height: 400px" class="thumbnail"></div>
     <hr/>{% if courts|length > 0 %}
     {% for court in courts %}
@@ -63,9 +80,39 @@ $(document).on('input', '#searchquery', function () {
     queryfunc();
 });
 
+
+function href() {
+    var sporttype = $('#sporttype').val();
+    var query = $("#searchquery").val();
+    if (sporttype == '0') {
+        if (query) {
+            location.href = '{% url "courts_view" %}' + '?q=' + query;
+        } else {
+            location.href = '{% url "courts_view" %}';
+        }
+    }
+    else {
+        if (query) {
+            location.href = '{% url "courts_view" %}' + '?s=' + sporttype + '&q=' + query;
+        } else {
+            location.href = '{% url "courts_view" %}' + '?s=' + sporttype;
+        }
+    }
+};
+
+
+
 $(document).on('click', '#searchbutton', function () {
-    var url = "{% url 'courts_view' %}?q=".concat($("#searchquery").val())
-    window.location.replace(url);
+    href();
+});
+
+$(document).on('click', '#resetbutton', function () {
+    $("#searchquery").val('');
+    href();
+});
+
+$(document).on('change','#sporttype',function(){
+    href();
 });
 
 

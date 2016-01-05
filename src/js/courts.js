@@ -15,9 +15,39 @@ $(document).on('input', '#searchquery', function () {
     queryfunc();
 });
 
+
+function href() {
+    var sporttype = $('#sporttype').val();
+    var query = $("#searchquery").val();
+    if (sporttype == '0') {
+        if (query) {
+            location.href = '{% url "courts_view" %}' + '?q=' + query;
+        } else {
+            location.href = '{% url "courts_view" %}';
+        }
+    }
+    else {
+        if (query) {
+            location.href = '{% url "courts_view" %}' + '?s=' + sporttype + '&q=' + query;
+        } else {
+            location.href = '{% url "courts_view" %}' + '?s=' + sporttype;
+        }
+    }
+};
+
+
+
 $(document).on('click', '#searchbutton', function () {
-    var url = "{% url 'courts_view' %}?q=".concat($("#searchquery").val())
-    window.location.replace(url);
+    href();
+});
+
+$(document).on('click', '#resetbutton', function () {
+    $("#searchquery").val('');
+    href();
+});
+
+$(document).on('change','#sporttype',function(){
+    href();
 });
 
 
