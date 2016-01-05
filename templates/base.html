@@ -129,7 +129,7 @@
                   <div class="alert fade in {% if notification.level == 0 %}alert-info{% elif notification.level == 1 %}alert-warning{% elif notification.level == 2 %}alert-danger{% endif %}">
                     <button id="notif-{{notification.id}}" type="button" data-dismiss="alert" aria-hidden="true" class="close delete-notification">&times;</button>
                     <p><small>{{notification.datetime}}</small></p>
-                    <p class="lead">{{ notification }} | {{ notification.level }} | {{ notification.read }}</p>
+                    <p class="lead">{{ notification }}</p>
                   </div>{% endfor %}
                 </div>
               </div>
@@ -142,7 +142,7 @@
       <div style="display: none;" class="alert {% if notification.level == 0 %}alert-info{% elif notification.level == 1 %}alert-warning{% elif notification.level == 2 %}alert-danger{% endif %}">
         <button type="button" data-dismiss="alert" aria-hidden="true" class="close">&times;</button>
         <p><small>{{notification.datetime}}</small></p>
-        <p class="lead">{{ notification }} | {{ notification.level }} | {{ notification.read }}</p>
+        <p class="lead">{{ notification }}</p>
       </div>{% endfor %}
     </div>{% block globalcontent %}
     <section id="content">
