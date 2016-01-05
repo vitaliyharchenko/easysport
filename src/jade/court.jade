@@ -43,6 +43,13 @@ script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
                   strong Для админов:
               td {{ court.admin_description }}
             |{% endif %}
+            |{% if current_user.is_staff and court.phone %}
+            tr
+              td.p-l-0
+                small
+                  strong Телефон:
+              td {{ court.phone }}
+            |{% endif %}
             tr
               td.p-l-0
                 small

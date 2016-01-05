@@ -27,6 +27,11 @@
               <td class="p-l-0"><small><strong>Для админов:</strong></small></td>
               <td>{{ court.admin_description }}</td>
             </tr>{% endif %}
+            {% if current_user.is_staff and court.phone %}
+            <tr>
+              <td class="p-l-0"><small><strong>Телефон:</strong></small></td>
+              <td>{{ court.phone }}</td>
+            </tr>{% endif %}
             <tr>
               <td class="p-l-0"><small><strong>Виды спорта:</strong></small></td>
               <td>{% if court.sporttypes.count > 0 %}
