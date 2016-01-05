@@ -36,6 +36,13 @@ script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
                 small
                   strong Описание:
               td {% if court.description %} {{ court.description }} {% endif %}
+            |{% if current_user.is_staff and court.admin_description %}
+            tr
+              td.p-l-0
+                small
+                  strong Для админов:
+              td {{ court.admin_description }}
+            |{% endif %}
             tr
               td.p-l-0
                 small
