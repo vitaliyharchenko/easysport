@@ -14,6 +14,7 @@ from utils import mailing, vkontakte
 from urllib.request import urlopen
 from io import BytesIO
 from django.core.files import File
+from notifications.models import Notification
 
 
 @csrf_protect
@@ -95,6 +96,10 @@ def register_view(request):
                                             request_time=timezone.now())
             new_activation.save()
             mailing.confirm_email(email, activation_key)
+
+            notification = Notification(user=user,
+                                        text='Пожалуйста, активируйте ваш профиль, перейдя по ссылке в письме на вашем почтовом ящике')
+            notification.save()
 
             user = auth.authenticate(username=email, password=password)
             auth.login(request, user)

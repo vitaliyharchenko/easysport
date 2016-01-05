@@ -14,7 +14,7 @@ class Notification(models.Model):
     DELETE = 2
 
     user = models.ForeignKey(User, related_name='notifications', verbose_name='Пользователь')
-    datetime = models.DateTimeField(verbose_name='Время')
+    datetime = models.DateTimeField(verbose_name='Время', auto_now=True)
     text = models.TextField(verbose_name='Текст')
 
     read = models.PositiveSmallIntegerField(default=0, choices=(
