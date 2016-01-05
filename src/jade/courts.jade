@@ -1,6 +1,9 @@
 | {% extends 'base.html' %}
 | {% load globaltags %}
 | {% block title %}Спортивные площадки{% endblock %}
+| {% block headers %}
+script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
+| {% endblock %}
 | {% block content %}
 h1.m-t-0 Площадки
 hr
@@ -28,6 +31,8 @@ hr
           .vkontakte
           .odnoklassniki
   .col-md-9
+    #CourtMap.thumbnail(style="width: 100%; height: 400px")
+    hr
     |{% if courts|length > 0 %}
     | {% for court in courts %}
     .row

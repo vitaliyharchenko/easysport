@@ -2,6 +2,8 @@
 {% extends 'base.html' %}
 {% load globaltags %}
 {% block title %}Спортивные площадки{% endblock %}
+{% block headers %}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>{% endblock %}
 {% block content %}
 <h1 class="m-t-0">Площадки</h1>
 <hr/>
@@ -26,7 +28,8 @@
     </div>
   </div>
   <div class="col-md-9">
-    {% if courts|length > 0 %}
+    <div id="CourtMap" style="width: 100%; height: 400px" class="thumbnail"></div>
+    <hr/>{% if courts|length > 0 %}
     {% for court in courts %}
     <div class="row">
       <div class="col-xs-3">
@@ -63,6 +66,38 @@ $(document).on('input', '#searchquery', function () {
 $(document).on('click', '#searchbutton', function () {
     var url = "{% url 'courts_view' %}?q=".concat($("#searchquery").val())
     window.location.replace(url);
+});
+
+
+var courts = '{{map_data}}';
+courts = courts.replace(/&quot;/g,"\"");
+courts = jQuery.parseJSON(courts);
+
+console.log(courts);
+
+$(".testpanel").html(function() {
+    return courts[0];
+});
+
+ymaps.ready(function () {
+
+    var map = new ymaps.Map("CourtMap", {
+        center: [56.834331,60.607307],
+        zoom: 11,
+        controls: ['zoomControl', 'fullscreenControl']
+    });
+
+    for (i = 0; i < courts.length; i++) {
+        var court = courts[i]
+        var point = [court[3], court[4]];
+        var myPlacemark = new ymaps.Placemark(point, {
+            balloonContentHeader: court[1],
+            balloonContentBody: court[2],
+            balloonContentFooter: court[5]
+        });
+        map.geoObjects.add(myPlacemark);
+    }
+
 });
   </script>
 </div>{% endblock %}
