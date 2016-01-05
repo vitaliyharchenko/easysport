@@ -23,11 +23,11 @@ def games_view(request):
         if query == -2:
             user = User.objects.get(email=request.user.email)
             context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
-                                                   datetime__lt=timezone.now(), deleted=False)
+                                                   datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
         elif query == -1:
-            context['games'] = Game.objects.filter(is_reported=True, deleted=False)
+            context['games'] = Game.objects.filter(is_reported=True, deleted=False).order_by('-datetime')
         else:
-            context['games'] = Game.objects.filter(sporttype=query, datetime__gt=timezone.now(), deleted=False)
+            context['games'] = Game.objects.filter(sporttype=query, datetime__gt=timezone.now(), deleted=False).order_by('datetime')
         context['query'] = query
         return render(request, 'games.html', context)
     except KeyError:
