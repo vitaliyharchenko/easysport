@@ -71,7 +71,7 @@ npm outdated
 
 # Работа с удаленкой #
 ```
-lt --port 8000
+django-admin dumpdata
 ```
 
 # Развертываем фронтенд #

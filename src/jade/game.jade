@@ -3,6 +3,8 @@
 | {% block title %}{{ game.title }}{% endblock %}
 | {% block headers %}
 script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
+script(type="text/javascript")
+  |VK.init({apiId: 4963792, onlyWidgets: true});
 meta(property="og:title" content="Игра в {{ game.sporttype }}")
 meta(property="og:site_name" content="SportCourts.ru")
 meta(property="og:type" content="website")
@@ -24,8 +26,13 @@ meta(property="og:description" content="Рекомендую посетить и
   .col-md-9
     | {% game_tpl game=game %}
     br
-    #CourtMap.thumbnail(style="width: 100%; height: 600px")
-    //TODO: add VK comments
+    #CourtMap.thumbnail(style="width: 100%; height: 350px")
+    br
+    .panel.panel-default
+      .panel-body
+        #vk_comments
+        script(type="text/javascript")
+          |VK.Widgets.Comments("vk_comments", {limit: 5, attach: false});
 script
   include ../js/games.js
   include ../js/game.js
