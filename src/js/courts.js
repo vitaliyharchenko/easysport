@@ -28,10 +28,6 @@ console.log(courts);
 courts = jQuery.parseJSON(courts);
 console.log(courts);
 
-$(".testpanel").html(function() {
-    return courts[0];
-});
-
 ymaps.ready(function () {
 
     var map = new ymaps.Map("CourtMap", {
