@@ -30,7 +30,7 @@
             {% if current_user.is_staff and court.phone %}
             <tr>
               <td class="p-l-0"><small><strong>Телефон:</strong></small></td>
-              <td>{{ court.phone }}</td>
+              <td>{{ court.phone|beauty_phone }}</td>
             </tr>{% endif %}
             <tr>
               <td class="p-l-0"><small><strong>Виды спорта:</strong></small></td>

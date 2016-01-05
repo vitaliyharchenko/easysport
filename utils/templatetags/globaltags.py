@@ -5,7 +5,7 @@ import random
 from django import template
 from django.core.urlresolvers import reverse, NoReverseMatch
 
-from utils import vkontakte
+from utils import vkontakte, formatters
 
 
 register = template.Library()
@@ -51,3 +51,14 @@ def image(img, height='', width='', thumbnail=False):
     height = str(height)
     width = str(width)
     return {'image': img, 'width': width, 'height': height, 'thumbnail': thumbnail}
+
+
+@register.filter(name='beauty_phone')
+def beauty_phone(value):
+    phone = value.__str__()
+    return phone[:2] + ' (' + phone[2:5] + ') ' + phone[5:8] + '-' + phone[8:10] + '-' + phone[10:12]
+
+
+@register.filter(name='beauty_age')
+def beauty_age(value):
+    return formatters.show_years(value)

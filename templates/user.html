@@ -33,7 +33,7 @@
         {% if user.is_referee %}<span id="badge3" data-toggle="tooltip" data-placement="bottom" title="Судья" class="glyphicon glyphicon-king"></span>&nbsp;
         {% endif %}</small></h1>
     <p>{% if not current %}<small>Последний раз заходил{% ifequal user.sex 'f' %}a{% endifequal %}: {{ user.last_login }}</small>{% endif %}</p><br/>
-    <p>{% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}</p>{% if user.height > 0 %}<br/>
+    <p>{% if user.bdate %}{{ user.age|beauty_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}</p>{% if user.height > 0 %}<br/>
     <p>Рост: {{ user.height }} см.</p>{% elif current %}
     <p>Рост:<small>&nbsp;<a href="{% url 'user_update_view' %}">Заполнить...</a></small></p>{% endif %}
     {% if user.weight > 0 %}
@@ -42,7 +42,7 @@
     {% if user.amplua %}
     <p>{{ user.amplua }}</p>{% endif %}
     {% if user.phone %}<br/>
-    <p>Телефон: {{ user.get_beautiful_phone }}</p>{% else %}<br/>
+    <p>Телефон: {{ user.phone|beauty_phone }}</p>{% else %}<br/>
     <p>Телефон не указан</p>{% endif %}
     {% if user.vkuserid %}
     <p><a href="{% vkontakte_profile_link user.vkuserid %}" target="_blank"><img src="{% static 'images/vk.png' %}" width="32"/></a></p>{% endif %}

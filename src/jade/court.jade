@@ -48,7 +48,7 @@ script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript")
               td.p-l-0
                 small
                   strong Телефон:
-              td {{ court.phone }}
+              td {{ court.phone|beauty_phone }}
             |{% endif %}
             tr
               td.p-l-0

@@ -47,7 +47,7 @@
       </div>
       <div class="col-xs-9">
         <p class="lead"><a href="{{ user.get_absolute_url }}">{{ user }}</a></p>
-        <p>{% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}</p>{% if user.amplua %}
+        <p>{% if user.bdate %}{{ user.age|beauty_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}</p>{% if user.amplua %}
         <p>{{ user.amplua }}</p>{% endif %}
       </div>
     </div>

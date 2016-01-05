@@ -53,7 +53,7 @@ hr
         p.lead
           a(href="{{ user.get_absolute_url }}") {{ user }}
         p
-          | {% if user.bdate %}{{ user.beautiful_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}
+          | {% if user.bdate %}{{ user.age|beauty_age }}{% endif %}{% if user.city and user.bdate %}, {% endif %}{% if user.city %}{{ user.city }}{% endif %}
         | {% if user.amplua %}
         p {{ user.amplua }}
         | {% endif %}

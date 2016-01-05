@@ -102,17 +102,10 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.last_name
 
-    def get_beautiful_phone(self):
-        phone = self.phone.__str__()
-        return phone[:2] + ' (' + phone[2:5] + ') ' + phone[5:8] + '-' + phone[8:10] + '-' + phone[10:12]
-
     @property
-    def age_in_years(self):
+    def age(self):
         today = datetime.date.today()
         return today.year - self.bdate.year - ((today.month, today.day) < (self.bdate.month, self.bdate.day))
-
-    def beautiful_age(self):
-        return show_years(self.age_in_years)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
