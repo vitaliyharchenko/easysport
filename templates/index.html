@@ -17,7 +17,7 @@
       <!--  h1 SportCourts--><br/><br/>
       <h2 class="h3">Ваш проводник в мире любительского спорта.</h2>
       <p class="h3">Играй в&nbsp;<span class="gamestyped"></span>&nbsp;<br class="visible-xs"/>вместе с {% random_choice 'нами' 'друзьями' %}!</p></p><br/>
-      <div style="max-height:80px; overflow:hidden;" class="row text-center">{% for user in users %}<a href="#">{% avatar user.avatar height="80" width="80" circle="True" sex=user.sex thumbnail="False" %}</a>{% endfor %}</div><br/><br/>{% if not loggedin %}
+      <div style="max-height:80px; overflow:hidden;" class="row text-center">{% for user in users %}<a href="{{ user.get_absolute_url }}" target="_blank">{% avatar user.avatar height="80" width="80" circle="True" sex=user.sex thumbnail="False" %}</a>{% endfor %}</div><br/><br/>{% if not loggedin %}
       <p><a href="{% url 'reg_view' %}" class="btn btn-main btn-lg btn-success">Зарегистрироваться</a></p>
       <p>или</p>
       <p><a href="#" data-toggle="modal" data-target="#loginModal" role="button" class="btn btn-main btn-lg btn-primary">Войти</a></p>{% else %}

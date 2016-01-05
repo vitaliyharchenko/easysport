@@ -29,7 +29,7 @@ script(src="{% static 'js/index.js' %}")
       br
       .row.text-center(style="max-height:80px; overflow:hidden;")
         |{% for user in users %}
-        a(href="#")
+        a(href="{{ user.get_absolute_url }}" target="_blank")
           |{% avatar user.avatar height="80" width="80" circle="True" sex=user.sex thumbnail="False" %}
         |{% endfor %}
       br
