@@ -22,7 +22,9 @@ $(document).on('click', '#searchbutton', function () {
 
 
 var courts = "{{map_data}}";
+console.log(courts);
 courts = courts.replace(/&quot;/g,"\"");
+console.log(courts);
 courts = jQuery.parseJSON(courts);
 console.log(courts);
 
