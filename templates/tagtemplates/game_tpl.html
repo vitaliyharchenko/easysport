@@ -27,11 +27,15 @@
     <div class="panel-body p-b-5">
       <div class="row">
         <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-0">{% localtime on %}
-          <div class="well well-sm text-center p-b-0 m-w-180px">
+          <div class="well well-sm text-center p-b-0">
             <p>{{ game.datetime|date:"l" }}</p>
             <p><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ game.datetime|date:"j E" }}</p>
             <p><span class="glyphicon glyphicon-time"></span>&nbsp;{{ game.datetime|date:"H:i" }}</p>
           </div>{% endlocaltime %}
+          {% if game.near_time_status == 'Today' %}
+          <div class="well well-sm text-center">Сегодня</div>{% elif game.near_time_status == 'Tomorrow' %}
+          <div class="well well-sm text-center">Завтра</div>{% elif game.near_time_status == 'After Tomorrow' %}
+          <div class="well well-sm text-center">Послезавтра</div>{% endif %}
         </div>
         <div class="col-xs-12 col-sm-7 col-md-7">
           <p>{{ game.gametype }}</p>

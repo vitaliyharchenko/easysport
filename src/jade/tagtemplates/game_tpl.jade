@@ -30,7 +30,7 @@ div(id="{{ game.id }}-pane")
       .row
         .col-xs-6.col-xs-offset-3.col-sm-2.col-sm-offset-0
           |{% localtime on %}
-          .well.well-sm.text-center.p-b-0.m-w-180px
+          .well.well-sm.text-center.p-b-0
             p {{ game.datetime|date:"l" }}
             p
               span.glyphicon.glyphicon-calendar
@@ -39,6 +39,13 @@ div(id="{{ game.id }}-pane")
               span.glyphicon.glyphicon-time
               |&nbsp;{{ game.datetime|date:"H:i" }}
           |{% endlocaltime %}
+          |{% if game.near_time_status == 'Today' %}
+          .well.well-sm.text-center Сегодня
+          |{% elif game.near_time_status == 'Tomorrow' %}
+          .well.well-sm.text-center Завтра
+          |{% elif game.near_time_status == 'After Tomorrow' %}
+          .well.well-sm.text-center Послезавтра
+          |{% endif %}
         .col-xs-12.col-sm-7.col-md-7
           p {{ game.gametype }}
           p

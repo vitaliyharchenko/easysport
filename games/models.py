@@ -95,6 +95,22 @@ class Game(models.Model):
         return "/game/%i" % self.id
 
     @property
+    def near_time_status(self):
+        event_date = timezone.localtime(self.datetime).date()
+        now = timezone.localtime(timezone.now())
+        today = now.date()
+        tomorrow = today + datetime.timedelta(days=1)
+        double_tomorrow = today + datetime.timedelta(days=2)
+        if event_date == today and now < self.datetime:
+            return 'Today'
+        elif event_date == tomorrow:
+            return 'Tomorrow'
+        elif event_date == double_tomorrow:
+            return 'After Tomorrow'
+        else:
+            return False
+
+    @property
     def time_status(self):
         now = timezone.now()
         # считаем продоожительность события и высчитываем погрещнойсть для отображения статусов, аля "скоро начнется"
