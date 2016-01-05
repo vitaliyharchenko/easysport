@@ -4,6 +4,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import User
 from datetimewidget.widgets import DateWidget
 from utils.fields import JasnyImageWidget
+from django.utils import timezone
 
 
 class UserLoginForm(forms.Form):
@@ -31,6 +32,12 @@ class UserRegistrationForm(forms.ModelForm):
                    'bdate': DateWidget(options=dateTimeOptions, usel10n=True, bootstrap_version=3),
                    'avatar': JasnyImageWidget(),
                    }
+
+    def clean_bdate(self):
+        bdate = self.cleaned_data.get("bdate")
+        if timezone.now().date() - bdate < timezone.timedelta(days=3650):
+            raise forms.ValidationError("Тебе меньше 10 лет, серьезно?")
+        return bdate
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -87,6 +94,12 @@ class UserUpdateForm(forms.ModelForm):
         }
         widgets = {'avatar': JasnyImageWidget(),
                    'bdate': DateWidget(options=dateTimeOptions, usel10n=True, bootstrap_version=3)}
+
+    def clean_bdate(self):
+        bdate = self.cleaned_data.get("bdate")
+        if timezone.now().date() - bdate < timezone.timedelta(days=3650):
+            raise forms.ValidationError("Тебе меньше 10 лет, серьезно?")
+        return bdate
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
