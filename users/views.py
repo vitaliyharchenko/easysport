@@ -33,11 +33,11 @@ def login_view(request):
             user = auth.authenticate(username=email, password=password)
             # TODO: добавить условия, при которых юзер не может залогиниться
             if user:
-                if user.is_active:
+                if not user.banned:
                     auth.login(request, user)
                     return redirect(return_path)
                 else:
-                    messages.warning(request, "Ваш профиль деактивирован!")
+                    messages.warning(request, "Ваш профиль забанен!")
                     return shortcut()
             else:
                 messages.warning(request, "Введенные данные неверны!")
