@@ -33,7 +33,7 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Персональная информация', {'fields': ('avatar', 'first_name', 'last_name', 'vkuserid', 'phone',
-                                                'referer', 'sex', 'weight', 'height', 'amplua')}),
+                                                'referer', 'sex', 'weight', 'height', 'bdate', 'amplua')}),
         ('Доступы', {'fields': ('is_active', 'banned', 'is_referee', 'is_coach', 'is_responsible',
                                 'is_organizer', 'is_admin',)}),
     )
