@@ -70,15 +70,9 @@ $(document).on('click', '#searchbutton', function () {
 
 
 var courts = '{{map_data}}';
-console.log(courts);
 courts = courts.replace(/&quot;/g,"\"");
-console.log(courts);
 courts = jQuery.parseJSON(courts);
 console.log(courts);
-
-$(".testpanel").html(function() {
-    return courts[0];
-});
 
 ymaps.ready(function () {
 
