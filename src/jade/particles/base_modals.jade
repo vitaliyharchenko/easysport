@@ -14,7 +14,7 @@
       .modal-body
         .container-fluid
           .row
-            .col-xs-6
+            .col-xs-12.col-sm-6
               form(method="post" action="{% url 'login_view' %}")
                 | {% csrf_token %}
                 .form-group
@@ -27,7 +27,7 @@
                 br
                 br
                 a(href="") Забыли пароль?
-            .col-xs-6
+            .col-xs-12.col-sm-6
               .form-group
                 |{% url 'login_view' as login_url %}
                 a.btn.btn-default.btn-block(href="{% vkontakte_auth_link login_url %}") ВКОНТАКТЕ
