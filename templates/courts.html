@@ -82,8 +82,9 @@ ymaps.ready(function () {
     for (i = 0; i < courts.length; i++) {
         var court = courts[i]
         var point = [court[3], court[4]];
+        var string = '<a href="/court/' + court[0] + '" target="_blank">' + court[1] + '<' + '/a>';
         var myPlacemark = new ymaps.Placemark(point, {
-            balloonContentHeader: court[1],
+            balloonContentHeader: string,
             balloonContentBody: court[2],
             balloonContentFooter: court[5]
         });
