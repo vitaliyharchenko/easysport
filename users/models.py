@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.mail import send_mail
 from django.utils import timezone
 from utils.fields import PhoneField
-from utils.formatters import show_years
 from sports.models import Amplua
 from places.models import City
 from games.models import UserGameAction
