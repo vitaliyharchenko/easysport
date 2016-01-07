@@ -3,6 +3,7 @@ import json
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.utils import timezone
+import datetime
 from .models import Game, UserGameAction
 from users.models import User
 from sports.models import SportType
@@ -25,7 +26,7 @@ def games_view(request):
             context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
                                                    datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
         elif query == -1:
-            context['games'] = Game.objects.filter(is_reported=True, deleted=False).order_by('-datetime')
+            context['games'] = Game.objects.filter(is_reported=True, datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
         else:
             context['games'] = Game.objects.filter(sporttype=query, datetime__gt=timezone.now(), deleted=False).order_by('datetime')
         context['query'] = query
@@ -39,6 +40,16 @@ def games_view(request):
 def game_view(request, game_id):
     game = Game.objects.get(id=game_id)
     return render(request, 'game.html', {'game': game, 'standalone': True})
+
+
+def game_next_add(request, game_id):
+    game = Game.objects.get(id=game_id)
+    game.datetime = game.datetime + datetime.timedelta(days=7)
+    game.datetime_to = game.datetime_to + datetime.timedelta(days=7)
+    game.pk = None
+    game.is_reported = False
+    game.save()
+    return redirect('games_view')
 
 
 # TODO: privacy add

@@ -170,6 +170,10 @@ div(id="{{ game.id }}-pane")
           a.btn.btn-lg.btn-success(href="{% url 'game_report_view' game.id %}") Заполнить отчет
           br
           br
+          |{% elif game.time_status == 'WAS' and game.is_reported and current_user.is_organizer %}
+          a.btn.btn-success(href="{% url 'game_next_add' game.id %}") Создать новую игру через неделю
+          br
+          br
           |{% endif %}
         .col-xs-12.col-sm-3.col-md-3.text-right
           | {% if current_user %}
