@@ -16,12 +16,10 @@
       </div>
     </div>{% if not user.is_active %}<a class="btn btn-warning btn-block">Профиль не активирован</a>{% endif %}
     {% if current_user.is_admin %}<a href="mailto:{{ user.email }}" class="btn btn-primary btn-block">{{ user.email }}</a>{% endif %}
-    {% if user.gamesvisited > 0 %}<br/>
-    <div class="panel panel-default">
-      <div class="panel-body text-center p-b-5">
-        <p><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр посещено: {{ user.gamesvisited }}</p>
-      </div>
-    </div>{% endif %}
+    {% if user.gamesvisited %}<br/>
+    <div class="well well-sm text-center"><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр посещено: {{ user.gamesvisited|length }}</div>{% endif %}
+    {% if user.gamesnotvisited %}<br/>
+    <div class="well well-sm text-center"><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр пропущено: {{ user.gamesnotvisited|length }}</div>{% endif %}
   </div>
   <div class="col-md-8 col-sm-8 col-xs-8">
     <h1 class="m-t-0">{{ user }}<small>&nbsp;&nbsp;&nbsp;<br class="visible-xs"/>{% if user.is_admin %}<span id="badge1" data-toggle="tooltip" data-placement="bottom" title="Администратор" class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;
@@ -46,5 +44,26 @@
     <p>Телефон не указан</p>{% endif %}
     {% if user.vkuserid %}
     <p><a href="{% vkontakte_profile_link user.vkuserid %}" target="_blank"><img src="{% static 'images/vk.png' %}" width="32"/></a></p>{% endif %}
+    {% if user.gamesvisited %}
+    <hr/>
+    <p>Последние посещенные игры:</p>
+    <table class="table table-hover table-bordered">
+      <tr class="active">
+        <td>№ игры</td>
+        <td>Дата</td>
+        <td>Название</td>
+        <td>Тип игры</td>
+        <td>Площадка</td>
+        <td>Время на площадке</td>
+      </tr>{% for game in user.gamesvisited %}
+      <tr>
+        <td><a href="{% url 'game_view' game.pk %}" target="_blank"># {{ game.pk }}</a></td>
+        <td>{{ game.datetime }}</td>
+        <td>{{ game.title }}</td>
+        <td>{{ game.gametype }}</td>
+        <td><a href="{% url 'court_view' game.court.pk %}" target="_blank">{{ game.court.title }}</a></td>
+        <td>{{ game.duration_beauty }}</td>
+      </tr>{% endfor %}
+    </table>{% endif %}
   </div>
 </div>{% endblock %}

@@ -21,13 +21,19 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
     | {% if current_user.is_admin %}
     a.btn.btn-primary.btn-block(href="mailto:{{ user.email }}") {{ user.email }}
     | {% endif %}
-    | {% if user.gamesvisited > 0 %}
+
+    | {% if user.gamesvisited %}
     br
-    .panel.panel-default
-      .panel-body.text-center.p-b-5
-        p
-          span.glyphicon.glyphicon-stats
-          |&nbsp;Игр посещено: {{ user.gamesvisited }}
+    .well.well-sm.text-center
+      span.glyphicon.glyphicon-stats
+      |&nbsp;Игр посещено: {{ user.gamesvisited|length }}
+    | {% endif %}
+
+    | {% if user.gamesnotvisited %}
+    br
+    .well.well-sm.text-center
+      span.glyphicon.glyphicon-stats
+      |&nbsp;Игр пропущено: {{ user.gamesnotvisited|length }}
     | {% endif %}
   .col-md-8.col-sm-8.col-xs-8
     h1.m-t-0
@@ -91,5 +97,29 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
     p
       a(href="{% vkontakte_profile_link user.vkuserid %}" target="_blank")
         img(src="{% static 'images/vk.png' %}" width="32")
+    | {% endif %}
+
+    | {% if user.gamesvisited %}
+    hr
+    p Последние посещенные игры:
+    table.table.table-hover.table-bordered
+      tr.active
+        td № игры
+        td Дата
+        td Название
+        td Тип игры
+        td Площадка
+        td Время на площадке
+      |{% for game in user.gamesvisited %}
+      tr
+        td
+          a(href="{% url 'game_view' game.pk %}" target="_blank") # {{ game.pk }}
+        td {{ game.datetime }}
+        td {{ game.title }}
+        td {{ game.gametype }}
+        td
+          a(href="{% url 'court_view' game.court.pk %}" target="_blank") {{ game.court.title }}
+        td {{ game.duration_beauty }}
+      |{% endfor %}
     | {% endif %}
 | {% endblock %}

@@ -7,7 +7,7 @@ from django.utils import timezone
 from utils.fields import PhoneField
 from sports.models import Amplua
 from places.models import City
-from games.models import UserGameAction
+from games.models import UserGameAction, Game
 
 
 class UserManager(BaseUserManager):
@@ -114,8 +114,13 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def gamesvisited(self):
-        actions = UserGameAction.objects.filter(user=self, action=UserGameAction.VISITED)
-        return actions.count()
+        games_ids = UserGameAction.objects.filter(user=self, action=UserGameAction.VISITED).values_list('game', flat=True)
+        return Game.objects.filter(pk__in=games_ids).order_by('-datetime')[:10]
+
+    @property
+    def gamesnotvisited(self):
+        games_ids = UserGameAction.objects.filter(user=self, action=UserGameAction.NOTVISITED).values_list('game', flat=True)
+        return Game.objects.filter(pk__in=games_ids).order_by('-datetime')[:10]
 
     def __str__(self):
         return u'{} {}'.format(self.first_name, self.last_name)
