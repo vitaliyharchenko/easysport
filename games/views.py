@@ -28,11 +28,11 @@ def games_view(request):
         elif query == -1:
             context['games'] = Game.objects.filter(is_reported=True, datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
         else:
-            context['games'] = Game.objects.filter(sporttype=query, datetime__gt=timezone.now(), deleted=False).order_by('datetime')
+            context['games'] = Game.objects.filter(is_public=True, sporttype=query, datetime__gt=timezone.now(), deleted=False).order_by('datetime')
         context['query'] = query
         return render(request, 'games.html', context)
     except KeyError:
-        context['games'] = Game.objects.filter(is_reported=False, datetime__gt=timezone.now(),
+        context['games'] = Game.objects.filter(is_public=True, is_reported=False, datetime__gt=timezone.now(),
                                                deleted=False).order_by('datetime')
         return render(request, 'games.html', context)
 
@@ -49,6 +49,7 @@ def game_next_add(request, game_id):
     game.pk = None
     game.is_reported = False
     game.save()
+    # TODO: already exist check
     return redirect('games_view')
 
 
