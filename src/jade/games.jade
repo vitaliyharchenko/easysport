@@ -35,6 +35,14 @@ hr
           | {% endif %}
           |{% endif %}
 
+          |{% if current_user %}
+          | {% if query == -3 %}
+          option(value="-3" selected) Мои игры
+          | {% else %}
+          option(value="-3") Мои игры
+          | {% endif %}
+          |{% endif %}
+
           | {% for sport_type in sport_types %}
           | {% if query == sport_type.id %}
           option(value="{{ sport_type.id }}" selected) {{ sport_type.title }}

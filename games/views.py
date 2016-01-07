@@ -21,7 +21,11 @@ def games_view(request):
 
     try:
         query = int(request.GET.__getitem__('q'))
-        if query == -2:
+        if query == -3:
+            user = User.objects.get(email=request.user.email)
+            games_ids = UserGameAction.objects.filter(user=user, game__datetime__gt=timezone.now()).values_list('game', flat=True)
+            context['games'] = Game.objects.filter(pk__in=games_ids)
+        elif query == -2:
             user = User.objects.get(email=request.user.email)
             context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
                                                    datetime__lt=timezone.now(), deleted=False).order_by('-datetime')

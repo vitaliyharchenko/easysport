@@ -22,6 +22,11 @@
           <option value="-2" selected="selected">Требующие отчета</option>{% else %}
           <option value="-2">Требующие отчета</option>{% endif %}
           {% endif %}
+          {% if current_user %}
+          {% if query == -3 %}
+          <option value="-3" selected="selected">Мои игры</option>{% else %}
+          <option value="-3">Мои игры</option>{% endif %}
+          {% endif %}
           {% for sport_type in sport_types %}
           {% if query == sport_type.id %}
           <option value="{{ sport_type.id }}" selected="selected">{{ sport_type.title }}</option>{% else %}
