@@ -34,7 +34,7 @@ class Game(models.Model):
 
     cost = models.PositiveIntegerField(verbose_name='Цена')
 
-    datetime = models.DateTimeField(verbose_name='Дата проведения', validators=[validators.gte_now])
+    datetime = models.DateTimeField(verbose_name='Дата проведения')
     datetime_to = models.DateTimeField(verbose_name='Дата окончания', blank=True)
 
     reserved_count = models.PositiveIntegerField(verbose_name='Резервных мест', default=0)
