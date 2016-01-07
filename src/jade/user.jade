@@ -31,7 +31,7 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
 
     | {% if user.gamesnotvisited %}
     br
-    .well.well-sm.text-center
+    .well.well-sm.text-center.text-danger
       span.glyphicon.glyphicon-stats
       |&nbsp;Игр пропущено: {{ user.gamesnotvisited|length }}
     | {% endif %}

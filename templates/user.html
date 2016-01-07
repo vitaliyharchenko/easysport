@@ -19,7 +19,7 @@
     {% if user.gamesvisited %}<br/>
     <div class="well well-sm text-center"><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр посещено: {{ user.gamesvisited|length }}</div>{% endif %}
     {% if user.gamesnotvisited %}<br/>
-    <div class="well well-sm text-center"><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр пропущено: {{ user.gamesnotvisited|length }}</div>{% endif %}
+    <div class="well well-sm text-center text-danger"><span class="glyphicon glyphicon-stats"></span>&nbsp;Игр пропущено: {{ user.gamesnotvisited|length }}</div>{% endif %}
   </div>
   <div class="col-md-8 col-sm-8 col-xs-8">
     <h1 class="m-t-0">{{ user }}<small>&nbsp;&nbsp;&nbsp;<br class="visible-xs"/>{% if user.is_admin %}<span id="badge1" data-toggle="tooltip" data-placement="bottom" title="Администратор" class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;
