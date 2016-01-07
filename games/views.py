@@ -21,16 +21,20 @@ def games_view(request):
 
     try:
         query = int(request.GET.__getitem__('q'))
+        # my games
         if query == -3:
             user = User.objects.get(email=request.user.email)
             games_ids = UserGameAction.objects.filter(user=user, game__datetime__gt=timezone.now()).values_list('game', flat=True)
-            context['games'] = Game.objects.filter(pk__in=games_ids)
+            context['games'] = Game.objects.filter(pk__in=games_ids).order_by('datetime')
+        # needs report
         elif query == -2:
             user = User.objects.get(email=request.user.email)
             context['games'] = Game.objects.filter(is_reported=False, responsible_user=user,
                                                    datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
+        # old games
         elif query == -1:
             context['games'] = Game.objects.filter(is_reported=True, datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
+        # all feature games
         else:
             context['games'] = Game.objects.filter(is_public=True, sporttype=query, datetime__gt=timezone.now(), deleted=False).order_by('datetime')
         context['query'] = query
