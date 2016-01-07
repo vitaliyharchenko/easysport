@@ -68,7 +68,7 @@
                 <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-notvisited" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Не пришли<span class="caret"></span></a></h4>
               </div>
               <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notvisited" class="panel-collapse collapse">
-                <div class="panel-body">{% for user in game.notvisited %}
+                <div class="panel-body p-b-5">{% for user in game.notvisited %}
                   <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
                 </div>
               </div>
@@ -79,7 +79,7 @@
                 <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ game.pk }}-notpay" aria-expanded="true" aria-controls="collapse-{{ game.pk }}">Не заплатили<span class="caret"></span></a></h4>
               </div>
               <div role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notpay" class="panel-collapse collapse">
-                <div class="panel-body">{% for user in game.notpay %}
+                <div class="panel-body p-b-5">{% for user in game.notpay %}
                   <p><a href="{{ user.get_absolute_url }}" target="_blank">{{ forloop.counter }}. {{ user }}</a></p>{% endfor %}
                 </div>
               </div>

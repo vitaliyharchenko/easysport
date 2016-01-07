@@ -97,7 +97,7 @@ div(id="{{ game.id }}-pane")
                     | Не пришли
                     span.caret
               .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notvisited")
-                .panel-body
+                .panel-body.p-b-5
                   | {% for user in game.notvisited %}
                   p
                     a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
@@ -111,7 +111,7 @@ div(id="{{ game.id }}-pane")
                     | Не заплатили
                     span.caret
               .panel-collapse.collapse(role="tabpanel" aria-labelledby="headingOne" id="collapse-{{ game.pk }}-notpay")
-                .panel-body
+                .panel-body.p-b-5
                   | {% for user in game.notpay %}
                   p
                     a(href="{{ user.get_absolute_url }}" target="_blank") {{ forloop.counter }}. {{ user }}
