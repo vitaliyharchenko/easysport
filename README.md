@@ -257,6 +257,7 @@ sudo pip3 install uwsgi
 простой старт сервера
 '''
 uwsgi --ini sportcourts_uwsgi.ini
+uwsgi --stop sportcourts_uwsgi.ini
 '''
 
 автоматический старт сервера после перезагрузки
