@@ -91,9 +91,10 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         db_table = 'auth_user'
         abstract = True
 
-    def pre_save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if self.is_admin or self.is_organizer or self.is_responsible:
             self.is_staff = True
+        super(User, self).save()
 
     def get_full_name(self):
         return u'{} {}'.format(self.first_name, self.last_name)
