@@ -77,7 +77,7 @@ def game_invite_view(request, game_id):
 def game_email_invite(request, game_id):
     game = Game.objects.get(id=game_id)
     for user in game.old_users():
-        mailing.confirm_email(user.email, '12345')
+        # mailing.confirm_email(user.email, '12345')
     return redirect('game_invite_view', game_id)
 
 
