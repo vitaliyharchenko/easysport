@@ -76,16 +76,16 @@ bower install jasny-bootstrap --save
 bower install jasny-bootstrap --save
 
 далее gulp в директории проекта
-'''
+```
 
 # Миграция старой БД
 
-'''
+```
 python users_delete.py
 python filldb.py
 python manage.py loaddata users_all.xml
 python users_render.py
-'''
+```
 
 
 # Поднимаем сервер
