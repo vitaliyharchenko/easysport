@@ -1,53 +1,26 @@
-# sportcourts2
+# sportcourts v2.0
 
-Initial commit
+# На локальной машине:
 
-# Инструкция по развертыванию проекта для локальной разработки:
-
-1) установка PyCharm
-
-2) 
 ```
 git clone https://github.com/vitaliyharchenko/sportcourts2.git
-```
-
-3) открыть как проект в PyCharm
-
-4) создание virtualenv вне папки проекта. Pycharm-Preferences-Project-Interpreter-create virtualenv
-
-5) В virtualenv 
-
-```
-install django
-```
-
-6)
-```
+create venv
+source venv/bin/activate
+pip install -r requirements.txt
 psql
-CREATE USER scuser WITH PASSWORD '4203';
+CREATE USER scuser WITH PASSWORD '$$$$';
 CREATE DATABASE scdb OWNER scuser;
 ALTER USER scuser CREATEDB;
 \q
-```
-
-10) install psycopg2
-
-```
-cd scenv (ссылка к виртуальному окружению)
-source bin/activate
 pip install psycopg2
-cd sportcourts (путь к проекту)
 python manage.py makemigrations
 python manage.py migrate
-python manage.py syncdb
-create user - admin, ceo@sportcourts.ru, 123456
+python manage.py createsuperuser
 ```
-
-11) set database in PyCharm
 
 # обнуление БД
 
-'''
+```
 sudo su postgres -c 'pg_ctl -D /opt/local/var/db/postgresql84/defaultdb/ restart' (рестарт psql)
 psql
 DROP DATABASE scdb;
@@ -57,25 +30,24 @@ python manage.py makemigrations api users courts games places sports users
 python manage.py migrate
 python manage.py createsuperuser
 create user - admin, ceo@sportcourts.ru, 123456
-'''
+```
 
 
 # Работа с зависимостями
-'''
+```
 pip install -r requirements.txt
 pip freeze > requirements.txt
-
 npm update --save
 npm outdated
-'''
+```
 
-# Работа с удаленкой #
+# Резервное копирование #
 ```
 django-admin dumpdata
 ```
 
 # Развертываем фронтенд #
-'''
+```
 npm install --save-dev gulp - в директории проекта
 npm init
 
@@ -116,115 +88,60 @@ python users_render.py
 '''
 
 
-# Деплой на сервер
+# Поднимаем сервер
+```
+Установка Ubuntu ubuntu14.04-x86_64
+ssh-keygen -R 194.58.108.127
+ssh root@194.58.108.127
+OKBxmNX*GL6rg1
+sudo apt-get update
+sudo apt-get upgrade
+apt-get install python3-pip
+sudo apt-get install libpq-dev python3.4-dev libjpeg8 libjpeg62-dev
+sudo apt-get install libfreetype6 libfreetype6-dev
+sudo apt-get build-dep python-imaging
+sudo apt-get install python-virtualenv git nginx postgresql postgresql-contrib
+locale-gen ru_RU.UTF-8
 
-Подключение к серверу
-'''
-    Установка Ubuntu ubuntu14.04-x86_64
-    ssh-keygen -R 194.58.108.127
-    ssh root@194.58.108.127
-    OKBxmNX*GL6rg1
-'''
+sudo su - postgres
+psql
+create user "scuser" with password '4203';
+create database "scdb" owner "scuser";
+alter user scuser createdb;
+grant all privileges on database scdb TO scuser;
+\q
+su - root
 
-    
-Установка зависимостей на Ubuntu    
-'''    
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install libpq-dev python3.4-dev libjpeg8 libjpeg62-dev
-    sudo apt-get install libfreetype6 libfreetype6-dev
-    sudo apt-get build-dep python-imaging
-    sudo apt-get install python-virtualenv git nginx postgresql postgresql-contrib
-    apt-get install python3-pip
-    locale-gen ru_RU.UTF-8
-'''
+sudo virtualenv /opt/scenv --python=python3.4
+source /opt/scenv/bin/activate
+cd /opt
+git clone https://github.com/vitaliyharchenko/sportcourts2.git
+pip install -r /opt/sportcourts2/requirements.txt
+pip install uwsgi
+```
 
-Устанавливаем базу данных
-'''
-    sudo su - postgres
-    psql
-    create user "scuser" with password '4203';
-    create database "scdb" owner "scuser";
-    alter user scuser createdb;
-    grant all privileges on database scdb TO scuser;
-    \q
-    su - root
-'''
+# Test Django-uwsgi
+```
+cd /opt/sportcourts2
+python manage.py collectstatic
+python manage.py makemigrations api courts games places sports users notifications
+python manage.py migrate
+python manage.py createsuperuser
+create user - admin, ceo@sportcourts.ru, 123456
+python manage.py runserver 0.0.0.0:8000
+go to http://sportcourts.ru:8000
+uwsgi --http :8000 --module sportcourts.wsgi
+go to http://sportcourts.ru:8000
+the web client <-> uWSGI <-> Django | works
+go to http://sportcourts.ru
+the web client <-> the web server |works
+```
 
 
-Поднимаем виртуальное окружение
-'''
-    sudo virtualenv /opt/scenv --python=python3.4
-    source /opt/scenv/bin/activate
-    cd /opt
-    git clone https://github.com/vitaliyharchenko/sportcourts2.git
-    pip install -r /opt/sportcourts2/requirements.txt
-    pip install uwsgi
-'''
-
-Test Django-uwsgi
-'''
-    cd /opt/sportcourts2
-    python manage.py collectstatic
-    python manage.py makemigrations api courts games places sports users notifications
-    python manage.py migrate
-    python manage.py createsuperuser
-    create user - admin, ceo@sportcourts.ru, 123456
-    
-    python manage.py runserver 0.0.0.0:8000
-    go to http://sportcourts.ru:8000
-    
-    uwsgi --http :8000 --module sportcourts.wsgi
-    go to http://sportcourts.ru:8000
-    the web client <-> uWSGI <-> Django | works
-    
-    go to http://sportcourts.ru
-    the web client <-> the web server |works
-'''
-
-Set up nginx
-'''
+# Set up nginx
+```
 sudo nano /etc/nginx/sites-available/sportcourts
-'''
-
-'''
-# mysite_nginx.conf
-
-# the upstream component nginx needs to connect to
-upstream django {
-    # server unix:///opt/sportcourts2/sportcourts.sock; # for a file socket
-    server 127.0.0.1:8001; # for a web port socket (we'll use this first)
-}
-
-# configuration of the server
-server {
-    # the port your site will be served on
-    listen      8000;
-    # the domain name it will serve for
-    server_name sportcourts.ru; # substitute your machine's IP address or FQDN
-    charset     utf-8;
-
-    # max upload size
-    client_max_body_size 75M;   # adjust to taste
-
-    # Django media
-    location /media  {
-        alias /opt/sportcourts2/media;  # your Django project's media files - amend as required
-    }
-
-    location /static {
-        alias /opt/sportcourts2/static; # your Django project's static files - amend as required
-    }
-
-    # Finally, send all non-media requests to the Django server.
-    location / {
-        uwsgi_pass  django;
-        include     /opt/sportcourts2/uwsgi_params; # the uwsgi_params file you installed
-    }
-}
-'''
-
-'''
+look at sportcourts.conf file
 cd /etc/nginx/sites-enabled
 sudo ln -s ../sites-available/sportcourts
 sudo rm default
@@ -246,22 +163,21 @@ go to http://sportcourts.ru:8000
 socket works correctly
 
 uwsgi --socket sportcourts.sock --module sportcourts.wsgi --chmod-socket=666
-'''
 
 Install uWSGI system-wide
-'''
+
 deactivate
 sudo pip3 install uwsgi
-'''
+```
 
-простой старт сервера
-'''
+# старт сервера
+```
 uwsgi --ini sportcourts_uwsgi.ini
 uwsgi --stop sportcourts_uwsgi.ini
-'''
+```
 
-автоматический старт сервера после перезагрузки
-'''
+# автоматический старт сервера после перезагрузки
+```
 nano /etc/init/uwsgi.conf
 
 description "uwsgi tiny instance"
@@ -269,4 +185,4 @@ start on runlevel [2345]
 stop on runlevel [06]
 respawn
 exec uwsgi --ini /opt/sportcourts2/sportcourts_uwsgi.ini
-'''
+```
