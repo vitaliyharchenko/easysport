@@ -11,6 +11,12 @@ class UserGameActionInline(admin.TabularInline):
     model = UserGameAction
     extra = 0
 
+    def has_add_permission(self, request):
+        return permissions.admin_organizer_responsible_permissions(request)
+
+    def has_change_permission(self, request):
+        return permissions.admin_organizer_responsible_permissions(request)
+
 
 class UserAdmin(UserAdmin):
     # The forms to add and change user instances
