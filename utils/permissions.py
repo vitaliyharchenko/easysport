@@ -13,3 +13,13 @@ def admin_organizer_permissions(request):
             return False
     else:
         return False
+
+
+def admin_organizer_responsible_permissions(request):
+    if request.user:
+        if request.user.is_admin or request.user.is_organizer or request.user.is_responsible:
+            return True
+        else:
+            return False
+    else:
+        return False

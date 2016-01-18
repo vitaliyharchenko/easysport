@@ -12,6 +12,12 @@ class UserGameActionInline(admin.TabularInline):
     raw_id_fields = ('user',)
     can_delete = False
 
+    def has_add_permission(self, request):
+        return permissions.admin_organizer_responsible_permissions(request)
+
+    def has_change_permission(self, request):
+        return permissions.admin_organizer_responsible_permissions(request)
+
 
 class GameAdmin(admin.ModelAdmin):
     model = Game
