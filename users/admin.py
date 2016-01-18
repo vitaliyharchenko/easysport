@@ -11,15 +11,6 @@ class UserGameActionInline(admin.TabularInline):
     model = UserGameAction
     extra = 0
 
-    def has_add_permission(self, request):
-        return permissions.admin_organizer_permissions(request)
-
-    def has_change_permission(self, request):
-        return permissions.admin_organizer_permissions(request)
-
-    def has_module_permission(self, request):
-        return permissions.admin_organizer_permissions(request)
-
 
 class UserAdmin(UserAdmin):
     # The forms to add and change user instances
@@ -31,8 +22,9 @@ class UserAdmin(UserAdmin):
         return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        # return permissions.only_admin_permissions(request)
-        return permissions.admin_organizer_permissions(request)
+        if obj is None and '_popup' in request.GET:
+            return True
+        return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
         return permissions.admin_organizer_permissions(request)
