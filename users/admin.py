@@ -18,11 +18,14 @@ class UserAdmin(UserAdmin):
     add_form = UserCreationForm
     inlines = [UserGameActionInline]
 
+    def has_add_permission(self, request, obj=None):
+        return permissions.only_admin_permissions(request)
+
     def has_change_permission(self, request, obj=None):
         return permissions.only_admin_permissions(request)
 
     def has_module_permission(self, request):
-        return permissions.only_admin_permissions(request)
+        return permissions.admin_organizer_responsible_permissions(request)
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
