@@ -31,10 +31,8 @@ class UserAdmin(UserAdmin):
         return permissions.only_admin_permissions(request)
 
     def has_change_permission(self, request, obj=None):
-        return permissions.only_admin_permissions(request)
-
-    # def has_view_permission(self, request):
-    #     return permissions.admin_organizer_responsible_permissions(request)
+        # return permissions.only_admin_permissions(request)
+        return permissions.admin_organizer_permissions(request)
 
     def has_module_permission(self, request):
         return permissions.admin_organizer_permissions(request)
