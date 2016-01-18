@@ -27,6 +27,9 @@ class UserAdmin(UserAdmin):
     def has_view_permission(self, request):
         return permissions.admin_organizer_responsible_permissions(request)
 
+    def has_module_permission(self, request):
+        return permissions.admin_organizer_responsible_permissions(request)
+
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
