@@ -12,13 +12,13 @@ class UserGameActionInline(admin.TabularInline):
     extra = 0
 
     def has_add_permission(self, request):
-        return permissions.admin_organizer_responsible_permissions(request)
+        return permissions.admin_organizer_permissions(request)
 
     def has_change_permission(self, request):
-        return permissions.admin_organizer_responsible_permissions(request)
+        return permissions.admin_organizer_permissions(request)
 
     def has_module_permission(self, request):
-        return permissions.admin_organizer_responsible_permissions(request)
+        return permissions.admin_organizer_permissions(request)
 
 
 class UserAdmin(UserAdmin):
@@ -37,7 +37,7 @@ class UserAdmin(UserAdmin):
     #     return permissions.admin_organizer_responsible_permissions(request)
 
     def has_module_permission(self, request):
-        return permissions.admin_organizer_responsible_permissions(request)
+        return permissions.admin_organizer_permissions(request)
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
