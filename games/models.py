@@ -206,6 +206,7 @@ class UserGameAction(models.Model):
         verbose_name = 'запись на игру'
         verbose_name_plural = 'записи на игру'
         app_label = 'games'
+        unique_together = ("game", "user")
 
     SUBSCRIBED = 1
     UNSUBSCRIBED = 2
