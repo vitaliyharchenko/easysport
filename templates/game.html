@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="SportCourts.ru"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="{{ game.get_absolute_url }}"/>
-<meta property="og:image" content="{{ game.court.url }}"/>
+<meta property="og:image" content="{{ game.court.photo.url }}"/>
 <meta property="og:description" content="Рекомендую посетить игру {{game.datetime|date:'D, j M, H:i'}} {{ game.gametype }}"/>{% endblock %}
 {% block content %}
 <div class="row">
