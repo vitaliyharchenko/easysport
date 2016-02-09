@@ -43,7 +43,7 @@ npm outdated
 
 # Резервное копирование #
 ```
-django-admin dumpdata
+python manage.py dumpdata > db.json
 ```
 
 # Развертываем фронтенд #
