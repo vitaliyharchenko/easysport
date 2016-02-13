@@ -13,3 +13,9 @@ def confirm_email(email, activation_key):
     body = render_to_string('mail/email_confirm.html',
                             {'activation_key': activation_key, 'current_host': settings.CURRENT_HOST})
     return sc_send_email(email, u'Подтверждение адреса электронной почты', body)
+
+
+def invite_email(user, game):
+    body = render_to_string('mail/email_invite.html',
+                            {'game': game, 'current_host': settings.CURRENT_HOST, 'user': user})
+    return sc_send_email(user.email, u'Приглашение на игру', body)

@@ -17,9 +17,14 @@
                         <tbody>
                           <tr>
                             <td valign="top" style="margin:0;padding:0;color:#606060;display:block;font-family:Helvetica;font-size:20px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:-1px;text-align:left" class="content-td"><br/>
-                              <h1>Привет!</h1><br/>
-                              <h3>Поздравляем Вас с вступлением в команду активных людей, не представлюящих свою жизнь без спорта!</h3>
-                              <p>Пожалуйста, перейдите по ссылке для подтверждения учетной записи:</p>
+                              <h1>Привет, {{ user.first_name }}!</h1><br/>
+                              <h3>Приглашаем Вас на игру, которая состоится на этой неделе:</h3>
+                              <hr/>
+                              <p>Тип игры: {{ game.gametype }}</p>
+                              <p>Площадка:&nbsp;<a href="{{ game.court.get_absolute_url }}">{{ game.court }}</a></p>
+                              <p>{{ game.datetime }}</p>
+                              <p>Продолжительность: {{ game.duration_beauty }}</p>
+                              <p>Цена: {{ game.cost }} RUB</p>
                             </td>
                           </tr>
                         </tbody>
@@ -35,7 +40,7 @@
                       <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate!important;border:2px none #707070;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;background-color:#399fed" class="btn">
                         <tbody>
                           <tr>
-                            <td align="center" valign="middle" style="font-family:Arial;font-size:16px;padding:16px"><a title="Подтвердить" href="{{ current_host }}{% url 'confirm' activation_key %}" target="_blank" style="font-weight:bold;letter-spacing:normal;line-height:100%;text-align:center;text-decoration:none;color:#ffffff;word-wrap:break-word">Подтвердить</a></td>
+                            <td align="center" valign="middle" style="font-family:Arial;font-size:16px;padding:16px"><a title="Записаться на игру..." href="{{ current_host }}{% url 'game_view' game.id %}" target="_blank" style="font-weight:bold;letter-spacing:normal;line-height:100%;text-align:center;text-decoration:none;color:#ffffff;word-wrap:break-word">Записаться на игру...</a></td>
                           </tr>
                         </tbody>
                       </table>

@@ -17,10 +17,17 @@ tbody
                           tr
                             td.content-td(valign="top" style="margin:0;padding:0;color:#606060;display:block;font-family:Helvetica;font-size:20px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:-1px;text-align:left")
                               br
-                              h1 Привет!
+                              h1 Привет, {{ user.first_name }}!
                               br
-                              h3 Поздравляем Вас с вступлением в команду активных людей, не представлюящих свою жизнь без спорта!
-                              p Пожалуйста, перейдите по ссылке для подтверждения учетной записи:
+                              h3 Приглашаем Вас на игру, которая состоится на этой неделе:
+                              hr
+                              p Тип игры: {{ game.gametype }}
+                              p
+                                |Площадка:&nbsp;
+                                a(href="{{ game.court.get_absolute_url }}") {{ game.court }}
+                              p {{ game.datetime }}
+                              p Продолжительность: {{ game.duration_beauty }}
+                              p Цена: {{ game.cost }} RUB
               table(border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse")
                 tbody
                   tr
@@ -29,7 +36,7 @@ tbody
                         tbody
                           tr
                             td(align="center" valign="middle" style="font-family:Arial;font-size:16px;padding:16px")
-                              a(title="Подтвердить" href="{{ current_host }}{% url 'confirm' activation_key %}" target="_blank" style="font-weight:bold;letter-spacing:normal;line-height:100%;text-align:center;text-decoration:none;color:#ffffff;word-wrap:break-word") Подтвердить
+                              a(title="Записаться на игру..." href="{{ current_host }}{% url 'game_view' game.id %}" target="_blank" style="font-weight:bold;letter-spacing:normal;line-height:100%;text-align:center;text-decoration:none;color:#ffffff;word-wrap:break-word") Записаться на игру...
               table(border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse")
                 tbody
                   tr
