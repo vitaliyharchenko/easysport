@@ -125,6 +125,11 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
         games_ids = UserGameAction.objects.filter(user=self, action=UserGameAction.NOTVISITED).values_list('game', flat=True)
         return Game.objects.filter(pk__in=games_ids).order_by('-datetime')[:10]
 
+    @property
+    def gamesnotpay(self):
+        games_ids = UserGameAction.objects.filter(user=self, action=UserGameAction.NOTPAY).values_list('game', flat=True)
+        return Game.objects.filter(pk__in=games_ids).order_by('-datetime')[:10]
+
     def __str__(self):
         return u'{} {}'.format(self.first_name, self.last_name)
 

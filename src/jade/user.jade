@@ -35,6 +35,13 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
       span.glyphicon.glyphicon-stats
       |&nbsp;Игр пропущено: {{ user.gamesnotvisited|length }}
     | {% endif %}
+
+    | {% if user.gamesnotpay %}
+    br
+    .well.well-sm.text-center.text-danger
+      span.glyphicon.glyphicon-stats
+      |&nbsp;Игр не оплачено: {{ user.gamesnotpay|length }}
+    | {% endif %}
   .col-md-8.col-sm-8.col-xs-8
     h1.m-t-0
       | {{ user }}
