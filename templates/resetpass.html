@@ -1,0 +1,40 @@
+
+{% extends 'base.html' %}
+{% block title %}Наши контакты{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h2>Сброс пароля</h2>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            {% if messages %}
+            {% for message in messages %}
+            <div role="alert" class="alert alert-dismissible fade in alert-{{ message.tags }}">
+              <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">×</span></button><strong>Ура!</strong>&nbsp;{{ message }}
+            </div>
+            <script type="text/javascript">setInterval(function(){$(".alert").alert('close')}, 30000);</script>{% endfor %}
+            {% endif %}
+          </div>
+          <div class="col-xs-12">
+            <form method="post">{% csrf_token %}
+              <p class="lead">Пожалуйста, введите ваш email чтобы получить инструкции по восстановлению пароля.</p>
+              <div class="form-group">
+                <label class="sr-only">Email</label>
+                <input type="email" name="email" placeholder="Email" class="form-control"/>
+              </div>
+              <button type="submit" class="btn btn-default">Получить письмо</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}
