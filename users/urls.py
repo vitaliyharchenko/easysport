@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^changepass$', views.changepass, name="changepass"),
     url(r'^unsetvkid$', views.unsetvkid, name="unsetvkid"),
 
+    url(r'^resetpass$', views.resetpass, name="resetpass"),
+
     url(r'^user/(?P<user_id>\d+)$', views.user_view, name='user_view'),
     url(r'^users$', views.users_view, name='users_view'),
 ]

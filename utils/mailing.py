@@ -19,3 +19,9 @@ def invite_email(user, game):
     body = render_to_string('mail/email_invite.html',
                             {'game': game, 'current_host': settings.CURRENT_HOST, 'user': user})
     return sc_send_email(user.email, u'Приглашение на игру', body)
+
+
+def resetpass_email(email, new_pass):
+    body = render_to_string('mail/email_resetpass.html',
+                            {'new_pass': new_pass, 'current_host': settings.CURRENT_HOST})
+    return sc_send_email(email, u'Смена пароля', body)

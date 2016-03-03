@@ -37,7 +37,7 @@
               button.btn.btn-default(type="submit") Войти
               br
               br
-              a(href="#") Забыли пароль?
+              a(href="{% url 'resetpass' %}") Забыли пароль?
           .col-xs-6
             .form-group
               |{% url 'login_view' as login_url %}

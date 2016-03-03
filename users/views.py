@@ -1,4 +1,5 @@
 # coding=utf-8
+import random
 from django.shortcuts import render, redirect
 from django.core import signing
 from django.core.urlresolvers import reverse
@@ -8,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from django.http import Http404
-from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm
+from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm, UserResetPassForm
 from .models import User, UserActivation
 from utils import mailing, vkontakte
 from urllib.request import urlopen
@@ -284,3 +285,17 @@ def unsetvkid(request):
     user.save()
     messages.success(request, "Профиль ВКонтакте откреплен", extra_tags='integration')
     return redirect('user_update_view')
+
+
+def resetpass(request):
+    form = UserResetPassForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            new_pass = str(random.randint(100000, 999999))
+            user = User.objects.get(email=email)
+            user.set_password(new_pass)
+            user.save()
+            mailing.resetpass_email(email, new_pass)
+            messages.success(request, "Пароль изменен. Письмо отправлено на почту!")
+    return render(request, 'resetpass.html')

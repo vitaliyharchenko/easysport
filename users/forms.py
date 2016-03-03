@@ -12,6 +12,10 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
 
 
+class UserResetPassForm(forms.Form):
+    email = forms.EmailField(label='Email', max_length=150)
+
+
 class UserRegistrationForm(forms.ModelForm):
     # TODO: Override all error messages
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
