@@ -36,11 +36,14 @@ def games_view(request):
             context['games'] = Game.objects.filter(is_reported=True, datetime__lt=timezone.now(), deleted=False).order_by('-datetime')
         # all feature games
         else:
-            context['games'] = Game.objects.filter(is_public=True, sporttype=query, datetime__gt=timezone.now(), deleted=False).order_by('datetime')
+            time_mark = timezone.now() - datetime.timedelta(hours=2)
+            context['games'] = Game.objects.filter(is_public=True, sporttype=query, datetime__gt=time_mark,
+                                                   deleted=False).order_by('datetime')
         context['query'] = query
         return render(request, 'games.html', context)
     except KeyError:
-        context['games'] = Game.objects.filter(is_public=True, is_reported=False, datetime__gt=timezone.now(),
+        time_mark = timezone.now() - datetime.timedelta(hours=2)
+        context['games'] = Game.objects.filter(is_public=True, is_reported=False, datetime__gt=time_mark,
                                                deleted=False).order_by('datetime')
         return render(request, 'games.html', context)
 
