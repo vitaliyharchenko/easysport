@@ -1,13 +1,15 @@
 # coding=utf-8
 from django import forms
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, modelformset_factory
 from .models import Game, UserGameAction
 
 
 class UserGameActionForm(forms.ModelForm):
     class Meta:
         model = UserGameAction
-        fields = ('user', 'game',)
+        fields = ('user', 'action',)
+        exclude = ('id',)
+        readonly_fields = ('user', )
 
     VISITED = 5
     NOTVISITED = 6
@@ -21,4 +23,9 @@ class UserGameActionForm(forms.ModelForm):
     action = forms.ChoiceField(choices=ACTIONS)
 
 
-GameFormSet = inlineformset_factory(Game, UserGameAction, form=UserGameActionForm, can_delete=False, extra=0)
+ActionFormSet = modelformset_factory(UserGameAction, fields=('user', 'action',), exclude=('id',), extra=0,
+                                     form=UserGameActionForm)
+
+
+GameFormSet = inlineformset_factory(Game, UserGameAction, form=UserGameActionForm, can_delete=False,
+                                    fields=('user', 'action',), extra=0)

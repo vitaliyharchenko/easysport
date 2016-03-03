@@ -1,5 +1,6 @@
 | {% extends 'base.html' %}
 | {% load gametags %}
+| {% load bootstrap %}
 | {% block title %}{{ game.title }}{% endblock %}
 | {% block headers %}{% endblock %}
 | {% block content %}
@@ -36,6 +37,7 @@
                 hr
             .row
               .col-xs-12
+                |{% if game.is_reported %}
                 .table-responsive
                   table.table.table-hover.table-bordered.table-condensed
                     tbody
@@ -45,7 +47,6 @@
                         td Фамилия
                         td Телефон
                         td
-                      |{% if game.is_reported %}
                       tr
                         td.text-center(colspan=6) Посетившие
                       | {% for user in game.visited %}
@@ -76,18 +77,36 @@
                         td {{ user.phone }}
                         td
                       | {% endfor %}
+                |{% else %}
+                form(method="post" action="{% url 'game_report_view' game.id %}")
+                  |{% csrf_token %}
+                  table#formset.table.table-hover.table-bordered.table-condensed
+                    |{{ formset.management_form }}
+                    |{% for form in formset.forms %}
+                    | {% if forloop.first %}
+                    thead
+                      tr.success
+                        th №
+                        |{% for field in form.visible_fields %}
+                        th {{ field.label|capfirst }}
+                        |{% endfor %}
+                    | {% endif %}
+                    tr
+                      td {{ forloop.counter }}
+                      |{% for field in form.visible_fields %}
+                      td
+                        |{% if forloop.first %}
+                        | {% for hidden in form.hidden_fields %}
+                        |  {{ hidden }}
+                        | {% endfor %}
+                        |{% endif %}
 
-                      |{% else %}
-
-                      | {% for action in actions %}
-                      tr
-                        td {{ action.user.pk }}
-                        td {{ action.user.first_name }}
-                        td {{ action.user.last_name }}
-                        td {{ action.user.phone }}
-                        td {{ action.text }}
-                      | {% endfor %}
-                      |{% endif %}
+                        |{{ field.errors.as_ul }}
+                        |{{ field }}
+                      |{% endfor %}
+                    |{% endfor %}
+                  button.btn.btn-primary.btn-block(type="submit") Отправить отчет
+                |{% endif %}
 script
   include ../../src/js/report.js
 | {% endblock %}

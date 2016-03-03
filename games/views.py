@@ -7,7 +7,7 @@ import datetime
 from .models import Game, UserGameAction
 from users.models import User
 from sports.models import SportType
-from .forms import GameFormSet
+from .forms import GameFormSet, ActionFormSet
 from utils import mailing
 
 from django.core import serializers
@@ -87,18 +87,16 @@ def game_report_view(request, game_id):
     game = Game.objects.get(id=game_id)
 
     if request.method == "POST":
-        formset = GameFormSet(request.POST, instance=game)
+        formset = ActionFormSet(request.POST)
         if formset.is_valid():
             formset.save()
-            # Do something. Should generally end with a redirect. For example:
+            game.is_reported = True
+            game.save()
+            return redirect('game_view', game_id)
     else:
-        formset = GameFormSet(instance=game)
+        formset = ActionFormSet(queryset=UserGameAction.objects.filter(game=game).filter(action=UserGameAction.SUBSCRIBED))
 
-    subscribed = game.subscribed
-    data = serializers.serialize("json", subscribed, fields=('id', 'first_name', 'last_name', 'phone'))
-    actions = UserGameAction.objects.filter(game=game)
-
-    context = {'game': game, 'formset': formset, 'users': data, 'actions': actions}
+    context = {'game': game, 'formset': formset}
     return render(request, 'report.html', context)
 
 
