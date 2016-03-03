@@ -14,7 +14,9 @@ hr
     .panel.panel-default
       .panel-body
         p.lead Поиск
-        input#searchquery.form-control(type="text" name="query" placeholder="Поиск по имени" value="{{ query }}")
+        input#searchquery.form-control(type="text" name="query" placeholder="Имя, телефон" value="{{ query }}")
+        small
+          p.help-block Телефон в формате 7**********
         br
         a#searchbutton.btn.btn-primary.btn-block(href="#" disabled) Найти
         |{% if query %}

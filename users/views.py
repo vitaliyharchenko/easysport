@@ -220,7 +220,7 @@ def user_view(request, user_id):
 def users_view(request):
     try:
         query = request.GET.__getitem__('q')
-        users = User.objects.filter(first_name__icontains=query) | User.objects.filter(last_name__icontains=query)
+        users = User.objects.filter(first_name__icontains=query) | User.objects.filter(last_name__icontains=query) | User.objects.filter(phone__icontains=query)
         context = {'users': users, 'query': query}
     except KeyError:
         context = {'users': User.objects.all().order_by('-last_login')}

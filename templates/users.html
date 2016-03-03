@@ -14,7 +14,8 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <p class="lead">Поиск</p>
-        <input id="searchquery" type="text" name="query" placeholder="Поиск по имени" value="{{ query }}" class="form-control"/><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>{% if query %}<a href="{% url 'users_view' %}" class="btn btn-primary btn-block">Сброс</a>{% endif %}
+        <input id="searchquery" type="text" name="query" placeholder="Имя, телефон" value="{{ query }}" class="form-control"/><small>
+          <p class="help-block">Телефон в формате 7**********</p></small><br/><a id="searchbutton" href="#" disabled="disabled" class="btn btn-primary btn-block">Найти</a>{% if query %}<a href="{% url 'users_view' %}" class="btn btn-primary btn-block">Сброс</a>{% endif %}
       </div>
     </div>
     <div class="panel panel-default hidden-xs">
