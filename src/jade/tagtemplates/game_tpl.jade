@@ -166,10 +166,12 @@ div(id="{{ game.id }}-pane")
             | {% endif %}
           | {% endif %}
 
-          |{% if current_user == game.responsible_user and game.is_reported == False and game.time_status == 'WAS' %}
+          |{% if game.is_reported == False and game.time_status == 'WAS' %}
+          | {% if current_user == game.responsible_user or current_user.is_superuser %}
           a.btn.btn-lg.btn-success(href="{% url 'game_report_view' game.id %}") Заполнить отчет
           br
           br
+          | {% endif %}
           |{% elif game.time_status == 'WAS' and game.is_reported and current_user.is_organizer %}
           a.btn.btn-success(href="{% url 'game_next_add' game.id %}") Создать новую игру через неделю
           br
