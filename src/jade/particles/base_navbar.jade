@@ -38,7 +38,7 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
             .visible-xs-inline
               |Мой профиль
             .visible-sm-inline
-              |Avatar
+              |{% avatar current_user.avatar height="40" width="40" circle="True" sex=user.sex thumbnail="False" %}
             .visible-lg-inline.visible-md-inline
               |{{ current_user }}&nbsp;
               |{% avatar current_user.avatar height="40" width="40" circle="True" sex=user.sex thumbnail="False" %}
