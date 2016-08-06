@@ -161,24 +161,21 @@
             <!--Если нет мест-->{% else %}
             {% if current_user %}
              {% if game.has_reserved_place %}
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li><a id="{{ game.id }}-reserve" class="action">Записаться в резерв</a></li>
-              </ul>
-            </button> {% else %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет</button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a id="{{ game.id }}-reserve" class="action">Записаться в резерв</a></li>
+            </ul> {% else %}
             <button class="btn btn-default btn-sm">Мест нет</button> {% endif %}
             {% else %}
              {% if game.has_reserved_place %}
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться в резерв</a></li>
-              </ul>
-            </button> {% else %}
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#" data-toggle="modal" data-target="#loginModal">Мест нет</a></li>
-              </ul>
-            </button> {% endif %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет</button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">Записаться в резерв</a></li>
+            </ul> {% else %}
+            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-sm dropdown-toggle">Мест нет</button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="#" data-toggle="modal" data-target="#loginModal">Мест нет</a></li>
+            </ul> {% endif %}
             {% endif %}
             {% endif %}
             <!--Конец проверки - Если есть места-->{% endif %}
