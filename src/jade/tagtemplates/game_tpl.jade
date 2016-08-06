@@ -227,23 +227,23 @@ div(id="{{ game.id }}-pane")
             | {% if current_user %}
             |  {% if game.has_reserved_place %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-              ul.dropdown-menu.dropdown-menu-right
-                li
-                  a.action(id="{{ game.id }}-reserve") Записаться в резерв
+            ul.dropdown-menu.dropdown-menu-right
+              li
+                a.action(id="{{ game.id }}-reserve") Записаться в резерв
             |  {% else %}
             button.btn.btn-default.btn-sm Мест нет
             |  {% endif %}
             | {% else %}
             |  {% if game.has_reserved_place %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-              ul.dropdown-menu.dropdown-menu-right
-                li
-                  a(href="#" data-toggle="modal" data-target="#loginModal") Записаться в резерв
+            ul.dropdown-menu.dropdown-menu-right
+              li
+                a(href="#" data-toggle="modal" data-target="#loginModal") Записаться в резерв
             |  {% else %}
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Мест нет
-              ul.dropdown-menu.dropdown-menu-right
-                li
-                  a(href="#" data-toggle="modal" data-target="#loginModal") Мест нет
+            ul.dropdown-menu.dropdown-menu-right
+              li
+                a(href="#" data-toggle="modal" data-target="#loginModal") Мест нет
             |  {% endif %}
             | {% endif %}
             |{% endif %}
