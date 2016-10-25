@@ -9,7 +9,8 @@ nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
         span.icon-bar
         span.icon-bar
       a.navbar-brand(href="{% url 'index_view' %}")
-        img(src="{% static 'images/logo_new.png' %}" alt="brand")
+        img.visible-xs(src="{% static 'images/logo_new_small.png' %}" alt="brand")
+        img.hidden-xs(src="{% static 'images/logo_new.png' %}" alt="brand")
 
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
