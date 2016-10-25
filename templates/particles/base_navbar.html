@@ -4,7 +4,7 @@
 <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle collapsed"><span class="sr-only">Toogle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="{% url 'index_view' %}" class="navbar-brand"><img src="{% static 'images/logo_new.png' %}" alt="brand"/></a>
+      <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle collapsed"><span class="sr-only">Toogle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="{% url 'index_view' %}" class="navbar-brand"><img src="{% static 'images/logo_new_small.png' %}" alt="brand" class="visible-xs"/><img src="{% static 'images/logo_new.png' %}" alt="brand" class="hidden-xs"/></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
