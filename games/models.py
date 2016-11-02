@@ -23,7 +23,8 @@ class Game(models.Model):
     created_by = models.ForeignKey('users.User', blank=True, null=True)
     # может быть, а может и не быть тренер на игре
     coach = models.ForeignKey('users.User', related_name='coach', blank=True, null=True,
-                              limit_choices_to={'is_coach': True})
+                              limit_choices_to={'is_coach': True},
+                              verbose_name='Тренер')
 
     court = models.ForeignKey(Court, verbose_name='Площадка')
 
