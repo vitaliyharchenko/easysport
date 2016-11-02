@@ -10,7 +10,7 @@ from utils import formatters, validators
 
 class Game(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
-    description = models.CharField(max_length=300, verbose_name='Описание', null=True)
+    description = models.CharField(max_length=300, verbose_name='Описание', blank=True, null=True)
 
     # TODO: add image of event
     is_public = models.BooleanField('Публичный статус', default=True,
