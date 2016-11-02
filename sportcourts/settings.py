@@ -27,9 +27,10 @@ IS_PRODUCTION = False
 
 if IS_PRODUCTION:
     DEBUG = True
-    CURRENT_HOST = 'http://sportcourts.ru'
+    CURRENT_HOST = 'http://easysport.online'
     ALLOWED_HOSTS = ['http://sportcourts.ru:8000', 'http://sportcourts.ru', 'sportcourts.ru',
-                     'http://sportcourts.ru', 'sportcourts.ru']
+                     'http://sportcourts.ru', 'sportcourts.ru',
+                     'easysport.online', 'http://easysport.online']
 else:
     DEBUG = True
     CURRENT_HOST = 'http://127.0.0.1:8000'
