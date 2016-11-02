@@ -1,5 +1,6 @@
 # coding=utf-8
 import json
+from django.forms.models import inlineformset_factory
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.utils import timezone
@@ -7,7 +8,7 @@ import datetime
 from .models import Game, UserGameAction
 from users.models import User
 from sports.models import SportType
-from .forms import GameFormSet, ActionFormSet
+from .forms import GameFormSet, ActionFormSet, GameEditForm, GameCreationForm
 from utils import mailing
 
 from django.core import serializers
@@ -51,6 +52,42 @@ def games_view(request):
 def game_view(request, game_id):
     game = Game.objects.get(id=game_id)
     return render(request, 'game.html', {'game': game, 'standalone': True})
+
+
+def game_create_view(request):
+    if request.user.is_organizer:
+        now = timezone.localtime(timezone.now() + timezone.timedelta(days=2))
+        form = GameCreationForm(initial={'datetime': now, 'datetime_to': now, 'created_by': request.user})
+
+        if request.method == "POST":
+            form = GameCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                game = Game.objects.filter(created_by=request.user).order_by('-id')[0]
+                return redirect('game_view', game.pk)
+            else:
+                print(form.errors)
+        return render(request, 'game_create.html', {'form': form})
+    else:
+        return redirect('index_view')
+
+
+def game_edit_view(request, game_id):
+    game = Game.objects.get(id=game_id)
+    UserGameActionInlineFormset = inlineformset_factory(Game, UserGameAction, fields=('user', 'action', 'game'), extra=1)
+
+    if request.method == "POST":
+        form = GameEditForm(request.POST, instance=game)
+        formset = UserGameActionInlineFormset(request.POST)
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+        else:
+            print(form.errors)
+    else:
+        form = GameEditForm(instance=game)
+        formset = UserGameActionInlineFormset(instance=game)
+    return render(request, 'game_edit.html', {'game': game, 'form': form, 'formset': formset})
 
 
 def game_next_add(request, game_id):

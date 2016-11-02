@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %}
+    Редактирование игры {{ game.title }}
+{% endblock %}
+
+{% block headers %}
+    <meta property="og:title" content="Игра в {{ game.sporttype }}"/>
+    <meta property="og:site_name" content="SportCourts.ru"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ game.get_absolute_url }}"/>
+    <meta property="og:image" content="{{ game.court.photo.url }}"/>
+    <meta property="og:description" content="Рекомендую посетить игру {{game.datetime|date:'D, j M, H:i'}} {{ game.gametype }}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Редактирование игры</h2>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{ form|bootstrap }}
+                        <hr>
+                        <h4>Записи на игру</h4>
+                        <br>
+                        {{ formset.management_form }}
+                        {% for form in formset %}
+                            {{ form|bootstrap_horizontal }}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary btn-block">Сохранить изменения</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
