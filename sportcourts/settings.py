@@ -179,6 +179,11 @@ VKONTAKTE = {
     'APPID': '4963792'
 }
 
+FACEBOOK = {
+    'SECRET': 'ebbab8e430edd8a69cdbb42ed04d881f',
+    'APPID': '1162383820517444'
+}
+
 LOGIN_URL = '/login'
 
 # TODO: memcache does not support python 3.4

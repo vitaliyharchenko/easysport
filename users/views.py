@@ -8,10 +8,10 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from .forms import UserLoginForm, UserRegistrationForm, UserUpdateForm, ChangePasswordForm, UserResetPassForm
 from .models import User, UserActivation
-from utils import mailing, vkontakte
+from utils import mailing, vkontakte, facebook
 from urllib.request import urlopen
 from io import BytesIO
 from django.core.files import File
@@ -48,26 +48,55 @@ def login_view(request):
             return shortcut()
 
     elif 'code' in request.GET:
+        try:
+            state = request.GET['state']
+            source = 'facebook'
+        except KeyError:
+            source = 'vkontakte'
         code = request.GET['code']
         form = UserLoginForm(request.POST or None)
-        try:
-            access_token, user_id = vkontakte.auth_code(code, reverse('login_view'))
-        except vkontakte.AuthError as e:
-            messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e))
-            return shortcut()
-        try:
-            user = User.objects.get(vkuserid=user_id)
 
-            # Bug fix
+        if source == 'vkontakte':
+            try:
+                access_token, user_id = vkontakte.auth_code(code, reverse('login_view'))
+            except vkontakte.AuthError as e:
+                messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e))
+                return shortcut()
+            try:
+                user = User.objects.get(vkuserid=user_id)
+
+                # Bug fix
+                user.last_login = timezone.now()
+                user.save()
+
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                auth.login(request, user)
+                return redirect(return_path)
+            except User.DoesNotExist:
+                messages.warning(request, 'Такой пользователь не найден')
+                return shortcut()
+        elif source == 'facebook':
+            try:
+                access_token = facebook.auth_code(code, reverse('login_view'))
+                print(access_token)
+                user_id = facebook.user_id(access_token)
+                print(user_id)
+            except vkontakte.AuthError as e:
+                messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
+                return shortcut()
+
+            try:
+                user = User.objects.get(fbuserid=user_id)
+            except User.DoesNotExist:
+                messages.warning(request, 'Такой пользователь не найден')
+                return shortcut()
+
             user.last_login = timezone.now()
             user.save()
 
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             auth.login(request, user)
             return redirect(return_path)
-        except User.DoesNotExist:
-            messages.warning(request, 'Такой пользователь не найден')
-            return shortcut()
 
     else:
         form = UserLoginForm(request)
@@ -234,22 +263,46 @@ def user_update_view(request):
     form = UserUpdateForm(request.POST or None, request.FILES or None, instance=user)
 
     if 'code' in request.GET:
+        try:
+            state = request.GET['state']
+            source = 'facebook'
+        except KeyError:
+            source = 'vkontakte'
         code = request.GET['code']
-        try:
-            access_token, user_id = vkontakte.auth_code(code, reverse('user_update_view'))
-        except vkontakte.AuthError as e:
-            messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
-            return redirect('user_update_view')
-        try:
-            user = User.objects.get(vkuserid=user_id)
-            messages.warning(request, 'Этот аккаунт ВКонтакте уже связан с профилем', extra_tags='integration')
-            return redirect('user_update_view')
-        except User.DoesNotExist:
-            user = User.objects.get(email=request.user.email)
-            user.vkuserid = user_id
-            user.save()
-            messages.success(request, "Профиль ВКонтакте прикреплен", extra_tags='integration')
-            return redirect('user_update_view')
+
+        if source == 'vkontakte':
+            try:
+                access_token, user_id = vkontakte.auth_code(code, reverse('user_update_view'))
+            except vkontakte.AuthError as e:
+                messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
+                return redirect('user_update_view')
+            try:
+                user = User.objects.get(vkuserid=user_id)
+                messages.warning(request, 'Этот аккаунт ВКонтакте уже связан с профилем', extra_tags='integration')
+                return redirect('user_update_view')
+            except User.DoesNotExist:
+                user = User.objects.get(email=request.user.email)
+                user.vkuserid = user_id
+                user.save()
+                messages.success(request, "Профиль ВКонтакте прикреплен", extra_tags='integration')
+                return redirect('user_update_view')
+        elif source == 'facebook':
+            try:
+                access_token = facebook.auth_code(code, reverse('user_update_view'))
+                user_id = facebook.user_id(access_token)
+            except vkontakte.AuthError as e:
+                messages.warning(request, u'Ошибка OAUTH авторизации {}'.format(e), extra_tags='integration')
+                return redirect('user_update_view')
+            try:
+                user = User.objects.get(fbuserid=user_id)
+                messages.warning(request, 'Этот аккаунт Facebook уже связан с профилем', extra_tags='integration')
+                return redirect('user_update_view')
+            except User.DoesNotExist:
+                user = User.objects.get(email=request.user.email)
+                user.fbuserid = user_id
+                user.save()
+                messages.success(request, "Профиль Facebook прикреплен", extra_tags='integration')
+                return redirect('user_update_view')
 
     elif request.POST:
         if form.is_valid():
@@ -284,6 +337,15 @@ def unsetvkid(request):
     user.vkuserid = None
     user.save()
     messages.success(request, "Профиль ВКонтакте откреплен", extra_tags='integration')
+    return redirect('user_update_view')
+
+
+@login_required
+def unsetfbid(request):
+    user = User.objects.get(email=request.user.email)
+    user.fbuserid = None
+    user.save()
+    messages.success(request, "Профиль Facebook откреплен", extra_tags='integration')
     return redirect('user_update_view')
 
 

@@ -42,6 +42,7 @@ hr
         | {% endif %}
         | {% endfor %}
         | {% endif %}
+
         | {% if current_user.vkuserid %}
         p
           a(href="{% vkontakte_profile_link user.vkuserid %}" target="_blank")
@@ -53,6 +54,19 @@ hr
         p
           a(href="{% vkontakte_auth_link update_url %}") + связать свой аккаунт с вконтакте
         | {% endif %}
+
+        | {% if current_user.fbuserid %}
+        p
+          a(href="{% facebook_profile_link user.fbuserid %}" target="_blank")
+            img(src="{% static 'images/fb.png' %}" width="32")
+          | &nbsp;&nbsp;
+          a(href="{% url 'unsetfbid' %}") Открепить профиль
+        | {% else %}
+        | {% url 'user_update_view' as update_url %}
+        p
+          a(href="{% facebook_auth_link update_url %}") + связать свой аккаунт с Facebook
+        | {% endif %}
+
     .panel.panel-default
       .panel-body
         h3 Сменить пароль

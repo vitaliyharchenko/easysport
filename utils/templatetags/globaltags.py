@@ -5,7 +5,7 @@ import random
 from django import template
 from django.core.urlresolvers import reverse, NoReverseMatch
 
-from utils import vkontakte, formatters
+from utils import vkontakte, formatters, facebook
 
 
 register = template.Library()
@@ -37,6 +37,16 @@ def vkontakte_auth_link(redirect_uri):
 def vkontakte_profile_link(vkuserid):
     vkuserid = str(vkuserid)
     return 'http://vk.com/' + 'id' * vkuserid.isdigit() + vkuserid
+
+@register.simple_tag
+def facebook_auth_link(redirect_uri):
+    return facebook.build_login_link(redirect_uri)
+
+
+@register.simple_tag
+def facebook_profile_link(fbuserid):
+    fbuserid = str(fbuserid)
+    return 'https://www.facebook.com/' + fbuserid
 
 
 @register.inclusion_tag('tagtemplates/avatar.html')

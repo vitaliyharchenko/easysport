@@ -45,6 +45,10 @@
         <p><a href="{% vkontakte_profile_link user.vkuserid %}" target="_blank"><img src="{% static 'images/vk.png' %}" width="32"/></a>&nbsp;&nbsp;<a href="{% url 'unsetvkid' %}">Открепить профиль</a></p>{% else %}
         {% url 'user_update_view' as update_url %}
         <p><a href="{% vkontakte_auth_link update_url %}">+ связать свой аккаунт с вконтакте</a></p>{% endif %}
+        {% if current_user.fbuserid %}
+        <p><a href="{% facebook_profile_link user.fbuserid %}" target="_blank"><img src="{% static 'images/fb.png' %}" width="32"/></a>&nbsp;&nbsp;<a href="{% url 'unsetfbid' %}">Открепить профиль</a></p>{% else %}
+        {% url 'user_update_view' as update_url %}
+        <p><a href="{% facebook_auth_link update_url %}">+ связать свой аккаунт с Facebook</a></p>{% endif %}
       </div>
     </div>
     <div class="panel panel-default">
