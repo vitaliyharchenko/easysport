@@ -43,7 +43,10 @@ class GameCreationForm(forms.ModelForm):
     class Meta:
         model = Game
         exclude = ('sporttype', 'is_reported', 'deleted',)
-        widgets = {'created_by': forms.HiddenInput()}
+        widgets = {
+            'created_by': forms.HiddenInput(),
+            'description': forms.HiddenInput()
+        }
 
     def save(self, commit=True):
         obj = super(GameCreationForm, self).save(commit=False)
