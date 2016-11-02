@@ -106,6 +106,12 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
         img(src="{% static 'images/vk.png' %}" width="32")
     | {% endif %}
 
+    | {% if user.fbuserid %}
+    p
+      a(href="{% facebook_profile_link user.fbuserid %}" target="_blank")
+        img(src="{% static 'images/fb.png' %}" width="32")
+    | {% endif %}
+
     | {% if user.gamesvisited %}
     hr
     p Последние посещенные игры:

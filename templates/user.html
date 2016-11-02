@@ -46,6 +46,8 @@
     <p>Телефон не указан</p>{% endif %}
     {% if user.vkuserid %}
     <p><a href="{% vkontakte_profile_link user.vkuserid %}" target="_blank"><img src="{% static 'images/vk.png' %}" width="32"/></a></p>{% endif %}
+    {% if user.fbuserid %}
+    <p><a href="{% facebook_profile_link user.fbuserid %}" target="_blank"><img src="{% static 'images/fb.png' %}" width="32"/></a></p>{% endif %}
     {% if user.gamesvisited %}
     <hr/>
     <p>Последние посещенные игры:</p>
