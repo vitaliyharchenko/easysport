@@ -74,7 +74,8 @@ def game_create_view(request):
 
 def game_edit_view(request, game_id):
     game = Game.objects.get(id=game_id)
-    UserGameActionInlineFormset = inlineformset_factory(Game, UserGameAction, fields=('user', 'action', 'game'), extra=1)
+    UserGameActionInlineFormset = inlineformset_factory(Game, UserGameAction, fields=('user', 'action', 'game'),
+                                                        extra=1, can_delete=True)
 
     if request.method == "POST":
         form = GameEditForm(request.POST, instance=game)
