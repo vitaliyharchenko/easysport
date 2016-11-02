@@ -37,6 +37,7 @@
     <p>Рост: {{ user.height }} см.</p>{% elif current %}
     <p>Рост:<small>&nbsp;<a href="{% url 'user_update_view' %}">Заполнить...</a></small></p>{% endif %}
     {% if user.weight > 0 and current %}
+    <p>Вес: {{ user.weight }} кг.</p>{% elif current %}
     <p>Вес:<small>&nbsp;<a href="{% url 'user_update_view' %}">Заполнить...</a></small></p>{% endif %}
     {% if user.amplua %}
     <p>{{ user.amplua }}</p>{% endif %}

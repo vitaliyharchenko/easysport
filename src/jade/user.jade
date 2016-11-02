@@ -82,6 +82,8 @@ link(href="{% static 'css/particles/profile.css' %}" type="text/css" rel="styles
         a(href="{% url 'user_update_view' %}") Заполнить...
     | {% endif %}
     | {% if user.weight > 0 and current %}
+    p Вес: {{ user.weight }} кг.
+    | {% elif current %}
     p
       | Вес:
       small
