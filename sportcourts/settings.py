@@ -179,6 +179,8 @@ VKONTAKTE = {
     'APPID': '4963792'
 }
 
+LOGIN_URL = '/login'
+
 # TODO: memcache does not support python 3.4
 # CACHES = {
 #     'default': {
