@@ -169,10 +169,10 @@ REST_FRAMEWORK = {
 }
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'info@sportcourts.ru'
-EMAIL_HOST_PASSWORD = 'courtssport2'
-EMAIL_SUBJECT_PREFIX = '[SPORTCOURTS] '
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'info@easysport.online'
+EMAIL_HOST_PASSWORD = 'sportsport123456'
+EMAIL_SUBJECT_PREFIX = '[EASYSPORT] '
 
 VKONTAKTE = {
     'SECRET': 'SyrEE8fNLlkCBUxuxwTL',
