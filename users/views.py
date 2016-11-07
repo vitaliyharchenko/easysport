@@ -189,20 +189,19 @@ def vk_reg(request):
                 vkdata['bdate'] = ''
 
             # TODO: set vkontakteavatar
-            if 'photo_max' in vkuser:
-                url = vkuser['photo_max']
-                response = urlopen(url)
-                io = BytesIO(response.read())
-                file = File(io)
-                vkdata['avatar'] = file
+            # if 'photo_max' in vkuser:
+            #     url = vkuser['photo_max']
+            #     response = urlopen(url)
+            #     io = BytesIO(response.read())
+            #     file = File(io)
+            #     vkdata['avatar'] = file
 
             initial = {'sex': vkdata['sex'],
                        'first_name': vkdata['first_name'],
                        'last_name': vkdata['last_name'],
                        'phone': vkdata['phone'],
                        'bdate': vkdata['bdate'],
-                       'vkuserid': user_id,
-                       'avatar': vkdata['avatar']
+                       'vkuserid': user_id
                        }
 
             form = UserRegistrationForm(initial=initial)
