@@ -16,7 +16,7 @@
       <!--.hidden-xs-->
       <!--  img.logo(src="{% static 'images/logo_big.png' %} ")-->
       <!--.visible-xs-->
-      <!--  h1 SportCourts--><br/><br/>
+      <!--  h1 EasySport--><br/><br/>
       <h2 class="h3">Ваш проводник в мире любительского спорта.</h2>
       <p class="h3">Играй в&nbsp;<span class="gamestyped"></span>&nbsp;<br class="visible-xs"/>вместе с {% random_choice 'нами' 'друзьями' %}!</p></p><br/>
       <div style="max-height:80px; overflow:hidden;" class="row text-center">{% for user in users %}<a href="{{ user.get_absolute_url }}" target="_blank">{% avatar user.avatar height="80" width="80" circle="True" sex=user.sex thumbnail="False" %}</a>{% endfor %}</div><br/><br/>{% if not loggedin %}
@@ -53,7 +53,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-6 hidden-sm"><img src="{% static 'images/index/site_preview.png' %}" style="width:100%;" alt="SportCourts - это удобное приложение для любителей спорта."/></div>
+        <div class="col-md-6 hidden-sm"><img src="{% static 'images/index/site_preview.png' %}" style="width:100%;" alt="EasySport - это удобное приложение для любителей спорта."/></div>
         <div class="col-sm-5 col-sm-offset-2 col-md-3 col-md-offset-0 text-left hidden-xs">
           <h3 class="h2">Удобно</h3>
           <ul style="margin-left: -24px;" class="promo-ul">
@@ -67,7 +67,7 @@
   </div>
 </div>
 <div class="row bigrow">
-  <div class="bigrow-background"><img src="{% static 'images/index/main_2.jpg' %}" alt="SportCourts решает все острые проблемы в организации любительских игр"/></div>
+  <div class="bigrow-background"><img src="{% static 'images/index/main_2.jpg' %}" alt="EasySport решает все острые проблемы в организации любительских игр"/></div>
   <div class="bigrow-content content-white">
     <div class="content-block-third">
       <h3 class="h2">Вы уже играете и вам не хватает игроков? Подключайтесь к нам! Проблем с составом больше не будет.</h3><br class="hidden-xs"/>
@@ -94,7 +94,7 @@
   </div>
 </div>
 <div class="row bigrow">
-  <div class="bigrow-background"><img src="{% static 'images/index/main_3.jpg' %}" alt="SportCourts - это развивающееся спортивное сообщество"/></div>
+  <div class="bigrow-background"><img src="{% static 'images/index/main_3.jpg' %}" alt="EasySport - это развивающееся спортивное сообщество"/></div>
   <div class="bigrow-content content-white">
     <div class="content-block-fifth">
       <p class="h2">Мы мечтаем построить в России динамичное и здоровое спортивное сообщество</p>
@@ -105,12 +105,12 @@
   <div class="bigrow-content">
     <div class="content-block-sixth">
       <p class="h2">Не можешь играть каждую неделю? Отвлекает семья и работа?</p><br/><img src="{% static 'images/index/main_4.png' %}" alt="" height="300"/><br/>
-      <p class="h2">Со SportCourts это не помеха. Планируй свое время удобным образом!</p>
+      <p class="h2">С EasySport это не помеха. Планируй свое время удобным образом!</p>
     </div>
   </div>
 </div>
 <div class="row bigrow">
-  <div class="bigrow-background"><img src="{% static 'images/index/main_5.jpg' %}" alt="SportCourts. Будь в игре!"/></div>
+  <div class="bigrow-background"><img src="{% static 'images/index/main_5.jpg' %}" alt="EasySport. Будь в игре!"/></div>
   <div class="bigrow-content content-white">
     <div class="content-block-seventh">
       <h1>Будь в игре!</h1><br/><br/>
