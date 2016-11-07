@@ -67,7 +67,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     city = models.ForeignKey(City, blank=True, null=True, verbose_name='Город')
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True, verbose_name='Аватар')
     date_joined = models.DateTimeField('Дата регистрации', default=timezone.now)
-    bdate = models.DateField('Дата рождения', auto_now_add=False, blank=True, null=True)
+    bdate = models.DateField('Дата рождения', auto_now_add=False, blank=True, null=True, help_text=u'В формате ДД.ММ.ГГГГ')
     first_name = models.CharField(u'Имя', max_length=120)
     last_name = models.CharField(u'Фамилия', max_length=120)
     vkuserid = models.BigIntegerField(unique=True, null=True, blank=True)
