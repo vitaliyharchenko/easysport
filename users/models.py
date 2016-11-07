@@ -119,7 +119,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     @property
     def gamesvisited(self):
         games_ids = UserGameAction.objects.filter(user=self, action=UserGameAction.VISITED).values_list('game', flat=True)
-        return Game.objects.filter(pk__in=games_ids).order_by('-datetime')[:10]
+        return Game.objects.filter(pk__in=games_ids).order_by('-datetime')
 
     @property
     def gamesnotvisited(self):
