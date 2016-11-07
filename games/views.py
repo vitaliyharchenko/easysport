@@ -73,22 +73,28 @@ def game_create_view(request):
 
 
 def game_edit_view(request, game_id):
-    game = Game.objects.get(id=game_id)
     UserGameActionInlineFormset = inlineformset_factory(Game, UserGameAction, fields=('user', 'action', 'game'),
                                                         extra=1, can_delete=True)
 
     if request.method == "POST":
+        game = Game.objects.get(id=game_id)
         form = GameEditForm(request.POST, instance=game)
-        formset = UserGameActionInlineFormset(request.POST)
+        formset = UserGameActionInlineFormset(request.POST, instance=game)
+        print(form)
         if form.is_valid() and formset.is_valid():
             form.save()
             formset.save()
+            return redirect('game_view', game_id)
         else:
-            print(form.errors)
+            notification = Notification(user=request.user,
+                                        text='Ошибка при редактировании игры')
+            notification.save()
+            return redirect('game_view', game_id)
     else:
+        game = Game.objects.get(id=game_id)
         form = GameEditForm(instance=game)
         formset = UserGameActionInlineFormset(instance=game)
-    return render(request, 'game_edit.html', {'game': game, 'form': form, 'formset': formset})
+        return render(request, 'game_edit.html', {'game': game, 'form': form, 'formset': formset})
 
 
 def game_next_add(request, game_id):
@@ -176,9 +182,16 @@ def gameaction(request):
                         return error_response('There is no place now')
                     elif set_action == UserGameAction.RESERVED and not game.has_reserved_place:
                         return error_response('There is no place now')
+                    elif set_action == UserGameAction.UNSUBSCRIBED and game.has_reserved_place:
+                        for user in game.reserved:
+                            mailing.invite_reserved_email(user, game)
                     usergameaction.action = set_action
                     usergameaction.save()
-                    # TODO: email user
+
+                    print(game.near_time_status)
+                    if game.near_time_status:
+                        mailing.info_for_responsible_email(game.responsible_user, usergameaction)
+
                     return render(request, 'tagtemplates/game_tpl.html', {'game': game, 'current_user': user})
             except UserGameAction.DoesNotExist:
                 UserGameAction.objects.create(game=game, user=user, action=set_action)
