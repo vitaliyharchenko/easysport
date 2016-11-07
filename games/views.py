@@ -184,11 +184,11 @@ def gameaction(request):
                         return error_response('There is no place now')
                     elif set_action == UserGameAction.UNSUBSCRIBED and game.has_reserved_place:
                         for user in game.reserved:
-                            mailing.invite_reserved_email(user, game)
+                            # mailing.invite_reserved_email(user, game)
+                            pass
                     usergameaction.action = set_action
                     usergameaction.save()
 
-                    print(game.near_time_status)
                     if game.near_time_status:
                         mailing.info_for_responsible_email(game.responsible_user, usergameaction)
 

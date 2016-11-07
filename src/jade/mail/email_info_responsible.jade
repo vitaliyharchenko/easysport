@@ -1,0 +1,38 @@
+| {% extends 'mail/base.html' %}
+| {% block title %}Новое действие пользователя{% endblock %}
+| {% block content %}
+tbody
+  tr
+    td.content-first(align="center" valign="top")
+      table(border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse;background-color:#EAE2DB;border-top:0;border-bottom:0")
+        tbody
+          tr
+            td(valign="top")
+              table(border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;")
+                tbody
+                  tr
+                    td(valign="top")
+                      table(align="left" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse")
+                        tbody
+                          tr
+                            td.content-td(valign="top" style="margin:0;padding:0;color:#606060;display:block;font-family:Helvetica;font-size:20px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:-1px;text-align:left")
+                              br
+                              h3 {{ usergameaction.user }} {{ usergameaction.get_action_display }}:
+                              hr
+                              p
+                              p
+                                |Игра:&nbsp;
+                                a(href="{{ usergameaction.game.get_absolute_url }}") {{ usergameaction.game.title }}
+                              p На игре пока {{ usergameaction.game.subscribed|length }} из {{ usergameaction.game.capacity }} мест заняты
+              table(border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse")
+                tbody
+                  tr
+                    td(valign="top")
+                      table(align="left" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse")
+                        tbody
+                          tr
+                            td.content-td(valign="top" style="padding-top:9px;padding-right:18px;padding-bottom:9px;padding-left:18px;color:#606060;font-family:Helvetica;font-size:15px;line-height:150%;text-align:left")
+                              span.small(style="font-size:12px") Если вы не регистрировались на Easysport.online, просто проигнорируйте это письмо.
+                              br
+                              | &nbsp;
+| {% endblock %}
