@@ -1,94 +1,14 @@
-# sportcourts v2.0
-
-# На локальной машине:
-
-```
-git clone https://github.com/vitaliyharchenko/sportcourts2.git
-create venv
-source venv/bin/activate
-pip install -r requirements.txt
-psql
-CREATE USER scuser WITH PASSWORD '$$$$';
-CREATE DATABASE scdb OWNER scuser;
-ALTER USER scuser CREATEDB;
-\q
-pip install psycopg2
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
-```
-
-# обнуление БД
-
-```
-sudo su postgres -c 'pg_ctl -D /opt/local/var/db/postgresql84/defaultdb/ restart' (рестарт psql)
-psql
-DROP DATABASE scdb;
-CREATE DATABASE scdb OWNER scuser;
-ALTER USER scuser CREATEDB;
-python manage.py makemigrations api users courts games places sports users
-python manage.py migrate
-python manage.py createsuperuser
-create user - admin, ceo@sportcourts.ru, 123456
-```
+# Easysport v1.0
 
 
-# Работа с зависимостями
-```
-pip install -r requirements.txt
-pip freeze > requirements.txt
-npm update --save
-npm outdated
-```
-
-# Резервное копирование #
+## Резервное копирование
 ```
 python manage.py dumpdata > db.json
 ```
 
-# Развертываем фронтенд #
-```
-npm install --save-dev gulp - в директории проекта
-npm init
 
-npm i gulp-autoprefixer --save
-npm i gulp-minify-css --save
-npm i gulp-imagemin --save
-npm i imagemin-pngquant --save
-npm i gulp-uglify --save
-npm i rimraf --save
-npm i gulp-sass --save
-npm i gulp-sourcemaps --save
-npm i gulp-rigger --save
-npm i gulp-watch --save
-npm i gulp-jade --save
-npm i gulp-inline --save
+## Поднимаем сервер
 
-
-bower init
-
-git config http.sslVerify false
-bower install bootstrap-sass --save
-bower install jquery-ui --save
-bower install fontawesome --save
-bower install social-likes --save
-bower install jasny-bootstrap --save
-bower install jasny-bootstrap --save
-
-далее gulp в директории проекта
-```
-
-# Миграция старой БД
-
-```
-python users_delete.py
-python filldb.py
-python manage.py loaddata users_all.xml
-python users_render.py
-```
-
-
-# Поднимаем сервер
 ```
 Установка Ubuntu ubuntu14.04-x86_64
 ssh-keygen -R 194.58.108.127
@@ -118,10 +38,7 @@ cd /opt
 git clone https://github.com/vitaliyharchenko/sportcourts2.git
 pip install -r /opt/sportcourts2/requirements.txt
 pip install uwsgi
-```
 
-# Test Django-uwsgi
-```
 cd /opt/sportcourts2
 python manage.py collectstatic
 python manage.py makemigrations api courts games places sports users notifications
@@ -135,11 +52,7 @@ go to http://sportcourts.ru:8000
 the web client <-> uWSGI <-> Django | works
 go to http://sportcourts.ru
 the web client <-> the web server |works
-```
 
-
-# Set up nginx
-```
 sudo nano /etc/nginx/sites-available/sportcourts
 look at sportcourts.conf file
 cd /etc/nginx/sites-enabled
@@ -168,16 +81,10 @@ Install uWSGI system-wide
 
 deactivate
 sudo pip3 install uwsgi
-```
 
-# старт сервера
-```
 uwsgi --ini sportcourts_uwsgi.ini
 uwsgi --stop sportcourts_uwsgi.ini
-```
 
-# автоматический старт сервера после перезагрузки
-```
 nano /etc/init/uwsgi.conf
 
 description "uwsgi tiny instance"
