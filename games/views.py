@@ -182,15 +182,8 @@ def gameaction(request):
                         return error_response('There is no place now')
                     elif set_action == UserGameAction.RESERVED and not game.has_reserved_place:
                         return error_response('There is no place now')
-                    elif set_action == UserGameAction.UNSUBSCRIBED and game.reserved_count > 0:
-                        for user in game.reserved:
-                            mailing.invite_reserved_email(user, game)
-                            pass
                     usergameaction.action = set_action
                     usergameaction.save()
-
-                    if game.near_time_status:
-                        mailing.info_for_responsible_email(game.responsible_user, usergameaction)
 
                     return render(request, 'tagtemplates/game_tpl.html', {'game': game, 'current_user': user})
             except UserGameAction.DoesNotExist:
