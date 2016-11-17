@@ -73,7 +73,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     vkuserid = models.BigIntegerField(unique=True, null=True, blank=True)
     fbuserid = models.BigIntegerField(unique=True, null=True, blank=True)
     sex = models.CharField(max_length=1, choices=(('m', 'мужской'), ('f', 'женский')), verbose_name='Пол')
-    phone = PhoneField(verbose_name='Телефон', blank=True, null=True, unique=True)
+    phone = PhoneField(verbose_name='Телефон', unique=True)
     amplua = models.ForeignKey(Amplua, verbose_name=u'Амплуа', blank=True, null=True)
     weight = models.PositiveSmallIntegerField(default=0, verbose_name='Вес')
     height = models.PositiveSmallIntegerField(default=0, verbose_name='Рост')

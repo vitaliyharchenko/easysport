@@ -39,9 +39,12 @@ class UserRegistrationForm(forms.ModelForm):
 
     def clean_bdate(self):
         bdate = self.cleaned_data.get("bdate")
-        if timezone.now().date() - bdate < timezone.timedelta(days=3650):
-            raise forms.ValidationError("Тебе меньше 10 лет, серьезно?")
-        return bdate
+        if bdate:
+            if timezone.now().date() - bdate < timezone.timedelta(days=3650):
+                raise forms.ValidationError("Тебе меньше 10 лет, серьезно?")
+            return bdate
+        else:
+            return None
 
     def clean_password2(self):
         # Check that the two password entries match
