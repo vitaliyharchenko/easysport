@@ -104,9 +104,12 @@ class UserUpdateForm(forms.ModelForm):
 
     def clean_bdate(self):
         bdate = self.cleaned_data.get("bdate")
-        if timezone.now().date() - bdate < timezone.timedelta(days=3650):
-            raise forms.ValidationError("Тебе меньше 10 лет, серьезно?")
-        return bdate
+        if bdate:
+            if timezone.now().date() - bdate < timezone.timedelta(days=3650):
+                raise forms.ValidationError("Тебе меньше 10 лет, серьезно?")
+            return bdate
+        else:
+            return None
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
