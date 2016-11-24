@@ -1,8 +1,8 @@
 @import "variables";
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
 
 /*
 * Custom
 */
-@import "../../bower_components/social-likes/social-likes_flat.css";
+@import "../../node_modules/social-likes/dist/social-likes_flat.css";
 @import "global";
