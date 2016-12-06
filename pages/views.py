@@ -10,3 +10,7 @@ def index_view(request):
 
 def contacts_view(request):
     return render(request, 'contacts.html')
+
+
+def stats_view(request):
+    return render(request, 'stats.html')
