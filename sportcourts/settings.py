@@ -34,7 +34,7 @@ if IS_PRODUCTION:
 else:
     DEBUG = True
     CURRENT_HOST = 'http://127.0.0.1:8000'
-    ALLOWED_HOSTS = ['http://127.0.0.1:8000']
+    ALLOWED_HOSTS = ['127.0.0.1']
 
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
