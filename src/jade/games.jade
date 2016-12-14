@@ -1,5 +1,6 @@
 | {% extends 'base.html' %}
 | {% load gametags %}
+| {% load staticfiles %}
 | {% block title %}Предстоящие игры{% endblock %}
 | {% block content %}
 h1.m-t-0 Игры
@@ -50,6 +51,11 @@ hr
           option(value="{{ sport_type.id }}") {{ sport_type.title }}
           | {% endif %}
           | {% endfor %}
+    .panel.panel-default.hidden-xs.hidden-sm
+      .panel-body
+        p.lead Реклама
+        a(href="{% url 'contacts_view' %}")
+          img(src="{% static 'images/ad.png' %}" alt="brand")
     .panel.panel-default.hidden-xs
       .panel-body
         p.lead.m-t-0 Расскажи о нас друзьям!

@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
 {% load gametags %}
+{% load staticfiles %}
 {% block title %}Предстоящие игры{% endblock %}
 {% block content %}
 <h1 class="m-t-0">Игры</h1>
@@ -33,6 +34,11 @@
           <option value="{{ sport_type.id }}">{{ sport_type.title }}</option>{% endif %}
           {% endfor %}
         </select>
+      </div>
+    </div>
+    <div class="panel panel-default hidden-xs hidden-sm">
+      <div class="panel-body">
+        <p class="lead">Реклама</p><a href="{% url 'contacts_view' %}"><img src="{% static 'images/ad.png' %}" alt="brand"/></a>
       </div>
     </div>
     <div class="panel panel-default hidden-xs">
