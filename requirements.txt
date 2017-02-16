@@ -3,7 +3,7 @@ django-bootstrap-form==3.2
 django-datetime-widget==0.9.3
 django-el-pagination==2.1.0
 djangorestframework==3.3.2
-phonenumbers==7.2.2
+phonenumbers
 Pillow==3.0.0
 psycopg2
 python-memcached==1.57
