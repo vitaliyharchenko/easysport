@@ -16,7 +16,6 @@ class UserAdmin(UserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
     add_form = UserCreationForm
-    inlines = [UserGameActionInline]
 
     def has_add_permission(self, request, obj=None):
         return permissions.only_admin_permissions(request)
