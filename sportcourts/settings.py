@@ -171,7 +171,7 @@ REST_FRAMEWORK = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_HOST_USER = 'info@easysport.online'
-EMAIL_HOST_PASSWORD = 'sportsport123456'
+EMAIL_HOST_PASSWORD = 'sportsport1234567'
 EMAIL_SUBJECT_PREFIX = '[EASYSPORT] '
 
 VKONTAKTE = {
