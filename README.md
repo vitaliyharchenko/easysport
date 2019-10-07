@@ -13,7 +13,7 @@ python manage.py dumpdata > db.json
 Установка Ubuntu ubuntu14.04-x86_64
 ssh-keygen -R 194.58.108.127
 ssh root@194.58.108.127
-OKBxmNX*GL6rg1
+
 sudo apt-get update
 sudo apt-get upgrade
 apt-get install python3-pip
