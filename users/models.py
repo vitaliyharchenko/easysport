@@ -11,7 +11,7 @@ from games.models import UserGameAction, Game
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, is_superuser=False, is_active=False, **extra_fields):
+    def create_user(self, email, password, is_superuser=False, is_active=True, **extra_fields):
         now = timezone.now()
         if not email:
             raise ValueError('Users must have an email address')
