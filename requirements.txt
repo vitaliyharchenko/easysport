@@ -2,7 +2,7 @@ Django==1.9
 django-bootstrap-form==3.2
 django-datetime-widget==0.9.3
 django-el-pagination==2.1.0
-djangorestframework==3.3.2
+djangorestframework==3.11.2
 phonenumbers
 Pillow==3.0.0
 psycopg2
