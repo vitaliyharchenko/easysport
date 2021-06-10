@@ -1,4 +1,4 @@
-Django==1.9
+Django==2.2.24
 django-bootstrap-form==3.2
 django-datetime-widget==0.9.3
 django-el-pagination==2.1.0
